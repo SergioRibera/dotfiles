@@ -83,6 +83,7 @@ string defaultAdmPkg = "sudo pacman -S";
 string appsCmd[] = {
     " todo",
     " vim",
+    " rofi",
     " brave-bin",
     " uniyhub",
     " ferdi",
@@ -127,6 +128,7 @@ void selectApps(){
     string apps[] = {
         languajeMessages[lanSel][3],
         "Vim",
+        "Rofi",
         "Brave",
         "Unity 3D",
         "Ferdi",
@@ -187,6 +189,11 @@ void configure(){
 
     system("mkdir $HOME/back && cp --backup=$HOME/back/bashrc -f .bashrc $HOME && cp --backup=$HOME/back/p10k.zsh -f .p10k.zsh $HOME && cp --backup=$HOME/back/vimrc -f .vimrc $HOME && cp --backup=$HOME/back/zshrc -f .zshrc $HOME && cp --backup=$HOME/back/zshrc.pre-oh-my-zsh -f .zshrc.pre-oh-my-zsh $HOME");
     system("cp --backup=$HOME/back/fzf -fr ./.fzf $HOME && cp --backup=$HOME/back/oh-my-zsh -fr ./.oh-my-zsh $HOME && cp --backup=$HOME/back/vim -fr .vim $HOME");
+
+    // configure rofi 
+    if(appsToInstall.find("2") || appsToInstall.find("0")){
+        system("cp --backup=$HOME/back/rofi -fr rofi $HOME/.config");
+    }
     
     string opt = "";
     cout << endl << BOLDBLUE << languajeMessages[lanSel][13] << RESET << endl;
