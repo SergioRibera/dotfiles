@@ -234,4 +234,6 @@ int main(){
     selectApps();
     configure();
     fin();
+
+    return 0;
 }
