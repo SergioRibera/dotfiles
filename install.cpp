@@ -88,7 +88,10 @@ string appsCmd[] = {
     " ferdi",
     " telegram-desktop",
     " wps-office",
-    " discord"
+    " discord",
+    " xampp",
+    " wine-staging",
+    " lutris"
 };
 
 vector<string> split(const string& str, const string& delim)
@@ -123,7 +126,16 @@ void selectApps(){
     cout << YELLOW << "git, yay " << RESET << languajeMessages[lanSel][2] << endl << endl;
     string apps[] = {
         languajeMessages[lanSel][3],
-        "Vim", "Brave", "Unity 3D", "Ferdi", "Telegram", "WPS Office", "Discord", "Xampp", "Kavantum", "Wine", "Lutris"
+        "Vim",
+        "Brave",
+        "Unity 3D",
+        "Ferdi",
+        "Telegram",
+        "WPS Office",
+        "Discord",
+        "Xampp",
+        "Wine",
+        "Lutris"
     };
     for (int i = 0; i < apps->length() - 1; i++) {
         cout << "[" << GREEN << i << RESET << "] " << GREEN << apps[i] << RESET << endl;
@@ -160,7 +172,7 @@ void selectApps(){
         }
     }
     cout << BLUE << languajeMessages[lanSel][5] << YELLOW << cmd << RESET << endl;
-    cmd = "yay -S" + cmd;
+    cmd = "yay -S" + cmd + " --noconfirm";
     cout << cmd;
     system(cmd.c_str());
 }
