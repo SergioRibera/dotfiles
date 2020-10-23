@@ -172,8 +172,9 @@ void configure(){
     system("sh -c \"$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"");
     system("git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions");
     system("git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k");
-    system("mkdir $HOME/back && cp --backup=$HOME/back/bashrc -f .bashrc $HOME && cp --backup=$HOME/back/p10k.zsh -f .p10k.zsh $HOME && cp --backup=$HOME/back/vim -f .vim $HOME && cp --backup=$HOME/back/zshrc -f .zshrc $HOME && cp --backup=$HOME/back/zshrc.pre-oh-my-zsh -f .zshrc.pre-oh-my-zsh $HOME");
-    system("cp --backup=$HOME/back/fzf -fr ./.fzf $HOME && cp --backup=$HOME/back/oh-my-zsh -fr ./.oh-my-zsh $HOME && cp --backup=$HOME/back/vim -fr ./.vim $HOME");
+
+    system("mkdir $HOME/back && cp --backup=$HOME/back/bashrc -f .bashrc $HOME && cp --backup=$HOME/back/p10k.zsh -f .p10k.zsh $HOME && cp --backup=$HOME/back/vimrc -f .vimrc $HOME && cp --backup=$HOME/back/zshrc -f .zshrc $HOME && cp --backup=$HOME/back/zshrc.pre-oh-my-zsh -f .zshrc.pre-oh-my-zsh $HOME");
+    system("cp --backup=$HOME/back/fzf -fr ./.fzf $HOME && cp --backup=$HOME/back/oh-my-zsh -fr ./.oh-my-zsh $HOME && cp --backup=$HOME/back/vim -fr .vim $HOME");
     
     string opt = "";
     cout << endl << BOLDBLUE << languajeMessages[lanSel][13] << RESET << endl;
