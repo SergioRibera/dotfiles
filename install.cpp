@@ -106,7 +106,7 @@ vector<string> split(const string& str, const string& delim)
         if (pos == string::npos) pos = str.length();
         string token = str.substr(prev, pos-prev);
         if (!token.empty()){
-            if(token.find("0") != string::npos){
+            if(token.find("0") != string::npos || token.find("1") != string::npos){
                 hasZero = true;
             }
             tokens.push_back(token);
@@ -127,6 +127,7 @@ void selectApps(){
     cout << YELLOW << "git, yay " << RESET << languajeMessages[lanSel][2] << endl << endl;
     string apps[] = {
         languajeMessages[lanSel][3],
+        "Ninguna",
         "Vim",
         "Rofi",
         "Brave",
@@ -146,55 +147,65 @@ void selectApps(){
     cout << endl << languajeMessages[lanSel][4];
     cin >> appsToInstall;
 
-    string cmdInsGit = defaultAdmPkg + " git --noconfirm";
-    system(cmdInsGit.c_str());
-    system("mkdir repos && cd repos && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && pwd && makepkg -si && cd ../..");
+    cout << endl << appsToInstall << endl;
 
-    string cmd = "";
-    if(appsToInstall.find(",") != string::npos){
-        vector<string> appsIndex = split(appsToInstall, ",");
-        if(appsIndex[0] == "hasZero"){
-            for (int i = 1; i < appsCmd->length() - 1; i++){
-                cmd = cmd + appsCmd[i];
+    if(appsToInstall.find("1") == string::npos || !appsToInstall.empty()){
+        string cmdInsGit = defaultAdmPkg + " git --noconfirm";
+        system(cmdInsGit.c_str());
+        system("mkdir repos && cd repos && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && pwd && makepkg -si && cd ../..");
+
+        string cmd = "";
+        if(appsToInstall.find(",") != string::npos){
+            vector<string> appsIndex = split(appsToInstall, ",");
+            if(appsIndex[0] == "hasZero"){
+                for (int i = 1; i < appsCmd->length() - 1; i++){
+                    cmd = cmd + appsCmd[i];
+                }
+            }else{
+                for (int i = 0; i < appsIndex.size(); i++) {
+                    int ind = stoi(appsIndex[i]);
+                    cmd = cmd + appsCmd[ind];
+                }
             }
         }else{
-            for (int i = 0; i < appsIndex.size(); i++) {
-                int ind = stoi(appsIndex[i]);
-                cmd = cmd + appsCmd[ind];
+            if(appsToInstall != "0"){
+                int ind = stoi(appsToInstall);
+                cmd = appsCmd[ind];
+            }else{
+                for (int i = 1; i < appsCmd->length() - 1; i++){
+                    cmd = cmd + appsCmd[i];
+                }
             }
         }
-    }else{
-        if(appsToInstall != "0"){
-            int ind = stoi(appsToInstall);
-            cmd = appsCmd[ind];
-        }else{
-            for (int i = 1; i < appsCmd->length() - 1; i++){
-                cmd = cmd + appsCmd[i];
-            }
-        }
+        cout << BLUE << languajeMessages[lanSel][5] << YELLOW << cmd << RESET << endl;
+        cmd = "yay -S" + cmd + " --noconfirm";
+        cout << cmd;
+        system(cmd.c_str());
     }
-    cout << BLUE << languajeMessages[lanSel][5] << YELLOW << cmd << RESET << endl;
-    cmd = "yay -S" + cmd + " --noconfirm";
-    cout << cmd;
-    system(cmd.c_str());
 }
 void configure(){
     system("clear");
     // Instalar zsh
-    cout << endl << BOLDBLUE << languajeMessages[lanSel][6] << RESET << endl;
-    system((defaultAdmPkg + " zsh && chsh -s /bin/zsh").c_str());
-    system("sh -c \"$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"");
-    system("git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions");
-    system("git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k");
+    if(appsToInstall.find("1") == string::npos){
+        cout << endl << BOLDBLUE << languajeMessages[lanSel][6] << RESET << endl;
+        system((defaultAdmPkg + " zsh && chsh -s /bin/zsh").c_str());
+        system("sh -c \"$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"");
+        system("git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions");
+        system("git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k");
 
-    system("mkdir $HOME/back && cp --backup=$HOME/back/bashrc -f .bashrc $HOME && cp --backup=$HOME/back/p10k.zsh -f .p10k.zsh $HOME && cp --backup=$HOME/back/vimrc -f .vimrc $HOME && cp --backup=$HOME/back/zshrc -f .zshrc $HOME && cp --backup=$HOME/back/zshrc.pre-oh-my-zsh -f .zshrc.pre-oh-my-zsh $HOME");
-    system("cp --backup=$HOME/back/fzf -fr ./.fzf $HOME && cp --backup=$HOME/back/oh-my-zsh -fr ./.oh-my-zsh $HOME && cp --backup=$HOME/back/vim -fr .vim $HOME");
+        system("mkdir $HOME/back && cp --backup=$HOME/back/bashrc -f .bashrc $HOME && cp --backup=$HOME/back/p10k.zsh -f .p10k.zsh $HOME && cp --backup=$HOME/back/zshrc -f .zshrc $HOME && cp --backup=$HOME/back/zshrc.pre-oh-my-zsh -f .zshrc.pre-oh-my-zsh $HOME");
+        system("cp --backup=$HOME/back/fzf -fr ./.fzf $HOME && cp --backup=$HOME/back/oh-my-zsh -fr ./.oh-my-zsh $HOME");
+    }
+
+    if(appsToInstall.find("2") != string::npos && appsToInstall.find("1") == string::npos){
+        system("cp --backup=$HOME/back/vimrc -f .vimrc $HOME && cp --backup=$HOME/back/vim -fr .vim $HOME");
+    }
 
     // configure rofi 
-    if(appsToInstall.find("2") || appsToInstall.find("0")){
+    if(appsToInstall.find("3") != string::npos || appsToInstall.find("0") != string::npos){
         system("cp --backup=$HOME/back/rofi -fr rofi $HOME/.config");
     }
-    
+
     string opt = "";
     cout << endl << BOLDBLUE << languajeMessages[lanSel][13] << RESET << endl;
     cin >> opt;

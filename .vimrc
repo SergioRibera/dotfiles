@@ -17,8 +17,6 @@ filetype plugin indent on
 " Turn off modelines
 set modelines=0
 
-" Automatically wrap text that extends beyond the screen length.
-set nowrap
 " Vim's auto indentation feature does not work properly with text copied from outside of Vim. Press the <F2> key to toggle paste mode on/off.
 nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
@@ -87,17 +85,33 @@ noremap <leader>gs :CocSearch
 noremap <leader>fs :Files<cr>
 noremap <leader><cr> <cr><c-w>h:q<cr>
 
+" change colorscheme
+noremap <leader>aa :colorscheme nord<cr> :syntax on <CR>
+noremap <leader>ss :colorscheme OceanicNext<cr> :syntax on <CR>
+noremap <leader>dd :colorscheme ayu<cr> :syntax on <CR>
+noremap <leader>qq :colorscheme palenight<cr> :syntax on <CR>
+noremap <leader>ww :colorscheme gruvbox<cr> :syntax on <CR>
+
+noremap <leader>n :NERDTreeToggle<CR>
+noremap <leader>ws :split<cr>
+noremap <leader>wh :vsplit<cr>
+
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
+" File Bash Search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" For programing
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
+" Nerd Tree (Left Bar Files)
+Plug 'preservim/nerdtree'
+
 Plug 'vim-airline/vim-airline'
 " C#
 Plug 'OmniSharp/omnisharp-vim'
@@ -107,7 +121,14 @@ Plug 'ianks/vim-tsx'
 " Temas
 Plug 'arcticicestudio/nord-vim'
 Plug 'mhartington/oceanic-next'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'morhetz/gruvbox'
 call plug#end()
+
+" Set Ayu Theme
+set termguicolors
+let ayucolor="mirage"
 
 " == AUTOCMD ================================
 " by default .ts file are not identified as typescript and .tsx files are not
@@ -163,6 +184,7 @@ nnoremap <C-k> :tabnext<CR>
 
 " Seleccion de tema de color
 " colorscheme nord
-colorscheme OceanicNext
+" colorscheme OceanicNext
+colorscheme palenight
 
 :imap ii <Esc>
