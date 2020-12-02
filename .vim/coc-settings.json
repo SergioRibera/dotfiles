@@ -1,6 +1,0 @@
-{
-    "coc.source.OmniSharp.enable": true,
-    "coc.source.OmniSharp.triggerCharacters": [
-        "."
-    ]
-}

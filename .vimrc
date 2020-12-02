@@ -6,7 +6,8 @@ set rnu
 filetype off
 
 " Set cursor
-set guicursor=n-v-c:line
+" set guicursor=n-v-c:line
+set guicursor=i-ci:ver25-Cursor/lCursor
 
 " Turn on syntax highlighting.
 syntax on
@@ -187,4 +188,8 @@ nnoremap <C-k> :tabnext<CR>
 " colorscheme OceanicNext
 colorscheme palenight
 
-:imap ii <Esc>
+if exists('+termguicolors')
+    let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif

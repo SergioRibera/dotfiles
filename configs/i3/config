@@ -1,0 +1,166 @@
+#set wallpaper
+exec --no-startup-id nitrogen --restore
+
+# Desktop notifications
+exec --no-startup-id /usr/bin/dunst
+
+# update notification should be set to tray and notification
+#exec --no-startup-id sleep 15 && eos-update-notifier
+exec --no-startup-id sleep 15 && eos-welcome
+
+# set screens
+exec --no-startup-id xrandr --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VGA1 --mode 1024x768 --pos 1920x0 --rotate normal --output VIRTUAL1 --off
+set $firstMonitor HDMI1
+set $secondMonitor VGA1
+
+# set floating (nontiling)for apps needing it
+for_window [class="Yad" instance="yad"] floating enable
+for_window [class="Galculator" instance="galculator"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+
+#set floating (nontiling) for special apps
+for_window [class="Xsane" instance="xsane"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="qt5ct" instance="qt5ct"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Pamac-manager"] floating enable
+
+
+# Set mod key
+set $mod Mod4
+
+# Set window title font
+font pango:Faira Code
+
+# Align window title
+title_align center
+
+# Window rules
+for_window [class="^.*"] border pixel 0
+for_window [title="Library"] floating enable
+
+# Define gaps between windows
+gaps inner 2
+
+# Drag floating windows (Mouse + $mod)
+floating_modifier $mod
+
+# Kill focused window
+bindsym $mod+w kill
+
+# Open applications
+bindsym $mod+Return exec /home/sergioribera/blur.sh "alacritty" "Alacritty" 3
+bindsym $mod+Shift+p exec scrot -q 100 "/home/manzoor/Pictures/Screenshots/%Y-%m-%d-%s-screenshot.png"
+bindsym $mod+Shift+Tab exec rofi -show run -theme black
+bindsym $mod+Tab exec rofi -show window -theme black
+
+# Change window focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split window in horizontal
+bindsym $mod+h split h
+
+# Split window in vertical
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused window
+bindsym $mod+f fullscreen toggle
+
+# Change window layout (Stacked, tabbed or toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle between tiling and floating
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling and floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Focus the child container
+#bindsym $mod+d focus child
+
+# Set names for workspaces
+set $ws1 "Main"
+set $ws2 "Terminal"
+set $ws3 "Web"
+set $ws4 "Program"
+set $ws5 "Design"
+set $ws6 "Media"
+
+# Switch to workspaces
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 session inplace
+bindsym $mod+Shift+r restart
+
+# Resize window
+mode "resize" {
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+r mode "default"
+}
+
+# Enter resize mode
+bindsym $mod+r mode "resize"
+
+# Customize colors
+client.focused          #ff79c6 #ff79c6 #282a36 #ff79c6 #ff79c6
+client.focused_inactive #282a36 #282a36 #f8f8f2 #282a36 #282a36
+client.unfocused        #282a36 #282a36 #f8f8f2 #282a36 #282a36
+client.urgent           #ff5555 #ff5555 #282a36 #ff5555 #ff5555
+client.placeholder      #282a36 #282a36 #f8f8f2 #282a36 #282a36
+
+# Run commands on startup
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id zsh /home/sergioribera/.config/polybar/launch.sh
+#exec_always --no-startup-id feh --bg-fill /home/manzoor/Downloads/arch.png
+#exec_always --no-startup-id compton -b
+
+#transparency
+exec --no-startup-id xcompmgr -c
+#exec --no-startup-id picom -cC
+
+
+#bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+#bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
