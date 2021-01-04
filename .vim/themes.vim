@@ -1,9 +1,9 @@
 " change colorscheme
-noremap <leader>aa :colorscheme nord<cr> :syntax on <CR>
-noremap <leader>ss :colorscheme OceanicNext<cr> :syntax on<CR>
-noremap <leader>dd :colorscheme ayu<cr> :syntax on <CR>
-noremap <leader>qq :colorscheme palenight<cr> :syntax on <CR>
-noremap <leader>ww :colorscheme gruvbox<cr> :syntax on <CR>
+noremap <leader>aa :colorscheme nord<cr> :syntax on <CR> :call webdevicons#refresh() <CR>
+noremap <leader>ss :colorscheme OceanicNext<cr> :syntax on<CR> :call webdevicons#refresh() <CR>
+noremap <leader>dd :colorscheme ayu<cr> :syntax on <CR> :call webdevicons#refresh() <CR>
+noremap <leader>qq :colorscheme palenight<cr> :syntax on <CR> :call webdevicons#refresh() <CR>
+noremap <leader>ww :colorscheme gruvbox<cr> :syntax on <CR> :call webdevicons#refresh() <CR>
 
 " Set Ayu Theme
 set termguicolors
