@@ -1,4 +1,5 @@
 source ~/.vim/plugins.vim
+source ~/.vim/pluginconfigs.vim
 source ~/.vim/shortcuts.vim
 source ~/.vim/themes.vim
 
@@ -43,8 +44,6 @@ set matchpairs+=<:>
 set number
 " Status bar
 set laststatus=2
-" Set status line display
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
 " Encoding
 set encoding=utf-8
 " Highlight matching search patterns
@@ -59,8 +58,17 @@ set smartcase
 set viminfo='100,<9999,s100
 
 " Automatically save and load folds
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview"
+augroup AutoSaveFolds
+    autocmd!
+    " view files are about 500 bytes
+    " bufleave but not bufwinleave captures closing 2nd tab
+    " nested is needed by bufwrite* (if triggered via other autocmd)
+    " BufHidden for for compatibility with `set hidden`
+    autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
+    autocmd BufWinEnter ?* silent! loadview
+augroup end
+set viewoptions=folds,cursor
+set sessionoptions=folds
 
 
 " == AUTOCMD ================================
@@ -68,15 +76,6 @@ autocmd BufWinEnter *.* silent loadview"
 " identified as typescript react file, so add following
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+au BufNewFile,BufRead *.xaml set filetype=xml
 " == AUTOCMD END ================================
 autocmd FileType typescript,typescriptreact command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" Auto close
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
-

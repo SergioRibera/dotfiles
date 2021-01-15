@@ -11,9 +11,9 @@ let ayucolor="mirage"
 
 " Seleccion de tema de color
 " colorscheme nord
-" colorscheme OceanicNext
+colorscheme OceanicNext
 " colorscheme palenight
-colorscheme ayu
+"colorscheme ayu
 
 if exists('+termguicolors')
     let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
