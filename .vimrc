@@ -44,6 +44,7 @@ set matchpairs+=<:>
 set number
 " Status bar
 set laststatus=2
+set showtabline=2
 " Encoding
 set encoding=utf-8
 " Highlight matching search patterns

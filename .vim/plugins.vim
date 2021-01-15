@@ -38,6 +38,7 @@ Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'maximbaz/lightline-ale'
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
+Plug 'mengelbrecht/lightline-bufferline'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'

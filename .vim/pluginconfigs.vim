@@ -13,7 +13,12 @@ let g:lightline = {
     \   'bufnum': '%n',
     \   'inactive': 'inactive'
     \ },
+    \ 'tabline': {
+    \   'left': [ ['buffers']  ],
+    \   'right': [ ]
+    \ },
     \ 'component_expand': {
+    \   'buffers': 'lightline#bufferline#buffers',
     \   'linter_checking': 'lightline#ale#checking',
     \   'linter_infos': 'lightline#ale#infos',
     \   'linter_warnings': 'lightline#ale#warnings',
@@ -24,9 +29,13 @@ let g:lightline = {
     \ },
     \ 'component_function': {
     \   'gitbranch': 'lightline#hunks#composer',
-    \   'readonly': 'LightlineReadonly'
+    \   'readonly': 'LightlineReadonly',
+    \   'filetype': 'MyFiletype',
+    \   'filename': 'MyFileName',
     \ },
+    \ 'tab_component_function': { 'tabnum': 'LightlineWebDevIcons' },
     \ 'component_type': {
+    \   'buffers': 'tabsel',
     \   'linter_warnings': 'warning',
     \   'linter_errors': 'error',
     \   'linter_info': 'info',
@@ -39,6 +48,7 @@ let g:lightline = {
     \ }
     \}
 " Lightline settings
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 let g:lightline#hunks#hunk_symbols = [ '+', '~', '-' ]
 let g:lightline#hunks#only_branch = 1
 let g:lightline#hunks#exclude_filetypes = [ 'startify', 'nerdtree', 'vista_kind', 'tagbar'  ]
@@ -47,8 +57,21 @@ let g:lightline#ale#indicator_infos = "~"
 let g:lightline#ale#indicator_warnings = ""
 let g:lightline#ale#indicator_errors = ""
 let g:lightline#ale#indicator_ok = ""
+"let g:lightline#bufferline#show_number = 2
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#read_only = ' '
 function! LightlineReadonly()
     return &readonly && &filetype !=# 'help' ? '' : ''
+endfunction
+function! LightlineWebDevIcons(n)
+    let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+    return WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+endfunction
+function! MyFiletype()
+    return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol().' '.&filetype : 'no ft'
+endfunction
+function! MyFileName()
+    return WebDevIconsGetFileTypeSymbol().' '.expand('%F')
 endfunction
 
 "  nerdtree
@@ -57,7 +80,6 @@ let NERDTreeAutoDeleteBuffer=1
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.history$', '\.meta$', '^node_modules$']
-
 
 let g:signify_diff_relative_to = 'working_tree'
 let g:airline#extensions#hunks#enabled = 1
@@ -69,8 +91,6 @@ let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx,*.xml,*.xaml'
 set conceallevel=3
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
-let g:webdevicons_enable_airline_tabline = 1
-let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
