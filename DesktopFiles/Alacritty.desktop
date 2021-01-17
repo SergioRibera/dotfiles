@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/sergioribera/blur.sh "alacritty" "Alacritty" 3
+Icon=Alacritty
+Terminal=false
+Categories=System;TerminalEmulator;
+
+Name=Alacritty Blur
+GenericName=Terminal
+Comment=A cross-platform, GPU enhanced terminal emulator
+StartupWMClass=Alacritty
+Actions=New;
+
+X-Desktop-File-Install-Version=0.26
+
+[Desktop Action New]
+Name=New Terminal
+Exec=/home/sergioribera/blur.sh "alacritty" "Alacritty" 3
