@@ -1,0 +1,87 @@
+background_opacity: .8
+draw_bold_text_with_bright_colors: true
+live_config_reload: true
+cursor:
+  style: Beam
+colors:
+  #primary:
+  #  background: '0x292d3e'
+  #  foreground: '0xbbc5ff'
+  #normal:
+  #  black:   '0x101010'
+  #  red:     '0xf07178'
+  #  green:   '0xc3e88d'
+  #  yellow:  '0xffcb6b'
+  #  blue:    '0x82aaff'
+  #  magenta: '0xc792ea'
+  #  cyan:    '0x89ddff'
+  #  white:   '0xd0d0d0'
+  #bright:
+  #  black:   '0x434758'
+  #  red:     '0xff8b92'
+  #  green:   '0xddffa7'
+  #  yellow:  '0xffe585'
+  #  blue:    '0x9cc4ff'
+  #  magenta: '0xe1acff'
+  #  cyan:    '0xa3f7ff'
+  #  white:   '0xffffff'
+  primary:
+    background: '#232627'
+    foreground: '#fcfcfc'
+    dim_foreground: '#eff0f1'
+    bright_foreground: '#ffffff'
+    dim_background: '#31363b'
+    bright_background: '#000000'
+  normal:
+    black: '#232627'
+    red: '#ed1515'
+    green: '#11d116'
+    yellow: '#f67400'
+    blue: '#1d99f3'
+    magenta: '#9b59b6'
+    cyan: '#1abc9c'
+    white: '#fcfcfc'
+  bright:
+    black: '#7f8c8d'
+    red: '#c0392b'
+    green: '#1cdc9a'
+    yellow: '#fdbc4b'
+    blue: '#3daee9'
+    magenta: '#8e44ad'
+    cyan: '#16a085'
+    white: '#ffffff'
+  dim:
+    black: '#31363b'
+    red: '#783228'
+    green: '#17a262'
+    yellow: '#b65619'
+    blue: '#1b668f'
+    magenta: '#614a73'
+    cyan: '#186c60'
+    white: '#63686d'
+font:
+  bold:
+    family: Inconsolata
+    #family: DejaVu Sans
+    #family: Ubuntu Mono
+  italic:
+    family: Inconsolata
+    #family: DejaVu Sans
+    #family: Ubuntu Mono
+  normal:
+    family: Inconsolata
+    #family: DejaVu Sans
+    #family: Ubuntu Mono
+    style: Regular
+  size: 11.0
+window:
+  padding:
+    x: 5
+    y: 5
+
+shell:
+  program: /bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux"
