@@ -1,0 +1,6 @@
+src/assets
+src/components
+src/helpers
+src/screens
+src/styles
+src/utils

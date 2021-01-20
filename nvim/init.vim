@@ -1,10 +1,11 @@
-source ~/.vim/plugins.vim
-source ~/.vim/pluginconfigs.vim
-source ~/.vim/shortcuts.vim
-source ~/.vim/themes.vim
+"source ~/.config/nvim/avalonia.vim
+source ~/.config/nvim/plugins.vim
+source ~/.config/nvim/pluginconfigs.vim
+source ~/.config/nvim/shortcuts.vim
+source ~/.config/nvim/themes.vim
 
 " Set compatibility to Vim only.
-set nocompatible
+"set nocompatible
 set nolist
 set rnu
 " Helps force plug-ins to load correctly when it is turned back on below.
@@ -27,6 +28,8 @@ set autoindent
 set smartindent
 "set noshiftround
 
+"not changing cursor
+set guicursor=
 " Display 5 lines above/below the cursor when scrolling with a mouse.
 set scrolloff=1
 " Fixes common backspace problems
@@ -44,7 +47,6 @@ set matchpairs+=<:>
 set number
 " Status bar
 set laststatus=2
-set showtabline=2
 " Encoding
 set encoding=utf-8
 " Highlight matching search patterns

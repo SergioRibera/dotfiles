@@ -1,7 +1,15 @@
+" Vim Files
+let g:vimFilesThemplatesDir = {
+    \ 'react-native': 'react/native.txt',
+    \}
+let g:vimFilesThemplatesFiles = {
+    \ 'bootstrap': 'web/bootstrap.txt'
+    \}
 " Bottom Bar
 let g:lightline = {
     \ 'colorscheme': 'ayu_mirage',
     \ 'active': {
+    \   'tabline': 0,
     \   'left': [['mode', 'paste'], ['gitbranch'], ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok'], ['readonly', 'filename', 'modified']],
     \   'right': [['coc_status'], ['filetype', 'percent', 'lineinfo'], ['signify']]
     \ },
@@ -13,12 +21,7 @@ let g:lightline = {
     \   'bufnum': '%n',
     \   'inactive': 'inactive'
     \ },
-    \ 'tabline': {
-    \   'left': [ ['buffers']  ],
-    \   'right': [ ]
-    \ },
     \ 'component_expand': {
-    \   'buffers': 'lightline#bufferline#buffers',
     \   'linter_checking': 'lightline#ale#checking',
     \   'linter_infos': 'lightline#ale#infos',
     \   'linter_warnings': 'lightline#ale#warnings',
@@ -33,7 +36,6 @@ let g:lightline = {
     \   'filetype': 'MyFiletype',
     \   'filename': 'MyFileName',
     \ },
-    \ 'tab_component_function': { 'tabnum': 'LightlineWebDevIcons' },
     \ 'component_type': {
     \   'buffers': 'tabsel',
     \   'linter_warnings': 'warning',
@@ -57,21 +59,14 @@ let g:lightline#ale#indicator_infos = "~"
 let g:lightline#ale#indicator_warnings = ""
 let g:lightline#ale#indicator_errors = ""
 let g:lightline#ale#indicator_ok = ""
-"let g:lightline#bufferline#show_number = 2
-let g:lightline#bufferline#enable_devicons = 1
-let g:lightline#bufferline#read_only = ' '
 function! LightlineReadonly()
     return &readonly && &filetype !=# 'help' ? '' : ''
-endfunction
-function! LightlineWebDevIcons(n)
-    let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-    return WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
 endfunction
 function! MyFiletype()
     return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol().' '.&filetype : 'no ft'
 endfunction
 function! MyFileName()
-    return WebDevIconsGetFileTypeSymbol().' '.expand('%F')
+    return WebDevIconsGetFileTypeSymbol().' '.expand('%:t')
 endfunction
 
 "  nerdtree
@@ -97,7 +92,7 @@ let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
 
 " Coc
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint-plugin', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-yank' ]
+"let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint-plugin', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-yank' ]
 " HERE FOR KIDS COMING FROM YOUTUBE.
 let g:ale_linters = {
             \ 'cs': ['OmniSharp'],
@@ -109,8 +104,8 @@ let g:OmniSharp_popup = 1
 let g:OmniSharp_server_use_mono=1
 let g:FrameworkPathOverride='/lib/mono/4.7.2-api'
 
-set completeopt=menuone,noinsert,noselect,popuphidden
-set completepopup=highlight:Pmenu,border:off
+"set completeopt=menuone,noinsert,noselect,popuphidden
+"set completepopup=highlight:Pmenu,border:off
 
 " Asyncomplete: {{{
 let g:asyncomplete_auto_popup = 1
@@ -135,11 +130,18 @@ let g:OmniSharp_popup_mappings = {
             \ 'pageDown': ['<C-f>', '<PageDown>'],
             \ 'pageUp': ['<C-b>', '<PageUp>']
             \}
+function! ShowDocIfNoDiagnostic(timer_id)
+    if (coc#float#has_float() == 0)
+        silent call CocActionAsync('doHover')
+    endif
+endfunction
 
-nmap <silent> <buffer> <leader>gd <Plug>(omnisharp_go_to_definition)
-nmap <silent> <buffer> <leader>rn <Plug>(omnisharp_rename)
-nmap <silent> <buffer> <leader>ff :OmniSharpCodeFormat<CR>
-nmap <silent> gr <Plug>(coc-references))
+"function! s:show_hover_doc()
+"    call timer_start(500, 'ShowDocIfNoDiagnostic')
+"endfunction
+
+"autocmd CursorHoldI * :call <SID>show_hover_doc()
+"autocmd CursorHold * :call <SID>show_hover_doc()
 
 " vim fugitive
 command! -bang -nargs=? -complete=dir GFiles

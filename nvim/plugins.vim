@@ -1,10 +1,14 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+" auto-install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  "autocmd VimEnter * PlugInstall
+  "autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/autoload/plugged')
+"Plug 'file://'.expand('~/.config/nvim/autoload/plugged/nvim-files/')
+Plug 'SergioRibera/vim-files'
 " Themes
 Plug 'arcticicestudio/nord-vim'
 Plug 'mhartington/oceanic-next'
@@ -38,7 +42,7 @@ Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'maximbaz/lightline-ale'
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
-Plug 'mengelbrecht/lightline-bufferline'
+"Plug 'mengelbrecht/lightline-bufferline'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
