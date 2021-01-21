@@ -15,6 +15,8 @@ Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox'
+
+Plug 'TeoDev1611/teo-material-dark'
 " IDE
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
