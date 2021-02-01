@@ -14,25 +14,37 @@ vnoremap <Space> zf
 noremap <leader>w :w<cr>
 noremap <leader>gs :CocSearch
 noremap <leader>fs :Files<cr>
-noremap <leader><cr> <cr><c-w>h:q<cr>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>ws :split<cr>
 noremap <leader>wh :vsplit<cr>
 " Vim Files
-noremap <leader>cd :call VimFiles#CreateDir()<Cr>
-noremap <leader>cf :call VimFiles#CreateFile()<Cr> 
-noremap <leader>ce :call VimFiles#CreateDirThemplate()<Cr>
-noremap <leader>cr :call VimFiles#CreateFileThemplate()<Cr>
+"
+" Dirs
+noremap <leader>cd :call VimFiles#DirCreate()<Cr>
+noremap <leader>ce :call VimFiles#DirCreateFromTemplate()<Cr>
+" Files
+noremap <leader>cf :call VimFiles#FileCreate()<Cr>
+noremap <leader>cv :call VimFiles#FileCreateVS()<Cr>
+noremap <leader>ch :call VimFiles#FileCreateHS()<Cr>
+noremap <leader>cw :call VimFiles#FileCreateCW()<Cr>
+" Templates
+noremap <leader>tc :call VimFiles#FileTemplateCreate()<Cr>
+noremap <leader>tv :call VimFiles#FileTemplateCreateVS()<Cr>
+noremap <leader>th :call VimFiles#FileTemplateCreateHS()<Cr>
+noremap <leader>tw :call VimFiles#FileTemplateCreateCW()<Cr>
+" Manipulate Rename Files
+noremap <leader>rw :call VimFiles#ManipulateRenameCurrentFile()<Cr>
+noremap <leader>rf :call VimFiles#ManipulateRenameFile()<Cr>
+" Manipulate Move Files
+noremap <leader>mw :call VimFiles#ManipulateMoveCurrentFile()<Cr>
+noremap <leader>mf :call VimFiles#ManipulateMoveFile()<Cr>
+" Manipulate Delete Files
+noremap <leader>dw :call VimFiles#ManipulateDeleteCurrentFile()<Cr>
+noremap <leader>df :call VimFiles#ManipulateDeleteFile()<Cr>
 
-" Shortcuts Buffetline
-noremap <Tab> :bn<CR>
-noremap <S-Tab> :bp<CR>
-noremap <Leader><Tab> :Bw<CR>
-noremap <Leader><S-Tab> :Bw!<CR>
-noremap <C-t> :tabnew split<CR>
 
 " Coc Navigation.
-nnoremap <leader> K :call CocAction('doHover')<CR>
+"nnoremap <leader> K :call CocAction('doHover')<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -45,8 +57,6 @@ nmap <silent> <buffer> <leader>rn <Plug>(omnisharp_rename)
 nmap <silent> <buffer> <leader>ff :OmniSharpCodeFormat<CR>
 nmap <leader>do <Plug>(coc-codeaction)
 " Move between tabs
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-j> :tabprevious<CR>
 nnoremap <C-k> :tabnext<CR>
 " Toggle between transparent

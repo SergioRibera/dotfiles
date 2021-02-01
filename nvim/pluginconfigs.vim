@@ -3,8 +3,25 @@ let g:vimFilesThemplatesDir = {
     \ 'react-native': 'react/native.txt',
     \}
 let g:vimFilesThemplatesFiles = {
-    \ 'bootstrap': 'web/bootstrap.txt'
+    \ 'react-component': 'react/react-component.jsx',
+    \ 'cs-program': 'c-sharp/program.cs',
+    \ 'cs-enum': 'c-sharp/enum.cs',
+    \ 'cs-interface': 'c-sharp/interface.cs',
+    \ 'cs-behaviour': 'c-sharp/behaviour.cs',
+    \ 'cs-class': 'c-sharp/class.cs',
+    \ 'html-empty': 'web/html/empty.html'
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
     \}
+
 " Bottom Bar
 let g:lightline = {
     \ 'colorscheme': 'ayu_mirage',
@@ -136,12 +153,11 @@ function! ShowDocIfNoDiagnostic(timer_id)
     endif
 endfunction
 
-"function! s:show_hover_doc()
-"    call timer_start(500, 'ShowDocIfNoDiagnostic')
-"endfunction
+"
+"   ScreenShot
+"
 
-"autocmd CursorHoldI * :call <SID>show_hover_doc()
-"autocmd CursorHold * :call <SID>show_hover_doc()
+
 
 " vim fugitive
 command! -bang -nargs=? -complete=dir GFiles

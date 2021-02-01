@@ -7,16 +7,15 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-"Plug 'file://'.expand('~/.config/nvim/autoload/plugged/nvim-files/')
-Plug 'SergioRibera/vim-files'
+"Plug 'file://'.expand('~/.config/nvim/autoload/plugged/vim-screenshot/')
+Plug 'SergioRibera/vim-files', { 'branch': 'develop' }
+Plug 'SergioRibera/vim-screenshot', { 'do': './install.sh 1.0.0 linux' }
 " Themes
 Plug 'arcticicestudio/nord-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox'
-
-Plug 'TeoDev1611/teo-material-dark'
 " IDE
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
@@ -24,8 +23,9 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mhinz/vim-signify'
-Plug 'yggdroot/indentline'
-Plug 'scrooloose/nerdcommenter'
+Plug 'yggdroot/indentline' " show identation
+Plug 'scrooloose/nerdcommenter' " Advanced commenter
+Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'} " live reload html
 " For programing
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
