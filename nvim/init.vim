@@ -26,7 +26,10 @@ set softtabstop=4
 set expandtab
 set autoindent
 set smartindent
-"set noshiftround
+
+" Coceal Config
+set conceallevel=3
+set concealcursor=nvc
 
 "not changing cursor
 set guicursor=
@@ -81,4 +84,7 @@ au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 au BufNewFile,BufRead *.xaml set filetype=xml
 " == AUTOCMD END ================================
-autocmd FileType typescript,typescriptreact command! -nargs=0 Prettier :CocCommand prettier.formatFile
+autocmd FileType * command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+"autocmd BufNewFile,BufRead *.txt,*.md,*.json setlocal concealcursor=nvc conceallevel=3
+autocmd FileType markdown,json let g:indentLine_enabled=0

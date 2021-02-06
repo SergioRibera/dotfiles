@@ -4,22 +4,13 @@ let g:vimFilesThemplatesDir = {
     \}
 let g:vimFilesThemplatesFiles = {
     \ 'react-component': 'react/react-component.jsx',
+    \ 'cs-class': 'c-sharp/class.cs',
+    \ 'cs-class-namespace': 'c-sharp/classnamespace.cs',
+    \ 'cs-behaviour': 'c-sharp/behaviour.cs',
     \ 'cs-program': 'c-sharp/program.cs',
     \ 'cs-enum': 'c-sharp/enum.cs',
     \ 'cs-interface': 'c-sharp/interface.cs',
-    \ 'cs-behaviour': 'c-sharp/behaviour.cs',
-    \ 'cs-class': 'c-sharp/class.cs',
     \ 'html-empty': 'web/html/empty.html'
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    \
     \}
 
 " Bottom Bar
@@ -92,6 +83,8 @@ let NERDTreeAutoDeleteBuffer=1
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.history$', '\.meta$', '^node_modules$']
+let NERDTreeNodeDelimiter = "\x07"
+
 
 let g:signify_diff_relative_to = 'working_tree'
 let g:airline#extensions#hunks#enabled = 1
@@ -100,16 +93,16 @@ let g:airline#extensions#hunks#enabled = 1
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx,*.xml,*.xaml'
 
 " Vim DevIcons
-set conceallevel=3
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 let g:DevIconsEnableFoldersOpenClose = 1
-let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
 
 " Coc
-"let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint-plugin', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-yank' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint-plugin', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-yank' ]
 " HERE FOR KIDS COMING FROM YOUTUBE.
 let g:ale_linters = {
             \ 'cs': ['OmniSharp'],
@@ -117,12 +110,11 @@ let g:ale_linters = {
             \}
 let b:ale_linters = ['cs', 'flow-language-server']
 
-let g:OmniSharp_popup = 1
-let g:OmniSharp_server_use_mono=1
-let g:FrameworkPathOverride='/lib/mono/4.7.2-api'
+" Omnisharp
 
-"set completeopt=menuone,noinsert,noselect,popuphidden
-"set completepopup=highlight:Pmenu,border:off
+let g:OmniSharp_popup = 1
+let g:OmniSharp_server_use_mono = 1
+let g:OmniSharp_selector_findusages = 'fzf'
 
 " Asyncomplete: {{{
 let g:asyncomplete_auto_popup = 1
@@ -154,10 +146,10 @@ function! ShowDocIfNoDiagnostic(timer_id)
 endfunction
 
 "
-"   ScreenShot
+" Screenshot
 "
-
-
+let g:vimShotSavePath = '~/Imágenes/Code'
+let g:vimShotTimeOut = 1000
 
 " vim fugitive
 command! -bang -nargs=? -complete=dir GFiles

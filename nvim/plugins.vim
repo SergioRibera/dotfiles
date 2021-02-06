@@ -7,21 +7,22 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-"Plug 'file://'.expand('~/.config/nvim/autoload/plugged/vim-screenshot/')
+Plug 'file://'.expand('~/Proyectos/Plugins/Vim/vim-general-conceal/')
 Plug 'SergioRibera/vim-files', { 'branch': 'develop' }
-Plug 'SergioRibera/vim-screenshot', { 'do': './install.sh 1.0.0 linux' }
+Plug 'SergioRibera/vim-screenshot', { 'do': 'npm install --prefix Renderizer' }
 " Themes
 Plug 'arcticicestudio/nord-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox'
+Plug 'ghifarit53/tokyonight-vim'
 " IDE
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'mhinz/vim-signify'
 Plug 'yggdroot/indentline' " show identation
 Plug 'scrooloose/nerdcommenter' " Advanced commenter
