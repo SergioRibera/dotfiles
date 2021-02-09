@@ -1,3 +1,5 @@
+# set enviroment vars
+exec --no-startup-id export FrameworkPathOverride=/lib/mono/4.7.2-api
 #set wallpaper
 exec --no-startup-id nitrogen --restore
 
@@ -6,12 +8,14 @@ exec --no-startup-id /usr/bin/dunst
 
 # update notification should be set to tray and notification
 #exec --no-startup-id sleep 15 && eos-update-notifier
-exec --no-startup-id sleep 15 && eos-welcome
 
 # set screens
 exec --no-startup-id xrandr --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VGA1 --mode 1024x768 --pos 1920x0 --rotate normal --output VIRTUAL1 --off
 set $firstMonitor HDMI1
 set $secondMonitor VGA1
+
+# Active Blur
+exec --no-startup-id picom --backend glx --experimental-backends -bc
 
 # set floating (nontiling)for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
@@ -50,8 +54,8 @@ floating_modifier $mod
 bindsym $mod+w kill
 
 # Open applications
-bindsym $mod+Return exec /home/sergioribera/blur.sh "alacritty" "Alacritty" 3
-bindsym $mod+Shift+p exec scrot -q 100 "/home/manzoor/Pictures/Screenshots/%Y-%m-%d-%s-screenshot.png"
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+p exec scrot -q 100 "/home/sergioribera/Imágenes/Screenshots/%Y-%m-%d-%s-screenshot.png"
 bindsym $mod+Shift+Tab exec rofi -show run -theme black
 bindsym $mod+Tab exec rofi -show window -theme black
 
@@ -151,7 +155,7 @@ exec_always --no-startup-id zsh /home/sergioribera/.config/polybar/launch.sh
 #exec_always --no-startup-id compton -b
 
 #transparency
-exec --no-startup-id xcompmgr -c
+#exec --no-startup-id xcompmgr -c
 #exec --no-startup-id picom -cC
 
 
