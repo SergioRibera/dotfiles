@@ -82,9 +82,8 @@ set sessionoptions=folds
 " identified as typescript react file, so add following
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
-au BufNewFile,BufRead *.xaml set filetype=xml
+au BufNewFile,BufRead *.xaml,*.xml,*.axaml set filetype=xml
+" Arduino
+au BufRead,BufNewFile *.ino,*.pde set filetype=cpp
 " == AUTOCMD END ================================
 autocmd FileType * command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-"autocmd BufNewFile,BufRead *.txt,*.md,*.json setlocal concealcursor=nvc conceallevel=3
-autocmd FileType markdown,json let g:indentLine_enabled=0

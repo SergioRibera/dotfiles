@@ -6,8 +6,8 @@ let ayucolor="mirage"
 let g:tokyonight_style = 'storm' " available: night, storm
 
 " Init with OceanicNext Theme
-call ccolor#SelectTokyoNight()
-call ccolor#ChangeColor()
+colorscheme tokyonight
+call ccolor#ChangeBGColor()
 
 if exists('+termguicolors')
     let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"

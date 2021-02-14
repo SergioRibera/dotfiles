@@ -1,5 +1,6 @@
 if exists('g:fvim_loaded')
     " good old 'set guifont' compatibility
+    
     set guifont=Iconsolata\ Slab:h11
 
     "FVimCursorSmoothMove v:true

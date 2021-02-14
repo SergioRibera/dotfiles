@@ -11,14 +11,12 @@ let mapleader = " "
 
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-" Map the <Space> key to toggle a selected fold opened/closed.
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
-
 " Shortcuts
 noremap <leader>w :w<cr>
 noremap <leader>wq :wq<cr>
-noremap <leader>fs :Files<cr>
+noremap <leader>q :q<cr>
+"noremap <leader>fs :Files<cr>
+noremap <leader>fs <cmd>Telescope find_files color=all<Cr>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>ws :split<cr>
 noremap <leader>wh :vsplit<cr>
@@ -86,4 +84,3 @@ noremap <leader>ps :TakeScreenShot<Cr>
 " Move between tabs
 nnoremap <C-j> :tabprevious<CR>
 nnoremap <C-k> :tabnext<CR>
-" Toggle between transparent

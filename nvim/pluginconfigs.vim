@@ -10,7 +10,9 @@ let g:vimFilesThemplatesFiles = {
     \ 'cs-program': 'c-sharp/program.cs',
     \ 'cs-enum': 'c-sharp/enum.cs',
     \ 'cs-interface': 'c-sharp/interface.cs',
-    \ 'html-empty': 'web/html/empty.html'
+    \ 'cpp-basic-program': 'c++/basic-program.cpp',
+    \ 'html-empty': 'web/html/empty.html',
+    \ 'html-js-basic': 'web/html/main.js'
     \}
 
 " Bottom Bar
@@ -77,15 +79,6 @@ function! MyFileName()
     return WebDevIconsGetFileTypeSymbol().' '.expand('%:t')
 endfunction
 
-"  nerdtree
-let NERDTreeQuitOnOpen=1
-let NERDTreeAutoDeleteBuffer=1
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=1
-let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.history$', '\.meta$', '^node_modules$']
-let NERDTreeNodeDelimiter = "\x07"
-
-
 let g:signify_diff_relative_to = 'working_tree'
 let g:airline#extensions#hunks#enabled = 1
 
@@ -139,17 +132,24 @@ let g:OmniSharp_popup_mappings = {
             \ 'pageDown': ['<C-f>', '<PageDown>'],
             \ 'pageUp': ['<C-b>', '<PageUp>']
             \}
-function! ShowDocIfNoDiagnostic(timer_id)
-    if (coc#float#has_float() == 0)
-        silent call CocActionAsync('doHover')
-    endif
-endfunction
 
+"  nerdtree
+let NERDTreeQuitOnOpen=1
+let NERDTreeAutoDeleteBuffer=1
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.history$', '\.meta$', '^node_modules$']
+let NERDTreeNodeDelimiter = "\x07"
+
+" Palette
+augroup my-glyph-palette
+  autocmd! *
+  autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
 "
 " Screenshot
 "
 let g:vimShotSavePath = '~/Imágenes/Code'
-let g:vimShotTimeOut = 1000
 
 " vim fugitive
 command! -bang -nargs=? -complete=dir GFiles
@@ -176,3 +176,73 @@ set updatetime=300
 
 " fugitive always vertical diffing
 set diffopt+=vertical
+
+"
+"    -----------------------------------------------
+"   |                                               |
+"   |               Dashboard Settings              |
+"   |                                               |
+"    -----------------------------------------------
+"
+"
+"autocmd VimEnter * Dashboard
+
+" let g:dashboard_custom_header =[
+"     \"  █████████  ███████████          ",
+"     \" ███░░░░░███░░███░░░░░███         ",
+"     \"░███    ░░░  ░███    ░███         ",
+"     \"░░█████████  ░██████████          ",
+"     \" ░░░░░░░░███ ░███░░░░░███         ",
+"     \" ███    ░███ ░███    ░███         ",
+"     \"░░█████████  █████   █████        ",
+"     \" ░░░░░░░░░  ░░░░░   ░░░░░         ",
+"     \"                                  ",
+"     \]
+
+let g:dashboard_custom_header = [
+    \"                                                                                ",
+    \"                                                                                ",
+    \"                                                                                ",
+    \"                                                                                ",
+    \"                                            %&                                  ",
+    \"                                          %%%%%%                                ",
+    \"                                       %%%%%%%%                                 ",
+    \"                                    %%%%%%%%                                    ",
+    \"                                  # #####%%%                                    ",
+    \"                               ######&########                                  ",
+    \"                             ########    ########                               ",
+    \"                          ((((((((         %#######                             ",
+    \"                       #(((((((((&            ########                          ",
+    \"                     /((((( ((((((((             ########                       ",
+    \"                  (///////    /(((((((&            (#######                     ",
+    \"                ////////         /(((((((             ########                  ",
+    \"               *///////             ((((((((            (#######                ",
+    \"                 ***/////             ///(((((           ((((####               ",
+    \"                    *****//*             ////((((     ((((((((                  ",
+    \"                       *******/            (//////( /(((((((                    ",
+    \"                         ********             ////////&(/                       ",
+    \"                            ********           ////////                         ",
+    \"                              ********      ////////                            ",
+    \"                                 ******** ******/%                              ",
+    \"                                    ***********                                 ",
+    \"                                    (*******                                    ",
+    \"                                  ,,,,,,,*                                      ",
+    \"                               *,,,,,,,                                         ",
+    \"                                  ,,,                                           ",
+    \"                                                                                ",
+    \"                                                                                ",
+    \"                                                                                ",
+    \]
+
+let g:dashboard_default_executive ='telescope'
+let g:dashboard_custom_shortcut_icon = {
+            \'last_session': ' ',
+            \'find_history': 'ﭯ ',
+            \'find_file': ' ',
+            \'new_file': ' ',
+            \'change_colorscheme': ' ',
+            \'find_word': ' ',
+            \'book_marks': ' '
+            \}
+
+let g:indentLine_fileTypeExclude = ['dashboard']

@@ -1,2 +1,22 @@
 {
+    "explorer.width": 25,
+    "explorer.quitOnOpen": true,
+    "explorer.filename.colored.enable": true,
+    "explorer.buffer.root.template": "[icon] [title] [hidden & 1]",
+    "explorer.file.root.template": "[icon & 1] PROJECT ([root])",
+    "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5]",
+    "explorer.file.autoReveal": false,
+    "explorer.icon.enableVimDevicons": true,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": "content",
+    "explorer.keyMappings.global": {
+        "o": ["expandable?", "expand", "open"],
+        "i": "open:split",
+        "s": "open:vsplit",
+        "rn": "rename",
+        "c": "copyFile",
+        "d": "delete",
+        "a": "addFile",
+        "A": "addDirectory"
+    }
 }

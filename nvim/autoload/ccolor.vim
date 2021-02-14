@@ -1,39 +1,58 @@
-noremap <leader>aa :call ccolor#SelectNord()<CR>
-noremap <leader>ss :call ccolor#SelectOceanicNext()<CR>
-noremap <leader>dd :call ccolor#SelectAyu()<CR>
-noremap <leader>qq :call ccolor#SelectPalenight()<CR>
-noremap <leader>ww :call ccolor#SelectGruvbox()<CR>
+noremap <leader>aa :colorscheme nord<CR>
+noremap <leader>ss :colorscheme OceanicNext<CR>
+noremap <leader>dd :colorscheme ayu<CR>
+noremap <leader>qq :colorscheme palenight<CR>
+noremap <leader>ww :colorscheme gruvbox<CR>
+noremap <leader>ee :colorscheme tokyonight<CR>
+" Toggle Transparent Background
+nnoremap <leader>tt :call ccolor#ChangeBGColor()<CR>
 
-function! ccolor#SelectNord()
-    colorscheme nord
-    call s:RefreshHighlight()
+let t:is_transparent = 0
+let t:groupBgColorsNvim = has('nvim') ? ['guibg'] : ['ctermbg']
+
+function! s:automaticChange()
+    if t:is_transparent == 0
+        call ccolor#EnableTransparency()
+    endif
 endfunction
-function! ccolor#SelectOceanicNext()
-    colorscheme OceanicNext
-    call s:RefreshHighlight()
+function! s:clearBg(hl)
+    for group in t:groupBgColorsNvim
+        execute 'highlight ' . a:hl . ' ' . group . '=NONE'
+    endfor
 endfunction
-function! ccolor#SelectAyu()
-    colorscheme ayu
-    call s:RefreshHighlight()
+function! ccolor#DisableTransparency()
+    let l:colors_name = get(g:, 'colors_name', '')
+    echomsg l:colors_name
+    if l:colors_name !=# ''
+        try
+            execute 'colorscheme ' . l:colors_name
+        endtry
+    endif
 endfunction
-function! ccolor#SelectPalenight()
-    colorscheme palenight
-    call s:RefreshHighlight()
-endfunction
-function! ccolor#SelectGruvbox()
-    colorscheme gruvbox
-    call s:RefreshHighlight()
+function! ccolor#EnableTransparency()
+    call s:clearBg('Normal')
+    call s:clearBg('EndOfBuffer')
+    call s:clearBg('LineNr')
+    call s:clearBg('SignColumn')
+    call s:clearBg('VertSplit')
+    call s:clearBg('NonText')
 endfunction
 
-function! s:RefreshHighlight()
-    highlight! link NERDTreeFlags NERDTreeDir
+function! ccolor#ChangeBGColor()
+    if t:is_transparent == 0
+        call ccolor#EnableTransparency() | let t:is_transparent = 0 | syntax on
+    else
+        call ccolor#DisableTransparency() | let t:is_transparent = 1
+    endif
 endfunction
 
-function! ccolor#ChangeColor()
-    autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
-    autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
-    autocmd ColorScheme * highlight Normal guibg=None ctermbg=None
-    autocmd ColorScheme * highlight EndOfBuffer guibg=None ctermbg=None
-    syntax on
-endfunction
-
+autocmd VimEnter * call ccolor#EnableTransparency()
+autocmd ColorScheme * call s:automaticChange()
+" Remove Nerd Tree Backets
+augroup nerdtreeconcealbrackets
+      autocmd!
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
+      autocmd FileType nerdtree setlocal conceallevel=3
+      autocmd FileType nerdtree setlocal concealcursor=nvic
+augroup END
