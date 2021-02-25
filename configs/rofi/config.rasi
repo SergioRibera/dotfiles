@@ -56,6 +56,14 @@ configuration {
 	click-to-exit: true;
 	show-match: true;
 	theme: "onedark";
+    kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+    kb-row-down: "Down,Control+j";
+    kb-accept-entry: "Control+m,Return,KP_Enter";
+    terminal: "mate-terminal";
+    kb-remove-to-eol: "Control+Shift+e";
+    kb-mode-next: "Shift+Right,Control+Tab,Control+l";
+    kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
+    kb-remove-char-back: "BackSpace";
 //	color-normal: "argb:002f343f, #d8dee8, argb:002f343f, argb:002f343f, #e7763a";
 //	color-urgent: "#393939, #f3843d, #393939, #268bd2, #ffc39c";
 //	color-active: "#393939, #268bd2, #393939, #268bd2, #205171";
