@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 dir="$HOME/.config/rofi/powermenu"
-rofi_command="rofi -theme $dir/full_square.rasi"
+rofi_command="rofi -theme $dir/styles/powermenu.rasi"
 
 # Options
 shutdown=""
@@ -15,7 +15,7 @@ confirm_exit() {
 		-i\
 		-no-fixed-num-lines\
 		-p "Are You Sure? : "\
-		-theme $dir/confirm.rasi
+		-theme $dir/styles/confirm.rasi
 }
 
 # Message

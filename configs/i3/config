@@ -2,7 +2,7 @@
 exec --no-startup-id export FrameworkPathOverride=/lib/mono/4.7.2-api
 #set wallpaper
 #exec --no-startup-id nitrogen --restore
-exec --no-startup-id /home/sergioribera/.config/nitrogen/autobg.py -c "./bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/"
+exec --no-startup-id /home/sergioribera/.config/nitrogen/autobg.py -c "/home/sergioribera/.config/nitrogen/bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/"
 
 # Desktop notifications
 exec --no-startup-id /usr/bin/dunst
@@ -51,8 +51,7 @@ bindsym $mod+w kill
 
 # Open applications
 bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+p exec scrot -q 100 "%Y-%m-%d-%s-screenshot.png" -e 'mv $f /home/sergioribera/Imágenes/Screenshots/'
-bindsym $mod+Shift+l exec scrot --select -q 100 "%Y-%m-%d-%s-screenshot.png" -e 'mv $f /home/sergioribera/Imágenes/Screenshots/'
+bindsym $mod+Shift+p exec bash -c "/home/sergioribera/.config/rofi/scripts/screenshot.sh"
 bindsym $mod+Shift+Tab exec rofi -show run
 bindsym $mod+Tab exec rofi -show window
 

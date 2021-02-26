@@ -137,7 +137,10 @@ alt + super + {Left,Down,Up,Right}
 # CUSTOM
 # ---------------------------------------------
 
-# Google-Chrome
-
+# Microsof Edge
 super + shift + n
 	microsoft-edge-dev
+
+# Screenshot
+super + shift + p
+    /home/sergioribera/.config/rofi/scripts/screenshot.sh

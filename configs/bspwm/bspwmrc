@@ -6,7 +6,7 @@ xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --ou
 compton --config /dev/null --backend glx --blur-method kawase --blur-background --blur-strength 12 &
 wname L3GD &
 # Set Backgrounds Randoms
-/home/sergioribera/.config/nitrogen/autobg.py -c "./bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/" &
+/home/sergioribera/.config/nitrogen/autobg.py -c "/home/sergioribera/.config/nitrogen/bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/" &
 /home/sergioribera/.config/polybar/launch.sh &
 dunst &
 
