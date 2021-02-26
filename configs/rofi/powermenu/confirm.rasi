@@ -1,11 +1,13 @@
 /* Confirm Dialog */
 
-@import "styles/colors.rasi"
 
 * {
-    background-color:       @background;
-    text-color:             @foreground;
-	font:				 	"FantasqueSansMono Nerd Font 12";
+  blue:       #6eaafb;
+  spacing: 0;
+  background-color: transparent;
+
+  font: "Knack Nerd Font 14";
+  text-color: @text;
 }
 
 window {
@@ -13,12 +15,11 @@ window {
     padding:    			25px;
     border:					1px;
     border-radius:          0px;
-    border-color:           @border;
     location:               center;
     y-offset:               -2em;
 }
 
 entry {
     expand: 				true;
-    text-color:				@border;
+    text-color:				@blue;
 }
