@@ -1,14 +1,3 @@
-/*
- * ROFI One Dark
- *
- * Based on OneDark.vim (https://github.com/joshdick/onedark.vim)
- *
- * Author: Benjamin Stauss
- * User: me-benni
- *
- */
-
-
 * {
   black:      #000000;
   red:        #eb6e67;
@@ -33,9 +22,6 @@
 window {
   transparency: "real";
   fullscreen: true;
-  /*
-   *background-color: #282c34dd;
-   */
    background-color: #282c34a2;
 }
 

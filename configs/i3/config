@@ -1,7 +1,8 @@
 # set enviroment vars
 exec --no-startup-id export FrameworkPathOverride=/lib/mono/4.7.2-api
 #set wallpaper
-exec --no-startup-id nitrogen --restore
+#exec --no-startup-id nitrogen --restore
+exec --no-startup-id /home/sergioribera/.config/nitrogen/autobg.py -c "./bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/"
 
 # Desktop notifications
 exec --no-startup-id /usr/bin/dunst
@@ -15,7 +16,8 @@ set $firstMonitor HDMI-1
 set $secondMonitor VGA-1
 
 # Active Blur
-exec --no-startup-id compton --backend glx --blur-method kawase --blur-background --blur-strength 12 --config /dev/null
+#exec --no-startup-id compton --backend glx --blur-method kawase --blur-background --blur-strength 12 --config /dev/null
+#exec --no-startup-id compton
 
 #set floating (nontiling) for special apps
 for_window [class="Xsane" instance="xsane"] floating enable
