@@ -23,6 +23,8 @@ super + Escape
 
 # quit/restart bspwm
 super + alt + {q,r}
+    killall -q /home/sergioribera/.config/nitrogen/autobg.py \
+    while pgrep -u $UID -x /home/sergioribera/.config/nitrogen/autobg.py >/dev/null; do sleep 1; done \
 	bspc {quit,wm -r}
 
 # close and kill
@@ -73,10 +75,6 @@ super + {p,b,comma,period}
 super + {_,shift + }c
 	bspc node -f {next,prev}.local
 
-# focus the next/previous desktop in the current monitor
-super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
-
 # focus the last node/desktop
 super + Alt + {grave,Tab}
 	bspc {node,desktop} -f last
@@ -104,14 +102,6 @@ super + ctrl + alt + {Left,Down,Up,Right}
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
-# cancel the preselection for the focused node
-super + ctrl + space
-	bspc node -p cancel
-
-# cancel the preselection for the focused desktop
-super + ctrl + alt + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
 #
 # move/resize
 #
@@ -126,7 +116,7 @@ super + ctrl + alt + space
 
 # move a floating window
 super + ctrl + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+	bspc node -v {-5 0,0 5,0 -5,5 0}
 
 # Custom move/resize
 alt + super + {Left,Down,Up,Right}

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dir="$HOME/.config/rofi/powermenu"
+dir="$HOME/.config/rofi"
 rofi_command="rofi -theme $dir/styles/powermenu.rasi"
 
 # Options

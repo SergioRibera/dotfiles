@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 import subprocess, os, random, glob, time, argparse, re
 
 dirImages = [ ]

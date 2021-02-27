@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dir="$HOME/.config/rofi/appets/config"
+dir="$HOME/.config/rofi"
 rofi_command="rofi -theme $dir/styles/screenshot.rasi"
 
 # Error msg
