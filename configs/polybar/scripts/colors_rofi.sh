@@ -57,7 +57,7 @@ MENU="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p 'Style' \
 -color-normal "$BACKGROUND_ALT,$FOREGROUND,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
 -color-active "$BACKGROUND,$MAGENTA,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
 -color-urgent "$BACKGROUND,$YELLOW,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
-<<< "♥ amber|♥ blue|♥ blue-grey|♥ brown|♥ cyan|♥ deep-orange|♥ deep-purple|♥ green|♥ grey|♥ indigo|♥ blue-light|♥ green-light|♥ lime|♥ orange|♥ pink|♥ purple|♥ red|♥ teal|♥ yellow")"
+<<< " amber| blue| blue-grey| brown| cyan| deep-orange| deep-purple| green| grey| indigo| blue-light| green-light| lime| orange| pink| purple| red| teal| yellow")"
             case "$MENU" in
 				## Colors
 				*amber) $SDIR/colors.sh -amber ;;

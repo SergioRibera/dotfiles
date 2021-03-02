@@ -127,9 +127,17 @@ alt + super + {Left,Down,Up,Right}
 # CUSTOM
 # ---------------------------------------------
 
-# Microsof Edge
-super + shift + n
-	microsoft-edge-dev
+# Discord
+super + d
+    discord
+
+# File manager
+super + e
+    dolphin
+
+# Web Browser
+super + n
+    firefox
 
 # Screenshot
 super + shift + p
