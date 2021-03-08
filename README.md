@@ -6,23 +6,25 @@ Arch Linux o que tengan pacman como administrador de paquetes
 
 - 1 .- `git clone https://github.com/SergioRibera/my-linux-config.git`
 - 2 .- `cd my-linux-config`
-- 3 .- `./install`
+- 3 .- `./install.sh`
 
 Luego solo queda seguir las instrucciones que vayan apareciendo en consola
 
 #### Aplicaciones Instaladas
-- Vim
+- Neovim
 - git
 - Yay
-- Brave
+- Firefox
 - Unity
 - Ferdi
 - Altus
-- Telegram
+- Telegram Desktop
 - WPS Office
 - Reactide
 - Discord (Betterdiscord)
 - Xampp
+- Picom jonaburg
+- Rofi
 ##### Opcionales
 - TLauncher
 - Kavantum
