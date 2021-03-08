@@ -1,11 +1,11 @@
 #! /bin/sh
 
 pgrep -x sxhkd > /dev/null || sxhkd &
-setxkbmap -model pc105 -layout latam,us -variant deadtilde, -option grp:ctrl_alt_toggle;
+#setxkbmap -model pc105 -layout latam,us -variant deadtilde, -option grp:ctrl_alt_toggle;
+setxkbmap -model pc105 -layout latam,us -variant deadtilde, ;
 xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VGA-1 --mode 1024x768 --pos 1920x0 --rotate normal --output VIRTUAL1 --off &
 
 #compton --config /dev/null --backend glx --blur-method kawase --blur-background --blur-strength 12 &
-picom --config $HOME/.config/picom/picom.conf
 #wname L3GD &
 
 # Set Backgrounds Randoms
@@ -34,3 +34,5 @@ bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+# Set Picom as Default Compositor
+picom --config $HOME/.config/picom/picom.conf

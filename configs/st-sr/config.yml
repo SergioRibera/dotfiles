@@ -1,0 +1,11 @@
+# args: "zsh -c tmux"
+alpha: 0.7
+class: "stsr_class"
+title: "SR Terminal"
+font: "mono Iosevka"
+default_font_size: 16
+colors: [
+    '#aksjd',
+    '#kasjhd',
+    '#kajsas'
+]

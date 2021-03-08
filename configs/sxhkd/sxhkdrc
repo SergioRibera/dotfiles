@@ -4,7 +4,8 @@
 
 # terminal emulator
 super + Return
-	alacritty
+    st -A 0.75 -x 6 -s "gruv-dark" -f "mono" -e tmux
+	#alacritty
 
 # program launcher
 super + Tab
@@ -126,6 +127,10 @@ alt + super + {Left,Down,Up,Right}
 # ---------------------------------------------
 # CUSTOM
 # ---------------------------------------------
+
+# Lock Screen
+super + shift + l
+    /home/sergioribera/.config/i3/i3lock.sh
 
 # Discord
 super + d
