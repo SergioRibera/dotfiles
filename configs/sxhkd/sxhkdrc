@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-    st -A 0.75 -x 6 -s "gruv-dark" -f "mono" -e tmux
+    st -A 0.75 -x 6 -s "gruv-dark" -f "mono" -z 13.0 -e tmux
 	#alacritty
 
 # program launcher
