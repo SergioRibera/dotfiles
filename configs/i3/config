@@ -1,23 +1,14 @@
-# set enviroment vars
-exec --no-startup-id export FrameworkPathOverride=/lib/mono/4.7.2-api
-#set wallpaper
-#exec --no-startup-id nitrogen --restore
-exec --no-startup-id /home/sergioribera/.config/nitrogen/autobg.py -c "/home/sergioribera/.config/nitrogen/bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/"
-
 # Desktop notifications
+exec --no-startup-id setxkbmap -model pc105 -layout latam,us -variant deadtilde, ;
 exec --no-startup-id /usr/bin/dunst
 
 # update notification should be set to tray and notification
 #exec --no-startup-id sleep 15 && eos-update-notifier
 
 # set screens
-exec --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VGA-1 --mode 1024x768 --pos 1920x0 --rotate normal --output VIRTUAL1 --off
-set $firstMonitor HDMI-1
-set $secondMonitor VGA-1
-
-# Active Blur
-#exec --no-startup-id compton --backend glx --blur-method kawase --blur-background --blur-strength 12 --config /dev/null
-#exec --no-startup-id compton
+exec --no-startup-id xrandr --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VGA1 --mode 1024x768 --pos 1920x0 --rotate normal --output VIRTUAL1 --off
+set $firstMonitor HDMI1
+set $secondMonitor VGA1
 
 #set floating (nontiling) for special apps
 for_window [class="Xsane" instance="xsane"] floating enable
@@ -25,6 +16,9 @@ for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
+for_window [class="Unity-Hub"] floating enable
+for_window [class="Unity"] floating enable
+for_window [class="Dolphin"] floating enable
 
 
 # Set mod key
@@ -37,6 +31,9 @@ font pango:Faira Code
 title_align center
 
 # Window rules
+default_orientation vertical 
+for_window [class=".*"] split toggle # simulate fibonacy
+
 for_window [class="^.*"] border pixel 0
 for_window [title="Library"] floating enable
 
@@ -47,12 +44,14 @@ gaps inner 2
 floating_modifier $mod
 
 # Kill focused window
-bindsym $mod+w kill
+bindsym $mod+w split toggle kill
 
 # Open applications
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec st -A 0.75 -x 6 -s "gruv-dark" -f "mono" -z 13.0 -e tmux
+bindsym $mod+e exec dolphin
+bindsym $mod+n exec firefox
 bindsym $mod+Shift+p exec bash -c "/home/sergioribera/.config/rofi/scripts/screenshot.sh"
-bindsym $mod+Shift+Tab exec rofi -show run
+bindsym $mod+Shift+Tab exec rofi -show drun
 bindsym $mod+Tab exec rofi -show window
 
 # Change window focus
@@ -74,12 +73,10 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # Enter fullscreen mode for the focused window
-bindsym $mod+f fullscreen toggle
+bindsym $mod+s fullscreen toggle
 
 # Change window layout (Stacked, tabbed or toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+t layout toggle split
 
 # Toggle between tiling and floating
 bindsym $mod+Shift+space floating toggle
@@ -167,6 +164,8 @@ client.placeholder      #282a36 #282a36 #f8f8f2 #282a36 #282a36
 
 # Run commands on startup
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id /home/sergioribera/.config/nitrogen/autobg.py -c "/home/sergioribera/.config/nitrogen/bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/"
+#/home/sergioribera/.config/nitrogen/autobg.py -c "/home/sergioribera/.config/nitrogen/bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/MisLogos"
 exec_always --no-startup-id zsh /home/sergioribera/.config/polybar/launch.sh
 #exec_always --no-startup-id compton -b
 
@@ -176,3 +175,5 @@ set $refresh_i3status killall -SIGUSR1 i3status
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 #bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf

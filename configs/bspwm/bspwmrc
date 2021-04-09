@@ -3,7 +3,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 #setxkbmap -model pc105 -layout latam,us -variant deadtilde, -option grp:ctrl_alt_toggle;
 setxkbmap -model pc105 -layout latam,us -variant deadtilde, ;
-xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VGA-1 --mode 1024x768 --pos 1920x0 --rotate normal --output VIRTUAL1 --off &
+xrandr --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VGA1 --mode 1024x768 --pos 1920x0 --rotate normal --output VIRTUAL1 --off &
 
 #compton --config /dev/null --backend glx --blur-method kawase --blur-background --blur-strength 12 &
 #wname L3GD &
@@ -16,12 +16,14 @@ xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --ou
 dunst &
 
 # Leader Key
-bspc config pointer_modifier mod1
+bspc config pointer_modifier mod1 # Command key 
+bspc config pointer_action1 move # Left Button Mouse to Move
+bspc config pointer_action2 resize_corner # Rigth Button Mouse to Resize
 
-bspc monitor HDMI-1 -d I II III IV V
-bspc monitor VGA-1 -d VI VII VIII IX X
+bspc monitor HDMI1 -d I II III IV V
+bspc monitor VGA1 -d VI VII VIII IX X
 
-bspc config border_width 1
+bspc config border_width 0
 bspc config window_gap 5
 
 bspc config split_ratio          0.52
@@ -30,9 +32,12 @@ bspc config gapless_monocle      true
 bspc config focus_follows_pointer true
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
+bspc rule -a Glava manage=off
+bspc rule -a Discord desktop='^7'
+bspc rule -a UnityHub state=floating
+bspc rule -a Pavucontrol state=floating
+bspc rule -a Dolphin state=floating
+
 # Set Picom as Default Compositor
-picom --config $HOME/.config/picom/picom.conf
+picom --config ~/.config/picom/picom.conf

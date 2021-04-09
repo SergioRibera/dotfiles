@@ -3,7 +3,7 @@
 if bspc query -N -n focused.floating > /dev/null; then
 	step=5
 else
-	step=100
+	step=10
 fi
 
 case "$1" in

@@ -24,8 +24,6 @@ super + Escape
 
 # quit/restart bspwm
 super + alt + {q,r}
-    killall -q /home/sergioribera/.config/nitrogen/autobg.py \
-    while pgrep -u $UID -x /home/sergioribera/.config/nitrogen/autobg.py >/dev/null; do sleep 1; done \
 	bspc {quit,wm -r}
 
 # close and kill
@@ -37,12 +35,12 @@ super + m
 	bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
-super + y
-	bspc node newest.marked.local -n newest.!automatic.local
+#super + y
+	#bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest node
-super + g
-	bspc node -s biggest
+#super + g
+	#bspc node -s biggest
 
 #
 # state/flags
@@ -53,8 +51,8 @@ super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-super + ctrl + {m,x,y,z}
-	bspc node -g {marked,locked,sticky,private}
+#super + ctrl + {m,x,y,z}
+	#bspc node -g {marked,locked,sticky,private}
 
 #
 # focus/swap
@@ -69,22 +67,22 @@ super + {_,shift + }{Left,Down,Up,Right}
 
 
 # focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+#super + {p,b,comma,period}
+	#bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous node in the current desktop
-super + {_,shift + }c
-	bspc node -f {next,prev}.local
+#super + {_,shift + }c
+	#bspc node -f {next,prev}.local
 
 # focus the last node/desktop
-super + Alt + {grave,Tab}
-	bspc {node,desktop} -f last
+#super + Alt + {grave,Tab}
+	#bspc {desktop,node} -f last
 
 # focus the older or newer node in the focus history
-super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
+#super + {o,i}
+	#bspc wm -h off; \
+	#bspc node {older,newer} -f; \
+	#bspc wm -h on
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
@@ -121,7 +119,11 @@ super + ctrl + {Left,Down,Up,Right}
 
 # Custom move/resize
 alt + super + {Left,Down,Up,Right}
-	/home/sergioribera/.config/bspwm/scripts/bspwm_resize {west,south,north,east}
+	~/.config/bspwm/scripts/bspwm_resize {west,south,north,east}
+
+# Resize windows
+super + alt + {s,n,r,t}
+    bspc window -e {left -10,down +10,up -10,right +10} 
 
 
 # ---------------------------------------------
