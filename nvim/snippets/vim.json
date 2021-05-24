@@ -1,0 +1,12 @@
+{
+    "If Exists" : {
+        "prefix" : "ife",
+        "body" : [
+            "if exists(\"g:loaded_$1\")",
+            "\tfinish",
+            "endif",
+            "$0"
+        ],
+        "description" : "Classic vim load guard"
+    }
+}

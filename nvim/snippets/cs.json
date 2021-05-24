@@ -1,0 +1,125 @@
+{
+    "Using" : {
+        "prefix": "us",
+        "body": [
+            "using $1;"
+        ]
+    },
+    "Switch" : {
+        "prefix" : "switch",
+        "body" : [
+            "switch ($1) {",
+                "\t$2",
+                "\tdefault:",
+                "\t\t$3",
+                "}",
+                "$0"
+        ],
+        "description" : "A switch statement."
+    },
+    "Case" : {
+        "prefix" : "case",
+        "body" : [
+            "case $1:",
+            "\t$2",
+            "\tbreak",
+            "$0"
+        ],
+        "description" : "A case statement."
+    },
+    "For" : {
+        "prefix": "for",
+        "body": [
+            "for (int $1 = 0; $2 < $3; $4++) {",
+            "\t$5",
+            "}"
+        ]
+    },
+    "Foreach" : {
+        "prefix": "foreach",
+        "body": [
+            "foreach (var $1 in $2) {",
+            "\t$3",
+            "}"
+        ]
+    },
+    "If" : {
+        "prefix": "if",
+        "body": [
+            "if ($1) {",
+            "\t$2",
+            "}"
+        ]
+    },
+    "IfElse" : {
+        "prefix": "ifelse",
+        "body": [
+            "if ($1) {",
+            "\t$2",
+            "} else {",
+            "\t$3",
+            "}"
+        ]
+    },
+    "IfTern" : {
+        "prefix": "iftern",
+        "body": [
+            "$1 ? $2 : $3"
+        ]
+    },
+    "AbstractClass" : {
+        "prefix" : "absclass",
+        "body" : [
+            "using System;",
+            "",
+            "public abstract class ${1:name} {",
+            "\t$2",
+            "}"
+        ],
+        "description" : "Basic class for any c# proyect."
+    },
+    "Class" : {
+        "prefix" : "class",
+        "body" : [
+            "using System;",
+            "",
+            "public class ${1:name} {",
+            "\t$2",
+            "}"
+        ],
+        "description" : "Basic class for any c# proyect."
+    },
+    "MonoBehaviour" : {
+        "prefix" : "behaviour",
+        "body" : [
+            "using System;",
+            "using UnityEngine;",
+            "",
+            "public class ${1:name} : MonoBehaviour {",
+            "\t$2",
+            "}"
+        ],
+        "description" : "MonoBehaviour for Unity Development."
+    },
+    "AbstractMonoBehaviour" : {
+        "prefix" : "absbehaviour",
+        "body" : [
+            "using System;",
+            "using UnityEngine;",
+            "",
+            "public abstract class ${1:name} : MonoBehaviour {",
+            "\t$2",
+            "}"
+        ],
+        "description" : "MonoBehaviour for Unity Development."
+    },
+    "Enum" : {
+        "prefix" : "enum",
+        "body" : [
+            "enum ${1:name} {",
+            "\t$2",
+            "}"
+        ],
+        "description" : "Basic Enum for any c# proyect."
+    }
+}
