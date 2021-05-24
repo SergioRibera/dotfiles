@@ -1,6 +1,5 @@
 -- check if packer is installed (~/local/share/nvim/site/pack)
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
-
 local packer = require("packer")
 local use = packer.use
 
@@ -16,11 +15,18 @@ return require("packer").startup(
 
         -- lsp stuff
         use "nvim-treesitter/nvim-treesitter"
-        use "neovim/nvim-lspconfig"
         use "hrsh7th/nvim-compe"
         use "onsails/lspkind-nvim"
         use "sbdchd/neoformat"
         use "nvim-lua/plenary.nvim"
+        use 'hrsh7th/vim-vsnip'
+        use 'hrsh7th/vim-vsnip-integ'
+        use 'neovim/nvim-lspconfig'
+        --[[ use {
+            'nvim-lua/completion-nvim',
+            requires = {
+            }
+        } ]]
         -- Languajes Independents
         use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
         use 'simrat39/rust-tools.nvim'
@@ -41,12 +47,14 @@ return require("packer").startup(
         use "nvim-lua/popup.nvim"
 
         -- misc
-        use "karb94/neoscroll.nvim"
         use 'andweeb/presence.nvim' -- display nvim on discord
+        use "blackCauldron7/surround.nvim"
+        use 'jbyuki/instant.nvim' -- Collaborative Nvim
+        use 'b3nj5m1n/kommentary' -- Comment Text
     end,
     {
         display = {
             border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
         }
     }
-)
+    )

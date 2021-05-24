@@ -1,4 +1,3 @@
-local onattach = require 'lsp.utils'.onattach
 -- lua lsp settings
 USER = "/home/" .. vim.fn.expand("$USER")
 
@@ -7,7 +6,8 @@ local sumneko_binary = USER .. "/.config/lua-language-server/bin/Linux/lua-langu
 
 require "lspconfig".sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-    on_attach = onattach,
+    on_attach = on_attach,
+    capabilities = _G.capabilities,
     root_dir = function()
         return vim.loop.cwd()
     end,

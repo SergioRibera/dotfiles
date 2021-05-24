@@ -18,15 +18,15 @@ require "compe".setup {
     documentation = true,
     source = {
         path = true,
-        buffer = true,
+        buffer = false,
         calc = true,
         vsnip = true,
-        nvim_lsp = true,
-        nvim_lua = true,
-        spell = true,
-        tags = true,
+        nvim_lsp = { priority = 80 },
+        nvim_lua = { priority = 79 },
+        spell = false,
+        tags = { ignored_filetypes = {'sql'}, priority = 85 },
         snippets_nvim = true,
-        treesitter = true
+        treesitter = false
     }
 }
 
@@ -42,17 +42,23 @@ local check_back_space = function()
         return false
     end
 end
-
 -- tab completion
 
 _G.tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-n>"
-    elseif check_back_space() then
-        return t "<Tab>"
-    else
-        return vim.fn["compe#complete"]()
+    if vim.fn['vsnip#jumpable'](1) > 0 then
+        return t '<Plug>(vsnip-jump-next)'
     end
+    if vim.fn.pumvisible() > 0 then
+        return t '<C-n>'
+    end
+    if check_back_space() then
+        return t '<TAB>'
+    end
+    if vim.fn['vsnip#expandable']() > 0 then
+        return t '<Plug>(vsnip-expand)'
+    end
+
+    return vim.fn["compe#complete"]()
 end
 _G.s_tab_complete = function()
     if vim.fn.pumvisible() == 1 then
@@ -66,7 +72,6 @@ end
 
 --  mappings
 
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})

@@ -31,7 +31,7 @@ opt("b", "shiftwidth", 4)
 -- colorscheme related stuff
 -- opt("o", "nolist", true)
 -- opt("o", "guifont", "Hack:15")
-opt("o", "guifont", "FiraCode Nerd Font:h15")
+opt("o", "guifont", "FiraCode Nerd Font,DejaVuSans:15")
 opt("w", "rnu", true)
 opt("o", "modelines", 0)
 opt("o", "formatoptions", "tcqrn1")
@@ -71,5 +71,4 @@ function M.has_width_gt(cols)
     -- Check if the windows width is greater than a given number of columns
     return vim.fn.winwidth(0) / 2 > cols
 end
-
 return M

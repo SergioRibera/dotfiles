@@ -1,5 +1,4 @@
 local lspconfig = require('lspconfig')
-local onattach = require 'lsp.utils'.onattach
 local pid = vim.fn.getpid()
 
 USER = "/home/" .. vim.fn.expand("$USER")
@@ -15,7 +14,8 @@ local exclude_patterns = {
 lspconfig.omnisharp.setup {
     cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
     filetypes = {'cache', 'cs', 'csproj', 'dll', 'nuget', 'props', 'sln', 'targets'},
-    on_attach = onattach,
+    on_attach = on_attach,
+    capabilities = _G.capabilities,
     settings = {
         FileOptions = {
             ExcludeSearchPatterns = exclude_patterns,
@@ -36,6 +36,7 @@ lspconfig.omnisharp.setup {
         RoslynExtensionsOptions = {
             EnableAnalyzersSupport = true,
             EnableDecompilationSupport = true,
+            EnableImportCompletion = true,
             locationPaths= {
                 "$HOME/Aplicaciones/Unity/2019.4.15f1/Editor/Data/Managed/**.dll"
             }

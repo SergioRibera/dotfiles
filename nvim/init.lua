@@ -1,37 +1,43 @@
+-- misc-utils.oneinstance"
 -- load all plugins
 require "pluginsList.lua"
 require "file-icons.lua"
 
 require "misc-utils.lua"
-require "bufferline.lua"
+-- require "bufferline.lua"
 require "lualine.lua"
 
 require("colorizer").setup()
 
+require"surround".setup{}
+require("kommentary.lua")
+
 -- lsp
 require "lsp.init"
-require "compe.lua"
+require "completion.lua"
 
 local cmd = vim.cmd
 local g = vim.g
 
+g.instant_username = "s4rch"
+g.vsnip_snippet_dir = "~/.config/nvim/snippets"
 g.mapleader = " "
 g.auto_save = 0
+g.kommentary_create_default_mappings = false
 
 -- colorscheme related stuff
 cmd "syntax enable"
 cmd "syntax on"
 
-
-local base16 = require "base16"
-base16(base16.themes["onedark"], true)
+-- local base16 = require "base16"
+-- base16(base16.themes["material"], true)
 
 -- blankline
 
 local indent = 4
 g.indentLine_enabled = 1
--- g.indent_blankline_char = {"▏", '¦', '┆', '┊'}
-g.indent_blankline_char = "▏"
+g.indentLine_char_list = { "▏", '¦', '┆', '┊' }
+-- g.indent_blankline_char = "▏"
 
 --
 --  Neovide Configurations
@@ -56,6 +62,7 @@ require "mappings.lua"
 
 require "telescope.lua"
 require "nvimTree.lua"
+require "instant"
 
 -- git signs
 require "gitsigns.lua"

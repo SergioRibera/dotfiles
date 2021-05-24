@@ -1,11 +1,11 @@
 require 'lsp.servers.omnisharp'
 require 'lsp.servers.sumneko_lua'
-local onattach = require 'lsp.utils'.onattach
 
 local lspconf = require "lspconfig"
 local servers = {
     "html",
     "cssls",
+    "clangd",
     "tsserver",
     "pyright",
     "bashls",
@@ -15,7 +15,8 @@ local servers = {
 }
 for k, lang in pairs(servers) do
     lspconf[lang].setup {
-        on_attach = onattach,
+        on_attach = on_attach,
+        capabilities = _G.capabilities,
         root_dir = vim.loop.cwd
     }
 end
@@ -27,6 +28,7 @@ end
 --]]
 lspconf.rust_analyzer.setup {
     on_attach = on_attach,
+    capabilities = _G.capabilities,
     settings = {
         ["rust-analyzer"] = {
             assist = {

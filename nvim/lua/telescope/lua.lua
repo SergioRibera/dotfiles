@@ -61,10 +61,6 @@ require("telescope").setup {
     }
 }
 require("telescope").load_extension("media_files")
-function edit_nvim()
-    return require("telescope").git_files {
-    }
-end
 
 local opt = {noremap = true, silent = true}
 vim.g.mapleader = " "
@@ -77,10 +73,13 @@ vim.api.nvim_set_keymap(
 opt
 )
 
-vim.api.nvim_set_keymap("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], opt)
-vim.api.nvim_set_keymap("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], opt)
 vim.api.nvim_set_keymap("n", "<Leader>fm", [[<Cmd> Neoformat<CR>]], opt)
-
+-- git
+vim.api.nvim_set_keymap("n", "<Leader>gc", [[<Cmd>lua require('telescope.builtin').git_commits()<CR>]], opt)
+vim.api.nvim_set_keymap("n", "<Leader>gbc", [[<Cmd>lua require('telescope.builtin').git_bcommits()<CR>]], opt)
+vim.api.nvim_set_keymap("n", "<Leader>gb", [[<Cmd>lua require('telescope.builtin').git_branches()<CR>]], opt)
+vim.api.nvim_set_keymap("n", "<Leader>gs", [[<Cmd>lua require('telescope.builtin').git_status()<CR>]], opt)
+vim.api.nvim_set_keymap("n", "<Leader>gt", [[<Cmd>lua require('telescope.builtin').git_stash()<CR>]], opt)
 -- highlights
 
 local cmd = vim.cmd
