@@ -17,16 +17,9 @@ return require("packer").startup(
         use "nvim-treesitter/nvim-treesitter"
         use "hrsh7th/nvim-compe"
         use "onsails/lspkind-nvim"
-        use "sbdchd/neoformat"
-        use "nvim-lua/plenary.nvim"
         use 'hrsh7th/vim-vsnip'
         use 'hrsh7th/vim-vsnip-integ'
         use 'neovim/nvim-lspconfig'
-        --[[ use {
-            'nvim-lua/completion-nvim',
-            requires = {
-            }
-        } ]]
         -- Languajes Independents
         use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
         use 'simrat39/rust-tools.nvim'

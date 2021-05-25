@@ -73,7 +73,6 @@ vim.api.nvim_set_keymap(
 opt
 )
 
-vim.api.nvim_set_keymap("n", "<Leader>fm", [[<Cmd> Neoformat<CR>]], opt)
 -- git
 vim.api.nvim_set_keymap("n", "<Leader>gc", [[<Cmd>lua require('telescope.builtin').git_commits()<CR>]], opt)
 vim.api.nvim_set_keymap("n", "<Leader>gbc", [[<Cmd>lua require('telescope.builtin').git_bcommits()<CR>]], opt)
