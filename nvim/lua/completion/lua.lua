@@ -21,15 +21,14 @@ require "compe".setup {
         buffer = false,
         calc = true,
         vsnip = true,
-        nvim_lsp = { priority = 80 },
-        nvim_lua = { priority = 79 },
-        spell = false,
-        tags = { ignored_filetypes = {'sql'}, priority = 85 },
+        nvim_lsp = true,
+        nvim_lua = true,
+        spell = true,
+        tags = false,
         snippets_nvim = true,
         treesitter = false
     }
 }
-
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -70,6 +69,24 @@ _G.s_tab_complete = function()
     end
 end
 
+--  mappings
+
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+function _G.completions()
+    local npairs = require("nvim-autopairs")
+    if vim.fn.pumvisible() == 1 then
+        if vim.fn.complete_info()["selected"] ~= -1 then
+            return vim.fn["compe#confirm"]("<CR>")
+        end
+    end
+    return npairs.check_break_line_char()
+end
+
+vim.api.nvim_set_keymap("i", "<CR>", "v:lua.completions()", {expr = true})
 --  mappings
 
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})

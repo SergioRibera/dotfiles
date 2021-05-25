@@ -15,7 +15,6 @@ lspconfig.omnisharp.setup {
     cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
     filetypes = {'cache', 'cs', 'csproj', 'dll', 'nuget', 'props', 'sln', 'targets'},
     on_attach = on_attach,
-    capabilities = _G.capabilities,
     settings = {
         FileOptions = {
             ExcludeSearchPatterns = exclude_patterns,

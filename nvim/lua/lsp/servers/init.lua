@@ -16,7 +16,6 @@ local servers = {
 for k, lang in pairs(servers) do
     lspconf[lang].setup {
         on_attach = on_attach,
-        capabilities = _G.capabilities,
         root_dir = vim.loop.cwd
     }
 end
@@ -28,7 +27,6 @@ end
 --]]
 lspconf.rust_analyzer.setup {
     on_attach = on_attach,
-    capabilities = _G.capabilities,
     settings = {
         ["rust-analyzer"] = {
             assist = {

@@ -36,8 +36,6 @@ end
 --  Mappings
 --
 
-local opt = {}
-
 map("", "<leader>tn", ":lua cycle_teme()<Cr>")
 map("", "<C-h>", ":tabprevious<Cr>") -- Move to prev tab
 map("", "<C-l>", ":tabnext<Cr>") -- Move to next tab
@@ -46,10 +44,11 @@ map("", "<leader>p", '"+p') -- Paste any text
 map("", "<leader>ws", ":split<Cr>") -- Open Split windows
 map("", "<leader>wh", ":vsplit<Cr>") -- Open Vertical split windows
 map("", "<leader>ps", ":TakeScreenShot<Cr>") -- Take Screenshot (require SergioRibera/vim-screenshot plugin)
+map("n", "<leader>r", ":NvimTreeRefresh<Cr>", { noremap = true })
 -- Kommentary
-vim.api.nvim_set_keymap("n", "<leader>cc", "<Plug>kommentary_line_default", {})
-vim.api.nvim_set_keymap("n", "<leader>c", "<Plug>kommentary_motion_default", {})
-vim.api.nvim_set_keymap("v", "<leader>c", "<Plug>kommentary_visual_default", {})
+map("n", "<leader>cc", "<Plug>kommentary_line_default", {})
+map("n", "<leader>c", "<Plug>kommentary_motion_default", {})
+map("v", "<leader>c", "<Plug>kommentary_visual_default", {})
 
 -- Snippets enable jump to next cursor
 map('i', '<TAB>', 'v:lua.tab_complete()', { expr = true, noremap = false })
@@ -75,6 +74,6 @@ map("", "<leader>w", ':w<CR>')
 map("", "<leader>wq", ':wq<CR>')
 
 -- OPEN TERMINALS --
-map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) -- open term bottom
+map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], {}) -- open term bottom
 
 module(..., package.seeall)
