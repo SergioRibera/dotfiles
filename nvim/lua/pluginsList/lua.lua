@@ -1,10 +1,20 @@
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local packer_exists
+
+if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+    packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
+else
+    packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
+end
+
 -- check if packer is installed (~/local/share/nvim/site/pack)
-local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 local packer = require("packer")
 local use = packer.use
 
 -- using { } when using a different branch of the plugin or loading the plugin with certain commands
-return require("packer").startup(
+return packer.startup(
     function()
         use {"wbthomason/packer.nvim", opt = true}
         use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
@@ -50,4 +60,4 @@ return require("packer").startup(
             border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
         }
     }
-    )
+)
