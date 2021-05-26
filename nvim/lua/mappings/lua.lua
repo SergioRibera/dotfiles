@@ -20,7 +20,7 @@ local base16_position = settings_manager.get_value("current_theme", 1)
 base16_position = (base16_position - 1 % #themes_names) + 1
 base16(base16.themes[themes_names[base16_position]], true)
 
-function cycle_teme ()
+function _G.cycle_teme ()
     base16_position = (base16_position % #themes_names) + 1
     base16(base16.themes[themes_names[base16_position]], true)
     require("lua/misc-utils/settings").set_value("current_theme", base16_position)
@@ -75,5 +75,3 @@ map("", "<leader>wq", ':wq<CR>')
 
 -- OPEN TERMINALS --
 map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], {}) -- open term bottom
-
-module(..., package.seeall)
