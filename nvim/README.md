@@ -251,7 +251,13 @@ This is a custom system with autoload on open Nvim, this load last theme selecte
 
 ## Mappings
 The `leader` is a `Space` key.<br>
-The cell empty is equals to up cell. If you want modify any mapping, you can edit the file specified into table for each case
+The cell empty is equals to up cell. If you want modify any mapping, you can edit the file specified into table for each case.
+The modes in my keymapping:
+- i = Insert
+- s = Select
+- n = Normal
+- v = Visual
+- NerdTree = Being on NerdTree buffer
 
 |   **MODE**   |         **KEYMAP**        |                             **DESCRIPTION**                            |      **FILE TO MODIFY**      |
 |:--------:|:---------------------:|:------------------------------------------------------------------:|:------------------------:|
