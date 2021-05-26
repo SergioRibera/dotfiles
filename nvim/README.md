@@ -106,14 +106,6 @@ This is a custom system with autoload on open Nvim, this load last theme selecte
 </details>
 <details>
     <summary>
-        <a href="https://github.com/akinsho/flutter-tools.nvim">flutter-tools</a> <code>Not have configuration File</code>
-    </summary><br>
-    <blockquote>
-        <p> Build flutter and dart applications in neovim using the native lsp</p>
-    </blackquote>
-</details>
-<details>
-    <summary>
         <a href="https://github.com/simrat39/rust-tools.nvim">rust-tools.nvim</a> <code>Not have configuration File</code>
     </summary><br>
     <blockquote>
