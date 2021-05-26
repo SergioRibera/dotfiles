@@ -23,7 +23,7 @@ base16(base16.themes[themes_names[base16_position]], true)
 function _G.cycle_teme ()
     base16_position = (base16_position % #themes_names) + 1
     base16(base16.themes[themes_names[base16_position]], true)
-    require("lua/misc-utils/settings").set_value("current_theme", base16_position)
+    settings_manager.set_value("current_theme", base16_position)
     if log_cycle_theme == true then
         print(base16_position)
         print("Theme changed to: " .. themes_names[base16_position])
