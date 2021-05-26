@@ -44,7 +44,7 @@ This is a custom system with autoload on open Nvim, this load last theme selecte
     <details><summary>Nord</summary><br><img src="https://user-images.githubusercontent.com/56278796/119463285-9f515a00-bd0f-11eb-945b-5bef62649b08.png"></details>
 > If you want add other theme, i use [nvim-base16](https://github.com/norcalli/nvim-base16.lua) for themes so you can search some themes for add, the next step is modify the `lua/mappings/lua.lua` file on line `16` adding a theme in the list
 
-### Plugins
+## Plugins
 <details>
     <summary>
         <a href="https://github.com/wbthomason/packer.nvim">packer</a> <code>Not have configuration File</code> but a list of plugins stay on <code>lua/pluginList/lua.lua</code>
