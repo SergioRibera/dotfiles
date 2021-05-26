@@ -105,6 +105,8 @@ This is a custom system with autoload on open Nvim, this load last theme selecte
     - Discord Rich Presence for Neovim <br>![presence-demo](https://user-images.githubusercontent.com/56278796/119466309-7e3e3880-bd12-11eb-8253-b2033783b84d.gif)
 
 ## Mappings
+The `leader` is a `Space` key.<br>
+The cell empty is equals to up cell. If you want modify any mapping, you can edit the file specified into table for each case
 |   Mode   |         keymap        |                             Description                            |      File To Modify      |
 |:--------:|:---------------------:|:------------------------------------------------------------------:|:------------------------:|
 |   i, s   |         `Tab`         |                     Next option into completion                    | `lua/completion/lua.lua` |
