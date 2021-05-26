@@ -10,13 +10,12 @@ I'll keep adding new features like snippets etc and clean the config , make neov
 - Cycle Theme
 - Save and load current theme cycled
 - Languajes Support:
-    - C# (Need Roselyn bin, for more information see [this]())
+    - C# (Need Roselyn bin, for more information see [this](https://github.com/OmniSharp/omnisharp-roslyn))
     - Lua
     - Lua (Nvim Library)
     - C/C++ (With clang)
     - Python
     - Rust
-    - Dart
     - Javascript
     - Typescript
     - React (Jsx or Tsx)
@@ -37,6 +36,33 @@ I'll keep adding new features like snippets etc and clean the config , make neov
 - Snip support from VSCode through vsnip supporting custom and predefined snips (friendly-snippets)
 
 <hr>
+
+## Requirements
+- Neovim Nightly v0.5.0
+    > For More details see [this](https://github.com/neovim/neovim/releases)<br>
+    > If you use Arch Linux, you can install this from aur, example using `Yay`:<br> `yay -S neovim-nightly-bin`
+- Omnisharp Roselyn for c# intellisense
+    > You can download [release](https://github.com/OmniSharp/omnisharp-roslyn/releases) and unzip on `~/.omnisharp`
+- You need install languajes server
+    - Html => `sudo npm i -g vscode-html-languageserver-bin`
+    - Javascript and Typescript => `sudo npm i -g typescript typescript-language-server`
+    - Css => `sudo npm i -g vscode-css-languageserver-bin prettier`
+    - Lua => `sudo npm i -g lua-language-server`
+    - Json => `sudo npm i -g vscode-json-languageserver`
+    - Yaml => `sudo npm i -g yaml-language-server`
+    - Bash => `sudo npm i -g bash-language-server`
+    - Python +3.0 => `sudo npm i -g pyright`
+    - Rust => You need install [rustup](https://rustup.rs) and [Rust Analizer](https://github.com/rust-analyzer/rust-analyzer) for rust-tools
+    - C/C++ => On this moment i use [clang](https://clangd.llvm.org/installation.html)
+        > On Arch LInux you can install with `sudo pamcan -S clang`
+- Git is Needed for more plugins on this config
+- Packages needed for Telescope
+    > [Ripgrep](https://github.com/BurntSushi/ripgrep)<br>
+    > [Ueberzug](https://github.com/seebye/ueberzug)<br>
+    > On Arch LInux you can install with `sudo pacman -S ueberzug ripgrep ffmpegthumbnailer poppler`
+
+## After Installation
+> After installation this config and all requirements, you need excecute `:PackerSync` command for install all plugins
 
 ## **Cycle Theme System**
 This is a custom system with autoload on open Nvim, this load last theme selected
