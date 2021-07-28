@@ -1,0 +1,3 @@
+[submodule "configs/nvim"]
+	path = configs/nvim
+	url = https://github.com/SergioRibera/NvimDotFiles
