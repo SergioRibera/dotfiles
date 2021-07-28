@@ -1,0 +1,26 @@
+<!-- The main eww configuration file. This is where your widgets and how they appear on the screen and what they
+contain are defined. -->
+<eww>
+    <includes>
+        <file path="./widgets/bar.xml"/>
+        <file path="./widgets/left-side.xml"/>
+    </includes>
+
+    <windows>
+        <!-- These are the windows -->
+        <window name="bar" screen="0">
+            <geometry x="2%" y="96%" width="90%" height="4%"/> <!--Specifies geometry-->
+            <reserve side="top" distance="4%"/>
+            <widget>
+                <bar/> <!--This is the def we created earlier-->
+            </widget>
+        </window>
+        <window name="left-side" screen="0">
+            <geometry x="0%" y="0%" width="22%" height="100%"/> <!--Specifies geometry-->
+            <reserve side="left" distance="0%"/>
+            <widget>
+                <leftside/>
+            </widget>
+        </window>
+    </windows>
+</eww>

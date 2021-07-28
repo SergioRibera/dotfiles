@@ -1,0 +1,97 @@
+<eww>
+    <definitions>
+        <def name="leftside"> <!-- Starts the definition of a widget named main -->
+            <box class="left-side-main" orientation="v" vexpand="false" valign="top" space-evenly="false">
+                <smol_calendar/>
+                <player_side/>
+                <sliders_side/>
+                <!-- <connections_ip/> -->
+                <external_controlls/>
+                <kde_connections/>
+                <sys_side/>
+            </box>
+        </def>
+        <!-- Big Date -->
+        <def name="smol_calendar">
+            <box class="smol-calendar" orientation="v"  space-evenly="false">
+                <box class="clock-time" space-evenly="true">
+                    <box class="hour-time">{{hour}}</box>{{min}}
+                </box>
+                <box class="month">{{number_day}} {{month}}, {{year_full}}</box>
+            </box>
+        </def>
+        <def name="player_side">
+            <box orientation="h" space-evenly="false" class="music-side">
+                <box class="musicart" style="background-image: url('{{cover}}');">{{art}}</box>
+                <box orientation="h" hexpand="true" halign="center" space-evenly="false">
+                    <box class="musicstuff-side" valign="center" halign="center" orientation="v" space-evenly="false">
+                        <label class="musicinfo-side" wrap="true" limit-width="20" text="{{music}}"/>
+                        <label class="musicinfo-artist" wrap="true" limit-width="15" text="{{music2}}"/>
+                        <box orientation="h" halign="center" class="musicbtn-side" space-evenly="false">
+                            <button onclick="playerctl previous"></button> 
+                            <button class="pause-play-side" onclick="playerctl play-pause">{{musicstat}}</button>
+                            <button onclick="playerctl next"></button>
+                        </box>
+                    </box>
+                </box>
+            </box>
+        </def>
+        <def name="sliders_side">
+            <box orientation="v" space-evenly="false" class="sliders-side">
+                <box orientation="h" class="slider-vol-side" space-evenly="false">
+                    <box class="label-vol-side"></box>
+                    <scale min="0" max="101" onchange="amixer -D pulse sset Master {}%"/>
+                </box>
+                <box orientation="h" class="slider-bright-side" space-evenly="false">
+                    <box class="label-bright-side"></box>
+                    <scale min="0" max="101" value="{{bright}}" onchange="brightnessctl s {}%"/>
+                </box>
+                <box orientation="h" class="slider-ram-side" space-evenly="false">
+                    <box class="label-ram-side"></box>
+                    <scale min="0" active="false" max="101" value="{{ram-used}}"/>
+                </box>
+                <box orientation="h" class="slider-battery-side" space-evenly="false">
+                    <box class="label-battery-side">{{bat-icon}}</box>
+                    <scale min="0" active="false" max="101" value="{{battery-remaining}}"/>
+                </box>
+            </box>
+        </def>
+        <def name="connections_ip">
+            <box orientation="h" hexpand="true" halign="center" space-evenly="false" class="ip-side">
+                <box orientation="h" halign="center" class="label-ip" space-evenly="false">
+                    <label class="label-ip-icon" text="🖧 "/>
+                    <label class="label-ip-text" text="{{local_ip}}"/>
+                </box>
+                <box orientation="h" halign="center" class="label-ip" space-evenly="false">
+                    <label class="label-ip-icon-hack" text="嬨 "/>
+                    <label class="label-ip-text" text="{{vpn_ip}}"/>
+                </box>
+            </box>
+        </def>
+        <def name="external_controlls">
+            <box orientation="h" halign="center" class="control-panel">
+                <button class="notify-btn"> </button>
+                <button class="notify-btn"> </button>
+                <button class="notify-btn">直 睊</button>
+            </box>
+        </def>
+        <def name="kde_connections">
+            <box orientation="h" halign="center" class="kde-side">
+                <box orientation="h" halign="center" class="kde-devices" space-evenly="false">
+                    <label class="label-device-icon" text="{{kde_devices}}"/>
+                </box>
+            </box>
+        </def>
+        <def name="sys_side">
+            <box orientation="v" space-evenly="false">
+                <box orientation="h" halign="center" class="sysbtn" space-evenly="true">
+                    <button class="shutdown-side" onclick="~/.config/eww/scripts/powerctl p"></button> 
+                    <button class="reboot-side" onclick="~/.config/eww/scripts/powerctl r"></button>
+                    <button class="lock-side" onclick="~/.config/eww/scripts/powerctl l"></button>
+                    <button class="suspend-side" onclick="~/.config/eww/scripts/powerctl h"></button>
+                    <button class="logout-side" onclick="~/.config/eww/scripts/powerctl e"></button>
+                </box>
+            </box>
+        </def>
+    </definitions>
+</eww>

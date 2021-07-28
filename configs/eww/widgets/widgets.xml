@@ -1,0 +1,58 @@
+<eww>
+    <definitions>
+        <def name="music">
+            <box orientation="h" class="music" halign="center" space-evenly="false">
+                 {{music}}
+            </box>
+        </def>
+        <def name="slider-vol">
+            <!--A basic volume slider-->
+            <box orientation="h" class="slider-vol" space-evenly="false">
+                <box class="label-vol"></box>
+                <scale min="0" max="101" value="{{volume}}" onchange="amixer -D pulse sset Master {}%"/>
+            </box>
+        </def>
+        <def name="slider-ram">
+            <!--A basic RAM slider-->
+            <box orientation="h" class="slider-ram" space-evenly="false">
+                <box class="label-ram"></box>
+                <scale min="0" active="false" max="101" value="{{ram-used}}"/>
+            </box>
+        </def>
+        <def name="time">
+            <!--Time-->
+            <box class="time">{{hour}}:{{min}}</box>
+        </def>
+        <def name="date">
+            <box class="time" halign="start">{{number_day}} {{month}}, {{year_full}}</box>
+        </def>
+    </definitions>
+
+    <variables>
+        <!-- Music vars -->
+        <script-var name="music" interval="5s">~/.config/eww/scripts/playerctlstatus a</script-var>
+        <script-var name="music2" interval="5s">playerctl metadata --format '{{ artist }}'</script-var>
+        <script-var name="volume" interval="3ms">~/.config/eww/scripts/getvol</script-var>
+        <script-var name="art" interval="5s">~/.config/eww/scripts/echoart</script-var>
+        <script-var name="cover" interval="5s">echo "/tmp/eww/music/cover.png"</script-var>
+        <script-var name="musicstat" interval="1s">~/.config/eww/scripts/playerctlstatus s</script-var>
+        <!-- Brightness Value -->
+        <script-var name="bright" interval="1ms">~/.config/eww/scripts/getbri</script-var>
+        <!--Big brain RAM vars-->
+        <script-var name="ram-used" interval="1s">~/.config/eww/scripts/getram</script-var>
+        <!--Battery charge vars-->
+        <script-var name="battery-remaining" interval="2m">cat /sys/class/power_supply/BAT0/capacity</script-var>
+        <script-var name="bat-icon" interval="2m">~/.config/eww/scripts/batteryicon</script-var>
+        <!--Date vars-->
+        <script-var name="number_day" interval="5h">date "+%d"</script-var>
+        <script-var name="month" interval="10h">date "+%b"</script-var>
+        <script-var name="min" interval="10s">date "+%M"</script-var>
+        <script-var name="hour" interval="1m">date "+%H"</script-var>
+        <script-var name="year_full" interval="15h">date "+%Y"</script-var>
+
+            <!-- Network vars -->
+        <script-var name="local_ip">hostname -i</script-var>
+        <script-var name="vpn_ip" interval="1m">~/.config/eww/scripts/getvpn</script-var>
+        <script-var name="kde_devices" interval="1m">~/.config/eww/scripts/kdeconnect -d</script-var>
+    </variables>
+</eww>

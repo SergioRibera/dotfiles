@@ -1,0 +1,311 @@
+* {
+    all: unset; //Unsets everything so you can style everything from scratch
+}
+
+//Global Styles
+window {
+    background-color: #121212;
+    //background-color: transparent;
+    color: #ffd5cd;
+    font-family: Inconsolata;
+}
+
+.main-bar {
+    border-radius: 7px;
+}
+
+button {
+    all: unset;
+    background-color: #121212;
+    padding: 10px;
+}
+
+.left-side-main {
+    background-color: #121212;
+    //padding-bottom: 400px;
+    padding-top: 50px;
+    transition: crossfade 10s;
+
+    //animation-name: show-left-side-main;
+    //animation-duration: 1s;
+    //animation-timing-function: linear;
+    //animation-iteration-count: infinite;
+    .smol-calendar{
+        margin: 30px;
+        margin-bottom: 100px;
+        .clock-time, .hour-time{
+            color: #D35D6E;
+            font-size: 80px;
+            padding: 0px;
+            margin: 0px;
+            padding-bottom: 10px;
+        }
+        .hour-time { color: #ffd5cd; }
+    }
+}
+/*@keyframes show-left-side-main {
+    from {  }
+    to { -gtk-icon-transform: rotate(1turn); }
+}*/
+
+/*
+ *
+ *      Music Widget
+ *
+ */
+
+    .music-side {
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, .7);
+        background-color: #121212;
+        border-radius: 15px;
+        margin: 20px;
+    }
+    .musicart {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 70px;
+        min-width: 110px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+    .musicart-side {
+        // background-image: url("/tmp/xmonad/spotify/cover.png");
+        background-size: 80px;
+        min-height: 70px;
+        min-width: 80px;
+        border-radius: 6px;
+    }
+    .musicinfo-side {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px;
+        border-radius: 10px;
+        // border: 1px solid white;
+        min-width: 40px;
+    }
+    .musicinfo-artist{
+        font-size: 12px;
+        margin-top: 5px;
+        min-width: 40px;
+    }
+    .musicbtn-side {
+        padding-left: 20px;
+        padding-top: 8px;
+        padding-bottom: 5px;
+    }
+    .musicbtn-side button {
+        font-size: 16px;
+        padding-right: 30px;
+    }
+
+    .musicbtn-side button:hover {
+        color: #D35D6E;
+    }
+    .pause-play-side {
+        color: #D35D6E;
+    }
+    .pause-play-side:hover {
+        color: #ffd5cd;
+    }
+    /*
+     *
+     *      Sliders Widgets
+     *
+     */
+    .sliders-side {
+        margin-left: 40px;
+    }
+    .sliders-side slider {
+        all: unset;
+        color: #ffd5cd;
+    }
+    .slider-vol-side {
+        margin-top: 10px;
+    }
+    .slider-vol-side scale trough highlight {
+        all: unset;
+        background-color: #c47eb7;
+        color: #000000;
+        border-radius: 10px;
+    }
+    .slider-bright-side scale trough highlight {
+        all: unset;
+        background-color: #84afdb;
+        color: #000000;
+        border-radius: 10px;
+    }
+    .slider-ram-side scale trough highlight {
+        all: unset;
+        background-color: #D35D6E;;
+        color: #000000;
+        border-radius: 10px;
+    }
+    .slider-battery-side scale trough highlight {
+        all: unset;
+        background-color: #90c861;
+        color: #000000;
+        border-radius: 10px;
+    }
+    .slider-vol-side scale trough {
+        all: unset;
+        background-color: #4e4e4e;
+        border-radius: 50px;
+        min-height: 5px;
+        min-width: 170px;
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+    .slider-bright-side scale trough {
+        all: unset;
+        background-color: #4e4e4e;
+        border-radius: 50px;
+        min-height: 5px;
+        min-width: 170px;
+        margin-top: 10px;
+        margin-left: 16px;
+    }
+    .slider-ram-side scale trough {
+        all: unset;
+        background-color: #4e4e4e;
+        border-radius: 50px;
+        min-height: 5px;
+        min-width: 170px;
+        margin-top: 10px;
+        margin-left: 17px;
+    }
+    .slider-battery-side scale trough {
+        all: unset;
+        background-color: #4e4e4e;
+        border-radius: 50px;
+        min-height: 5px;
+        min-width: 170px;
+        margin-top: 10px;
+        margin-left: 13px;
+    }
+
+    .label-battery-side, .label-bright-side, .label-ram-side, .label-vol-side{
+        margin-top: 10px;
+        font-family: Iosevka;
+        margin-left: 35px;
+        font-size: 25px;
+    }
+    .label-bright-side {
+        color: #84afdb;
+    }
+    .label-ram-side {
+        font-size: 30px;
+        color: #D35D6E;
+    }
+    .label-battery-side {
+        font-size: 18px;
+        color: #90c861;
+    }
+    .label-vol-side {
+        color: #c47eb7;
+    }
+
+    /*
+     *
+     *      Network Widgets
+     *
+     */
+    .ip-side {
+        padding-top: 50px;
+    }
+    .ip-side .label-ip {
+        background-color: #121212;
+        box-shadow: 0 0 25px 5px rgba(0, 0, 0, .3);
+        margin: 5px;
+        border-radius: 15px;
+        padding: 20px;
+    }
+    .ip-side .label-ip .label-ip-icon {
+        color: #5DD3BD;
+        font-size: 16px;
+    }
+    .ip-side .label-ip .label-ip-icon-hack {
+        color: #7CD35D;
+        font-size: 36px;
+    }
+    .ip-side .label-ip .label-ip-text{
+        color: #84afdb;
+        font-size: 14px;
+        font-family: "Noto Fonts";
+        margin-bottom: 4px;
+    }
+    /*
+     *
+     *      External Controlls
+     *
+     */
+    .controll-panel {
+        margin: 5px;
+        border-radius: 15px;
+        padding: 10px;
+    }
+    .controll-panel button {
+        background-color: #121212;
+        box-shadow: 0 0 25px 5px rgba(0, 0, 0, .3);
+        padding: 5px;
+        margin: 5px;
+        font-size: 24px;
+    }
+
+    /*
+     *
+     *      KDE Widgets
+     *
+     */
+    .kde-side .kde-devices {
+        background-color: #121212;
+        box-shadow: 0 0 25px 5px rgba(0, 0, 0, .3);
+        margin: 5px;
+        border-radius: 15px;
+        padding: 20px;
+    }
+    .kde-side .kde-devices .label-device-icon {
+        font-size: 14px;
+        font-family: "Noto Fonts";
+        margin-bottom: 4px;
+    }
+
+/*
+ *
+ *      Last Side (Search Bar and Power Controlls)
+ *
+ */
+
+.search-side {
+  border-radius: 12px;
+  background-color: #272626;
+  margin: 20px 30px 20px 30px;
+  box-shadow: 0 0 25px 5px rgba(0, 0, 0, .5);
+}
+.search-side:hover {
+  color: #D35D6E;
+}
+.sysbtn button {
+  font-size: 30px;
+  margin-top: 120px;
+}
+.sysbtn button:hover {
+  color: #272626;
+}
+.shutdown-side{
+  color: #D35D6E;
+}
+.reboot-side{
+  color: #84afdb;
+}
+.lock-side{
+  color: #ffd5cd;
+}
+.suspend-side{
+  color: #c47eb7;
+}
+.logout-side{
+  color: #90c861;
+}
+
+

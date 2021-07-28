@@ -1,0 +1,23 @@
+<eww>
+    <includes>
+        <file path="./widgets.xml"/>
+    </includes>
+    <definitions>
+        <!-- This is the place where you structure your widgets, align them and stuff. -->
+
+        <def name="bar"> <!-- Starts the definition of a widget named main -->
+            <box class="main-bar" orientation="h" hexpand="true">
+                <date/>
+                <music/>
+                <sidestuff/>
+            </box>
+        </def>
+        <def name="sidestuff">
+            <box class="sidestuff" orientation="h" space-evenly="false" halign="end">
+                <slider-vol/>
+                <slider-ram/>
+                <time/>
+            </box>
+        </def>
+    </definitions>
+</eww>

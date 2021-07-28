@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+if [ "0" == `ifconfig | grep tun0 | wc -l` ]; then
+    echo "No VPN"
+else
+    nmcli con show tun0 | grep "ipv4.addresses:" | awk '{print $2}'
+fi
