@@ -1,30 +1,51 @@
 #! /bin/sh
 
-pgrep -x sxhkd > /dev/null || sxhkd &
 #setxkbmap -model pc105 -layout latam,us -variant deadtilde, -option grp:ctrl_alt_toggle;
-setxkbmap -model pc105 -layout latam,us -variant deadtilde, ;
-xrandr --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VGA1 --mode 1024x768 --pos 1920x0 --rotate normal --output VIRTUAL1 --off &
+# setxkbmap -model pc105 -layout latam,us -variant deadtilde, ;
+xrandr --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VGA1 --mode 1024x768 --pos 1925x0 --rotate normal --output VIRTUAL1 --off &
 
-#compton --config /dev/null --backend glx --blur-method kawase --blur-background --blur-strength 12 &
 #wname L3GD &
 
 # Set Backgrounds Randoms
+#killall /home/sergioribera/.config/nitrogen/autobg.py &&
 /home/sergioribera/.config/nitrogen/autobg.py -c "/home/sergioribera/.config/nitrogen/bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/" &
 #/home/sergioribera/.config/nitrogen/autobg.py -c "/home/sergioribera/.config/nitrogen/bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/MisLogos" &
 
-/home/sergioribera/.config/polybar/launch.sh &
-dunst &
+#/home/sergioribera/.config/polybar/launch.sh &
+sxhkd &
+eww daemon -c ~/.config/eww/eww.xml &
+deadd-notification-center &
 
-# Leader Key
-bspc config pointer_modifier mod1 # Command key 
-bspc config pointer_action1 move # Left Button Mouse to Move
-bspc config pointer_action2 resize_corner # Rigth Button Mouse to Resize
+###---Global Settings---###
+bspc config automatic_scheme alternate
+bspc config initial_polarity second_child
+bspc config pointer_modifier mod4
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_side
+bspc config pointer_action3 resize_corner
+bspc config click_to_focus none
+
+bspc config focus_follows_pointer true
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+bspc config merge_overlapping_monitors true
+
+###---Coloring---###
+bspc config normal_border_color "#222d32"
+bspc config active_border_color "#42565a"
+bspc config focused_border_color "#89ddff"
+bspc config presel_feedback_color "#42565a"
 
 bspc monitor HDMI1 -d I II III IV V
 bspc monitor VGA1 -d VI VII VIII IX X
 
+###---Monitor And Desktop Settings----###
+bspc config top_padding 0
+bspc config bottom_padding 0
+bspc config left_padding 0
+bspc config right_padding 0
 bspc config border_width 0
-bspc config window_gap 5
+bspc config window_gap 3
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
@@ -38,6 +59,13 @@ bspc rule -a Discord desktop='^7'
 bspc rule -a UnityHub state=floating
 bspc rule -a Pavucontrol state=floating
 bspc rule -a Dolphin state=floating
+bspc rule -a Plank layer=above manage=on border=off
 
 # Set Picom as Default Compositor
-picom --config ~/.config/picom/picom.conf
+picom --config ~/.config/picom/picom.conf &
+
+#
+#       Configurable
+#
+plank &
+jgmenu --hide-on-startup --at-pointer &
