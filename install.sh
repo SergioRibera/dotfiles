@@ -133,6 +133,7 @@ show_process(){
 }
 
 install_config_files(){
+    mkdir -p $userconfigdir
     for f in ${repoconfigdir}/*
     do
         foldername=$(basename $f)
@@ -144,6 +145,16 @@ install_config_files(){
         #
         #
         sleep 1
+    done
+    printf "\n\t\t\tInstall local configs into ${COLOR_CYAN}~/${COLOR_NC}\n"
+    filestocopy=(.my_commands.sh .zshrc)
+    for f in ${filestocopy[@]}
+    do
+	filename=$(basename $f)
+        show_process "Install Configs for ${COLOR_CYAN}${filename^}${COLOR_NC}"
+    	cp -r $f $HOME/
+	touch $f
+	sleep 1
     done
     printf "\n\n"
 }
