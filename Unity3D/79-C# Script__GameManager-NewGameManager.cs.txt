@@ -8,7 +8,7 @@ public class GameState {
 public class #SCRIPTNAME# : MonoBehaviour {
     #NOTRIM#
 
-    [ReadOnly] GameState _gameState = new GameState();
+    [ReadOnly] [SerializeField] GameState _gameState = new GameState();
     GameState gameState {
         get => _gameState;
         set {
