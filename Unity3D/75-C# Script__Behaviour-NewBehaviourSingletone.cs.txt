@@ -1,0 +1,22 @@
+using System;
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour {
+    #NOTRIM#
+#region Singletone
+    public static #SCRIPTNAME# Main = null;
+    
+    void Awake() {
+        if (Main == null)
+            Main = this;
+        else
+            Destroy(this);
+    }
+#endregion
+    #NOTRIM#
+#region Getters
+#endregion
+
+#region Setters
+#endregion
+}

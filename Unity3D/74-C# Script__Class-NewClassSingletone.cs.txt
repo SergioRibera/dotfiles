@@ -1,0 +1,21 @@
+using System;
+
+public static class #SCRIPTNAME# {
+    #NOTRIM#
+#region Singletone
+    static #SCRIPTNAME# _main = null;
+    public static #SCRIPTNAME# Main {
+        get {
+            if (_main == null)
+                _main = new #SCRIPTNAME#();
+            return _main;
+        }
+    }
+#endregion
+    #NOTRIM#
+#region Getters
+#endregion
+
+#region Setters
+#endregion
+}

@@ -1,0 +1,24 @@
+using System;
+using UnityEngine;
+
+public static class #SCRIPTNAME# : MonoBehaviour {
+    #NOTRIM#
+#region Singletone
+    static #SCRIPTNAME# _main = null;
+    public static #SCRIPTNAME# Main {
+        get {
+            if (_main == null) {
+                _main = new GameObject("#SCRIPTNAME#").AddComponent<#SCRIPTNAME#>();
+                DontDestroyOnLoad(_main);
+            }
+            return _main;
+        }
+    }
+#endregion
+    #NOTRIM#
+#region Getters
+#endregion
+
+#region Setters
+#endregion
+}
