@@ -1,6 +1,9 @@
 using System;
+using UnityEngine;
 
-public static class #SCRIPTNAME# {
+public class #SCRIPTNAME# {
+    #NOTRIM#
+    static __ data = new __();
     #NOTRIM#
 #region Singletone
     static #SCRIPTNAME# _main = null;
@@ -12,6 +15,13 @@ public static class #SCRIPTNAME# {
         }
     }
 #endregion
+
+#region Constructor
+    public #SCRIPTNAME# () {
+        // TODO: Load system
+    }
+#endregion
+
     #NOTRIM#
 #region Getters
 #endregion

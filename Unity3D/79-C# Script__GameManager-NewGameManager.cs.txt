@@ -1,0 +1,51 @@
+using System;
+using UnityEngine;
+
+public class GameState {
+    public bool pause;
+}
+
+public class #SCRIPTNAME# : MonoBehaviour {
+    #NOTRIM#
+
+    [ReadOnly] GameState _gameState = new GameState();
+    GameState gameState {
+        get => _gameState;
+        set {
+            _gameState = value;
+            onChangeGameState?.Invoke(value);
+        }
+    }
+
+    event Action<GameState> onChangeGameState;
+#region Singletone
+    static #SCRIPTNAME# _main = null;
+    public static #SCRIPTNAME# Main {
+        get {
+            if (_main == null) {
+                _main = new GameObject("#SCRIPTNAME#").AddComponent<#SCRIPTNAME#>();
+                DontDestroyOnLoad(_main);
+            }
+            return _main;
+        }
+    }
+#endregion
+    #NOTRIM#
+#region Getters
+    public GameState GetGameState() => gameState;
+
+    public bool IsPause => gameState.pause;
+#endregion
+
+#region Setters
+    // Usualy not external modify GameState
+    // public void SetGameState(GameState newGameState) => gameState = newGameState;
+
+    public void SetPause() => gameState.pause = true;
+    public void SetUnpause() => gameState.pause = false;
+#endregion
+
+#region Listeners
+    public AddOnGameStateChangeListener(Action<GameState> ac) => onChangeGameState += ac;
+#endregion
+}

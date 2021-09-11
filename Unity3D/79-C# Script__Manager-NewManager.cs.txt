@@ -1,8 +1,0 @@
-using System;
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "#SCRIPTNAME#", menuName = "")]
-[Serializable]
-public class #SCRIPTNAME# : ScriptableObject {
-    #NOTRIM#
-}
