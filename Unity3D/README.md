@@ -1,3 +1,2 @@
-## Path to cpy this files in my case
-linux:
-```~/Aplicaciones/Unity/$UnityVersion/Editor/Data/Resources/ScriptTemplates/```
+## Path to cpy this files on
+```<Unity installation path>/Editor/Data/Resources/ScriptTemplates```
