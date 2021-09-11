@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[Serializable]
 public class GameState {
     public bool pause;
 }
@@ -8,7 +9,9 @@ public class GameState {
 public class #SCRIPTNAME# : MonoBehaviour {
     #NOTRIM#
 
-    [ReadOnly] [SerializeField] GameState _gameState = new GameState();
+    [ReadOnly]
+    [SerializeField]
+    GameState _gameState = new GameState();
     GameState gameState {
         get => _gameState;
         set {
@@ -46,6 +49,6 @@ public class #SCRIPTNAME# : MonoBehaviour {
 #endregion
 
 #region Listeners
-    public AddOnGameStateChangeListener(Action<GameState> ac) => onChangeGameState += ac;
+    public void AddOnGameStateChangeListener(Action<GameState> ac) => onChangeGameState += ac;
 #endregion
 }
