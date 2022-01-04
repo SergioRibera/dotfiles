@@ -1,0 +1,19 @@
+#!/bin/bash
+export SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+$SCRIPTPATH/down
+
+# start picom
+if [ -f ~/.config/picom/picom.conf ]; then
+    if [ -x  "$(command -v picom)" ]; then
+        picom --config ~/.config/picom/picom.conf --experimental-backends --backend glx --xrender-sync-fence &
+    fi
+fi
+
+# Load random wallpaper
+$SCRIPTPATH/wallpaper -v "$HOME/Videos/Walpaper/" -t 15m --volume 25 -s '1' &
+
+# echo pid of wallpaper to file
+echo $! > $SCRIPTPATH/wallpaper.pid
+
+# Load Theme
+echo "LoadTheme $SCRIPTPATH/theme.toml" > $XDG_RUNTIME_DIR/leftwm/commands.pipe

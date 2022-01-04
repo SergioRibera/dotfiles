@@ -1,12 +1,12 @@
 configuration {
-	modi: "window,drun,run,ssh,calc";
-	width: 50;
-	lines: 15;
-	columns: 1;
+	modi: [window,drun,run,calc];
+	/* width: 50; */
+	/* lines: 15; */
+	/* columns: 1; */
 	font: "mono 12";
-	bw: 1;
+	/* bw: 1; */
 	location: 0;
-	padding: 5;
+	/* padding: 5; */
 	yoffset: 0;
 	xoffset: 0;
 	fixed-num-lines: true;
@@ -40,29 +40,29 @@ configuration {
 	matching: "normal";
 	tokenize: true;
 	m: "-5";
-	line-margin: 2;
-	line-padding: 1;
+	/* line-margin: 2; */
+	/* line-padding: 1; */
 	//filter: ;
-	separator-style: "dash";
-	hide-scrollbar: false;
-	fullscreen: true;
-	fake-transparency: true;
+	/* separator-style: "dash"; */
+	/* hide-scrollbar: false; */
+	/* fullscreen: true; */
+	/* fake-transparency: true; */
 	dpi: -1;
 	threads: 0;
-	scrollbar-width: 8;
+	/* scrollbar-width: 8; */
 	scroll-method: 0;
-	fake-background: "screenshot";
+	/* fake-background: "screenshot"; */
 	window-format: "{w}    {c}   {t}";
 	click-to-exit: true;
-	show-match: true;
-	theme: "onedark";
-    kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
-    kb-row-down: "Down,Control+j";
-    kb-accept-entry: "Control+m,Return,KP_Enter";
+	/* show-match: true; */
+    kb-mode-complete: "Alt+l";
+    kb-row-up: "Up,Ctrl+k,Shift+Tab,Shift+ISO_Left_Tab";
+    kb-row-down: "Down,Ctrl+j";
+    kb-accept-entry: "Ctrl+m,Return,KP_Enter";
     terminal: "mate-terminal";
-    kb-remove-to-eol: "Control+Shift+e";
-    kb-mode-next: "Shift+Right,Control+Tab,Control+l";
-    kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
+    kb-remove-to-eol: "Ctrl+Shift+e";
+    kb-mode-next: "Shift+Right,Ctrl+Tab,Ctrl+l";
+    kb-mode-previous: "Shift+Left,Ctrl+Shift+Tab,Ctrl+h";
     kb-remove-char-back: "BackSpace";
 //	color-normal: "argb:002f343f, #d8dee8, argb:002f343f, argb:002f343f, #e7763a";
 //	color-urgent: "#393939, #f3843d, #393939, #268bd2, #ffc39c";
@@ -86,42 +86,42 @@ configuration {
 /*	display-keys: ;*/
 /*	display-file-browser: ;*/
 /*	display-calc: ;*/
-/*	kb-primary-paste: "Control+V,Shift+Insert";*/
-/*	kb-secondary-paste: "Control+v,Insert";*/
-/*	kb-clear-line: "Control+w";*/
-/*	kb-move-front: "Control+a";*/
-/*	kb-move-end: "Control+e";*/
-/*	kb-move-word-back: "Alt+b,Control+Left";*/
-/*	kb-move-word-forward: "Alt+f,Control+Right";*/
-/*	kb-move-char-back: "Left,Control+b";*/
-/*	kb-move-char-forward: "Right,Control+f";*/
-/*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
-/*	kb-remove-word-forward: "Control+Alt+d";*/
-/*	kb-remove-char-forward: "Delete,Control+d";*/
-/*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
-/*	kb-remove-to-eol: "Control+k";*/
-/*	kb-remove-to-sol: "Control+u";*/
-/*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
-/*	kb-accept-custom: "Control+Return";*/
+/*	kb-primary-paste: "Ctrl+V,Shift+Insert";*/
+/*	kb-secondary-paste: "Ctrl+v,Insert";*/
+/*	kb-clear-line: "Ctrl+w";*/
+/*	kb-move-front: "Ctrl+a";*/
+/*	kb-move-end: "Ctrl+e";*/
+/*	kb-move-word-back: "Alt+b,Ctrl+Left";*/
+/*	kb-move-word-forward: "Alt+f,Ctrl+Right";*/
+/*	kb-move-char-back: "Left,Ctrl+b";*/
+/*	kb-move-char-forward: "Right,Ctrl+f";*/
+/*	kb-remove-word-back: "Ctrl+Alt+h,Ctrl+BackSpace";*/
+/*	kb-remove-word-forward: "Ctrl+Alt+d";*/
+/*	kb-remove-char-forward: "Delete,Ctrl+d";*/
+/*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Ctrl+h";*/
+/*	kb-remove-to-eol: "Ctrl+k";*/
+/*	kb-remove-to-sol: "Ctrl+u";*/
+/*	kb-accept-entry: "Ctrl+j,Ctrl+m,Return,KP_Enter";*/
+/*	kb-accept-custom: "Ctrl+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
-/*	kb-mode-next: "Shift+Right,Control+Tab";*/
-/*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
-/*	kb-row-left: "Control+Page_Up";*/
-/*	kb-row-right: "Control+Page_Down";*/
-/*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
-/*	kb-row-down: "Down,Control+n";*/
+/*	kb-mode-next: "Shift+Right,Ctrl+Tab";*/
+/*	kb-mode-previous: "Shift+Left,Ctrl+ISO_Left_Tab";*/
+/*	kb-row-left: "Ctrl+Page_Up";*/
+/*	kb-row-right: "Ctrl+Page_Down";*/
+/*	kb-row-up: "Up,Ctrl+p,ISO_Left_Tab";*/
+/*	kb-row-down: "Down,Ctrl+n";*/
 /*	kb-row-tab: "Tab";*/
 /*	kb-page-prev: "Page_Up";*/
 /*	kb-page-next: "Page_Down";*/
 /*	kb-row-first: "Home,KP_Home";*/
 /*	kb-row-last: "End,KP_End";*/
-/*	kb-row-select: "Control+space";*/
+/*	kb-row-select: "Ctrl+space";*/
 /*	kb-screenshot: "Alt+S";*/
 /*	kb-ellipsize: "Alt+period";*/
 /*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
 /*	kb-toggle-sort: "Alt+grave";*/
-/*	kb-cancel: "Escape,Control+g,Control+bracketleft";*/
+/*	kb-cancel: "Escape,Ctrl+g,Ctrl+bracketleft";*/
 /*	kb-custom-1: "Alt+1";*/
 /*	kb-custom-2: "Alt+2";*/
 /*	kb-custom-3: "Alt+3";*/
@@ -157,6 +157,14 @@ configuration {
 /*	ml-row-down: "ScrollDown";*/
 /*	me-select-entry: "MousePrimary";*/
 /*	me-accept-entry: "MouseDPrimary";*/
-/*	me-accept-custom: "Control+MouseDPrimary";*/
+/*	me-accept-custom: "Ctrl+MouseDPrimary";*/
+    timeout {
+        action: "kb-cancel";
+        delay:  0;
+    }
+    filebrowser {
+        directories-first: true;
+        sorting-method:    "name";
+    }
 }
 @theme "./onedark.rasi"

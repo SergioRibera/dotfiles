@@ -4,9 +4,9 @@
 
 # terminal emulator
 super + Return
-    kitty
+    #kitty
     #st -A 0.75 -x 6 -s "gruv-dark" -f "mono" -z 13.0 -e tmux
-	#alacritty
+    alacritty
 
 # program launcher
 super + Tab

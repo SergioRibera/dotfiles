@@ -1,0 +1,276 @@
+#!/bin/bash
+set -e
+
+export SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+
+# Define deafult variables
+IMG_BG_PATH="$HOME/Pictures/Background"
+VID_BG_PATH="$HOME/Videos/Background"
+TIME_DELAY=30m
+VIDEO_SPEED='1'
+VIDEO_VOLUME='30'
+GIF_PARAMS=''
+MPV_PARAMS=''
+ALLOW_VID_BG=1
+ALLOW_IMG_BG=1
+ALLOW_GIF_BG=1
+DEBUG_LEVEL=0
+
+SCREENS=$(xrandr | grep " connected" | cut -d" " -f3)
+PAUSE='0'
+
+
+restart() {
+    info "Restarting wallpaper..."
+    # detect if xwinwrap is running
+    if pgrep -f xwinwrap >/dev/null; then
+        info "xwinwrap is running, killing it..."
+        killall xwinwrap
+        info "xwinwrap killed"
+    fi
+    if pgrep -f gifview >/dev/null; then
+        info "gifview is running, killing it..."
+        killall gifview
+        info "gifview killed"
+    fi
+    info "Restarted"
+}
+
+cleanup() {
+    echo "Cleaning up..."
+    restart
+    echo "Cleaning up...\n" >> $SCRIPTPATH/wallpaper.log
+    rm -fr "$SCRIPTPATH/wallpaper.pipe"
+    rm -fr "$SCRIPTPATH/wallpaper.pid"
+}
+
+info() {
+    if [ $DEBUG_LEVEL -ge 1 ]; then
+        echo -e "\e[1;32mInfo:\e[0m $1"
+        echo "Info: $1" >> "$SCRIPTPATH/wallpaper.log"
+    fi
+}
+
+error() {
+    if [ $DEBUG_LEVEL -ge 1 ]; then
+        echo -e "\e[1;31mError:\e[0m $1"
+        echo "Error: $1" >> "$SCRIPTPATH/wallpaper.log"
+    fi
+}
+
+help() {
+    echo "Usage: $0 [OPTION]..."
+    echo "Set the desktop background to an image or a video"
+    echo
+    echo "  -h, --help                       display this help and exit"
+    echo "  -i, --image-path                 set the background path to an image"
+    echo "  -v, --video-path                 set the background path to a video"
+    echo "  -t, --time-delay TIME            set the time delay between images or videos"
+    echo "  -s, --video-speed SPEED          set the video speed"
+    echo "  -d, --debug                      enable debug"
+    echo "  --gif-params PARAMS              set the gif parameters"
+    echo "  --mpv-params PARAMS              set the mpv parameters"
+    echo "  --no-allow-video                 no allow video background"
+    echo "  --no-allow-image                 no allow image background"
+    echo "  --no-allow-gif                   no allow gif background"
+    echo -e "\nOnly if already running:\n"
+    echo "  -p, --pause                      pause the video when the window is not focused"
+    echo "  -r, --resume                     resume the video when the window is focused"
+    echo "  -n, --skip                       skip the current wallpaper"
+    exit 0
+}
+
+if [[ $# < 1 ]]; then
+    error "Illegal number of parameters"
+    help
+    exit 1
+fi
+
+watchpipe() {
+    if [[ ! -p $SCRIPTPATH/wallpaper.pipe ]]; then
+        mkfifo $SCRIPTPATH/wallpaper.pipe 2>/dev/null
+        info "Created pipe"
+    else
+        error "Pipe already exists"
+        exit 2
+    fi
+    while true; do
+        if read line; then
+            case $line in
+                skip)
+                    changewallpaper
+                    ;;
+                resume)
+                    PAUSE=0
+                    ;;
+                pause)
+                    PAUSE=1
+                    ;;
+            esac
+        fi
+    done <"$SCRIPTPATH/wallpaper.pipe"
+}
+
+sendtopipe() {
+    if [[ ! -p $SCRIPTPATH/wallpaper.pipe ]]; then
+        error "Not previous instance exists"
+        exit 1
+    fi
+    echo $1 > $SCRIPTPATH/wallpaper.pipe
+    exit 0
+} 2>>$SCRIPTPATH/err.log
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case $key in
+        -i|--image-path)
+            IMG_BG_PATH="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        -v|--video-path)
+            VID_BG_PATH="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        -t|--time-delay)
+            TIME_DELAY="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        -s|--video-speed)
+            VIDEO_SPEED="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        --volume)
+            VIDEO_VOLUME="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        --skip)
+            sendtopipe "skip"
+            shift # past argument
+            shift # past value
+            exit 0
+            ;;
+        --pause)
+            sendtopipe "pause"
+            shift # past argument
+            shift # past value
+            exit 0
+            ;;
+        --resume)
+            sendtopipe "resume"
+            shift # past argument
+            shift # past value
+            exit 0
+            ;;
+        --gif-params)
+            GIF_PARAMS="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        --mpv-params)
+            MPV_PARAMS="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        --no-allow-video)
+            ALLOW_VID_BG=0
+            shift # past argument
+            ;;
+        --no-allow-image)
+            ALLOW_IMG_BG=0
+            shift # past argument
+            ;;
+        --no-allow-gif)
+            ALLOW_GIF_BG=0
+            shift # past argument
+            ;;
+        -d|--debug)
+            DEBUG_LEVEL=1
+            shift # past argument
+            ;;
+        -h|--help)
+            help
+            shift # past argument
+            shift # past value
+            ;;
+        *)    # unknown option
+            error "Unknown option \"$key\""
+            help
+            exit 1
+            ;;
+    esac
+done
+
+# on exit call cleanup
+trap cleanup EXIT
+
+# get all images
+tmp_img=(`find $IMG_BG_PATH -name '*' -exec file {} \; | grep -o -P '^.+: \w+ image' | cut -d':' -f1`)
+tmp_videos=$(find $VID_BG_PATH -type f -exec file -N -i -- {} + | sed -n 's!: video/[^:]*$!!p')
+
+# Fix Arr content
+IFS=$'\n' tmp_videos=($tmp_videos)
+IFS=$'\n' tmp_img=($tmp_img)
+
+# make only one array
+declare -a all_bg
+all_bg=(${tmp_img[@]} ${tmp_videos[@]})
+
+changewallpaper() {
+    for screen in $SCREENS; do
+        info "Setting wallpaper for Screen with Resolution: $screen"
+        restart
+        if [[ ${#all_bg[@]} -gt 0 ]]; then
+            # randomize the wallpaper
+            random_bg=${all_bg[$RANDOM % ${#all_bg[@]}]}
+            info "Random wallpaper: $random_bg"
+            # check if the file is an image or a video
+            # if it is a video and allow video, set the video background
+            if [[ $random_bg =~ \.jpg$|\.png$|\.jpeg$ ]] && [[ $ALLOW_IMG_BG -eq 1 ]]; then
+                info "Setting image as wallpaper"
+                feh --bg-scale $random_bg
+            elif [[ $random_bg =~ \.gif$ ]] && [[ $ALLOW_GIF_BG -eq 1 ]]; then # if is a gif
+                info "Setting gif as wallpaper"
+                # replace the gif params
+                GIF_PARAMS=$(echo $GIF_PARAMS | sed -e 's/\$screen/'$screen'/g' | sed -e 's/\$delay/'$TIME_DELAY'/g' | sed -e 's/\$speed/'$VIDEO_SPEED'/g' | sed -e 's/\$volume/'$VIDEO_VOLUME'/g')
+                xwinwrap -g $screen -fs -fdt -ni -b -nf -un -o 1.0 -- gifview -wid WID "${random_bg}" -a --no-interactive &
+            elif [[  $random_bg =~ \.mp4$|\.mkv$|\.avi$|\.webm$ ]] && [[ $ALLOW_VID_BG -eq 1 ]]; then
+                info "Setting video as wallpaper"
+                # replace variables in the mpv parameters
+                mpv_params=$(echo $MPV_PARAMS | sed "s/\$screen/$screen/g")
+                info "mpv params: $mpv_params"
+                # start the videos
+                xwinwrap -g $screen -fs -fdt -ni -b -nf -un -o 1.0 -- mpv -wid WID --loop $mpv_params --no-input-terminal --no-input-cursor --no-osc --no-osd-bar --no-resume-playback --no-input-default-bindings --cursor-autohide=no --really-quiet --volume="$VIDEO_VOLUME" -speed "$VIDEO_SPEED" "${random_bg}" &
+            fi
+        else
+            error "No images or videos found"
+            exit 1
+        fi
+    done
+} 2>>$SCRIPTPATH/err.log
+
+info "Starting..."
+# Initialize listen pipe file
+watchpipe &
+
+# Default random image
+for screen in $SCREENS; do
+    # imgToUse=$(($RANDOM % ${#img[@]}))
+    imgToUse=${tmp_img[$RANDOM % ${#tmp_img[@]}]}
+    info "Setting image: ${imgToUse}"
+    feh --bg-scale ${imgToUse}
+done
+
+info "Setting wallpaper every $TIME_DELAY seconds"
+info "Pause is $PAUSE"
+while true; do
+    if [[ $PAUSE -eq 0 ]]; then
+        changewallpaper
+    fi
+    sleep $TIME_DELAY
+done

@@ -1,3 +1,4 @@
+#!/bin/bash
 
 dir_proyects=(
     ~/.config/nvim \
@@ -37,4 +38,4 @@ dir_proyects=(
     ~/Proyectos/Web/Works/FernandoArrieta/* \
     ~/Proyectos/Web/Works/FernandoArrieta/LandPages \
 )
-cd "$(printf "%s\n" "${dir_proyects[@]}" | rofi -p "Select Proyect" -dmenu -i)" && neovide .
+cd "$(printf "%s\n" "${dir_proyects[@]}" | rofi -p "Select Proyect" -dmenu -i)" | xargs -I {} neovide "{}/"

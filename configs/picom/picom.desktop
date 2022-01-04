@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Graphics;
+Exec=picom --config ~/.config/picom/picom.conf --experimental-backends --backend glx --xrender-sync-fence && leftwm-command "LoadTheme ~/.config/leftwm/themes/current/theme.toml"
+GenericName=Compositor
+Icon=picom
+Name=Compositor
+StartupNotify=false
+Terminal=false
+TryExec=picom --config ~/.config/picom/picom.conf --experimental-backends --backend glx --xrender-sync-fence
+Type=Application

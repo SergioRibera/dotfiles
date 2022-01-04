@@ -1,0 +1,14 @@
+#!/bin/bash
+export SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+
+# Check if wallpaper pid file exist
+if [ -f $SCRIPTPATH/wallpaper.pid ]; then
+    kill -9 `cat $SCRIPTPATH/wallpaper.pid`
+    rm -fr $SCRIPTPATH/wallpaper.pid
+fi
+
+if [ -f $SCRIPTPATH/wallpaper.pipe ]; then
+    rm -fr $SCRIPTPATH/wallpaper.pipe
+fi
+
+leftwm command "UnloadTheme"

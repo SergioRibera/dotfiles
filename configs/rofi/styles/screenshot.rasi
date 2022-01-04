@@ -8,41 +8,39 @@
  */
 
 configuration {
-	font:                      		"Comfortaa 12";
-    disable-history:                false;
-    fullscreen:                     false;
-	hide-scrollbar: 				true;
-	sidebar-mode: 					false;
+    font: "FiraCode Nerd Font 12";
+    disable-history: false;
+    sidebar-mode: false;
 }
 
 * {
-  black:      #000000;
-  red:        #eb6e67;
-  green:      #95ee8f;
-  yellow:     #f8c456;
-  blue:       #6eaafb;
-  mangenta:   #d886f3;
-  cyan:       #6cdcf7;
-  emphasis:   #50536b;
-  text:       #dfdfdf;
-  text-alt:   #b2b2b2;
-  fg:         #abb2bf;
-  bg:         #282c34;
+    black:      #000000;
+    red:        #eb6e67;
+    green:      #95ee8f;
+    yellow:     #f8c456;
+    blue:       #6eaafb;
+    mangenta:   #d886f3;
+    cyan:       #6cdcf7;
+    emphasis:   #50536b;
+    text:       #dfdfdf;
+    text-alt:   #b2b2b2;
+    fg:         #abb2bf;
+    bg:         #282c34;
 
-  spacing: 0;
-  background-color: transparent;
+    spacing: 0;
+    background-color: transparent;
 
-  font: "Knack Nerd Font 14";
-  text-color: @text;
+    // font: "Knack Nerd Font 14";
+    font: "FiraCode Nerd Font 14";
+    text-color: @text;
 }
 
 window {
     transparency:                   "real";
     border-radius:                  0px;
     location:                       southeast;
-	width:							250px;
-    x-offset:                       -15px;
-    y-offset:                       -45px;
+    width:			    100%;
+    height:                         100%;
 }
 
 prompt {
