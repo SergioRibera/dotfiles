@@ -1,4 +1,4 @@
-Desktop Entry]
+[Desktop Entry]
 Type=Application
 Exec=neovide %F
 Icon=nvim
