@@ -15,7 +15,8 @@
   spacing: 0;
   background-color: transparent;
 
-  font: "Knack Nerd Font 14";
+  /* font: "Knack Nerd Font 14"; */
+  font: "Source Code Pro 16";
   text-color: @text;
 }
 

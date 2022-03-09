@@ -1,5 +1,5 @@
 configuration {
-	modi: [window,drun,run,calc];
+	modi: "window,drun,run,calc";
 	/* width: 50; */
 	/* lines: 15; */
 	/* columns: 1; */

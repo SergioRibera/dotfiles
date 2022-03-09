@@ -1,41 +1,21 @@
 #!/bin/bash
 
-dir_proyects=(
-    ~/.config/nvim \
-    ~/.config/rofi \
-    ~/.config/bspwm \
-    ~/.config/picom/picom.conf \
-    ~/.config/sxhkd/sxhkdrc \
-    ~/.config/dunst/dunstrc \
-    ~/.config/eww \
-    ~/.config/pier/pier.conf \
-    ~/.config/i3 \
-    ~/Proyectos/Ayudas/* \
-    ~/Proyectos/C++/* \
-    ~/Proyectos/C-Sharp/* \
-    ~/Proyectos/C-Sharp/Clases/* \
-    ~/Proyectos/NodeJs/* \
-    ~/Proyectos/OperativeSystem/Extras/* \
-    ~/Proyectos/OperativeSystem/* \
-    ~/Proyectos/Plugins/Vim/* \
-    ~/Proyectos/Python/* \
-    ~/Proyectos/React/Desktop/* \
-    ~/Proyectos/React/Native/* \
-    ~/Proyectos/React/Web/* \
-    ~/Proyectos/React/Works/* \
-    ~/Proyectos/Rust/MSLearn/* \
-    ~/Proyectos/Rust/neovide \
-    ~/Proyectos/Rust/Desktop/* \
-    ~/Proyectos/Rust/Games/* \
-    ~/Proyectos/Rust/Tests/* \
-    ~/Proyectos/Unity/* \
-    ~/Proyectos/Unity/Jams/* \
-    ~/Proyectos/Unity/Tests/* \
-    ~/Proyectos/Unity/Works/* \
-    ~/Proyectos/Web/* \
-    ~/Proyectos/Web/GitHub/* \
-    ~/Proyectos/Web/Works/* \
-    ~/Proyectos/Web/Works/FernandoArrieta/* \
-    ~/Proyectos/Web/Works/FernandoArrieta/LandPages \
+base_proyects=(
+    ~/Repos
+    ~/Projects
+    ~/Projects/CSharp
+    ~/Projects/Rust
+    ~/Projects/Unity
 )
-cd "$(printf "%s\n" "${dir_proyects[@]}" | rofi -p "Select Proyect" -dmenu -i)" | xargs -I {} neovide "{}/"
+declare -A dir_proyects
+for proyect in "${base_proyects[@]}"; do
+    if [ -d "$proyect" ]; then
+        for dir in "$proyect"/*; do
+            if [ -d "$dir" ]; then
+                dir_proyects[${#dir_proyects[@]}]="$dir"
+            fi
+        done
+    fi
+done
+
+echo "$(printf "%s\n" "${dir_proyects[@]}" | rofi -p "Select Proyect" -dmenu -i)" | xargs -I {} neovide "{}/"

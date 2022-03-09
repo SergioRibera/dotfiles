@@ -11,9 +11,9 @@ msg() {
 
 # Options
 screen=""
-allscreen=""
-area=""
-window=""
+allscreen=""
+area=""
+window=""
 
 # Variable passed to rofi
 options="$screen\n$allscreen\n$area\n$window"
@@ -22,21 +22,21 @@ chosen="$(echo -e "$options" | $rofi_command -p '' -dmenu -selected-row 1)"
 case $chosen in
     $screen)
         if [[ -f /usr/bin/flameshot ]]; then
-            flameshot screen -c -p "$(xdg-user-dir PICTURES)/Screenshots" &
+            flameshot screen -c &
         else
             msg
         fi
         ;;
     $allscreen)
         if [[ -f /usr/bin/flameshot ]]; then
-            flameshot full -c -p "$(xdg-user-dir PICTURES)/Screenshots" &
+            flameshot full -c &
         else
             msg
         fi
         ;;
     $area)
         if [[ -f /usr/bin/flameshot ]]; then
-            sleep 1 && flameshot gui -p "$(xdg-user-dir PICTURES)/Screenshots" &
+            sleep 1 && flameshot gui &
         else
             msg
         fi
