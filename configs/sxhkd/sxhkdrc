@@ -4,9 +4,9 @@
 
 # terminal emulator
 super + Return
-    #kitty
+    kitty
+    # alacritty
     #st -A 0.75 -x 6 -s "gruv-dark" -f "mono" -z 13.0 -e tmux
-    alacritty
 
 # program launcher
 super + Tab
@@ -36,10 +36,11 @@ super + {_,shift + }w
 #	bspc desktop -l next
 
 super + m
-    eww open left-side
+    sbbw -t sidebar
+    # eww open left-side
 
-super + shift + m
-    eww close left-side
+# super + shift + m
+    # eww close left-side
 
 # send the newest marked node to the newest preselected node
 #super + y
@@ -93,7 +94,8 @@ super + {_,shift + }{h,j,k,l}
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+	bspc {desktop -f, node -d} '^{1-9,10}'
+	# bspc {desktop -f, node -d} $(bspc query -M -m)/{a,b,c}
 
 #
 # preselect
@@ -143,29 +145,29 @@ super + alt + {s,n,r,t}
 #         /home/sergioribera/.config/rofi/scripts/screenshot.sh
 
 # Toggle Dunst Notification
-super + z
-    kill -s USR1 $(pidof deadd-notification-center)
-super + a
-    # dunstctl set-pause toggle
-    notify-send.py a --hint boolean:deadd-notification-center:true \
-                 string:type:pausePopups
-
-super + shift + a
-    # dunstctl set-pause toggle
-    notify-send.py a --hint boolean:deadd-notification-center:true \
-                 string:type:unpausePopups
+# super + z
+#     kill -s USR1 $(pidof deadd-notification-center)
+# super + a
+#     # dunstctl set-pause toggle
+#     notify-send.py a --hint boolean:deadd-notification-center:true \
+#                  string:type:pausePopups
+# 
+# super + shift + a
+#     # dunstctl set-pause toggle
+#     notify-send.py a --hint boolean:deadd-notification-center:true \
+#                  string:type:unpausePopups
 
 # Lock Screen
-super + shift + b
-    /home/sergioribera/.config/i3/i3lock.sh
+# super + shift + b
+#      /home/sergioribera/.config/i3/i3lock.sh
 
 # Discord
-super + d
-    discord
+# super + d
+#     discord
 
 # File manager
 super + e
-    dolphin
+    thunar
 
 # Web Browser
 super + n
@@ -174,8 +176,8 @@ super + n
 
 # Select Proyect to open Neovide
 super + p
-    /home/sergioribera/.config/rofi/scripts/proyects.sh
+    ~/.config/rofi/scripts/proyects.sh
 
 # Screenshot
 super + shift + p
-    /home/sergioribera/.config/rofi/scripts/screenshot.sh
+    ~/.config/rofi/scripts/screenshot.sh
