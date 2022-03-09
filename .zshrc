@@ -1,5 +1,7 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+export TerminalEmulator=alacritty
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+fpath+=(~/.zfunc /usr/share/zsh/site-functions)
 # export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -64,6 +66,9 @@ COMPLETION_WAITING_DOTS="true"
 # ZSH_CUSTOM=~/.config/zsh
 
 setopt INC_APPEND_HISTORY
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=10000
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -71,18 +76,25 @@ setopt INC_APPEND_HISTORY
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    # git
+    git
     zsh-autosuggestions
+    zsh-completions
     zsh-syntax-highlighting
-    ansible
-    bundler
-    colored-man-pages
-    colorize
-    nmap
-    zsh-navigation-tools
-    zsh_reload
+    # ansible
+    # bundler
+    # colored-man-pages
+    # colorize
+    # nmap
+    # zsh-navigation-tools
+    # zsh_reload
 )
 
+autoload -Uz async
+autoload -Uz compinit && compinit
+
+# Load Plugins
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -121,7 +133,7 @@ alias ll='exa -lh --icons --group-directories-first'
 alias la='exa -a --icons --group-directories-first'
 alias lla='exa -lah --icons'
 alias llag='exa -lah --git --icons'
-alias ls='exa -Gxa --icons --group-directories-first'
+alias ls='exa -Gx --icons --group-directories-first'
 alias lsr='exa -Tlxa --icons --group-directories-first'
 # alias lsd='exa -GDx --icons --color always'
 alias cat='bat'
@@ -149,17 +161,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-starship_prompt_os_icon() {
-    unameOut="$(uname -s)"
-    case "${unameOut}" in
-        Darwin*)    machine="";; # Mac
-        FreeBSD*)   machine="";; # FreeBSD
-        *)          machine=""   # Linux
-    esac
-    echo -e ${machine}
-}
-
+export STARSHIP_CONFIG=~/.config/starship.toml
 # Load starship prompt
 if [[ ! $(which starship) ]]; then
     sh -c "$(curl -fsSL https://starship.rs/install.sh)"
@@ -260,5 +262,8 @@ export STARSHIP_SESSION_KEY=${STARSHIP_SESSION_KEY:0:16}; # Trim to 16-digits if
 VIRTUAL_ENV_DISABLE_PROMPT=1
 
 setopt promptsubst
-PROMPT='$(/usr/local/bin/starship prompt --keymap="$KEYMAP" --status="$STARSHIP_CMD_STATUS" --pipestatus ${STARSHIP_PIPE_STATUS[@]} --cmd-duration="$STARSHIP_DURATION" --jobs="$STARSHIP_JOBS_COUNT")'
-RPROMPT='$(/usr/local/bin/starship prompt --right --keymap="$KEYMAP" --status="$STARSHIP_CMD_STATUS" --pipestatus ${STARSHIP_PIPE_STATUS[@]} --cmd-duration="$STARSHIP_DURATION" --jobs="$STARSHIP_JOBS_COUNT")'
+RPROMPT='$(starship prompt --right --keymap="$KEYMAP" --status="$STARSHIP_CMD_STATUS" --pipestatus ${STARSHIP_PIPE_STATUS[@]} --cmd-duration="$STARSHIP_DURATION" --jobs="$STARSHIP_JOBS_COUNT")'
+
+export PATH="/home/s4rch/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-x86_64-unknown-linux-gnu/bin/:$PATH"
+export LIBCLANG_PATH="/home/s4rch/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-x86_64-unknown-linux-gnu/lib/"
+export PIP_USER=no
