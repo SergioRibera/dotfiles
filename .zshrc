@@ -1,7 +1,12 @@
 # If you come from bash you might have to change your $PATH.
-export TerminalEmulator=alacritty
+export TerminalEmulator=kitty
+export BROWSER=microsoft-edge-dev
+export JAVA_HOME="/opt/android-studio/jre"
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 fpath+=(~/.zfunc /usr/share/zsh/site-functions)
+get_idf() {
+    source /home/s4rch/Projects/Crkbd/Software/esp-idf/export.sh
+}
 # export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -75,6 +80,7 @@ SAVEHIST=10000
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=black"
 plugins=(
     git
     zsh-autosuggestions
@@ -211,6 +217,11 @@ starship_precmd() {
     # Use length of jobstates array as number of jobs. Expansion fails inside
     # quotes so we set it here and then use the value later on.
     STARSHIP_JOBS_COUNT=${#jobstates}
+    # if [[ $STARSHIP_CMD_STATUS -ne 0 ]]; then
+    #     echo "Ups"
+    # else
+    #     echo "Ok"
+    # fi
 }
 starship_preexec() {
     __starship_get_time && STARSHIP_START_TIME=$STARSHIP_CAPTURED_TIME
@@ -262,7 +273,7 @@ export STARSHIP_SESSION_KEY=${STARSHIP_SESSION_KEY:0:16}; # Trim to 16-digits if
 VIRTUAL_ENV_DISABLE_PROMPT=1
 
 setopt promptsubst
-RPROMPT='$(starship prompt --right --keymap="$KEYMAP" --status="$STARSHIP_CMD_STATUS" --pipestatus ${STARSHIP_PIPE_STATUS[@]} --cmd-duration="$STARSHIP_DURATION" --jobs="$STARSHIP_JOBS_COUNT")'
+RPROMPT='$(starship prompt --right --keymap="$KEYMAP" --status="$STARSHIP_CMD_STATUS" --cmd-duration="$STARSHIP_DURATION" --jobs="$STARSHIP_JOBS_COUNT")'
 
 export PATH="/home/s4rch/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-x86_64-unknown-linux-gnu/bin/:$PATH"
 export LIBCLANG_PATH="/home/s4rch/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-x86_64-unknown-linux-gnu/lib/"

@@ -1,23 +1,34 @@
 #! /bin/sh
 
-#setxkbmap -model pc105 -layout latam,us -variant deadtilde, -option grp:ctrl_alt_toggle;
+# setxkbmap -model pc105 -layout latam,us -variant deadtilde, -option grp:ctrl_alt_toggle;
 # setxkbmap -model pc105 -layout latam,us -variant deadtilde, ;
 # Set monitor layout
-autorandr --change
-SCREENS=$(xrandr | grep " connected" | cut -d ' ' -f1)
+# set_monitor_desktops() {
+    autorandr --change &>> /tmp/bspwm_log.txt
+    # bspc desktop 'Desktop' --remove
 
-for screen in $SCREENS; do
-    bspc monitor $screen -d I II III IV V VI VII VIII IX X
-done
+    # sleep 1
+    SCREENS=($(xrandr | grep -e 'connected' | sed -e 's/ primary//g' | cut -d" " -f1))
+    # SCREENS=($(bspc query -M --names))
+    i=1
+
+    printf '%s\n' "${my_array[@]}" >> /tmp/bspwm_log.txt
+
+    for screen in $SCREENS; do
+        bspc monitor $screen -n $screen -d 1 2 3 4 5 6 7 8 9 10
+        let i++
+    done
+#}
+
+# set_monitor_desktops &
 
 # Set Backgrounds Randoms
-#killall /home/sergioribera/.config/nitrogen/autobg.py &&
-~/.config/scripts/wallpaper -t 15m --volume 25 -s '1' --no-allow-video &
-# /home/sergioribera/.config/nitrogen/autobg.py -c "/home/sergioribera/.config/nitrogen/bg-saved.cfg" -d "/home/sergioribera/Imágenes/Backgrounds/" &
+~/.config/scripts/wallpaper -t 30m --volume 25 -s '1' --no-allow-video -d -b &
 
 sxhkd &
-# eww daemon -c ~/.config/eww/eww.xml &
-# deadd-notification-center &
+deadd-notification-center &
+devmon &
+thunar --daemon &
 
 ###---Global Settings---###
 bspc config automatic_scheme alternate
@@ -51,18 +62,22 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config focus_follows_pointer true
+bspc config pointer_follows_focus true
+bspc config pointer_follows_monitor true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Gimp state=floating follow=on
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Glava manage=off
-bspc rule -a Discord desktop='^7'
+bspc rule -a Discord state=floating follow=on
 bspc rule -a UnityHub state=floating
 bspc rule -a Pavucontrol state=floating
 bspc rule -a Dolphin state=floating
+bspc rule -a Thunar state=floating
 bspc rule -a Plank layer=above manage=on border=off
+bspc rule -a android-studio state=floating border=off follow=on
 
 # Set Picom as Default Compositor
-picom --config ~/.config/picom/picom.conf &
+picom -b --xrender-sync --xrender-sync-fence --config ~/.config/picom/picom.conf
 sbbw &
 
 # run all desktop files on autostart

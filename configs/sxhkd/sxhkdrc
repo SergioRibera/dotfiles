@@ -4,7 +4,8 @@
 
 # terminal emulator
 super + Return
-    kitty
+    wezterm start
+    # kitty
     # alacritty
     #st -A 0.75 -x 6 -s "gruv-dark" -f "mono" -z 13.0 -e tmux
 
@@ -94,8 +95,8 @@ super + {_,shift + }{h,j,k,l}
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f, node -d} '^{1-9,10}'
-	# bspc {desktop -f, node -d} $(bspc query -M -m)/{a,b,c}
+	bspc {desktop --focus, node --to-desktop} 'focused:^{1-9,10}'
+	# bspc {desktop -f, node -d} $(bspc query -M -m)/{1-9,10}
 
 #
 # preselect
@@ -145,17 +146,17 @@ super + alt + {s,n,r,t}
 #         /home/sergioribera/.config/rofi/scripts/screenshot.sh
 
 # Toggle Dunst Notification
-# super + z
-#     kill -s USR1 $(pidof deadd-notification-center)
-# super + a
-#     # dunstctl set-pause toggle
-#     notify-send.py a --hint boolean:deadd-notification-center:true \
-#                  string:type:pausePopups
-# 
-# super + shift + a
-#     # dunstctl set-pause toggle
-#     notify-send.py a --hint boolean:deadd-notification-center:true \
-#                  string:type:unpausePopups
+super + z
+    kill -s USR1 $(pidof deadd-notification-center)
+super + a
+    notify-send.py a --hint boolean:deadd-notification-center:true \
+                 string:type:pausePopups
+    # dunstctl set-pause toggle
+
+super + shift + a
+    notify-send.py a --hint boolean:deadd-notification-center:true \
+                 string:type:unpausePopups
+    # dunstctl set-pause toggle
 
 # Lock Screen
 # super + shift + b
@@ -164,6 +165,10 @@ super + alt + {s,n,r,t}
 # Discord
 # super + d
 #     discord
+
+# Gnome Settings
+super + i
+    gnome-control-center
 
 # File manager
 super + e

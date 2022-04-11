@@ -50,6 +50,7 @@ style = "yellow"
 
 [aws]
 symbol = "  "
+disabled = true
 
 [conda]
 symbol = " "
