@@ -4,16 +4,23 @@ return {
 
     disable_default_key_bindings = true,
 
+    mouse_bindings = {
+        {
+            event = { Up = { streak = 1, button = "Left" } },
+            mods = "CTRL",
+            action = "OpenLinkAtMouseCursor",
+        },
+    },
+
     keys = {
-        { key = "Enter", mods = "CTRL|SHIFT", action = "SpawnWindow" },
-        -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
-        {key="LeftArrow", mods="OPT", action=wezterm.action{SendString="\x1bb"}},
-        -- Make Option-Right equivalent to Alt-f; forward-word
-        {key="RightArrow", mods="OPT", action=wezterm.action{SendString="\x1bf"}},
+        { key = "l", mods = "CTRL|SHIFT", action = wezterm.action{ SplitHorizontal={ domain="CurrentPaneDomain" } } },
+        { key = "h", mods = "CTRL|SHIFT", action = wezterm.action{ SplitVertical={ domain="CurrentPaneDomain" } } },
+        { key = "LeftArrow", mods = "CTRL", action = { SendKey = { key = "b", mods = "ALT"} } },
+        { key = "RightArrow", mods = "CTRL", action = { SendKey = { key = "f", mods = "ALT"} } },
         -- Open mew tab
         { key = "t", mods = "CTRL", action = wezterm.action {SpawnTab = "CurrentPaneDomain"} },
         -- Close current Tab or window
-        { key = "w", mods = "CTRL|SHIFT", action = wezterm.action {CloseCurrentTab = {confirm = false}} },
+        { key = "w", mods = "CTRL|SHIFT", action = wezterm.action {CloseCurrentPane = {confirm = false}} },
         -- Go to next tab
         { mods = "CTRL", key = "Tab", action = wezterm.action {ActivateTabRelative = 1} },
         -- Go to previous tab
