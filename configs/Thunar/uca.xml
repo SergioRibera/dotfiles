@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
-<action>
-	<icon>utilities-terminal</icon>
-	<name>Open Terminal Here</name>
-	<unique-id>1643001293691201-1</unique-id>
-	<command>alacritty --hold --working-directory %f</command>
-	<description>Open Terminal on here directory</description>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-</action>
+    <action>
+        <icon>utilities-terminal</icon>
+        <name>Open Terminal Here</name>
+        <unique-id>1643001293691201-1</unique-id>
+        <command>wezterm start --cwd %f</command>
+        <description>Open Terminal on here directory</description>
+        <patterns>*</patterns>
+        <startup-notify />
+        <directories />
+    </action>
+    <action>
+        <icon>neovim</icon>
+        <name>Open with Neovide</name>
+        <unique-id>1643001293691201-2</unique-id>
+        <command>neovide %f</command>
+        <description>Open File/Directory with Neovide</description>
+        <patterns>*</patterns>
+        <directories />
+    </action>
 </actions>
