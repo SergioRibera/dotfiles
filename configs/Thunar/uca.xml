@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
-    <!-- <action> -->
-    <!--     <icon>copy</icon> -->
-    <!--     <name>Copy File</name> -->
-    <!--     <unique-id>1643001293691201-0</unique-id> -->
-    <!--     <command>xclip -sel clip -t $(file -b --mime-type %f) < %f && notify-send "Copied to clipboard" "Copied the contents of %f to clipboard"</command> -->
-    <!--     <description>Copy file bytes (not path)</description> -->
-    <!--     <patterns>.*</patterns> -->
-    <!--     <startup-notify /> -->
-    <!-- </action> -->
     <action>
         <icon>utilities-terminal</icon>
         <name>Open Terminal Here</name>
@@ -20,7 +11,7 @@
         <directories />
     </action>
     <action>
-        <icon>neovim</icon>
+        <icon>nvim</icon>
         <name>Open with Neovide</name>
         <unique-id>1643001293691201-2</unique-id>
         <command>neovide %f</command>
@@ -28,26 +19,24 @@
         <patterns>*</patterns>
         <directories />
     </action>
-
     <action>
-        <icon>copy</icon>
+        <icon>edit-paste</icon>
         <name>Clip to file</name>
         <unique-id>1643001293691201-3</unique-id>
         <command>~/.config/Thunar/cliptofile %f</command>
         <description>Create file from clipboard</description>
         <patterns>*</patterns>
-        <directories />
         <startup-notify />
+        <directories />
     </action>
     <action>
-        <icon>copy</icon>
+        <icon>edit-paste</icon>
         <name>Clip to image</name>
         <unique-id>1643001293691201-4</unique-id>
         <command>~/.config/Thunar/cliptoimg %f</command>
         <description>Create image from clipboard</description>
         <patterns>*</patterns>
-        <directories />
         <startup-notify />
+        <directories />
     </action>
-
 </actions>
