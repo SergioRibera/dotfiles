@@ -1,13 +1,13 @@
+/**
+#START_VERTEX
 #version 130
 
-/**
 -------------- glow vertex shader -------------
     author: Richman Stewart
     simple vertex shader that sets the position
     to the specified matrix and position while
     passing the vertex colour and tex coords
     to the fragment shader
-**/
 
 in vec2 a_position;
 in vec2 a_tex_coord;
@@ -25,8 +25,9 @@ void main() {
 }
 
 #END_VERTEX
+**/
 
-#START_FRAGMENT
+// #START_FRAGMENT
 #version 140
 
 /**
@@ -77,3 +78,4 @@ void main() {
         pixel = vec4(glow_colour, (sum / 9.0) * glow_intensity);
     }
 }
+

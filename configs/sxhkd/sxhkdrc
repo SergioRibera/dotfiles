@@ -7,7 +7,9 @@ super + Return
     wezterm start
     # kitty
     # alacritty
-    #st -A 0.75 -x 6 -s "gruv-dark" -f "mono" -z 13.0 -e tmux
+
+super + shift + Return
+    st -A 0.75 -x 5 -s "gruv-dark" -f "FiraCode Nerd Font Mono" -z 17.0 -e fish
 
 # program launcher
 super + Tab
@@ -184,5 +186,25 @@ super + p
     ~/.config/rofi/scripts/proyects.sh
 
 # Screenshot
+super + s
+    flameshot gui
+
 super + shift + p
     ~/.config/rofi/scripts/screenshot.sh
+
+# Voume keys
+XF86AudioRaiseVolume
+    ~/.config/scripts/volume up
+
+XF86AudioLowerVolume
+    ~/.config/scripts/volume down
+
+XF86AudioMute
+    ~/.config/scripts/volume mute
+
+# Brightness keys
+XF86MonBrightnessUp
+    ~/.config/scripts/brightness up
+
+XF86MonBrightnessDown
+    ~/.config/scripts/brightness down

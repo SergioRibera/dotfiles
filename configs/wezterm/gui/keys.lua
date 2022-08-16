@@ -13,6 +13,11 @@ return {
     },
 
     keys = {
+        { key = "n", mods = "CTRL|SHIFT", action = wezterm.action.SplitPane {
+            direction = 'Down',
+            top_level = true,
+            command = { args = { 'fish', '-P' } }
+        } },
         { key = "l", mods = "CTRL|SHIFT", action = wezterm.action{ SplitHorizontal={ domain="CurrentPaneDomain" } } },
         { key = "h", mods = "CTRL|SHIFT", action = wezterm.action{ SplitVertical={ domain="CurrentPaneDomain" } } },
         { key = "LeftArrow", mods = "CTRL", action = { SendKey = { key = "b", mods = "ALT"} } },
@@ -26,7 +31,6 @@ return {
         -- Go to previous tab
         { mods = "CTRL|SHIFT", key = "Tab", action = wezterm.action {ActivateTabRelative = -1} },
         -- standard copy/paste bindings
-        { key = "x", mods = "CTRL|SHIFT", action = "ActivateCopyMode" },
         { key = "v", mods = "CTRL|SHIFT", action = wezterm.action {PasteFrom = "Clipboard"} },
         { key = "c", mods = "CTRL|SHIFT", action = wezterm.action {CopyTo = "ClipboardAndPrimarySelection"} }
     }

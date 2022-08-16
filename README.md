@@ -11,22 +11,10 @@ Arch Linux o que tengan pacman como administrador de paquetes
 Luego solo queda seguir las instrucciones que vayan apareciendo en consola
 
 #### Aplicaciones Instaladas
+
 - Neovim
 - git
 - Yay
-- Firefox
-- Unity
-- Ferdi
 - Altus
-- Telegram Desktop
-- WPS Office
-- Reactide
-- Discord (Betterdiscord)
-- Xampp
 - Picom jonaburg
 - Rofi
-##### Opcionales
-- TLauncher
-- Kavantum
-- Wine
-- Lutris

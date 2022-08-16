@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ -f /sys/class/power_supply/BAT0/capacity ]]; then
+    while true
+    do
+        battery_level=$(cat /sys/class/power_supply/BAT0/capacity)
+        if [[ $battery_level -le 20 ]]; then
+            notify-send --urgency=CRITICAL "Battery Low" "Level: ${battery_level}%"
+            paplay /usr/share/sounds/freedesktop/stereo/suspend-error.oga
+        fi
+        sleep 60
+    done
+fi

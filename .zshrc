@@ -1,7 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-export TerminalEmulator=kitty
+export TerminalEmulator=wezterm start
 export BROWSER=microsoft-edge-dev
 export JAVA_HOME="/opt/android-studio/jre"
+export ANDROID_SDK_ROOT="/home/s4rch/Android/Sdk/"
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 fpath+=(~/.zfunc /usr/share/zsh/site-functions)
 get_idf() {
@@ -129,6 +130,15 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Toggle ignore-space. Useful when entering passwords.
+alias history-off='\
+unset HISTFILE &&\
+echo "Commands starting with space are now EXCLUDED from history."'
+
+alias history-on='\
+export HISTFILE=~/.zsh_history &&\
+echo "Commands starting with space are now ADDED to history."'
+
 function rmk(){
     scrub -p dod $1
     shred -zun 10 -v $1
@@ -144,6 +154,7 @@ alias lsr='exa -Tlxa --icons --group-directories-first'
 # alias lsd='exa -GDx --icons --color always'
 alias cat='bat'
 alias catn='/usr/bin/cat'
+alias neovide='neovide --multigrid'
 
 
 # Autocompletions

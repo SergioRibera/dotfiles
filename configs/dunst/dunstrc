@@ -1,10 +1,10 @@
 [global]
 monitor = 0
 follow = mouse
-geometry = "288x3-30+50"
+# geometry = "288x3-30+50"
 indicate_hidden = yes
 shrink = no
-transparency = 0
+transparency = 25
 notification_height = 0
 separator_height = 2
 padding = 24
@@ -12,9 +12,9 @@ horizontal_padding = 24
 separator_color = frame
 sort = yes
 idle_threshold = 120
-corner_radius = 15;
+# corner_radius = 15;
 
-font =  Avenir LT Pro 11
+font = FiraCode Nerd Font 10
 line_height = 4
 markup = full
 format = "<b>%s</b>\n\n%b"
@@ -28,7 +28,7 @@ hide_duplicate_count = true
 show_indicators = yes
 
 ### Icons ###
-icon_position = off
+icon_position = left
 
 # Scale larger icons down to this size, set to 0 to disable
 max_icon_size = 32
@@ -73,7 +73,7 @@ startup_notification = false
 #  mesg: Important Messages
 #  info: all unimportant stuff
 # debug: all less than unimportant stuff
-verbosity = mes
+verbosity = info
 
 ### Legacy
 
@@ -96,6 +96,7 @@ context = ctrl+shift+per_monitor_dp
 [urgency_low]
 # IMPORTANT: colors have to be defined in quotation marks.
 # Otherwise the "#" and following would be interpreted as a comment.
+frame_color = "#272a33"
 background = "#272a33"
 foreground = "#ffffff"
 timeout = 10
@@ -103,6 +104,7 @@ timeout = 10
 #icon = /path/to/icon
 
 [urgency_normal]
+frame_color = "#272a33"
 background = "#272a33"
 foreground = "#ffffff"
 timeout = 10

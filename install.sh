@@ -53,6 +53,10 @@ pacmanPackages=(alacritty zsh neovim bspwm sxhkd polybar picom-jonaburg-git stea
     #["steam"]="" \
 #)
 
+set -e
+
+trap banner EXIT
+
 
 banner(){
     clear

@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# You can call this script like this:
+# $./volume.sh up
+# $./volume.sh down
+# $./volume.sh mute
+
+# ICON_THEME=$(cat /usr/share/icons/default/index.theme | grep '=' | cut -d '=' -f 2)
+ICON_THEME="Papirus-Light"
+ICON_SIZE="48x48"
+
+function calc { awk "BEGIN { print "$*" }"; }
+
+function get_brightness {
+    brightnessctl get
+}
+
+function get_max_brightness {
+    brightnessctl max
+}
+
+function send_notification {
+    DIR=`dirname "$0"`
+    # tm_brightness=$(exp get_brightness / get_max_brightness)
+    a=$(calc $(get_brightness)/$(get_max_brightness))
+    b=$(calc $a*100)
+    brightness=${b%.*}
+    echo "brightness: $brightness"
+
+    if [ "$brightness" = "0" ]; then
+        icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-off.svg"
+    else
+        if [  "$brightness" -lt "10" ]; then
+            icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-low.svg"
+        else
+            if [ "$brightness" -lt "30" ]; then
+                icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-low.svg"
+            else
+                if [ "$brightness" -lt "70" ]; then
+                    icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-medium.svg"
+                else
+                    icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-high.svg"
+                fi
+            fi
+        fi
+    fi
+    # bar=$(seq -s "─" $(($brightness/5)) | sed 's/[0-9]//g')
+    # Send the notification
+    dunstify "Brightness" "" -I "$icon_name" -t 2000 -h int:value:"$brightness" -r 5556
+
+}
+
+case $1 in
+    up)
+        brightnessctl set +10 > /dev/null
+        send_notification
+        ;;
+    down)
+        brightnessctl set 10- > /dev/null
+        send_notification
+        ;;
+esac

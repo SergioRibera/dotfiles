@@ -42,6 +42,8 @@ local base = {
 
     -- Get rid of close prompt
     window_close_confirmation = "NeverPrompt",
+
+    ratelimit_output_bytes_per_second = 10000000,
 }
 
 -- Tab Style (like shape)
