@@ -39,7 +39,7 @@ super + {_,shift + }w
 #	bspc desktop -l next
 
 super + m
-    sbbw -t sidebar
+    sbbw toggle "sidebar"
     # eww open left-side
 
 # super + shift + m

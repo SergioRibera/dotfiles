@@ -4,7 +4,7 @@
 # setxkbmap -model pc105 -layout latam,us -variant deadtilde, ;
 # Set monitor layout
 
-~/.config/scripts/screens &
+~/.config/scripts/screens
 ~/.config/scripts/battery-status &
 
 # Set Backgrounds Randoms
@@ -64,11 +64,11 @@ bspc rule -a "_NET_WM_STATE_ABOVE" state=floating
 
 # Set Picom as Default Compositor
 picom -b --experimental-backends --config ~/.config/picom/picom.conf
-sbbw &
+sbbw --quiet run
 
 # run all desktop files on autostart
 for desktop in ~/.config/autostart/*.desktop; do
     if [ -f "$desktop" ]; then
         exo-open $desktop
     fi
-done
+done &

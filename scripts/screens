@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCREENS=($(xrandr | grep -e 'connected' | sed -e 's/ primary//g' | cut -d" " -f1))
+SCREENS=($(xrandr | grep -e ' connected' | sed -e 's/ primary//g' | cut -d" " -f1))
 
 autorandr --change &>> /tmp/bspwm_log.txt
 
