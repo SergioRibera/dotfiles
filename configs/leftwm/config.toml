@@ -1,8 +1,7 @@
 modkey = "Mod4"
 mousekey = "Mod4"
-workspaces = []
 tags = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-layouts = ["MainAndVertStack", "MainAndHorizontalStack", "MainAndDeck", "GridHorizontal", "EvenHorizontal", "EvenVertical", "Fibonacci", "CenterMain", "CenterMainBalanced", "Monocle", "RightWiderLeftStack", "LeftWiderRightStack"]
+layouts = [ "Fibonacci", "MainAndVertStack", "MainAndHorizontalStack", "MainAndDeck", "GridHorizontal", "EvenHorizontal", "EvenVertical", "CenterMain", "CenterMainBalanced", "Monocle", "RightWiderLeftStack", "LeftWiderRightStack"]
 layout_mode = "Workspace"
 scratchpad = []
 disable_current_tag_swap = false
@@ -25,7 +24,7 @@ key = "Tab"
 # Terminal settings
 [[keybind]]
 command = "Execute"
-value = "alacritty"
+value = "wezterm start"
 modifier = ["modkey"]
 key = "Return"
 

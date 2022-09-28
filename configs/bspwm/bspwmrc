@@ -14,6 +14,7 @@ sxhkd &
 udiskie &
 dunst &
 thunar --daemon &
+numlockx on
 
 ###---Global Settings---###
 bspc config automatic_scheme alternate

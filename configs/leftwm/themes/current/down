@@ -11,4 +11,12 @@ if [ -f $SCRIPTPATH/wallpaper.pipe ]; then
     rm -fr $SCRIPTPATH/wallpaper.pipe
 fi
 
+kill -9 ~/.config/scripts/screens
+kill -9 ~/.config/scripts/battery-status
+
+kill -9 udiskie
+kill -9 dunst
+kill -9 thunar
+kill -9 sbbw
+
 leftwm command "UnloadTheme"

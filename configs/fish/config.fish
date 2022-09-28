@@ -3,6 +3,7 @@ set -Ux BROWSER 'microsoft-edge-dev'
 set -Ux JAVA_HOME "/opt/android-studio/jre"
 set -Ux ANDROID_SDK_ROOT "/home/s4rch/Android/Sdk/"
 set -Ux fish_user_paths "$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin"
+alias paru "paru --skipreview --norebuild --noredownload"
 # Remove startup banner
 set fish_greeting
 
@@ -35,7 +36,7 @@ function promt_status -S -a last_status
     # User Input row
     # Detect errors or other
     set_color normal
-    if [ "$nonzero" -o "$fish_private_mode" -o "$superuser"]
+    if [ "$nonzero" -o "$superuser" ]
         if [ "$nonzero" ]
             set std_color 'red'
             fish -c "error" &
@@ -44,15 +45,15 @@ function promt_status -S -a last_status
             fish -c "success" &
         end
 
-        if [ "$fish_private_mode" ]
-            set user_char "  "
-        end
-
         if [ "$superuser" ]
             set user_char_color 'red'
             # set user_char " ☠ "
             set user_char "  "
         end
+    end
+
+    if [ "$fish_private_mode" ]
+        set user_char "  "
     end
 
     if [ -n "$SSH_CLIENT" ]
@@ -114,22 +115,22 @@ end
 
 function _git_status -d 'Check git status'
     set -l git_status (command git status --porcelain 2> /dev/null | cut -c 1-2)
-    if [ (echo -sn $git_status\n | egrep -c "[ACDMT][ MT]|[ACMT]D") -gt 0 ] #added
+    if [ (echo -sn $git_status\n | grep -E -c "[ACDMT][ MT]|[ACMT]D") -gt 0 ] #added
         echo -n (set_color green)$ICON_VCS_STAGED
     end
-    if [ (echo -sn $git_status\n | egrep -c "[ ACMRT]D") -gt 0 ] #deleted
+    if [ (echo -sn $git_status\n | grep -E -c "[ ACMRT]D") -gt 0 ] #deleted
         echo -n (set_color red)$ICON_VCS_DELETED
     end
-    if [ (echo -sn $git_status\n | egrep -c ".[MT]") -gt 0 ] #modified
+    if [ (echo -sn $git_status\n | grep -E -c ".[MT]") -gt 0 ] #modified
         echo -n (set_color $ORANGE)$ICON_VCS_MODIFIED
     end
-    if [ (echo -sn $git_status\n | egrep -c "R.") -gt 0 ] #renamed
+    if [ (echo -sn $git_status\n | grep -E -c "R.") -gt 0 ] #renamed
         echo -n (set_color purple)$ICON_VCS_RENAME
     end
-    if [ (echo -sn $git_status\n | egrep -c "AA|DD|U.|.U") -gt 0 ] #unmerged
+    if [ (echo -sn $git_status\n | grep -E -c "AA|DD|U.|.U") -gt 0 ] #unmerged
         echo -n (set_color brred)$ICON_VCS_UNMERGED(set_color normal)
     end
-    if [ (echo -sn $git_status\n | egrep -c "\?\?") -gt 0 ] #untracked (new) files
+    if [ (echo -sn $git_status\n | grep -E -c "\?\?") -gt 0 ] #untracked (new) files
         echo -n (set_color brcyan)$ICON_VCS_UNTRACKED
     end
     if test (command git rev-parse --verify --quiet refs/stash >/dev/null) #stashed (was '$')

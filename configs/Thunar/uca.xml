@@ -1,42 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
-    <action>
-        <icon>utilities-terminal</icon>
-        <name>Open Terminal Here</name>
-        <unique-id>1643001293691201-1</unique-id>
-        <command>wezterm start --cwd %f</command>
-        <description>Open Terminal on here directory</description>
-        <patterns>*</patterns>
-        <startup-notify />
-        <directories />
-    </action>
-    <action>
-        <icon>nvim</icon>
-        <name>Open with Neovide</name>
-        <unique-id>1643001293691201-2</unique-id>
-        <command>neovide %f</command>
-        <description>Open File/Directory with Neovide</description>
-        <patterns>*</patterns>
-        <directories />
-    </action>
-    <action>
-        <icon>edit-paste</icon>
-        <name>Clip to file</name>
-        <unique-id>1643001293691201-3</unique-id>
-        <command>~/.config/Thunar/cliptofile %f</command>
-        <description>Create file from clipboard</description>
-        <patterns>*</patterns>
-        <startup-notify />
-        <directories />
-    </action>
-    <action>
-        <icon>edit-paste</icon>
-        <name>Clip to image</name>
-        <unique-id>1643001293691201-4</unique-id>
-        <command>~/.config/Thunar/cliptoimg %f</command>
-        <description>Create image from clipboard</description>
-        <patterns>*</patterns>
-        <startup-notify />
-        <directories />
-    </action>
+<action>
+	<icon>nvim</icon>
+	<name>Open with Neovide</name>
+	<unique-id>1643001293691201-2</unique-id>
+	<command>neovide %f</command>
+	<description>Open File/Directory with Neovide</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<unique-id>1643001293691201-1</unique-id>
+	<command>wezterm start --cwd %f</command>
+	<description>Open Terminal on here directory</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Private Terminal Here</name>
+	<unique-id>1663468201164770-1</unique-id>
+	<command>wezterm start --cwd %f -- fish -P</command>
+	<description>Open terminal in private mode</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>edit-paste</icon>
+	<name>Clip to file</name>
+	<unique-id>1643001293691201-3</unique-id>
+	<command>~/.config/Thunar/cliptofile %f</command>
+	<description>Create file from clipboard</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>edit-paste</icon>
+	<name>Clip to image</name>
+	<unique-id>1643001293691201-4</unique-id>
+	<command>~/.config/Thunar/cliptoimg %f</command>
+	<description>Create image from clipboard</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>com.github.artemanufrij.playmyvideos</icon>
+	<name>Convert mkv to mp4</name>
+	<unique-id>1663468608276064-2</unique-id>
+	<command>~/.config/Thunar/ffmpeg_convert.sh %f mp4</command>
+	<description></description>
+	<patterns>*.mkv</patterns>
+	<video-files/>
+</action>
 </actions>

@@ -1,10 +1,17 @@
 #!/bin/bash
 
+percentages=("30", "20", "15", "10", "5")
+
+function contains() {
+    local e value="$1"
+    [[ " ${percentages[*]} " =~ " ${value} " ]] && return 1 || echo 0
+}
+
 if [[ -f /sys/class/power_supply/BAT0/capacity ]]; then
     while true
     do
         battery_level=$(cat /sys/class/power_supply/BAT0/capacity)
-        if [[ $battery_level -le 20 ]]; then
+        if [[ $(contains $battery_level) -eq 1 ]]; then
             notify-send --urgency=CRITICAL "Battery Low" "Level: ${battery_level}%"
             paplay /usr/share/sounds/freedesktop/stereo/suspend-error.oga
         fi
