@@ -9,3 +9,4 @@ alias lsd='exa -GDx --icons --color always'
 alias cat='bat'
 alias catn='/usr/bin/cat'
 alias neovide='neovide --multigrid'
+alias paru "paru --skipreview --norebuild --noredownload"

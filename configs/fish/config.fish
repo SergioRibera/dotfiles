@@ -3,7 +3,6 @@ set -Ux BROWSER 'microsoft-edge-dev'
 set -Ux JAVA_HOME "/opt/android-studio/jre"
 set -Ux ANDROID_SDK_ROOT "/home/s4rch/Android/Sdk/"
 set -Ux fish_user_paths "$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin"
-alias paru "paru --skipreview --norebuild --noredownload"
 # Remove startup banner
 set fish_greeting
 
