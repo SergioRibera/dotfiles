@@ -1,7 +1,8 @@
--- local wezterm = require("wezterm")
+local wezterm = require("wezterm")
 local mytable = require("lib/mystdlib").mytable
 local mycolors = require("colors")
 local gui = require('gui')
+local success, stdout, _ = wezterm.run_child_process({"echo", "$XDG_CURRENT_DESKTOP"});
 
 local fonts = {
     -- Basic font configuration
@@ -16,7 +17,7 @@ local style = {
     -- Cursor style
     default_cursor_style = "BlinkingBar",
 
-    window_background_opacity = 0.7,
+    -- window_background_opacity = 0.7,
 
     -- Bright bold colors
     bold_brightens_ansi_colors = true,
@@ -28,6 +29,10 @@ local style = {
 
     colors = mycolors,
 }
+
+if success and stdout ~= 'Hyprland' then
+    style.window_background_opacity = 0.7
+end
 
 local base = {
 
