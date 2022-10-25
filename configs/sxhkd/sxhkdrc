@@ -178,7 +178,7 @@ super + e
 
 # Web Browser
 super + n
-    microsoft-edge-dev
+    microsoft-edge-stable
     # firefox
 
 # Select Proyect to open Neovide
