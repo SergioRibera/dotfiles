@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=ferdi
+Comment=ferdistartup script
+Exec=/opt/ferdi/ferdi
+StartupNotify=false
+Terminal=false

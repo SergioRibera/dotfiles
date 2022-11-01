@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-NoDisplay=true
-Terminal=false
-Name=Work Applications
-Exec=/home/s4rch/.config/scripts/init-workapps.sh %U
-Icon=Terminal
-Comment=Start the applications I use in my work days.
-Categories=System;
