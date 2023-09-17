@@ -19,7 +19,5 @@ final: prev: rec {
   cosmic-files = prev.callPackage ./cosmic/files { inherit libcosmicAppHook; };
   xdg-desktop-portal-cosmic = prev.callPackage ./cosmic/xdg-portal { inherit libcosmicAppHook; };
 
-  test-package = prev.writeShellScriptBin "test-package" ''
-    echo "El overlay funciona correctamente!"
-  '';
+  firefoxAddons = prev.callPackage ./firefox-addons { };
 }

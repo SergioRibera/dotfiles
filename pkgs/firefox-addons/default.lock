@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "bitwarden-password-manager",
+    "name": "Bitwarden Password Manager",
+    "version": "2024.9.0",
+    "addonId": "{446900e4-71c2-419f-a6a7-df9c091e268b}",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4350677/bitwarden_password_manager-2024.9.0.xpi",
+    "sha256": "sha256:8c8b97b445fe65cbdd91eda4bd07e8946d6c1b21ac89c771205a3b9225e2ef12",
+    "homepage": "https://bitwarden.com",
+    "description": "At home, at work, or on the go, Bitwarden easily secures all your passwords, passkeys, and sensitive information.",
+    "license": "GPL-3.0-or-later"
+  },
+  {
+    "slug": "hyper-read",
+    "name": null,
+    "version": "1.1",
+    "addonId": "{2160556a-1fc4-453c-9dba-6707507bf5aa}",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4181453/hyper_read-1.1.xpi",
+    "sha256": "sha256:ebcd5d72156e93ea87ca4fce38406d50c4d5dcf92b0f5493e08171d69f6c7cb4",
+    "homepage": "https://addons.mozilla.org/en-US/firefox/addon/hyper-read/",
+    "description": null,
+    "license": "MPL-2.0"
+  },
+  {
+    "slug": "ublock-origin",
+    "name": "uBlock Origin",
+    "version": "1.59.0",
+    "addonId": "uBlock0@raymondhill.net",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4328681/ublock_origin-1.59.0.xpi",
+    "sha256": "sha256:1db9c676a07d141f8d36dbbc24f9e3d64a6cc2340dbfc6c848bc4395f96cfb14",
+    "homepage": "https://github.com/gorhill/uBlock#ublock-origin",
+    "description": "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.",
+    "license": "GPL-3.0-or-later"
+  },
+  {
+    "slug": "refined-github-",
+    "name": "Refined GitHub",
+    "version": "24.8.30",
+    "addonId": "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4345066/refined_github-24.8.30.xpi",
+    "sha256": "sha256:5ac5e48e8805182ba9dc1ff4fc6039139a7205f50db185ac1a25584140981560",
+    "homepage": "https://github.com/refined-github/refined-github",
+    "description": "Simplifies the GitHub interface and adds many useful features.",
+    "license": "MIT"
+  },
+  {
+    "slug": "vimium-ff",
+    "name": "Vimium",
+    "version": "2.1.2",
+    "addonId": "{d7742d87-e61d-4b78-b8a1-b469842139fa}",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4259790/vimium_ff-2.1.2.xpi",
+    "sha256": "sha256:3b9d43ee277ff374e3b1153f97dc20cb06e654116a833674c79b43b8887820e1",
+    "homepage": "https://github.com/philc/vimium",
+    "description": "The Hacker's Browser. Vimium provides keyboard shortcuts for navigation and control in the spirit of Vim.",
+    "license": "MIT"
+  },
+  {
+    "slug": "rust-search-extension",
+    "name": "Rust Search Extension",
+    "version": "1.13.0",
+    "addonId": "{04188724-64d3-497b-a4fd-7caffe6eab29}",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4236369/rust_search_extension-1.13.0.xpi",
+    "sha256": "sha256:59ddefdab6cd7dbe5fb368fe6fac2eace052060bf9357dd39bc9c7ff3439be13",
+    "homepage": "https://rust.extension.sh",
+    "description": "The ultimate search extension for Rust\n\nSearch std docs, crates, builtin attributes, official books, and error codes, etc in your address bar instantly.\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4af48e3229ba03b454fb9b352a7e5a4c038e1bcc6721bf744b781a5e96b9e798/https%3A//rust.extension.sh\" rel=\"nofollow\">https://rust.extension.sh</a>",
+    "license": "MPL-2.0"
+  }
+]
