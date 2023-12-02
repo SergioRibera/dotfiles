@@ -168,6 +168,9 @@ super + shift + a
 # super + d
 #     discord
 
+super + period
+    simplemoji --show-search -t medium-light
+
 # Gnome Settings
 super + i
     gnome-control-center

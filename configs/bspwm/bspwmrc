@@ -4,7 +4,7 @@
 # setxkbmap -model pc105 -layout latam,us -variant deadtilde, ;
 # Set monitor layout
 
-~/.config/scripts/screens
+~/.config/scripts/screens &
 ~/.config/scripts/battery-status &
 
 # Set Backgrounds Randoms
@@ -14,7 +14,12 @@ sxhkd &
 udiskie &
 dunst &
 thunar --daemon &
-numlockx on
+numlockx on &
+rofi --help &>/dev/null
+superclipboard &
+
+# Set Picom as Default Compositor
+picom -b --experimental-backends --config ~/.config/picom/picom.conf
 
 ###---Global Settings---###
 bspc config automatic_scheme alternate
@@ -62,14 +67,14 @@ bspc rule -a scrcpy state=floating follow=on
 bspc rule -a "bevy*" monitor=2 desktop="^5" follow=on
 bspc rule -a zoom state=floating center=on
 bspc rule -a "_NET_WM_STATE_ABOVE" state=floating
+# My Proyects
+bspc rule -a "openmc_lite" state=floating monitor=primary center=on follow=off
 
-# Set Picom as Default Compositor
-picom -b --experimental-backends --config ~/.config/picom/picom.conf
-sbbw --quiet run
+# sbbw --quiet run
 
 # run all desktop files on autostart
-for desktop in ~/.config/autostart/*.desktop; do
-    if [ -f "$desktop" ]; then
-        exo-open $desktop
-    fi
-done &
+# for desktop in ~/.config/autostart/*.desktop; do
+#     if [ -f "$desktop" ]; then
+#         exo-open $desktop &
+#     fi
+# done &

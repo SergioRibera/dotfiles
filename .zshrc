@@ -289,3 +289,5 @@ RPROMPT='$(starship prompt --right --keymap="$KEYMAP" --status="$STARSHIP_CMD_ST
 export PATH="/home/s4rch/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-x86_64-unknown-linux-gnu/bin/:$PATH"
 export LIBCLANG_PATH="/home/s4rch/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-x86_64-unknown-linux-gnu/lib/"
 export PIP_USER=no
+export OPENAI_KEY=
+export PATH=$PATH:/usr/local/bin

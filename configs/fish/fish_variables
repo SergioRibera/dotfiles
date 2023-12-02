@@ -1,11 +1,22 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export ANDROID_SDK_ROOT:/home/s4rch/Android/Sdk/
-SETUVAR --export BROWSER:microsoft\x2dedge\x2ddev
-SETUVAR --export JAVA_HOME:/opt/android\x2dstudio/jre
+SETUVAR --export ANDROID:/home/s4rch/Android
+SETUVAR --export ANDROID_HOME:/home/s4rch/Android
+SETUVAR --export ANDROID_NDK_ROOT:/home/s4rch/Android/android\x2dndk\x2dr25
+SETUVAR --export ANDROID_SDK:/home/s4rch/Android
+SETUVAR --export ANDROID_SDK_ROOT:/home/s4rch/Android
+SETUVAR --export BROWSER:microsoft\x2dedge\x2dstable
+SETUVAR --export FLUTTER:/home/s4rch/Android/flutter
+SETUVAR --export JAVA_HOME:/usr/lib/jvm/java\x2d17\x2dopenjdk
+SETUVAR --export NDK_HOME:/home/s4rch/Android/android\x2dndk\x2dr25
 SETUVAR --export --path PATH:/usr/local/bin\x1e/usr/bin\x1e/bin\x1e/usr/local/sbin\x1e/home/s4rch/\x2edotnet/tools\x1e/usr/lib/jvm/default/bin\x1e/usr/bin/site_perl\x1e/usr/bin/vendor_perl\x1e/usr/bin/core_perl\x1e/home/s4rch/bin\x1e/usr/local/bin\x1e/home/s4rch/\x2elocal/bin\x1e/home/s4rch/\x2ecargo/bin
+SETUVAR --export --path RIPGREP_CONFIG_PATH:/home/s4rch/\x2ergignore
 SETUVAR --export TerminalEmulator:wezterm\x20start
 SETUVAR __fish_initialized:3400
+SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
+SETUVAR _fisher_jorgebucaran_2F_nvm_2E_fish_files:\x7e/\x2econfig/fish/functions/_nvm_index_update\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_list\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_activate\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_deactivate\x2efish\x1e\x7e/\x2econfig/fish/functions/nvm\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/nvm\x2efish\x1e\x7e/\x2econfig/fish/completions/nvm\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejorgebucaran/nvm\x2efish
+SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue
@@ -34,4 +45,6 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:cyan\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR --export fish_user_paths:/home/s4rch/bin\x3a/usr/local/bin\x3a/home/s4rch/\x2elocal/bin\x3a/home/s4rch/\x2ecargo/bin
+SETUVAR --export fish_user_paths:/home/s4rch/bin\x3a/usr/local/bin\x3a/home/s4rch/\x2elocal/bin\x3a/home/s4rch/\x2ecargo/bin\x3a/home/s4rch/Android/cmdline\x2dtools/tools\x3a/home/s4rch/Android/cmdline\x2dtools/tools/bin\x3a/home/s4rch/Android/platform\x2dtools\x3a/home/s4rch/Android\x3a/home/s4rch/Android/flutter/bin\x3a/usr/lib/jvm/java\x2d17\x2dopenjdk/bin
+SETUVAR nvm_data:/home/s4rch/\x2elocal/share/nvm
+SETUVAR nvm_mirror:https\x3a//nodejs\x2eorg/dist

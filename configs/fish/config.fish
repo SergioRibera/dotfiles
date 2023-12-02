@@ -1,8 +1,15 @@
 set -Ux TerminalEmulator 'wezterm start'
-set -Ux BROWSER 'microsoft-edge-dev'
-set -Ux JAVA_HOME "/opt/android-studio/jre"
-set -Ux ANDROID_SDK_ROOT "/home/s4rch/Android/Sdk/"
-set -Ux fish_user_paths "$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin"
+set -Ux BROWSER 'microsoft-edge-stable'
+set -Ux ANDROID "$HOME/Android"
+set -Ux ANDROID_SDK "$ANDROID"
+set -Ux ANDROID_HOME "$ANDROID"
+set -Ux NDK_HOME "$ANDROID/android-ndk-r25"
+set -Ux ANDROID_NDK_ROOT "$ANDROID/android-ndk-r25"
+set -Ux JAVA_HOME "/usr/lib/jvm/java-17-openjdk"
+set -Ux FLUTTER "$ANDROID/flutter"
+set -Ux RIPGREP_CONFIG_PATH "$HOME/.rgignore"
+set -Ux fish_user_paths "$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$ANDROID/cmdline-tools/tools:$ANDROID/cmdline-tools/tools/bin:$ANDROID/platform-tools:$ANDROID_SDK:$FLUTTER/bin:$JAVA_HOME/bin"
+
 # Remove startup banner
 set fish_greeting
 
@@ -136,3 +143,7 @@ function _git_status -d 'Check git status'
         echo -n (set_color brred)$ICON_VCS_STASH
     end
 end
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
