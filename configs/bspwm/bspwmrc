@@ -7,19 +7,10 @@
 ~/.config/scripts/screens &
 ~/.config/scripts/battery-status &
 
-# Set Backgrounds Randoms
-wallpaper -t 30m --volume 25 -s '1' --no-allow-video -d -b &
-
 sxhkd &
 udiskie &
 dunst &
-thunar --daemon &
 numlockx on &
-rofi --help &>/dev/null
-superclipboard &
-
-# Set Picom as Default Compositor
-picom -b --experimental-backends --config ~/.config/picom/picom.conf
 
 ###---Global Settings---###
 bspc config automatic_scheme alternate
@@ -69,6 +60,22 @@ bspc rule -a zoom state=floating center=on
 bspc rule -a "_NET_WM_STATE_ABOVE" state=floating
 # My Proyects
 bspc rule -a "openmc_lite" state=floating monitor=primary center=on follow=off
+
+#
+# Run Daemons
+#
+
+# Set Backgrounds Randoms
+wallpaper -t 30m --volume 25 -s '1' --no-allow-video -d -b &
+
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) export SSH_AUTH_SOCK
+
+thunar --daemon &
+rofi --help &>/dev/null
+superclipboard &
+
+# Set Picom as Default Compositor
+picom -b --experimental-backends --config ~/.config/picom/picom.conf
 
 # sbbw --quiet run
 
