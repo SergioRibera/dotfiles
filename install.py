@@ -1,8 +1,16 @@
-import json
 from typing import Optional, List
 
-import archinstall, urllib, urllib.request
+import urllib, urllib.request, sys
 
+url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/cc3f3539e7406389288d3273a207456a89767170/config.json"
+url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/cc3f3539e7406389288d3273a207456a89767170/packages"
+
+packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
+
+urllib.request.urlretrieve(url_config_json, "config.json")
+sys.argv.extend(['--config', './config.json'])
+
+import archinstall
 from archinstall import Installer, Path
 from archinstall import profile
 from archinstall import SysInfo
@@ -12,21 +20,6 @@ from archinstall import menu
 from archinstall import models
 from archinstall import locale
 from archinstall import info, debug
-
-url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/035df0beeca11e3864aa7219b994ac1af2b16027/packages"
-url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/035df0beeca11e3864aa7219b994ac1af2b16027/config.json"
-
-packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
-# config_json: str = urllib.request.urlopen(url_config_json).read().decode('utf-8')
-
-# config = {}
-#
-# if not json_stream_to_structure('--config', url_config_json, config):
-#     error("Failed Loading json config")
-#     exit(1)
-#
-# clean_args = cleanup_empty_args(config)
-# archinstall.arguments.update(clean_args)
 
 def ask_user_questions():
 	global_menu = archinstall.GlobalMenu(data_store=archinstall.arguments)
