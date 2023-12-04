@@ -2,8 +2,8 @@ from typing import Optional, List
 
 import urllib, urllib.request, sys
 
-url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/cc3f3539e7406389288d3273a207456a89767170/config.json"
-url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/cc3f3539e7406389288d3273a207456a89767170/packages"
+url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/d59d934cbb8ebcfa76e0bb895a585174486604f3/config.json"
+url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/d59d934cbb8ebcfa76e0bb895a585174486604f3/packages"
 
 packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
 
@@ -126,7 +126,7 @@ def perform_installation(mountpoint: Path):
 		else:
 			info("No audio server will be installed")
 
-		installation.add_additional_packages(archinstall.arguments.get('packages', packages))
+		installation.add_additional_packages(packages)
 
 		if profile_config := archinstall.arguments.get('profile_config', None):
 			profile.profile_handler.install_profile_config(installation, profile_config)
