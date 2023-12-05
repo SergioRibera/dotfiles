@@ -154,19 +154,18 @@ def perform_installation(mountpoint: Path):
 		if (root_pw := archinstall.arguments.get('!root-password', None)) and len(root_pw):
 			installation.user_set_pw('root', root_pw)
 
-
-		if archinstall.arguments.get('services', None):
-			installation.enable_service(archinstall.arguments.get('services', []))
-
-		if archinstall.arguments.get('custom-commands', None):
-			archinstall.run_custom_user_commands(archinstall.arguments['custom-commands'], installation)
-
 		installation.genfstab()
 		installation.user_create("auruser", None, None, sudo=True)
 		installation.arch_chroot("git clone https://aur.archlinux.org/paru.git /tmp/paru && cd /tmp/paru && makepkg -si --clean --forse --cleanbuild --noconfirm --needed", run_as="auruser")
 		installation.arch_chroot(f"paru --skipreview --cleanafter --noconfirm -Sy {' '.join(aur_packages)}", run_as="auruser")
 		installation.arch_chroot("/usr/bin/killall -u auruser")
 		installation.arch_chroot("/usr/bin/userdel auruser")
+
+		if archinstall.arguments.get('services', None):
+			installation.enable_service(archinstall.arguments.get('services', []))
+
+		if archinstall.arguments.get('custom-commands', None):
+			archinstall.run_custom_user_commands(archinstall.arguments['custom-commands'], installation)
 
 		info("For post-installation tips, see https://wiki.archlinux.org/index.php/Installation_guide#Post-installation")
 
