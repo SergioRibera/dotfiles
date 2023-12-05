@@ -6,7 +6,7 @@ url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4
 url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/65369eaf331521f8bdfaf75d525ac823c70fec98/packages"
 
 raw_packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
-packages: List[str] = []
+packages: List[str] = ["git", "base-devel"]
 aur_packages: List[str] = []
 
 urllib.request.urlretrieve(url_config_json, "config.json")
