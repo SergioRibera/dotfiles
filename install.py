@@ -2,10 +2,12 @@ from typing import Optional, List
 
 import urllib, urllib.request, sys
 
-url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/d59d934cbb8ebcfa76e0bb895a585174486604f3/config.json"
-url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/d59d934cbb8ebcfa76e0bb895a585174486604f3/packages"
+url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/65369eaf331521f8bdfaf75d525ac823c70fec98/config.json"
+url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/65369eaf331521f8bdfaf75d525ac823c70fec98/packages"
 
-packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
+raw_packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
+packages: List[str] = []
+aur_packages: List[str] = []
 
 urllib.request.urlretrieve(url_config_json, "config.json")
 sys.argv.extend(['--config', './config.json'])
@@ -67,6 +69,15 @@ def perform_installation(mountpoint: Path):
 	enable_multilib = 'multilib' in archinstall.arguments.get('additional-repositories', [])
 	locale_config: locale.LocaleConfiguration = archinstall.arguments['locale_config']
 	disk_encryption: disk.DiskEncryption = archinstall.arguments.get('disk_encryption', None)
+	for package in packages:
+		try:
+			if archinstall.SysCommand(f"pacman -Ss {package}").exit_code == 0:
+				packages.append(package)
+			else:
+				aur_packages.append(package)
+
+		except archinstall.exceptions.SysCallError:
+			aur_packages.append(package)
 
 	with Installer(
 		mountpoint,
@@ -151,6 +162,11 @@ def perform_installation(mountpoint: Path):
 			archinstall.run_custom_user_commands(archinstall.arguments['custom-commands'], installation)
 
 		installation.genfstab()
+		installation.user_create("auruser", None, None, sudo=True)
+		installation.arch_chroot("git clone https://aur.archlinux.org/paru.git /tmp/paru && cd /tmp/paru && makepkg -si --clean --forse --cleanbuild --noconfirm --needed", run_as="auruser")
+		installation.arch_chroot(f"paru --skipreview --cleanafter --noconfirm -Sy {' '.join(aur_packages)}", run_as="auruser")
+		installation.arch_chroot("/usr/bin/killall -u auruser")
+		installation.arch_chroot("/usr/bin/userdel auruser")
 
 		info("For post-installation tips, see https://wiki.archlinux.org/index.php/Installation_guide#Post-installation")
 
