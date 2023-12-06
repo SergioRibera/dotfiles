@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-import urllib, urllib.request, sys
+import urllib, urllib.request, sys, os
 
 url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/9f87a2199722424dcd219e20d7b70a786561e6a4/config.json"
 url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/9f87a2199722424dcd219e20d7b70a786561e6a4/packages"
@@ -14,6 +14,7 @@ sys.argv.extend(['--config', './config.json'])
 
 import archinstall
 from archinstall import Installer, Path
+from archinstall.lib.models import User
 from archinstall import profile
 from archinstall import SysInfo
 from archinstall import mirrors
@@ -22,6 +23,13 @@ from archinstall import menu
 from archinstall import models
 from archinstall import locale
 from archinstall import info, debug
+
+install_config = [
+    "mkdir -p ~/Repos && mkdir -p ~/.config",
+    "git clone --depth 1 https://github.com/SergioRibera/DotFiles ~/Repos/DotFiles",
+    "git clone --depth 1 https://github.com/SergioRibera/NvimDotFiles ~/Repos/NvimDotFiles",
+    "ln -s $HOME/Repos/NvimDotfiles $HOME/.config/nvim",
+]
 
 def ask_user_questions():
 	global_menu = archinstall.GlobalMenu(data_store=archinstall.arguments)
@@ -129,8 +137,8 @@ def perform_installation(mountpoint: Path):
 				archinstall.arguments.get('profile_config', None)
 			)
 
-		if users := archinstall.arguments.get('!users', None):
-			installation.create_users(users)
+		users: List[User] = archinstall.arguments.get('!users', None)
+		installation.create_users(users)
 
 		audio_config: Optional[models.AudioConfiguration] = archinstall.arguments.get('audio_config', None)
 		if audio_config:
@@ -156,7 +164,13 @@ def perform_installation(mountpoint: Path):
 			installation.user_set_pw('root', root_pw)
 
 		installation.genfstab()
-		installation.user_create("auruser", None, None, sudo=True)
+
+		mount_location = installation.target
+
+		with open(f'{mount_location}/etc/sudoers.d/auruser', 'w') as fh:
+			fh.write(f"auruser ALL=(ALL:ALL) NOPASSWD: ALL\n")
+		installation.user_create("auruser")
+
 		installation.arch_chroot("git clone https://aur.archlinux.org/paru-bin.git /tmp/paru && cd /tmp/paru && makepkg -si --clean --force --cleanbuild --noconfirm --needed", run_as="auruser")
 		installation.arch_chroot(f"paru --skipreview --cleanafter --noconfirm -Sy {' '.join(aur_packages)}", run_as="auruser")
 		installation.arch_chroot("/usr/bin/killall -u auruser")
@@ -165,8 +179,17 @@ def perform_installation(mountpoint: Path):
 		if archinstall.arguments.get('services', None):
 			installation.enable_service(archinstall.arguments.get('services', []))
 
-		if archinstall.arguments.get('custom-commands', None):
-			archinstall.run_custom_user_commands(archinstall.arguments['custom-commands'], installation)
+        # Download configs
+		archinstall.run_custom_user_commands(install_config, installation)
+
+        # Link Configs
+		directory = os.fsencode(f"{mount_location}/home/{users[0].username}/Repos/DotFiles/configs")
+		for cfg in os.listdir(directory):
+			filename = os.fsdecode(cfg)
+			installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/configs/{filename} $HOME/.config/{filename}")
+
+		installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/scripts $HOME/.config/scripts")
+		installation.arch_chroot(f"ln -s $HOME/Repos/NvimDotfiles $HOME/.config/nvim")
 
 		info("For post-installation tips, see https://wiki.archlinux.org/index.php/Installation_guide#Post-installation")
 
