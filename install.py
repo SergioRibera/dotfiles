@@ -2,8 +2,8 @@ from typing import Optional, List
 
 import urllib, urllib.request, sys
 
-url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/65369eaf331521f8bdfaf75d525ac823c70fec98/config.json"
-url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/65369eaf331521f8bdfaf75d525ac823c70fec98/packages"
+url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/9f87a2199722424dcd219e20d7b70a786561e6a4/config.json"
+url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/9f87a2199722424dcd219e20d7b70a786561e6a4/packages"
 
 raw_packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
 packages: List[str] = ["git", "base-devel"]
@@ -72,7 +72,7 @@ def perform_installation(mountpoint: Path):
 
 	for package in raw_packages:
 		try:
-			if archinstall.SysCommand(f"pacman -Ss {package}").exit_code == 0:
+			if archinstall.SysCommand(f"pacman -Ss ^{package}\\$").exit_code == 0:
 				packages.append(package)
 			else:
 				aur_packages.append(package)
