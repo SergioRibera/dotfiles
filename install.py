@@ -69,7 +69,8 @@ def perform_installation(mountpoint: Path):
 	enable_multilib = 'multilib' in archinstall.arguments.get('additional-repositories', [])
 	locale_config: locale.LocaleConfiguration = archinstall.arguments['locale_config']
 	disk_encryption: disk.DiskEncryption = archinstall.arguments.get('disk_encryption', None)
-	for package in packages:
+
+	for package in raw_packages:
 		try:
 			if archinstall.SysCommand(f"pacman -Ss {package}").exit_code == 0:
 				packages.append(package)
@@ -156,7 +157,7 @@ def perform_installation(mountpoint: Path):
 
 		installation.genfstab()
 		installation.user_create("auruser", None, None, sudo=True)
-		installation.arch_chroot("git clone https://aur.archlinux.org/paru.git /tmp/paru && cd /tmp/paru && makepkg -si --clean --forse --cleanbuild --noconfirm --needed", run_as="auruser")
+		installation.arch_chroot("git clone https://aur.archlinux.org/paru.git /tmp/paru && cd /tmp/paru && makepkg -si --clean --force --cleanbuild --noconfirm --needed", run_as="auruser")
 		installation.arch_chroot(f"paru --skipreview --cleanafter --noconfirm -Sy {' '.join(aur_packages)}", run_as="auruser")
 		installation.arch_chroot("/usr/bin/killall -u auruser")
 		installation.arch_chroot("/usr/bin/userdel auruser")
