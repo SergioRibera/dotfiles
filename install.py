@@ -2,8 +2,8 @@ from typing import Optional, List
 
 import urllib, urllib.request, sys, os
 
-url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/9f87a2199722424dcd219e20d7b70a786561e6a4/config.json"
-url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/9f87a2199722424dcd219e20d7b70a786561e6a4/packages"
+url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/810a75cfbeb9a49904a68457e48531e477823bc6/config.json"
+url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/810a75cfbeb9a49904a68457e48531e477823bc6/packages"
 
 raw_packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
 packages: List[str] = ["git", "base-devel"]
@@ -180,15 +180,21 @@ def perform_installation(mountpoint: Path):
 			installation.enable_service(archinstall.arguments.get('services', []))
 
         # Download configs
+		info("Running custom user Commands")
+		info("Downloading configs")
 		archinstall.run_custom_user_commands(install_config, installation)
 
         # Link Configs
+		info("Downloading configs")
 		directory = os.fsencode(f"{mount_location}/home/{users[0].username}/Repos/DotFiles/configs")
 		for cfg in os.listdir(directory):
 			filename = os.fsdecode(cfg)
+			info(f"Symbolic link of '{filename}'")
 			installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/configs/{filename} $HOME/.config/{filename}", run_as=users[0].username)
 
+		info("Symbolic link of 'scripts'")
 		installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/scripts $HOME/.config/scripts", run_as=users[0].username)
+		info("Symbolic link of Neovim Configs")
 		installation.arch_chroot(f"ln -s $HOME/Repos/NvimDotfiles $HOME/.config/nvim", run_as=users[0].username)
 
 		info("For post-installation tips, see https://wiki.archlinux.org/index.php/Installation_guide#Post-installation")
