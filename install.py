@@ -186,10 +186,10 @@ def perform_installation(mountpoint: Path):
 		directory = os.fsencode(f"{mount_location}/home/{users[0].username}/Repos/DotFiles/configs")
 		for cfg in os.listdir(directory):
 			filename = os.fsdecode(cfg)
-			installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/configs/{filename} $HOME/.config/{filename}")
+			installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/configs/{filename} $HOME/.config/{filename}", run_as=users[0].username)
 
-		installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/scripts $HOME/.config/scripts")
-		installation.arch_chroot(f"ln -s $HOME/Repos/NvimDotfiles $HOME/.config/nvim")
+		installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/scripts $HOME/.config/scripts", run_as=users[0].username)
+		installation.arch_chroot(f"ln -s $HOME/Repos/NvimDotfiles $HOME/.config/nvim", run_as=users[0].username)
 
 		info("For post-installation tips, see https://wiki.archlinux.org/index.php/Installation_guide#Post-installation")
 
