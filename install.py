@@ -157,7 +157,7 @@ def perform_installation(mountpoint: Path):
 
 		installation.genfstab()
 		installation.user_create("auruser", None, None, sudo=True)
-		installation.arch_chroot("git clone https://aur.archlinux.org/paru.git /tmp/paru && cd /tmp/paru && makepkg -si --clean --force --cleanbuild --noconfirm --needed", run_as="auruser")
+		installation.arch_chroot("git clone https://aur.archlinux.org/paru-bin.git /tmp/paru && cd /tmp/paru && makepkg -si --clean --force --cleanbuild --noconfirm --needed", run_as="auruser")
 		installation.arch_chroot(f"paru --skipreview --cleanafter --noconfirm -Sy {' '.join(aur_packages)}", run_as="auruser")
 		installation.arch_chroot("/usr/bin/killall -u auruser")
 		installation.arch_chroot("/usr/bin/userdel auruser")
