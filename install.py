@@ -2,8 +2,8 @@ from typing import Optional, List
 
 import urllib, urllib.request, sys, os
 
-url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/810a75cfbeb9a49904a68457e48531e477823bc6/config.json"
-url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/810a75cfbeb9a49904a68457e48531e477823bc6/packages"
+url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/f58dd07db02b1168a1427bb44cca0dda9034c057/config.json"
+url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/f58dd07db02b1168a1427bb44cca0dda9034c057/packages"
 
 raw_packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
 packages: List[str] = ["git", "base-devel"]
