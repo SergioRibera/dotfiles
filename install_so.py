@@ -130,7 +130,7 @@ def perform_installation(mountpoint: Path):
 		else:
 			info("No audio server will be installed")
 
-		installation.add_additional_packages(["git", "base-devel", "bluez", "bluez-utils"])
+		installation.add_additional_packages(["git", "base-devel", "bluez", "bluez-utils", "wget"])
 
 		if profile_config := archinstall.arguments.get('profile_config', None):
 			profile.profile_handler.install_profile_config(installation, profile_config)
@@ -155,7 +155,8 @@ def perform_installation(mountpoint: Path):
         # Download configs
 		info("Running custom user Commands")
 		info("Downloading configs")
-		archinstall.run_custom_user_commands(install_config, installation)
+		for cmd in install_config:
+			installation.arch_chroot(cmd, run_as=users[0].username)
 
 		info("Configure wallpaper script")
 		installation.arch_chroot(f"wget -O wallpaper -P /usr/bin {url_wallpaper_script}", run_as=users[0].username)
