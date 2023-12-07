@@ -1,13 +1,9 @@
 from typing import Optional, List
 
-import urllib, urllib.request, sys, os
+import urllib, urllib.request, sys
 
 url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/f58dd07db02b1168a1427bb44cca0dda9034c057/config.json"
-url_packages_raw = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/f58dd07db02b1168a1427bb44cca0dda9034c057/packages"
-
-raw_packages: List[str] = urllib.request.urlopen(url_packages_raw).read().decode('utf-8').split('\n')
-packages: List[str] = ["git", "base-devel"]
-aur_packages: List[str] = []
+url_wallpaper_script = "https://gist.githubusercontent.com/SergioRibera/e761fd61bc6a632c6b566c32aa25558a/raw/77c07702ede538e7736ff89ed71d43d3a9356086/wallpaper.sh"
 
 urllib.request.urlretrieve(url_config_json, "config.json")
 sys.argv.extend(['--config', './config.json'])
@@ -78,16 +74,6 @@ def perform_installation(mountpoint: Path):
 	locale_config: locale.LocaleConfiguration = archinstall.arguments['locale_config']
 	disk_encryption: disk.DiskEncryption = archinstall.arguments.get('disk_encryption', None)
 
-	for package in raw_packages:
-		try:
-			if archinstall.SysCommand(f"pacman -Ss ^{package}\\$").exit_code == 0:
-				packages.append(package)
-			else:
-				aur_packages.append(package)
-
-		except archinstall.exceptions.SysCallError:
-			aur_packages.append(package)
-
 	with Installer(
 		mountpoint,
 		disk_config,
@@ -146,7 +132,7 @@ def perform_installation(mountpoint: Path):
 		else:
 			info("No audio server will be installed")
 
-		installation.add_additional_packages(packages)
+		installation.add_additional_packages(["git", "base-devel", "bluez", "bluez-utils"])
 
 		if profile_config := archinstall.arguments.get('profile_config', None):
 			profile.profile_handler.install_profile_config(installation, profile_config)
@@ -172,7 +158,6 @@ def perform_installation(mountpoint: Path):
 		installation.user_create("auruser")
 
 		installation.arch_chroot("git clone https://aur.archlinux.org/paru-bin.git /tmp/paru && cd /tmp/paru && makepkg -si --clean --force --cleanbuild --noconfirm --needed", run_as="auruser")
-		installation.arch_chroot(f"paru --skipreview --cleanafter --noconfirm -Sy {' '.join(aur_packages)}", run_as="auruser")
 		installation.arch_chroot("/usr/bin/killall -u auruser")
 		installation.arch_chroot("/usr/bin/userdel auruser")
 
@@ -184,18 +169,9 @@ def perform_installation(mountpoint: Path):
 		info("Downloading configs")
 		archinstall.run_custom_user_commands(install_config, installation)
 
-        # Link Configs
-		info("Downloading configs")
-		directory = os.fsencode(f"{mount_location}/home/{users[0].username}/Repos/DotFiles/configs")
-		for cfg in os.listdir(directory):
-			filename = os.fsdecode(cfg)
-			info(f"Symbolic link of '{filename}'")
-			installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/configs/{filename} $HOME/.config/{filename}", run_as=users[0].username)
-
-		info("Symbolic link of 'scripts'")
-		installation.arch_chroot(f"ln -s $HOME/Repos/DotFiles/scripts $HOME/.config/scripts", run_as=users[0].username)
-		info("Symbolic link of Neovim Configs")
-		installation.arch_chroot(f"ln -s $HOME/Repos/NvimDotfiles $HOME/.config/nvim", run_as=users[0].username)
+		info("Configure wallpaper script")
+		installation.arch_chroot(f"wget -O wallpaper -P /usr/bin {url_wallpaper_script}", run_as=users[0].username)
+		installation.arch_chroot(f"chmod +x /usr/bin/wallpaper", run_as=users[0].username)
 
 		info("For post-installation tips, see https://wiki.archlinux.org/index.php/Installation_guide#Post-installation")
 
