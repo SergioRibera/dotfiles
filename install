@@ -38,6 +38,12 @@ packages=$(curl -s $url_packages_raw | tr "\n" " ")
 
 set -e
 
+install_rust() {
+    sudo pacman -Sy rustup
+    rustup default stable
+    rustup target add wasm32-unknown-unknown
+}
+
 install_basic_packages() {
     echo -e "${COLOR_BLUE}Installing$COLOR_NC '$packages'"
     paru --skipreview --cleanafter --noconfirm -Sy $packages
@@ -53,7 +59,11 @@ link_all_config() {
     ln -s "$PWD/scripts $HOME/.config/scripts"
     echo -e "${COLOR_PURPLE}Linking Git Config${COLOR_NC}"
     ln -s "$PWD/.gitconfig $HOME/.gitconfig"
+    echo -e "${COLOR_PURPLE}Linking Rust Config${COLOR_NC}"
+    ln -s "$PWD/.cargo/config $HOME/.cargo/config"
+    ln -s "$PWD/.cargo/cargo-generate.toml $HOME/.cargo/cargo-generate.toml"
 }
 
 install_basic_packages
+install_rust
 link_all_config
