@@ -2,7 +2,7 @@ from typing import Optional, List
 
 import urllib, urllib.request, sys
 
-url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/f58dd07db02b1168a1427bb44cca0dda9034c057/config.json"
+url_config_json = "https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/0c01fd24313abe9faa4eabb3bf7190784ec522eb/config.json"
 url_wallpaper_script = "https://gist.githubusercontent.com/SergioRibera/e761fd61bc6a632c6b566c32aa25558a/raw/77c07702ede538e7736ff89ed71d43d3a9356086/wallpaper.sh"
 
 urllib.request.urlretrieve(url_config_json, "config.json")

@@ -33,7 +33,7 @@ COLOR_WHITE='\e[1;37m'
 repoconfigdir="$PWD/configs"
 userconfigdir="$HOME/.config"
 
-url_packages_raw="https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/f58dd07db02b1168a1427bb44cca0dda9034c057/packages"
+url_packages_raw="https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/0c01fd24313abe9faa4eabb3bf7190784ec522eb/packages"
 packages=$(curl -s $url_packages_raw | tr "\n" " ")
 
 set -e
