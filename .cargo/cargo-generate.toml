@@ -1,0 +1,10 @@
+[values]
+gh_username = "SergioRibera"
+itch_username = "sergioribera"
+license = "all"
+
+[favorites.bevy]
+git = "https://github.com/SrTemplates/Bevy"
+
+[favorites.bbin]
+git = "https://github.com/SrTemplates/BasicBin"

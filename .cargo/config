@@ -1,0 +1,6 @@
+[alias]
+gen = "generate"
+ptest = "pretty-test"
+
+[registries.crates-io]
+protocol = "sparse"
