@@ -33,6 +33,7 @@ COLOR_WHITE='\e[1;37m'
 repoconfigdir="$PWD/configs"
 userconfigdir="$HOME/.config"
 
+url_wallpaper_script="https://gist.githubusercontent.com/SergioRibera/e761fd61bc6a632c6b566c32aa25558a/raw/77c07702ede538e7736ff89ed71d43d3a9356086/wallpaper.sh"
 url_packages_raw="https://gist.githubusercontent.com/SergioRibera/c30e826d7ada4a8385ac9b04a732bbb5/raw/0c01fd24313abe9faa4eabb3bf7190784ec522eb/packages"
 packages=$(curl -s $url_packages_raw | tr "\n" " ")
 
@@ -48,8 +49,12 @@ install_basic_packages() {
     echo -e "${COLOR_BLUE}Installing$COLOR_NC Paru"
     git clone https://aur.archlinux.org/paru-bin.git /tmp/paru
     (cd /tmp/paru && makepkg -si --clean --cleanbuild --noconfirm --needed) && rm -fr /tmp/paru
-    echo -e "${COLOR_BLUE}Installing$COLOR_NC '$packages'"
-    paru --skipreview --cleanafter --noconfirm -Sy $packages
+    echo -e "${COLOR_BLUE}Installing$COLOR_NC 'wget $packages'"
+    paru --skipreview --cleanafter --noconfirm -Sy wget $packages
+
+    echo -e "${COLOR_BLUE}Installing$COLOR_NC wallpaper script"
+    sudo wget -O /usr/bin/wallpaper $url_wallpaper_script
+    sudo chmod +x /usr/bin/wallpaper
 }
 
 link_nvim_configs() {
