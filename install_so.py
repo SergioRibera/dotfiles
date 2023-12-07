@@ -149,16 +149,6 @@ def perform_installation(mountpoint: Path):
 
 		installation.genfstab()
 
-		mount_location = installation.target
-
-		with open(f'{mount_location}/etc/sudoers.d/auruser', 'w') as fh:
-			fh.write(f"auruser ALL=(ALL:ALL) NOPASSWD: ALL\n")
-		installation.user_create("auruser")
-
-		installation.arch_chroot("git clone https://aur.archlinux.org/paru-bin.git /tmp/paru && cd /tmp/paru && makepkg -si --clean --force --cleanbuild --noconfirm --needed", run_as="auruser")
-		installation.arch_chroot("/usr/bin/killall -u auruser")
-		installation.arch_chroot("/usr/bin/userdel auruser")
-
 		if archinstall.arguments.get('services', None):
 			installation.enable_service(archinstall.arguments.get('services', []))
 

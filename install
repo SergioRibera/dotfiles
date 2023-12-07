@@ -45,6 +45,9 @@ install_rust() {
 }
 
 install_basic_packages() {
+    echo -e "${COLOR_BLUE}Installing$COLOR_NC Paru"
+    git clone https://aur.archlinux.org/paru-bin.git /tmp/paru
+    (cd /tmp/paru && makepkg -si --clean --cleanbuild --noconfirm --needed) && rm -fr /tmp/paru
     echo -e "${COLOR_BLUE}Installing$COLOR_NC '$packages'"
     paru --skipreview --cleanafter --noconfirm -Sy $packages
 }
@@ -69,7 +72,16 @@ link_all_config() {
     ln -s "$PWD/.cargo/cargo-generate.toml $HOME/.cargo/cargo-generate.toml"
 }
 
+start_services() {
+    services=(docker bluetooth gdm)
+    for s in $servcices; do
+        sudo systemctl enable $s
+        sudo systemctl start $s
+    done
+}
+
 install_basic_packages
 install_rust
 link_all_config
 link_nvim_configs
+start_services
