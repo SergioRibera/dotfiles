@@ -23,8 +23,6 @@ from archinstall import info, debug
 install_config = [
     "mkdir -p ~/Repos && mkdir -p ~/.config",
     "git clone --depth 1 https://github.com/SergioRibera/DotFiles ~/Repos/DotFiles",
-    "git clone --depth 1 https://github.com/SergioRibera/NvimDotFiles ~/Repos/NvimDotFiles",
-    "ln -s $HOME/Repos/NvimDotfiles $HOME/.config/nvim",
 ]
 
 def ask_user_questions():

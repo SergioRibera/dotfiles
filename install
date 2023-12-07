@@ -49,6 +49,11 @@ install_basic_packages() {
     paru --skipreview --cleanafter --noconfirm -Sy $packages
 }
 
+link_nvim_configs() {
+    git clone --depth 1 https://github.com/SergioRibera/NvimDotFiles ~/Repos/NvimDotFiles
+    ln -s "$HOME/Repos/NvimDotfiles" "$HOME/.config/nvim"
+}
+
 link_all_config() {
     for f in $repoconfigdir/*; do
         filename=$(basename $f)
@@ -67,3 +72,4 @@ link_all_config() {
 install_basic_packages
 install_rust
 link_all_config
+link_nvim_configs
