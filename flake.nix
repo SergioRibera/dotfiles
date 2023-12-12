@@ -72,6 +72,7 @@
                     programs.hyprland.enable = true;
 
                     networking.networkmanager.enable = true;
+                    services.xserver.displayManager.gdm.enable = true;
 
                     boot.loader = {
                       systemd-boot.enable = false;
