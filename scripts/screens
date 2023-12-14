@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 SCREENS=($(xrandr | grep -e ' connected' | sed -e 's/ primary//g' | cut -d" " -f1))
 

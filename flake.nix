@@ -2,126 +2,26 @@
   description = "SergioRibera NixOS System Configuration";
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake
-      {
-        inherit inputs;
-      }
-      {
-        systems = [ "x86_64-linux" ];
-
-        perSystem =
-          { config
-          , pkgs
-          , ...
-          }: {
-            devShells.default = pkgs.mkShell {
-              packages = [ pkgs.alejandra pkgs.git ];
-              name = "Zenparadise";
-              DIRENV_LOG_FORMAT = "";
-            };
-
-            flake.nixosConfigurations =
-              withSystem "x86_64-linux"
-                { system
-                , config
-                , self'
-                , ...
-                }:
-                let
-                  systemInputs = { _module.args = { inherit inputs; }; };
-                  inherit (inputs.nixpkgs.lib) nixosSystem;
-                  allowUnfree = { nixpkgs.config.allowUnfree = true; };
-                in
-                {
-                  s4rch = nixosSystem {
-                    users.users.s4rch = {
-                      isNormalUser = true;
-                      username = "Sergio Ribera";
-                      extraGroups = [ "wheel" "docker" "networkmanager" ];
-                    };
-                    nixpkgs.config.allowUnfree = true;
-                    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-                    environment.systemPackages = [
-                      microsoft-edge
-                      discord
-                      git
-                      curl
-                      wget
-                      ouch
-                      bluez
-                      ripgrep
-                      # Xserver
-                      xdg-utils
-                      pavucontrol
-
-                      # Docker
-                      docker-compose
-
-                      # Font
-                      font-manager
-
-                      #Hyprland
-                      wev
-                    ];
-                    programs.neovim.enable = true;
-                    programs.neovim.defaultEditor = true;
-
-                    programs.flameshot.enable = true;
-                    programs.fish.enable = true;
-                    programs.wezterm.enable = true;
-
-                    programs.hyprland.enable = true;
-
-                    networking.networkmanager.enable = true;
-                    services.xserver.displayManager.gdm.enable = true;
-
-                    boot.loader = {
-                      systemd-boot.enable = false;
-                      efi = {
-                        canTouchEfiVariables = true;
-                        efiSysMountPoint = "/boot";
-                      };
-                      grub = {
-                        enable = true;
-                        device = "nodev";
-                        efiSupport = true;
-                        useOSProber = true;
-                      };
-                    };
-                    openssh = {
-                      enable = true;
-                      settings = {
-                        PasswordAuthentication = true;
-                        PermitRootLogin = "no";
-                      };
-                    };
-                    sound.enable = true;
-                    gnome.gnome-keyring.enable = true;
-                    pipewire = {
-                      enable = true;
-                      alsa.enable = true;
-                      alsa.support32Bit = true;
-                      jack.enable = true;
-                      pulse.enable = true;
-                    };
-                    virtualisation = {
-                      docker = {
-                        enable = true;
-                        enableOnBoot = true;
-                      };
-                    };
-                    xdg.portal = {
-                      enable = true;
-                      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-                    };
-                  };
-                  specialArgs = {
-                    inherit inputs;
-                  };
-                };
-            # Nix Formatter
-            formatter = pkgs.alejandra;
-          };
+    {
+      inputs = inputs;
+    }
+    {
+      systems = ["x86_64-linux"];
+      imports = [./hosts];
+      perSystem = {
+        config,
+        pkgs,
+        ...
+      }: {
+        devShells.default = pkgs.mkShell {
+          packages = [pkgs.alejandra pkgs.git];
+          name = "nixdev";
+          DIRENV_LOG_FORMAT = "";
+        };
+        # Nix Formatter
+        formatter = pkgs.alejandra;
       };
+    };
 
   inputs = {
     fenix = {
@@ -138,7 +38,6 @@
       "https://nix-community.cachix.org"
       "https://helix.cachix.org"
       "https://fufexan.cachix.org"
-      "https://nix-gaming.cachix.org"
       "https://hyprland.cachix.org"
       "https://cache.privatevoid.net"
     ];

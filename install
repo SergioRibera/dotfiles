@@ -1,4 +1,3 @@
-#!/bin/bash
 
 #   ┌───────────────────────────────┐
 #   │                               │
@@ -63,18 +62,19 @@ link_nvim_configs() {
 }
 
 link_all_config() {
+    mkdir -p ~/{.config,.cargo}
     for f in $repoconfigdir/*; do
         filename=$(basename $f)
         echo -e "${COLOR_PURPLE}Linking Config${COLOR_NC}: $filename"
         ln -s $f "$userconfigdir/$filename"
     done
     echo -e "${COLOR_PURPLE}Linking scripts${COLOR_NC}"
-    ln -s "$PWD/scripts $HOME/.config/scripts"
+    ln -s "$PWD/scripts" "$HOME/.config/scripts"
     echo -e "${COLOR_PURPLE}Linking Git Config${COLOR_NC}"
-    ln -s "$PWD/.gitconfig $HOME/.gitconfig"
+    ln -s "$PWD/.gitconfig" "$HOME/.gitconfig"
     echo -e "${COLOR_PURPLE}Linking Rust Config${COLOR_NC}"
-    ln -s "$PWD/.cargo/config $HOME/.cargo/config"
-    ln -s "$PWD/.cargo/cargo-generate.toml $HOME/.cargo/cargo-generate.toml"
+    ln -s "$PWD/.cargo/config" "$HOME/.cargo/config"
+    ln -s "$PWD/.cargo/cargo-generate.toml" "$HOME/.cargo/cargo-generate.toml"
 }
 
 start_services() {
@@ -85,8 +85,8 @@ start_services() {
     done
 }
 
-install_basic_packages
-install_rust
+# install_basic_packages
+# install_rust
 link_all_config
 link_nvim_configs
-start_services
+# start_services

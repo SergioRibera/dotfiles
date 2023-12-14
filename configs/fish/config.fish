@@ -15,12 +15,12 @@ set fish_greeting
 
 function error
     # TODO: make more interactive
-    crkbd_gui --no-gui -t 500ms color "00FFFF" "BFFFFF" full &>/dev/null
+    # crkbd_gui --no-gui -t 500ms color "00FFFF" "BFFFFF" full &>/dev/null
 end
 
 function success
     # TODO: make more interactive
-    crkbd_gui --no-gui -t 500ms color "00FFFF" full &>/dev/null
+    # crkbd_gui --no-gui -t 500ms color "00FFFF" full &>/dev/null
 end
 
 function promt_status -S -a last_status
