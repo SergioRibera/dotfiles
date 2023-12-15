@@ -1,6 +1,6 @@
 { pkgs, self', ... }:
 {
-    home-manager.users.lemi.packages = [
+    home-manager.users.s4rch.packages = [
         self'.packages.xwaylandvideobridge
     ];
 }
