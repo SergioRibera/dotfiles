@@ -2,7 +2,6 @@
     programs = {
         fish.enable = true;
         thunar.enable = true;
-        obs-studio.enable = true;
 
         hyprland = {
             enable = true;

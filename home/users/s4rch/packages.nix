@@ -55,5 +55,6 @@
     neovide
     pavucontrol
     font-manager
+    obs-studio
   ];
 }
