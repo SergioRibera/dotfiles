@@ -63,6 +63,38 @@
       ];
     };
 
+    windowrule = [
+        #
+        # Implementation
+        #
+        "float,zoom"
+
+        "float,thunar"
+        "float,dolphin"
+        "float,sirula"
+
+        "pseudo,neovide"
+
+        #
+        # Sbbw
+        #
+        "float,^*sbbw*$"
+        "pin,^*sbbw*$"
+        # windowrule=noblur,^*sbbw*$
+        "noanim,^*sbbw*$"
+        "nofocus,^*sbbw*$"
+        "noshadow,^*sbbw*$"
+        "noborder,^*sbbw*$"
+
+        #
+        # Style
+        #
+        "opacity 0.90,[Cc]ode"
+        "opacity 0.90,[Tt]hunar"
+        "opacity 0.90,org.wezfurlong.wezterm"
+        "opacity 0.90,Discord"
+    ];
+
     dwindle = {
       # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
       pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
