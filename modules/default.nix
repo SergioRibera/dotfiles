@@ -14,6 +14,8 @@ in {
         ./network.nix
         ./programs.nix
         ./services.nix
+        ./sound.nix
+        ./time.nix
         ./virtualisation.nix
         ./xdg.nix
         ./xwaylandvideobridge.nix
@@ -40,9 +42,6 @@ in {
             default = [];
         };
     };
-
-    # sound.enable = true;
-    # time.timeZone = "America/La_Paz";
 
     config = {
         users.users."${laptop.username}" = {
