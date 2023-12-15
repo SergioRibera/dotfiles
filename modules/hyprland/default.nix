@@ -6,21 +6,24 @@
     workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
     exec-once = [ "udiskie" "dunst" "thunar --daemon" ];
     env = "XCURSOR_SIZE,24";
+
     input = {
       kb_layout = "us";
       kb_variant = "";
       kb_model = "";
       kb_options = "";
       kb_rules = "";
-      follow_mouse = 1;
+      follow_mouse = true;
       numlock_by_default = true;
       scroll_method = "on_button_down";
       scroll_button = 274;
-      touchpad = {
-        natural_scroll = true;
-      };
+        touchpad = {
+            natural_scroll = true;
+            middle_button_emulation = true;
+        };
       sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
     };
+
     general = {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
       gaps_in = 3;
@@ -29,7 +32,7 @@
       layout = "dwindle";
     };
 
-    misc {
+    misc = {
        disable_hyprland_logo = true;
        animate_manual_resizes = true;
        animate_mouse_windowdragging = true;
@@ -71,17 +74,6 @@
       new_is_master = true;
     };
 
-    input {
-        numlock_by_default = true;
-        follow_mouse = true;
-        sensitivity = false;
-
-        touchpad {
-            natural_scroll = true;
-            middle_button_emulation = true;
-        };
-    };
-
     gestures = {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
       workspace_swipe = true;
@@ -108,7 +100,7 @@
         # Custom Exec Keybinds
         #
         "SUPER,Return,exec,wezterm start"
-        "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s "gruv-dark" -f "FiraCode Nerd Font Mono" -z 17.0 -e fish"
+        "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
         "SUPER,E,exec,thunar"
         "SUPER,D,exec,trilium"
         "SUPER,Tab,exec,rofi -show window"
