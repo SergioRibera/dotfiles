@@ -20,9 +20,9 @@
             inherit system;
             modules = [
               ./laptop
-              {
-                environment.systemPackages = [ config.packages.xwaylandvideobridge ];
-              }
+              # {
+              #   environment.systemPackages = [ config.packages.xwaylandvideobridge ];
+              # }
             ];
 
             specialArgs = {

@@ -45,7 +45,7 @@
     dunst
     hyprpicker
     swww
-    xwaylandvideobridge
+    # xwaylandvideobridge
     
     # Browser
     microsoft-edge
