@@ -6,7 +6,7 @@
     laptop = config.laptop;
 in {
     imports = [
-        ./nvim
+        # ./nvim
         ./boot.nix
         ./environment.nix
         ./fonts.nix
@@ -22,7 +22,7 @@ in {
         username = mkOption {
             type = types.str;
         };
-        normalUser = mkOption {
+        isNormalUser = mkOption {
             type = types.bool;
             default = true;
         };
@@ -40,13 +40,13 @@ in {
         };
     };
 
-    sound.enable = true;
-    time.timeZone = "America/La_Paz"
+    # sound.enable = true;
+    # time.timeZone = "America/La_Paz";
 
     config = {
-        users.users."${zenix.username}" = {
-            isNormalUser = zenix.normalUser;
-            extraGroups = zenix.groups;
+        users.users."${laptop.username}" = {
+            isNormalUser = laptop.isNormalUser;
+            extraGroups = laptop.groups;
         };
     };
 }
