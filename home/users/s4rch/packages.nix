@@ -8,7 +8,8 @@
     gcc_multi
 
     # Rust Develoment
-    fenix.complete.toolchain
+    fenix.stable.toolchain
+    fenix.nightly.toolchain
     cargo-leptos
     leptosfmt
     cargo-make
