@@ -45,11 +45,10 @@
     dunst
     hyprpicker
     swww
-    # xwaylandvideobridge
+    xwaylandvideobridge
     
     # Browser
     microsoft-edge
-    firefox
 
     # GUI
     wezterm
@@ -57,5 +56,8 @@
     pavucontrol
     font-manager
     obs-studio
+
+    # Icons
+    papirus-icon-theme
   ];
 }

@@ -32,6 +32,9 @@
             enable = true;
             layout = "us";
             displayManager.gdm.enable = true;
+            excludePackages = [
+                pkgs.xterm            
+            ];
         };
     };
 }

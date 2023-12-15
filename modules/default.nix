@@ -46,6 +46,7 @@ in {
     config = {
         users.users."${laptop.username}" = {
             inherit (laptop) isNormalUser;
+            inherit (laptop) shell;
             extraGroups = laptop.groups;
         };
     };

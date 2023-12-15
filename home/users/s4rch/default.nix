@@ -4,7 +4,7 @@
     ./programs.nix
   ];
   home = {
-    stateVersion = "23.05";
+    stateVersion = "23.11";
     username = "s4rch";
     homeDirectory = "/home/s4rch";
   };

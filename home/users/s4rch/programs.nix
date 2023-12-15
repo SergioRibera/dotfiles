@@ -10,19 +10,27 @@
         home-manager.enable = true;
     };
 
-# Iterate over script folder and make executable
-    home.file = {
-        ".config/script/volume" = {
-            executable = true;
-            source = ../../../scripts/volume;
+    home = {
+        pointerCursor = {
+            gtk.enable = true;
+            name = "Bibata-Modern-Ice";
+            package = pkgs.bibata-cursors;
+            size = 40;
         };
-        ".config/script/brightness" = {
-            executable = true;
-            source = ../../../scripts/brightness;
-        };
-        ".config/script/battery-status" = {
-            executable = true;
-            source = ../../../scripts/battery-status;
+        # Iterate over script folder and make executable
+        file = {
+            ".config/script/volume" = {
+                executable = true;
+                source = ../../../scripts/volume;
+            };
+            ".config/script/brightness" = {
+                executable = true;
+                source = ../../../scripts/brightness;
+            };
+            ".config/script/battery-status" = {
+                executable = true;
+                source = ../../../scripts/battery-status;
+            };
         };
     };
 }
