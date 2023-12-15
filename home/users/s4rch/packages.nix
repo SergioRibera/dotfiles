@@ -9,7 +9,6 @@
 
     # Rust Develoment
     fenix.stable.toolchain
-    fenix.nightly.toolchain
     cargo-leptos
     leptosfmt
     cargo-make
