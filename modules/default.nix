@@ -3,7 +3,7 @@
     pkgs,
     ...
 }: let
-    laptop = config.laptop;
+    inherit (config) laptop;
 in {
     imports = [
         # ./nvim
@@ -45,7 +45,7 @@ in {
 
     config = {
         users.users."${laptop.username}" = {
-            isNormalUser = laptop.isNormalUser;
+            inherit (laptop) isNormalUser;
             extraGroups = laptop.groups;
         };
     };

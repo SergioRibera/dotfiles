@@ -3,7 +3,7 @@
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake
     {
-      inputs = inputs;
+      inherit inputs;
     }
     {
       systems = ["x86_64-linux"];

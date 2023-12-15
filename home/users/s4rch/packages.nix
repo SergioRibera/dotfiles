@@ -25,6 +25,7 @@
     discord
 
     # Utils
+    statix
     jq
     delta
     neofetch
