@@ -3,7 +3,7 @@
   xwayland.enable = true;
   settings = {
     monitor = [ "eDP-1,1600x900@60,1080x1020,1" "HDMI-A-1,1920x1080@60,0x0,1" ];
-    workspace = [ "eDP-1,10" "HDMI-A-1,10" ]
+    workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
     exec-once = [ "udiskie" "dunst" "thunar --daemon" ];
     env = "XCURSOR_SIZE,24";
     input = {
@@ -73,8 +73,8 @@
 
     input {
         numlock_by_default = true;
-        follow_mouse = 1;
-        sensitivity = 0;
+        follow_mouse = true;
+        sensitivity = false;
 
         touchpad {
             natural_scroll = true;
@@ -87,14 +87,8 @@
       workspace_swipe = true;
     };
 
-    "$mainMod" = "SUPER";
-    "$escMod" = "code:9";
-    "$minus" = "code:20";
-    "$printScreen" = "code:107";
-    "$equal" = "code:21";
     # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-    binde = [
-    ];
+    binde = [ ];
     # Move/resize windows with mainMod + LMB/RMB and dragging
     bindm = [
         "SUPER,mouse:272,movewindow"
