@@ -3,16 +3,6 @@ set -Ux fish_user_paths "$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/
 # Remove startup banner
 set fish_greeting
 
-function error
-    # TODO: make more interactive
-    # crkbd_gui --no-gui -t 500ms color "00FFFF" "BFFFFF" full &>/dev/null
-end
-
-function success
-    # TODO: make more interactive
-    # crkbd_gui --no-gui -t 500ms color "00FFFF" full &>/dev/null
-end
-
 function promt_status -S -a last_status
     set -l nonzero
     set -l superuser
@@ -35,10 +25,10 @@ function promt_status -S -a last_status
     if [ "$nonzero" -o "$superuser" ]
         if [ "$nonzero" ]
             set std_color 'red'
-            fish -c "error" &
+            fish -c "__fish_cmd_error" &
         else
             set std_color 'blue'
-            fish -c "success" &
+            fish -c "__fish_cmd_success" &
         end
 
         if [ "$superuser" ]
