@@ -147,14 +147,14 @@
         #
         # Volume keybinds
         #
-        ",XF86AudioRaiseVolume,exec,~/.config/scripts/volume up"
-        ",XF86AudioLowerVolume,exec,~/.config/scripts/volume down"
-        ",XF86AudioMute,exec,~/.config/scripts/volume mute"
+        ",XF86AudioRaiseVolume,exec,volume up"
+        ",XF86AudioLowerVolume,exec,volume down"
+        ",XF86AudioMute,exec,volume mute"
         #
         # Brightness keys
         #
-        ",XF86MonBrightnessUp,exec,~/.config/scripts/brightness up"
-        ",XF86MonBrightnessDown,exec,~/.config/scripts/brightness down"
+        ",XF86MonBrightnessUp,exec,brightness up"
+        ",XF86MonBrightnessDown,exec,brightness down"
         #
         # Windows Navigations
         #

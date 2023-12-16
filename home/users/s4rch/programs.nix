@@ -17,19 +17,15 @@
         };
         # Iterate over script folder and make executable
         file = {
-            ".config/script/volume" = {
+            ".local/bin/volume" = {
                 executable = true;
                 source = ../../../scripts/volume;
             };
-            ".config/script/brightness" = {
+            ".local/bin/brightness" = {
                 executable = true;
                 source = ../../../scripts/brightness;
             };
-            ".config/script/battery-status" = {
-                executable = true;
-                source = ../../../scripts/battery-status;
-            };
-            ".config/script/hyprshot" = {
+            ".local/bin/hyprshot" = {
                 executable = true;
                 source = ../../../scripts/hyprshot;
             };
