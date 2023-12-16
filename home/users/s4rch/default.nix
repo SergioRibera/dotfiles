@@ -11,4 +11,5 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [inputs.fenix.overlays.default];
   wayland.windowManager.hyprland = import ../../../modules/hyprland;
+  services.dunst = import ../../../modules/dunst;
 }
