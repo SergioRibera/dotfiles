@@ -1,7 +1,0 @@
-margin = 2
-workspace_margin = 3
-border_width = 1
-
-default_border_color = '#000000'
-floating_border_color = '#000000'
-focused_border_color = '#3498db'

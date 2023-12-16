@@ -1,3 +1,0 @@
--- Tab Bar Options
-return {
-}
