@@ -37,6 +37,13 @@
                 executable = false;
                 source = ../../../.cargo/cargo-generate.toml;
             };
+            ".ssh/config" = ''
+Host github.com
+    IdentifyFile ~/.ssh/github
+
+Host gitlab.com
+    IdentifyFile ~/.ssh/gitlab
+            '';
         };
     };
 }

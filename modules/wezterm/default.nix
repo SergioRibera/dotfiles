@@ -40,6 +40,11 @@ return {
 
     window_background_opacity = 0.7,
     -- Basic font configuration
+    font = wezterm.font_with_fallback {
+        'CaskaydiaCove Nerd Font',
+        'UbuntuMono Nerd Font',
+        'Noto Color Emoji',
+    }
     font_size = 12.0,
     font_shaper = "Harfbuzz",
     line_height = 1.0,
