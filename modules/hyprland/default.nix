@@ -80,7 +80,7 @@
         #
         "float,^*sbbw*$"
         "pin,^*sbbw*$"
-        "windowrule=noblur,^*sbbw*$"
+        "noblur,^*sbbw*$"
         "noanim,^*sbbw*$"
         "nofocus,^*sbbw*$"
         "noshadow,^*sbbw*$"
