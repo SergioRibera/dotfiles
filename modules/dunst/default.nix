@@ -1,7 +1,8 @@
-{
+{pkgs, ...}: {
     enable = true;
     iconTheme = {
         name = "Papirus-Light";
+        package = pkgs.papirus-icon-theme;
     };
     settings = {
         global = {
@@ -46,27 +47,27 @@
             mouse_middle_click = "close_all";
             mouse_right_click = "close_current";
             per_monitor_dpi = false;
+        };
 
-            urgency_low = {
-                frame_color = "#272a33";
-                background = "#272a33";
-                foreground = "#ffffff";
-                timeout = 10;
-            };
-            
-            urgency_normal = {
-                frame_color = "#272a33";
-                background = "#272a33";
-                foreground = "#ffffff";
-                timeout = 10;
-            };
-            
-            urgency_critical = {
-                frame_color = "#272a33";
-                background = "#272a33";
-                foreground = "#ffffff";
-                timeout = 0;
-            };
+        urgency_low = {
+            frame_color = "#272a33";
+            background = "#272a33";
+            foreground = "#ffffff";
+            timeout = 10;
+        };
+        
+        urgency_normal = {
+            frame_color = "#272a33";
+            background = "#272a33";
+            foreground = "#ffffff";
+            timeout = 10;
+        };
+        
+        urgency_critical = {
+            frame_color = "#272a33";
+            background = "#272a33";
+            foreground = "#ffffff";
+            timeout = 0;
         };
     };
 }

@@ -2,17 +2,13 @@
     enable = true;
     userName = "Sergio Ribera";
     userEmail = "56278796+SergioRibera@users.noreply.github.com";
-    init = {
-        defaultBranch = "main";
-    };
-    core = {
-        pager = "delta";
-    };
-    credential = {
-        helper = "store";
-    };
-    interactive = {
-        diffFilter = "delta --color-only --features=interactive";
+    extraConfig = {
+        init = {
+            defaultBranch = "main";
+        };
+        credential = {
+            helper = "store";
+        };
     };
     delta = {
         enable = true;
@@ -21,7 +17,7 @@
             side-by-side = true;
             syntax-theme = "gruvbox-dark";
             whitespace-error-style = "22 reverse";
-            features = [ "decorations" "unobtrusive-line-number" ];
+            features = "decorations";
             interactive = {
                 keep-plus-minus-markers = false;
             };

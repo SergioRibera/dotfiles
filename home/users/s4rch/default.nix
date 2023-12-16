@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{inputs, pkgs, ...}: {
   imports = [
     ./packages.nix
     ./programs.nix
@@ -11,5 +11,5 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [inputs.fenix.overlays.default];
   wayland.windowManager.hyprland = import ../../../modules/hyprland;
-  services.dunst = import ../../../modules/dunst;
+  services.dunst = import ../../../modules/dunst{inherit pkgs;};
 }

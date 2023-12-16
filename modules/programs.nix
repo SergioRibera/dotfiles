@@ -1,4 +1,4 @@
-_:
+{pkgs, ...}:
     let hyprshot = pkgs.fetchFromGitHub {
         owner  = "Gustash";
         repo   = "Hyprshot";
@@ -7,15 +7,12 @@ _:
       };
     in {
 
-        environment.systemPackages = [ grim slurp wl-clipboard hyprshot ];
+        environment.systemPackages = with pkgs; [ grim slurp wl-clipboard hyprshot ];
 
         programs = {
             thunar.enable = true;
-
-            ssh = {
-                enable = true;
-                startAgent = true;
-            };
+            ssh.startAgent = true;
+            fish.enable = true;
 
             hyprland = {
                 enable = true;
