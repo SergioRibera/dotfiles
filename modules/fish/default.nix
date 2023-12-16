@@ -17,5 +17,5 @@
 # crkbd_gui --no-gui -t 500ms color "00FFFF" full &>/dev/null
             '';
         };
-    }
+    };
 }

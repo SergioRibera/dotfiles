@@ -41,7 +41,7 @@
                 executable = false;
                 source = ../../../.cargo/cargo-generate.toml;
             };
-            ".ssh/config" = ''
+            ".ssh/config".text = ''
 Host github.com
     IdentifyFile ~/.ssh/github
 
