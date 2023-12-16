@@ -44,7 +44,7 @@ return {
         'CaskaydiaCove Nerd Font',
         'UbuntuMono Nerd Font',
         'Noto Color Emoji',
-    }
+    },
     font_size = 12.0,
     font_shaper = "Harfbuzz",
     line_height = 1.0,
