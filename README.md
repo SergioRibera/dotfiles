@@ -9,6 +9,9 @@ To install it see the next steps:
 > [!IMPORTANT]
 > List of hosts:
 > - laptop: settings for personal laptop with 2 monitors
+> 
+> List of users:
+> - s4rch: Personal user with graphical interface and ready-to-use environment
 
 - Boot into the installer environment
 - Format and mount your disks inside /mnt
@@ -24,7 +27,7 @@ nix-shell -p git nixUnstable
 mkdir -p /mnt/etc/
 
 # clone the repo
-git clone https://github.com/AlphaTechnolog/nixdots.git /mnt/etc/nixos --recurse-submodules
+git clone --depth 1 https://github.com/SergioRibera/Dotfiles /mnt/etc/nixos
 
 # remove this file
 # replace <host> by host you want install
@@ -43,14 +46,12 @@ cd /mnt/etc/nixos
 nixos-install --flake '.#<host>'
 ```
 
-- Reboot, login as root, and change the password for your user using `passwd` (by default, it's alpha)
+- Reboot, login as root, and change the password for your user using `passwd`
 - Log-in in the displayManager.
 - Then do this:
-
 ```sh
 sudo chown -R $USER /etc/nixos
 ```
-
 
 ## Thanks to
 This good people who helped me when learning nix-related stuff! really, thanks!
