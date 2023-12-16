@@ -37,6 +37,9 @@
     blueman
 
     # Hyprland
+    grim
+    slurp
+    wl-clipboard
     hyprpicker
     swww
     xwaylandvideobridge

@@ -29,6 +29,10 @@
                 executable = true;
                 source = ../../../scripts/battery-status;
             };
+            ".config/script/hyprshot" = {
+                executable = true;
+                source = ../../../scripts/hyprshot;
+            };
             ".cargo/config" = {
                 executable = false;
                 source = ../../../.cargo/config;
