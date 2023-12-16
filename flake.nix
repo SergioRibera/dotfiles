@@ -25,12 +25,12 @@
 
   inputs = {
     fenix = {
-      url = "github:nix-community/fenix";
+        url = "github:nix-community/fenix";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     hm = {
-      url = "github:nix-community/home-manager";
+        url = "github:nix-community/home-manager";
     };
   };
   nixConfig = {

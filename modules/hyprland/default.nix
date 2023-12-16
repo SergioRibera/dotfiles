@@ -2,7 +2,7 @@
   enable = true;
   xwayland.enable = true;
   settings = {
-    monitor = [ "eDP-1,1600x900@60,1080x1020,1" "HDMI-A-1,1920x1080@60,0x0,1" ];
+    monitor = [ "eDP-1,1600x900@60,1080x1020,1" "HDMI-A-1,1920x1080@60,0x0,1,transform,3" ];
     workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
     exec-once = [ "udiskie" "dunst" "thunar --daemon" ];
     env = "XCURSOR_SIZE,24";
@@ -80,7 +80,7 @@
         #
         "float,^*sbbw*$"
         "pin,^*sbbw*$"
-        # windowrule=noblur,^*sbbw*$
+        "windowrule=noblur,^*sbbw*$"
         "noanim,^*sbbw*$"
         "nofocus,^*sbbw*$"
         "noshadow,^*sbbw*$"
@@ -93,6 +93,7 @@
         "opacity 0.90,[Tt]hunar"
         "opacity 0.90,org.wezfurlong.wezterm"
         "opacity 0.90,Discord"
+        "opacity 0.70,^*rofi*$"
     ];
 
     dwindle = {
@@ -137,12 +138,12 @@
         "SUPER,D,exec,trilium"
         "SUPER,Tab,exec,rofi -show window"
         "SUPER_SHIFT,Tab,exec,rofi -show drun"
-        "SUPER,I,exec,gnome-control-center"
-        "SUPER,N,exec,microsoft-edge-stable --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WebRTCPipeWireCapturer"
-        "SUPER,S,exec,flameshot gui"
+        "SUPER,N,exec,firefox"
+        "SUPER_SHIFT,N,exec,firefox --private-window"
+        "SUPER,S,exec,hyprshot --clipboard-only -m region"
+        "SUPER_SHIFT,S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
         "SUPER,P,exec,~/.config/rofi/scripts/proyects.sh"
-        "SUPER_SHIFT,P,exec,~/.config/rofi/scripts/screenshot.sh"
-        "SUPER,C,exec,hyprpicker -f hex"
+        "SUPER,C,exec,hyprpicker -a -f hex"
         #
         # Volume keybinds
         #
