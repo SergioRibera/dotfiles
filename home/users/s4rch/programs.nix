@@ -17,6 +17,10 @@
         };
         # Iterate over script folder and make executable
         file = {
+            ".local/bin/wallpaper" = {
+                executable = true;
+                source = ../../../scripts/wallpaper;
+            };
             ".local/bin/volume" = {
                 executable = true;
                 source = ../../../scripts/volume;

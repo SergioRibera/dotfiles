@@ -7,6 +7,7 @@
     };
     environment.systemPackages = with pkgs; [
         # Default
+        fd
         eza
         curl
         wget

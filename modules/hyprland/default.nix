@@ -4,7 +4,7 @@
   settings = {
     monitor = [ "eDP-1,1600x900@60,1080x1020,1" "HDMI-A-1,1920x1080@60,0x0,1,transform,3" ];
     workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
-    exec-once = [ "udiskie" "dunst" "thunar --daemon" ];
+    exec-once = [ "udiskie" "dunst" "thunar --daemon" "swww init" "wallpaper -t 8h --no-allow-video -d -b" ];
     env = "XCURSOR_SIZE,24";
 
     input = {
