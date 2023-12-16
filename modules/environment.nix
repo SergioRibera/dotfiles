@@ -7,10 +7,10 @@
     };
     environment.systemPackages = with pkgs; [
         # Default
-        bat
         eza
         curl
         wget
+        htop
         pkg-config
 
         # SSL
@@ -23,9 +23,7 @@
         # Compression
         ouch
 
-        # Predefined
         # Git
-        git
         gitoxide
 
         # Bluetooth

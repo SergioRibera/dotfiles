@@ -27,12 +27,7 @@
     # Utils
     statix
     jq
-    delta
     neofetch
-    flameshot
-    rofi
-    rofi-calc
-    rofi-bluetooth
     xdg-utils
     wev
     brightnessctl
@@ -42,7 +37,6 @@
     blueman
 
     # Hyprland
-    dunst
     hyprpicker
     swww
     xwaylandvideobridge
@@ -51,7 +45,7 @@
     microsoft-edge
 
     # GUI
-    wezterm
+    feh
     neovide
     pavucontrol
     font-manager

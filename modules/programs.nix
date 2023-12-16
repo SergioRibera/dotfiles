@@ -10,8 +10,12 @@ _:
         environment.systemPackages = [ grim slurp wl-clipboard hyprshot ];
 
         programs = {
-            fish.enable = true;
             thunar.enable = true;
+
+            ssh = {
+                enable = true;
+                startAgent = true;
+            };
 
             hyprland = {
                 enable = true;

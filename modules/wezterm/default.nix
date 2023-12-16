@@ -1,3 +1,28 @@
+{ pkgs, ... }: {
+    enable = true;
+    colorSchemes = {
+        custom = {
+            background = "#232627";
+            foreground = "#fcfcfc";
+            cursor_bg = "#a3b8ef";
+            cursor_fg = "#a3b8ef";
+            cursor_border = "#a3b8ef";
+            split = "#3b4b58";
+            selection_fg = "#2a2e38";
+            selection_bg= "#979eab";
+
+            ansi = [
+                "#71798a" "#d19a66" "#56b6c2" "#e5c07b" "#61afef"
+                "#be5046" "#56b6c2" "#abb2bf"
+            ];
+
+            brights = [
+                "#2a2e38" "#ed1515" "#1cdc9a" "#f67400" "#1d99f3"
+                "#9b59b6" "#1abc9c" "#fcfcfc"
+            ];
+        };
+    };
+    extraConfig = ''
 local wezterm = require("wezterm")
 
 return {
@@ -63,4 +88,6 @@ return {
         { key = "v", mods = "CTRL|SHIFT", action = wezterm.action {PasteFrom = "Clipboard"} },
         { key = "c", mods = "CTRL|SHIFT", action = wezterm.action {CopyTo = "ClipboardAndPrimarySelection"} }
     }
+}
+'';
 }

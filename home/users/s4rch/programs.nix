@@ -1,13 +1,11 @@
 {pkgs, ...}: {
     programs = {
-        # bat = import ../../../modules/bat {inherit pkgs;};
-        # eza = import ../../../modules/eza {inherit pkgs;};
-        # feh = import ../../../modules/feh;
-        # git = import ../../../modules/git {inherit pkgs;};
-        # htop = import ../../../modules/htop {inherit pkgs;};
-        # ripgrep = import ../../../modules/ripgrep;
-        # rofi = import ../../../modules/rofi {inherit pkgs;};
         home-manager.enable = true;
+        bat = import ../../../modules/bat {inherit pkgs;};
+        fish = import ../../../modules/fish {inherit pkgs;};
+        git = import ../../../modules/git {inherit pkgs;};
+        rofi = import ../../../modules/rofi {inherit pkgs;};
+        wezterm = import ../../../modules/wezterm {inherit pkgs;};
     };
 
     home = {
@@ -30,6 +28,14 @@
             ".config/script/battery-status" = {
                 executable = true;
                 source = ../../../scripts/battery-status;
+            };
+            ".cargo/config" = {
+                executable = false;
+                source = ../../../.cargo/config;
+            };
+            ".cargo/cargo-generate.toml" = {
+                executable = false;
+                source = ../../../.cargo/cargo-generate.toml;
             };
         };
     };
