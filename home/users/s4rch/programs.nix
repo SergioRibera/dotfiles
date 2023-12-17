@@ -13,7 +13,7 @@
             gtk.enable = true;
             name = "Bibata-Modern-Ice";
             package = pkgs.bibata-cursors;
-            size = 40;
+            size = 24;
         };
         # Iterate over script folder and make executable
         file = {
