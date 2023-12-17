@@ -1,6 +1,4 @@
 _: {
-    home-manager.services.swayosd = {
-        enable = true;
-        maxVolume = 100;
-    };
+    enable = true;
+    maxVolume = 100;
 }

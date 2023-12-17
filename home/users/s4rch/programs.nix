@@ -8,6 +8,10 @@
         wezterm = import ../../../modules/wezterm {inherit pkgs;};
     };
 
+    services = {
+        swayosd = import ../../../modules/swayosd {inherit pkgs;};
+    };
+
     home = {
         pointerCursor = {
             gtk.enable = true;
