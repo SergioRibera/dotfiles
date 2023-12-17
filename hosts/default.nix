@@ -21,6 +21,7 @@
             modules = [
               ./laptop
               {
+                  i18n.defaultLocale = "en_US.UTF-8";
                   environment.shellAliases = {
                     ll = "eza -lh --icons --group-directories-first";
                     la = "eza -a --icons --group-directories-first";
