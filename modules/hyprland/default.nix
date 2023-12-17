@@ -93,7 +93,7 @@
         "opacity 0.90,[Tt]hunar"
         "opacity 0.90,org.wezfurlong.wezterm"
         "opacity 0.90,Discord"
-        "opacity 0.70,^*wofi*$"
+        "opacity 0.70,^*rofi*$"
         "opacity 0.70,^*osd*$"
     ];
 
@@ -137,8 +137,8 @@
         "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
         "SUPER,E,exec,thunar"
         "SUPER,D,exec,trilium"
-        "SUPER,Tab,exec,wofi --show window"
-        "SUPER_SHIFT,Tab,exec,wofi --show drun"
+        "SUPER,Tab,exec,rofi -show window"
+        "SUPER_SHIFT,Tab,exec,rofi -show drun"
         "SUPER,N,exec,firefox"
         "SUPER_SHIFT,N,exec,firefox --private-window"
         "SUPER,S,exec,hyprshot --clipboard-only -m region"

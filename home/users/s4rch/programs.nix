@@ -4,7 +4,7 @@
         bat = import ../../../modules/bat {inherit pkgs;};
         fish = import ../../../modules/fish {inherit pkgs;};
         git = import ../../../modules/git {inherit pkgs;};
-        wofi = import ../../../modules/wofi {inherit pkgs;};
+        rofi = import ../../../modules/rofi {inherit pkgs;};
         wezterm = import ../../../modules/wezterm {inherit pkgs;};
     };
 

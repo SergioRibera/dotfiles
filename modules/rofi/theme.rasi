@@ -26,6 +26,8 @@
 window {
     background-color:   @bg0;
 
+    location: center;
+    width: 640;
     border-radius:  8;
 }
 
