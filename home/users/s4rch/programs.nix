@@ -21,14 +21,6 @@
                 executable = true;
                 source = ../../../scripts/wallpaper;
             };
-            ".local/bin/volume" = {
-                executable = true;
-                source = ../../../scripts/volume;
-            };
-            ".local/bin/brightness" = {
-                executable = true;
-                source = ../../../scripts/brightness;
-            };
             ".local/bin/hyprshot" = {
                 executable = true;
                 source = ../../../scripts/hyprshot;

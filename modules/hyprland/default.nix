@@ -93,7 +93,8 @@
         "opacity 0.90,[Tt]hunar"
         "opacity 0.90,org.wezfurlong.wezterm"
         "opacity 0.90,Discord"
-        "opacity 0.70,^*rofi*$"
+        "opacity 0.70,^*wofi*$"
+        "opacity 0.70,^*osd*$"
     ];
 
     dwindle = {
@@ -147,14 +148,15 @@
         #
         # Volume keybinds
         #
-        ",XF86AudioRaiseVolume,exec,volume up"
-        ",XF86AudioLowerVolume,exec,volume down"
-        ",XF86AudioMute,exec,volume mute"
+        ",XF86AudioRaiseVolume,exec,swayosd --output-volume raise"
+        ",XF86AudioLowerVolume,exec,swayosd --output-volume lower"
+        ",XF86AudioMute,exec,swayosd --output-volume mute-toggle"
+        ",XF86AudioMicMute,exec,swayosd --input-volume mute-toggle"
         #
         # Brightness keys
         #
-        ",XF86MonBrightnessUp,exec,brightness up"
-        ",XF86MonBrightnessDown,exec,brightness down"
+        ",XF86MonBrightnessUp,exec,swayosd --brightness raise"
+        ",XF86MonBrightnessDown,exec,swayosd --brightness lower"
         #
         # Windows Navigations
         #

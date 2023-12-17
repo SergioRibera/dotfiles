@@ -1,5 +1,6 @@
 _: {
     programs = {
+        adb.enable = true;
         thunar.enable = true;
         ssh.startAgent = true;
         fish.enable = true;

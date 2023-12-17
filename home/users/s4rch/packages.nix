@@ -25,12 +25,12 @@
     discord
 
     # Utils
+    scrcpy
     statix
     jq
     neofetch
     xdg-utils
     wev
-    brightnessctl
 
     # Bluetooth
     bluez
