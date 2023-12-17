@@ -1,9 +1,9 @@
 {pkgs, ...}: {
     enable = true;
     interactiveShellInit = builtins.readFile ./config.fish;
-    shellAliases = {
-        neovide = "neovide --multigrid";
-    };
+    # shellAliases = {
+    #     neovide = "neovide --multigrid";
+    # };
     functions = {
         __fish_cmd_error = {
             body = ''
