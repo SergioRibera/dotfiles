@@ -42,6 +42,7 @@ return {
     -- Basic font configuration
     font = wezterm.font_with_fallback {
         'CaskaydiaCove Nerd Font',
+        'FiraCode Nerd Font',
         'UbuntuMono Nerd Font',
         'Noto Color Emoji',
     },

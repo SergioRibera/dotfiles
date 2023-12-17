@@ -43,10 +43,10 @@
             };
             ".ssh/config".text = ''
 Host github.com
-    IdentifyFile ~/.ssh/github
+    IdentityFile ~/.ssh/github
 
 Host gitlab.com
-    IdentifyFile ~/.ssh/gitlab
+    IdentityFile ~/.ssh/gitlab
             '';
         };
     };
