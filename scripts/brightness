@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-# You can call this script like this:
-# $./volume.sh up
-# $./volume.sh down
-# $./volume.sh mute
-
-# ICON_THEME=$(cat /usr/share/icons/default/index.theme | grep '=' | cut -d '=' -f 2)
-ICON_THEME="Papirus-Light"
-ICON_SIZE="48x48"
-
 function calc { awk "BEGIN { print "$*" }"; }
 
 function get_brightness {
@@ -20,7 +11,6 @@ function get_max_brightness {
 }
 
 function send_notification {
-    DIR=`dirname "$0"`
     # tm_brightness=$(exp get_brightness / get_max_brightness)
     a=$(calc $(get_brightness)/$(get_max_brightness))
     b=$(calc $a*100)
@@ -28,26 +18,25 @@ function send_notification {
     echo "brightness: $brightness"
 
     if [ "$brightness" = "0" ]; then
-        icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-off.svg"
+        icon_name="notification-display-brightness-off"
     else
         if [  "$brightness" -lt "10" ]; then
-            icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-low.svg"
+            icon_name="notification-display-brightness-low"
         else
             if [ "$brightness" -lt "30" ]; then
-                icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-low.svg"
+                icon_name="notification-display-brightness-low"
             else
                 if [ "$brightness" -lt "70" ]; then
-                    icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-medium.svg"
+                    icon_name="notification-display-brightness-medium"
                 else
-                    icon_name="/usr/share/icons/$ICON_THEME/$ICON_SIZE/status/notification-display-brightness-high.svg"
+                    icon_name="notification-display-brightness-high"
                 fi
             fi
         fi
     fi
     # bar=$(seq -s "─" $(($brightness/5)) | sed 's/[0-9]//g')
     # Send the notification
-    dunstify "Brightness" "" -I "$icon_name" -t 2000 -h int:value:"$brightness" -r 5555
-
+    dunstify "Brightness" "" -I "$icon_name" -t 2000 -h int:value:"$brightness" -r 5555 &>/dev/null
 }
 
 case $1 in

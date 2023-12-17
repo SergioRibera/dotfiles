@@ -35,7 +35,7 @@
             max_icon_size = 32;
             sticky_history = false;
             history_length = 20;
-            dmenu = "rofi -p \"Notifications\" -dmenu -i";
+            dmenu = "wofi -p \"Notifications\" -dmenu -i";
             browser = "firefox --new-tab";
             always_run_script = true;
             title = "Dunst";
