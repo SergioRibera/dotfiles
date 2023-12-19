@@ -26,9 +26,6 @@
             jack.enable = true;
             pulse.enable = true;
         };
-        printing = {
-            enable = true;
-        };
         xserver = {
             enable = true;
             layout = "us";

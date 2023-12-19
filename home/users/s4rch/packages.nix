@@ -56,5 +56,8 @@
 
     # Icons
     papirus-icon-theme
+
+    # Audio plugins
+    easyeffects
   ];
 }

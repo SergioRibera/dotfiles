@@ -1,71 +1,47 @@
-{pkgs, ...}:
+{pkgs, config, ...}:
 let
     cfg = import ./plugins {inherit pkgs;};
+    user = config.laptop;
+    initLua = builtins.readFile ./init.lua;
+    mappingLua = builtins.readFile ./mapping.lua;
 in
 {
-    programs.neovim = {
-        enable = true;
-        defaultEditor = true;
-        viAlias = true;
-        vimAlias = true;
+    # programs.neovim = {
+    #     enable = true;
+    #     defaultEditor = true;
+    #     viAlias = true;
+    #     vimAlias = true;
+    # };
+    # Base plugins
+    # home.file."${user.username}".nvim = {
+    # 	source = "${nvimConf}/";
+    #     recursive = true;
+    # };
+    home-manager.users."${user.username}".programs.neovim = {
+    	enable = true;
+	extraLuaConfig = "${mappingLua}\n${initLua}";
+	# extraPackages = cfg.packages;
         plugins = with pkgs.vimPlugins; [
             # Color
-            nvim-base16
-            nvim-colorizer-lua
-            nvim-treesitter.withAllGrammars
-            nvim-ts-rainbow2
+            # nvim-base16
+            # nvim-colorizer-lua
+	    (import ./plugins/gruvbox.nix {inherit pkgs;})
             # completion
-            neogen
             cmp-path
             cmp-buffer
             cmp-cmdline
-            cmp-nvim-lsp
-            cmp-nvim-lsp-signature-help
-            # Snippets
-            luasnip
-            cmp_luasnip
-            friendly-snippets
-            # LSP
-            crates-nvim
-            trouble-nvim   # show diagnostics
-            nvim-lspconfig # lsp configs
-            lspkind-nvim   # icons for lsp
-            nvim-comment   # manage comment code with keymaps
+	    (import ./plugins/cmp.nix {inherit user pkgs;})
             # status bar
-            nvim-navic
-            lsp-status-nvim
-            lualine-nvim
+	    (import ./plugins/lualine.nix {inherit user pkgs;})
             # Editor
-            nvim-ufo
             nvim-autopairs
             nvim-surround
-            promise-async
-            nvim-tree-lua
-            nvim-web-devicons
-            cheatsheet-nvim
             # UI
-            telescope-nvim
-            telescope-media-files-nvim
             telescope-file-browser-nvim
             telescope-ui-select-nvim
             popup-nvim
-            # Debug
-            # just println! xd
-            # nvim-dap
-            # nvim-dap-ui
-            # nvim-dap-virtual-text
-            #
-            # Extras
-            plenary-nvim
-            twilight-nvim
-            nvim-notify
-            # git
-            gitsigns-nvim
-            # misc
-            vim-wakatime
-            presence-nvim
-            # instant-nvim # no one I work with uses nvim so it makes no sense
-            dial-nvim
-        ] ++ cfg.plugins;
+	    (import ./plugins/telescope.nix {inherit user pkgs;})
+        ];
+        # ++ cfg.plugins; # Plugins by host
     };
 }

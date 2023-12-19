@@ -6,7 +6,7 @@
     inherit (config) laptop;
 in {
     imports = [
-        # ./nvim
+        ./nvim
         ./boot.nix
         ./environment.nix
         ./fonts.nix
