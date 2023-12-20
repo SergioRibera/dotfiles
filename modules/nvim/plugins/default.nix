@@ -33,11 +33,14 @@
 
 	# Others
 	nodePackages.vscode-json-languageserver
+
+        # Extras
+        luajitPackages.jsregexp
     ];
     plugins = with pkgs.vimPlugins; [
         # Color
         nvim-treesitter.withAllGrammars
-        nvim-ts-rainbow2
+        rainbow-delimiters-nvim
         # completion
         neogen
         cmp-nvim-lsp
