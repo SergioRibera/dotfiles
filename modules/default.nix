@@ -25,6 +25,10 @@ in {
         username = mkOption {
             type = types.str;
         };
+        cfgType = mkOption {
+            type = types.enum ["minimal" "complete"];
+            default = "minimal";
+        };
         isNormalUser = mkOption {
             type = types.bool;
             default = true;

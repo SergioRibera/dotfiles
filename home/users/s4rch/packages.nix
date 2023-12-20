@@ -53,6 +53,7 @@
     pavucontrol
     font-manager
     obs-studio
+    screenkey
 
     # Icons
     papirus-icon-theme

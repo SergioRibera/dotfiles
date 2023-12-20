@@ -1,3 +1,6 @@
+local telescope_actions = require("telescope.actions")
+local telescope_fb_actions = require("telescope").extensions.file_browser.actions
+
 require("telescope").setup {
     defaults = {
         vimgrep_arguments = {
@@ -11,8 +14,6 @@ require("telescope").setup {
         },
         prompt_prefix = "❯ ",
         selection_caret = "❯ ",
-        -- prompt_prefix = " ",
-        -- selection_caret = " ",
         entry_prefix = "  ",
         initial_mode = "insert",
         selection_strategy = "reset",
@@ -46,12 +47,42 @@ require("telescope").setup {
     extensions = {
         media_files = {
             filetypes = {"png", "webp", "jpg", "jpeg"},
-            find_cmd = "rg" -- find command (defaults to `fd`)
+        },
+        file_browser = {
+            grouped = true,
+            mappings = {
+                ["i"] = {
+                    ["<C-a>"] = telescope_fb_actions.create,
+                    ["<C-i>"] = telescope_fb_actions.create_from_prompt,
+                    ["<C-r>"] = telescope_fb_actions.rename,
+                    ["<C-m>"] = telescope_fb_actions.move,
+                    ["<C-c>"] = telescope_fb_actions.copy,
+                    ["<C-d>"] = telescope_fb_actions.remove,
+                    ["<C-o>"] = telescope_fb_actions.open,
+                    ["<C-t>"] = telescope_actions.select_tab,
+                    ["<C-f>"] = telescope_fb_actions.toggle_browser,
+                    ["<C-h>"] = telescope_fb_actions.toggle_hidden,
+                    ["<C-s>"] = telescope_fb_actions.toggle_all,
+                    ["<bs>"] = telescope_fb_actions.backspace,
+                },
+                ["n"] = {
+                    ["a"] = telescope_fb_actions.create,
+                    ["r"] = telescope_fb_actions.rename,
+                    ["x"] = telescope_fb_actions.move,
+                    ["c"] = telescope_fb_actions.copy,
+                    ["d"] = telescope_fb_actions.remove,
+                    ["o"] = telescope_fb_actions.open,
+                    ["f"] = telescope_fb_actions.toggle_browser,
+                    ["h"] = telescope_fb_actions.toggle_hidden,
+                    ["t"] = telescope_fb_actions.toggle_all,
+                },
+            },
         },
     }
 }
 
 require("telescope").load_extension("file_browser")
+require("telescope").load_extension("media_files")
 require("telescope").load_extension("ui-select")
 
 local opt = {noremap = true, silent = true}
@@ -73,17 +104,20 @@ _G.register_map("n", "<Leader>hk", [[<Cmd>lua show_my_keymaps()<CR>]], opt, "tel
 _G.register_map("n", "<Leader>?", [[<Cmd>Cheatsheet<CR>]], opt, "telescope", "Show all cheatsheet on Neovim config")
 
 -- Extensions
-_G.register_map("n", "<Leader>se", [[<Cmd>Telescope emoji<CR>]], opt, "telescope", "Show emojis for easy implementation")
+_G.register_map(
+"n",
+"<Leader>n",
+[[<Cmd>Telescope file_browser<CR>]],
+opt, "telescope", "Find Files"
+)
 _G.register_map(
 "n",
 "<Leader>fp",
-[[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]],
+[[<Cmd>Telescope media_files<CR>]],
 opt, "telescope", "Show all media files on project with preview (if is compatible)"
 )
 
 -- highlights
-local cmd = vim.cmd
-
 cmd "hi TelescopeBorder guifg = #31314A"
 cmd "hi TelescopePromptBorder guifg = #31314A"
 cmd "hi TelescopeResultsBorder guifg = #31314A"

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, user, ...}: {
     packages = with pkgs; [
     	# Rust
 	taplo
@@ -28,6 +28,7 @@
 	nodePackages.vscode-css-languageserver-bin
 
 	# Utils
+        fd
 	ripgrep
 
 	# Others
@@ -70,13 +71,13 @@
         twilight-nvim
         nvim-notify
         # git
-        gitsigns-nvim
+        (import ./git.nix {inherit user pkgs;})
         # misc
         vim-wakatime
         presence-nvim
         # instant-nvim # no one I work with uses nvim so it makes no sense
         dial-nvim
-        import ./lsp_progress.nix {inherit pkgs;}
-        import ./nvim_conf.nix {inherit pkgs;}
+        (import ./lsp_progress.nix {inherit pkgs;})
+        # (import ./nvim_conf.nix {inherit pkgs;})
     ];
 }

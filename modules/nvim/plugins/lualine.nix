@@ -1,7 +1,9 @@
 { user, pkgs, ... }: with pkgs.vimPlugins; {
     plugin = lualine-nvim;
     type = "lua";
-    config = ''
+    config = if user.cfgType == "complete"
+    then builtins.readFile ./lualine.lua
+    else ''
 require('lualine').setup({
     options = {
         theme = 'gruvbox',

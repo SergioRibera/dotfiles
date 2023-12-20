@@ -1,7 +1,9 @@
 { user, pkgs, ... }: with pkgs.vimPlugins; {
     plugin = nvim-cmp;
     type = "lua";
-    config = ''
+    config = if user.cfgType == "complete"
+    then builtins.readFile ./cmp.lua
+    else ''
 local cmp = require('cmp')
 vim.o.completeopt = "menu,menuone,noselect"
 cmp.setup.cmdline('/', {
@@ -17,6 +19,6 @@ cmp.setup.cmdline(':', {
     }
 })
 
-vim.cmd("autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }")
+cmd("autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }")
     '';
 }

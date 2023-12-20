@@ -12,6 +12,6 @@ let
         meta.homepage = "https://github.com/SergioRibera/nvim-conf";
     };
 in {
-    pkgs.vimPlugins.plugin = nvim-conf;
-    pkgs.vimPlugins.type = "lua";
+    plugin = nvim-conf;
+    type = "lua";
 }

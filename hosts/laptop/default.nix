@@ -13,6 +13,7 @@
   laptop = {
     isNormalUser = true;
     username = "s4rch";
+    cfgType = "complete";
     shell = pkgs.fish;
     groups = ["wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input"];
   };

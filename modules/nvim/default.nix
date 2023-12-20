@@ -1,26 +1,27 @@
 {pkgs, config, ...}:
 let
-    cfg = import ./plugins {inherit pkgs;};
+    cfg = import ./plugins {inherit pkgs user;};
     user = config.laptop;
     initLua = builtins.readFile ./init.lua;
+    autocmdLua = builtins.readFile ./autocmd.lua;
     mappingLua = builtins.readFile ./mapping.lua;
+    utilsLua = builtins.readFile ./utils.lua;
+    extraPackages = if user.cfgType == "minimal"
+                    then [ pkgs.ripgrep pkgs.fd ]
+                    else cfg.packages;
+    extraPlugins = if user.cfgType == "minimal"
+                    then []
+                    else cfg.plugins;
+    modPlugins = if user.cfgType == "minimal"
+                    then ""
+                    else builtins.readFile ./plugins/mod.lua;
 in
 {
-    # programs.neovim = {
-    #     enable = true;
-    #     defaultEditor = true;
-    #     viAlias = true;
-    #     vimAlias = true;
-    # };
     # Base plugins
-    # home.file."${user.username}".nvim = {
-    # 	source = "${nvimConf}/";
-    #     recursive = true;
-    # };
     home-manager.users."${user.username}".programs.neovim = {
     	enable = true;
-	extraLuaConfig = "${mappingLua}\n${initLua}";
-	# extraPackages = cfg.packages;
+        inherit extraPackages;
+	extraLuaConfig = autocmdLua + utilsLua + mappingLua + modPlugins + initLua;
         plugins = with pkgs.vimPlugins; [
             # Color
             # nvim-base16
@@ -41,7 +42,6 @@ in
             telescope-ui-select-nvim
             popup-nvim
 	    (import ./plugins/telescope.nix {inherit user pkgs;})
-        ];
-        # ++ cfg.plugins; # Plugins by host
+        ] ++ extraPlugins; # Plugins by host
     };
 }

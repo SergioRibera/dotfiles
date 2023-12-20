@@ -33,13 +33,11 @@ end
 -- Set Globals
 _G.my_mapping_table = {}
 
-local map = M.register_map
+local map = _G.register_map
 
 --
 --  Mappings
 --
-map("n", "<leader>tn", ":lua cycle_teme()<Cr>", {}, "themes", "Cycle to next theme")
-map("n", "<leader>tp", ":lua cycle_inverse_teme()<Cr>", {}, "themes", "Cycle to preview theme")
 map("n", "<C-h>", ":tabprevious<Cr>", {}, "tabs", "Go to preview tab")                                         -- Move to prev tab
 map("n", "<C-l>", ":tabnext<Cr>", {}, "tabs", "Go to next tab")                                                -- Move to next tab
 map("n", "<leader>y", '"+y', {}, "clipboard", "Copy into system clipboard")                                    -- Copy any selected text
@@ -53,38 +51,7 @@ map("n", "<leader>q", ':q!<CR>', {}, "save", "Quit buffer")
 map("n", "<leader>w", ':w!<CR>', {}, "save", "Write buffer")
 map("n", "<leader>wq", ':x<CR>', {}, "save", "Write and close buffer")
 
--- [
---
---      Dap - Debugger
---
--- ]
-map('n', '<F7>', "<Cmd>lua require'dap'.clear_breakpoints()<CR>", {}, "dap", "Clear Breakpoints")
-map('n', '<F8>', "<Cmd>lua require'dap'.continue()<CR>", {}, "dap", "Continue")
-map('n', '<F9>', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", {}, "dap", "Toggle Breakpoint")
-map('n', '<F12>', "<Cmd>lua require'dap'.run_to_cursor()<CR>", {}, "dap", "Run to cursor")
-map('n', '<leader>dr', "<Cmd>lua require'dap'.repl.toggle()<CR>", {}, "dap", "Toggle controller window")
-map('n', '<leader>dc', "<Cmd>lua require'dap'.terminate()<CR>", {}, "dap", "End Debugging")
-map('n', '<leader>dt', "<Cmd>lua require'dapui'.toggle()<CR>", {}, "dap", "Debug UI Toggle")
-map('n', '<leader>dd', "<Cmd>lua require'dap'.clear_breakpoints()<CR>", {}, "dap", "Clear Breakpoints")
-map('n', '<leader>dl', "<Cmd>lua require'dap'.continue()<CR>", {}, "dap", "Continue")
-map('n', '<leader>db', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", {}, "dap", "Toggle Breakpoint")
--- Requests the debugee to step into a function or method if possible.
--- If it cannot step into a function or method it behaves like `dap.step_over()`.
-map('n', '<leader>i', "<Cmd>lua require'dap'.step_into()<CR>", {}, "dap", "Step Into")
--- step_next: Requests the debugee to run again for one step.
-map('n', '<leader>n', "<Cmd>lua require'dap'.step_over()<CR>", {}, "dap", "Step Over")
--- finish: Requests the debugee to step out of a function or method if possible.
-map('n', '<leader>o', "<Cmd>lua require'dap'.step_out()<CR>", {}, "dap", "Step Out")
-
--- nvim-dap-ui
--- For a one time expression evaluation, you can call a hover window to show a value
-map('n', '<C-k>', "<Cmd>lua require('dapui').eval()<CR>", {}, "dap", "Eval")
-map('n', '<space>k', "<cmd>lua require('dapui').float_element()<cr>", {}, "dap", "Float Element")
-
-
-map("i", "<C-L>", "copilot#Accept()", { silent = true, expr = true, script = true }, "copilot",
-    "Accept current copilot suggest")
-M.lsp_mapping = function()
+_G.lsp_mapping = function()
     local opts = { silent = true }
     map("n", "<leader>ga", "<cmd>lua vim.lsp.buf.code_action()<Cr>", opts, "lsp", "Show code actions on line")
     map("n", "<leader>gD", "<Cmd>lua require'telescope.builtin'.lsp_definitions()<CR>", opts, "lsp",
@@ -124,9 +91,9 @@ local term = 'bash'
 if os_type == 'UNIX' or os_type == 'MAC' then
     -- Detect if exists a command
     local default_terminal = vim.fn.expand("$SHELL")
-    if default_terminal == "/bin/zsh" or default_terminal == '/usr/bin/zsh' then
+    if default_terminal:find("zsh") then
         term = "zsh"
-    elseif default_terminal == '/bin/fish' or default_terminal == '/usr/bin/fish' then
+    elseif default_terminal:find('fish') then
         term = "fish"
     else
         term = "bash"

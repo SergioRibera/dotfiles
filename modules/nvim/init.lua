@@ -1,5 +1,3 @@
-require("mapping")
-
 local cmd = vim.cmd
 local g = vim.g
 
@@ -7,10 +5,6 @@ g.instant_username = "s4rch"
 g.mapleader = " "
 g.autoread = true
 g.kommentary_create_default_mappings = false
-
--- colorscheme related stuff
-cmd "syntax enable"
-cmd "syntax on"
 
 -- Identline
 g.indentLine_enabled = 1
@@ -24,7 +18,6 @@ g.indent_blankline_context_patterns = { 'class', 'function', 'method', 'void', '
 --  Neovide Configurations
 --
 if g.neovide ~= nil then
-    -- g.neovide_transparency=0.8                  -- Neovide Transparency
     g.neovide_cursor_antialiasing = true        -- Nevovide cursor Antialiasing
     g.neovide_cursor_vfx_mode = "ripple"        -- Neovide
 end
@@ -33,7 +26,6 @@ end
 vim.o.guifont = 'FiraCode Nerd Font:h13;CaskaydiaCove Nerd Font:h13'
 
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
-
 local function opt(scope, key, value)
     scopes[scope][key] = value
     if scope ~= "o" then
