@@ -1,8 +1,10 @@
 local cmd = vim.cmd
 local g = vim.g
 
+vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
+g.mapleader = " "
+
 g.instant_username = "s4rch"
-g.mapleader = "<Space>"
 g.autoread = true
 g.kommentary_create_default_mappings = false
 

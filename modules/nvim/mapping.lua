@@ -15,7 +15,7 @@ local mapping_table_contains = function(t, v)
     return false
 end
 local register_map = function(m, ls, rs, opts, c, d)
-    local options = { noremap = true }
+    local options = {}
     local desc = opts.desc or d or ""
 
     if opts then
@@ -25,7 +25,8 @@ local register_map = function(m, ls, rs, opts, c, d)
         m = "n"
     end
     if type(rs) == "string" then
-        vim.api.nvim_set_keymap(m, ls, rs, options)
+        vim.keymap.set(m, ls, rs, options)
+        -- vim.api.nvim_set_keymap(m, ls, rs, options)
     end
     local data = { mode = m, lhs = ls, rhs = rs, options = opts, category = c, description = desc }
     if not mapping_table_contains(_G.my_mapping_table, data) then
