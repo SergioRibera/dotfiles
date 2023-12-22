@@ -2,7 +2,7 @@ local cmd = vim.cmd
 local g = vim.g
 
 g.instant_username = "s4rch"
-g.mapleader = " "
+g.mapleader = "<Space>"
 g.autoread = true
 g.kommentary_create_default_mappings = false
 
@@ -13,6 +13,11 @@ g.ident_blankline_ident_level = 4
 g.indent_blankline_show_current_context = true
 g.indent_blankline_use_treesitter = true
 g.indent_blankline_context_patterns = { 'class', 'function', 'method', 'void', 'keyword' }
+
+-- colorscheme related stuff
+cmd "syntax enable"
+cmd "syntax on"
+cmd "colorscheme base16-gruvbox-dark-pale"
 
 --
 --  Neovide Configurations
@@ -72,12 +77,6 @@ opt("o", "incsearch", true)
 opt("o", "ignorecase", true)
 opt("o", "smartcase", true)
 
-function is_buffer_empty()
-    -- Check whether the current buffer is empty
-    return vim.fn.empty(vim.fn.expand("%:t")) == 1
-end
-
-function has_width_gt(cols)
-    -- Check if the windows width is greater than a given number of columns
-    return vim.fn.winwidth(0) / 2 > cols
-end
+require("ibl").setup()
+require("nvim-autopairs").setup()
+require("nvim-surround").setup()

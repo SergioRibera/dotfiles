@@ -1,4 +1,16 @@
-{pkgs, user, ...}: {
+{pkgs, user, ...}: let
+   lsp-progress = pkgs.vimUtils.buildVimPlugin {
+    pname = "lsp-progress.nvim";
+    version = "2023-12-21";
+    src = pkgs.fetchFromGitHub {
+      owner = "linrongbin16";
+      repo = "lsp-progress.nvim";
+      rev = "cabf7fde50cc0dad367a03a1542d9670d1118bd0";
+      sha256 = "sha256-qcKPcqHH1BEE9fnPxmpNsEt4mSnFsU3giof1bMvtJIY=";
+    };
+    meta.homepage = "https://github.com/linrongbin16/lsp-progress.nvim";
+  };
+in {
     packages = with pkgs; [
     	# Rust
 	taplo
@@ -32,13 +44,16 @@
 	ripgrep
 
 	# Others
+	nodePackages.bash-language-server
 	nodePackages.vscode-json-languageserver
+        nodePackages.yaml-language-server
 
         # Extras
         luajitPackages.jsregexp
     ];
     plugins = with pkgs.vimPlugins; [
-        # Color
+        # Colors
+        nvim-colorizer-lua
         nvim-treesitter.withAllGrammars
         rainbow-delimiters-nvim
         # completion
@@ -52,16 +67,16 @@
         # LSP
         crates-nvim
         trouble-nvim   # show diagnostics
-        nvim-lspconfig # lsp configs
         lspkind-nvim   # icons for lsp
         # status bar
         nvim-navic
-        lsp-status-nvim
+        lsp-progress
         # Editor
         nvim-ufo
         promise-async
         cheatsheet-nvim
         # UI
+        nvim-web-devicons
         telescope-media-files-nvim
         # Debug
         # just println! xd

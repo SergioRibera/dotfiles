@@ -1,5 +1,5 @@
-require("trouble").setup()
-require('crates').setup()
+require("colorizer").setup()
+require("nvim-web-devicons").setup()
 require('rainbow-delimiters.setup').setup()
 require("notify").setup({
     stages = "fade_in_slide_out",
@@ -30,14 +30,5 @@ require('nvim-treesitter.configs').setup {
     rainbow = {
         enable = true,
         extended_mode = true,
-        colors = {
-            '#bf616a',
-            '#d08770',
-            '#ebcb8b',
-            '#a3be8c',
-            '#88c0d0',
-            '#5e81ac',
-            '#b48ead',
-        }
     },
 }
