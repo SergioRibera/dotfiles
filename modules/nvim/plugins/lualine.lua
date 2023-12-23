@@ -30,10 +30,10 @@ lualine.setup {
                         return
                     end
                     if b == 'l' or b == 'left' then
-                        vim.cmd(":Telescope git_branches<Cr>")
+                        vim.cmd("Telescope git_branches")
                     end
                     if b == 'r' or b == 'right' then
-                        vim.cmd(":Telescope git_commits<Cr>")
+                        vim.cmd("Telescope git_commits")
                     end
                 end
             },
@@ -51,10 +51,10 @@ lualine.setup {
                         return
                     end
                     if b == 'l' or b == 'left' then
-                        vim.cmd(":Telescope git_status<Cr>")
+                        vim.cmd("<Plug>Telescope git_status<Cr>")
                     end
                     if b == 'r' or b == 'right' then
-                        vim.cmd(":Telescope git_stash<Cr>")
+                        vim.cmd("<Plug>Telescope git_stash<Cr>")
                     end
                 end
             }
@@ -80,15 +80,15 @@ lualine.setup {
                 'filename',
                 icons_enabled = true,
                 file_status = true,
-                symbols = { modified = '•', readonly = ' ' }
+                symbols = { modified = '•', readonly = ''}
             },
             { ' > ', cond = navic.is_available },
             { navic.get_location, cond = navic.is_available }
         },
         lualine_x = {},
         lualine_y = {
-            { -- Setup lsp-progress component
-                function()
+            {
+                function() -- Setup lsp-progress component
                     return require("lsp-progress").progress({
                         max_size = 80,
                         format = function(messages)
