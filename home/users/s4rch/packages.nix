@@ -11,8 +11,10 @@
     fenix.stable.toolchain
     cargo-leptos
     leptosfmt
-    cargo-make
     trunk
+    cargo-make
+    cargo-expand
+    cargo-generate
 
     # python
     python3

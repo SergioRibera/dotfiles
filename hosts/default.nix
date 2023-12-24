@@ -36,7 +36,6 @@
                     nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
                     nixforceclean = "sudo nix-collect-garbage -d";
                   };
-              #   environment.systemPackages = [ config.packages.xwaylandvideobridge ];
               }
             ];
 

@@ -18,7 +18,6 @@ in {
         ./time.nix
         ./virtualisation.nix
         ./xdg.nix
-        # ./xwaylandvideobridge.nix
     ];
 
     options.laptop = with pkgs.lib; {

@@ -85,6 +85,13 @@
         # "nofocus,^*sbbw*$"
         # "noshadow,^*sbbw*$"
         # "noborder,^*sbbw*$"
+        #
+        # Screen Share
+        #
+        "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
+        "noanim,class:^(xwaylandvideobridge)$"
+        "nofocus,class:^(xwaylandvideobridge)$"
+        "noinitialfocus,class:^(xwaylandvideobridge)$"
 
         #
         # Style

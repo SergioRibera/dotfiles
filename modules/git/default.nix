@@ -1,5 +1,6 @@
 { pkgs, ... }: {
     enable = true;
+    lfs.enable = true;
     userName = "Sergio Ribera";
     userEmail = "56278796+SergioRibera@users.noreply.github.com";
     extraConfig = {

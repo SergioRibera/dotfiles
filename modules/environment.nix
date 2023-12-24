@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-    environment.sessionVariables = rec {
+    environment.sessionVariables = {
         PATH = [
             "$HOME/.cargo/bin/"
             "$HOME/.npm-global/bin"

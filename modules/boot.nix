@@ -4,7 +4,8 @@ _: {
         initrd.verbose = false;
         plymouth.enable = true;
         kernelParams = [ "quiet" "splash" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail" "acpi_backlight=native" ];
-        supportedFilesystems = ["btrfs"];
+        tmp.cleanOnBoot = true;
+        supportedFilesystems = ["ntfs" "btrfs"];
 
         loader = {
             systemd-boot.enable = false;

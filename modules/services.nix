@@ -1,7 +1,4 @@
-{ pkgs
-    , self'
-    , ...
-}: {
+{ pkgs, ... }: {
     systemd.services."getty@tty1".enable = false;
     systemd.services."autovt@tty1".enable = false;
     security.pam.services.gdm.enableGnomeKeyring = true;
@@ -25,6 +22,7 @@
             alsa.support32Bit = true;
             jack.enable = true;
             pulse.enable = true;
+            wireplumber.enable = true;
         };
         xserver = {
             enable = true;
