@@ -87,6 +87,7 @@ in {
         nvim-ufo
         promise-async
         cheatsheet-nvim
+        editorconfig-nvim
         # UI
         nvim-web-devicons
         telescope-media-files-nvim
