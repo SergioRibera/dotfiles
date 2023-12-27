@@ -24,7 +24,11 @@
 
     # Social
     telegram-desktop
-    discord
+    (discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+      nss = nss_3_96_1;
+    })
 
     # Utils
     scrcpy
