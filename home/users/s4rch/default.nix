@@ -2,6 +2,7 @@
   imports = [
     ./packages.nix
     ./programs.nix
+    ./polkit-agent.nix
   ];
   home = {
     stateVersion = "23.11";

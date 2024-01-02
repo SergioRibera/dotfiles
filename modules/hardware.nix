@@ -5,6 +5,8 @@
       powerOnBoot = false;
     };
 
+    brillo.enable = true;
+
     opengl = {
       enable = true;
       # Vulkan

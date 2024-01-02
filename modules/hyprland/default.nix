@@ -4,8 +4,8 @@
   settings = {
     monitor = [ "eDP-1,1600x900@60,1080x1020,1" "HDMI-A-1,1920x1080@60,0x0,1,transform,3" ];
     workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
-    exec-once = [ "udiskie" "dunst" "thunar --daemon" "swww init" "wallpaper -t 8h --no-allow-video -d -b" ];
-    env = ["XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH"];
+    exec-once = [ "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY" "udiskie" "dunst" "thunar --daemon" "swww init" "wallpaper -t 8h --no-allow-video -d -b" ];
+    env = [ "XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH" ];
 
     input = {
       kb_layout = "us";
@@ -17,10 +17,10 @@
       numlock_by_default = true;
       scroll_method = "on_button_down";
       scroll_button = 274;
-        touchpad = {
-            natural_scroll = true;
-            middle_button_emulation = true;
-        };
+      touchpad = {
+        natural_scroll = true;
+        middle_button_emulation = true;
+      };
       sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
     };
 
@@ -33,9 +33,9 @@
     };
 
     misc = {
-       disable_hyprland_logo = true;
-       animate_manual_resizes = true;
-       animate_mouse_windowdragging = true;
+      disable_hyprland_logo = true;
+      animate_manual_resizes = true;
+      animate_mouse_windowdragging = true;
     };
 
     decoration = {
@@ -64,44 +64,44 @@
     };
 
     windowrule = [
-        #
-        # Implementation
-        #
-        "float,zoom"
+      #
+      # Implementation
+      #
+      "float,zoom"
 
-        "float,thunar"
-        "float,dolphin"
-        "float,sirula"
+      "float,thunar"
+      "float,dolphin"
+      "float,sirula"
 
-        "workspace 5,[Dd]iscord"
+      "workspace 5,[Dd]iscord"
 
-        #
-        # Sbbw
-        #
-        # "float,^*sbbw*$"
-        # "pin,^*sbbw*$"
-        # "noblur,^*sbbw*$"
-        # "noanim,^*sbbw*$"
-        # "nofocus,^*sbbw*$"
-        # "noshadow,^*sbbw*$"
-        # "noborder,^*sbbw*$"
-        #
-        # Screen Share
-        #
-        "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
-        "noanim,class:^(xwaylandvideobridge)$"
-        "nofocus,class:^(xwaylandvideobridge)$"
-        "noinitialfocus,class:^(xwaylandvideobridge)$"
+      #
+      # Sbbw
+      #
+      # "float,^*sbbw*$"
+      # "pin,^*sbbw*$"
+      # "noblur,^*sbbw*$"
+      # "noanim,^*sbbw*$"
+      # "nofocus,^*sbbw*$"
+      # "noshadow,^*sbbw*$"
+      # "noborder,^*sbbw*$"
+      #
+      # Screen Share
+      #
+      "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
+      "noanim,class:^(xwaylandvideobridge)$"
+      "nofocus,class:^(xwaylandvideobridge)$"
+      "noinitialfocus,class:^(xwaylandvideobridge)$"
 
-        #
-        # Style
-        #
-        "opacity 0.90,[Cc]ode"
-        "opacity 0.90,[Tt]hunar"
-        "opacity 0.90,org.wezfurlong.wezterm"
-        "opacity 0.90,[Dd]iscord"
-        "opacity 0.70,^*rofi*$"
-        "opacity 0.70,^*osd*$"
+      #
+      # Style
+      #
+      "opacity 0.90,[Cc]ode"
+      "opacity 0.90,[Tt]hunar"
+      "opacity 0.90,org.wezfurlong.wezterm"
+      "opacity 0.90,[Dd]iscord"
+      "opacity 0.70,^*rofi*$"
+      "opacity 0.70,^*osd*$"
     ];
 
     dwindle = {
@@ -124,81 +124,81 @@
     binde = [ ];
     # Move/resize windows with mainMod + LMB/RMB and dragging
     bindm = [
-        "SUPER,mouse:272,movewindow"
-        "SUPER,mouse:273,resizewindow"
+      "SUPER,mouse:272,movewindow"
+      "SUPER,mouse:273,resizewindow"
     ];
 
     bind = [
-        #
-        # WM Keybinds
-        #
-        "SUPER,F,togglefloating,"
-        "SUPER_SHIFT,F,fullscreen,"
-        "SUPER,T,pseudo,"
-        "SUPER,W,killactive,"
-        "SUPER,Q,exit,"
-        #
-        # Custom Exec Keybinds
-        #
-        "SUPER,Return,exec,wezterm start"
-        "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
-        "SUPER,E,exec,thunar"
-        "SUPER,D,exec,trilium"
-        "SUPER,Tab,exec,rofi -show window"
-        "SUPER_SHIFT,Tab,exec,rofi -show drun"
-        "SUPER,N,exec,firefox"
-        "SUPER_SHIFT,N,exec,firefox --private-window"
-        "SUPER,S,exec,hyprshot --clipboard-only -m region"
-        "SUPER_SHIFT,S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
-        "SUPER,P,exec,~/.config/rofi/scripts/proyects.sh"
-        "SUPER,C,exec,hyprpicker -a -f hex"
-        #
-        # Volume keybinds
-        #
-        ",XF86AudioRaiseVolume,exec,swayosd --output-volume raise"
-        ",XF86AudioLowerVolume,exec,swayosd --output-volume lower"
-        ",XF86AudioMute,exec,swayosd --output-volume mute-toggle"
-        ",XF86AudioMicMute,exec,swayosd --input-volume mute-toggle"
-        #
-        # Brightness keys
-        #
-        ",XF86MonBrightnessUp,exec,swayosd --brightness raise"
-        ",XF86MonBrightnessDown,exec,swayosd --brightness lower"
-        #
-        # Windows Navigations
-        #
-        "SUPER,H,movefocus,l"
-        "SUPER,L,movefocus,r"
-        "SUPER,K,movefocus,u"
-        "SUPER,J,movefocus,d"
-        "SUPER_SHIFT,H,movewindow,l"
-        "SUPER_SHIFT,L,movewindow,r"
-        "SUPER_SHIFT,K,movewindow,u"
-        "SUPER_SHIFT,J,movewindow,d"
-        #
-        # Workspace Navigations
-        #
-        "SUPER,1,workspace,1"
-        "SUPER,2,workspace,2"
-        "SUPER,3,workspace,3"
-        "SUPER,4,workspace,4"
-        "SUPER,5,workspace,5"
-        "SUPER,6,workspace,6"
-        "SUPER,7,workspace,7"
-        "SUPER,8,workspace,8"
-        "SUPER,9,workspace,9"
-        "SUPER,0,workspace,10"
+      #
+      # WM Keybinds
+      #
+      "SUPER,F,togglefloating,"
+      "SUPER_SHIFT,F,fullscreen,"
+      "SUPER,T,pseudo,"
+      "SUPER,W,killactive,"
+      "SUPER,Q,exit,"
+      #
+      # Custom Exec Keybinds
+      #
+      "SUPER,Return,exec,wezterm start"
+      "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
+      "SUPER,E,exec,thunar"
+      "SUPER,D,exec,trilium"
+      "SUPER,Tab,exec,rofi -show window"
+      "SUPER_SHIFT,Tab,exec,rofi -show drun"
+      "SUPER,N,exec,firefox"
+      "SUPER_SHIFT,N,exec,firefox --private-window"
+      "SUPER,S,exec,hyprshot --clipboard-only -m region"
+      "SUPER_SHIFT,S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
+      "SUPER,P,exec,~/.config/rofi/scripts/proyects.sh"
+      "SUPER,C,exec,hyprpicker -a -f hex"
+      #
+      # Volume keybinds
+      #
+      ",XF86AudioRaiseVolume,exec,swayosd --output-volume raise"
+      ",XF86AudioLowerVolume,exec,swayosd --output-volume lower"
+      ",XF86AudioMute,exec,swayosd --output-volume mute-toggle"
+      ",XF86AudioMicMute,exec,swayosd --input-volume mute-toggle"
+      #
+      # Brightness keys
+      #
+      ",XF86MonBrightnessUp,exec,swayosd --brightness raise"
+      ",XF86MonBrightnessDown,exec,swayosd --brightness lower"
+      #
+      # Windows Navigations
+      #
+      "SUPER,H,movefocus,l"
+      "SUPER,L,movefocus,r"
+      "SUPER,K,movefocus,u"
+      "SUPER,J,movefocus,d"
+      "SUPER_SHIFT,H,movewindow,l"
+      "SUPER_SHIFT,L,movewindow,r"
+      "SUPER_SHIFT,K,movewindow,u"
+      "SUPER_SHIFT,J,movewindow,d"
+      #
+      # Workspace Navigations
+      #
+      "SUPER,1,workspace,1"
+      "SUPER,2,workspace,2"
+      "SUPER,3,workspace,3"
+      "SUPER,4,workspace,4"
+      "SUPER,5,workspace,5"
+      "SUPER,6,workspace,6"
+      "SUPER,7,workspace,7"
+      "SUPER,8,workspace,8"
+      "SUPER,9,workspace,9"
+      "SUPER,0,workspace,10"
 
-        "SUPER_SHIFT,1,movetoworkspacesilent,1"
-        "SUPER_SHIFT,2,movetoworkspacesilent,2"
-        "SUPER_SHIFT,3,movetoworkspacesilent,3"
-        "SUPER_SHIFT,4,movetoworkspacesilent,4"
-        "SUPER_SHIFT,5,movetoworkspacesilent,5"
-        "SUPER_SHIFT,6,movetoworkspacesilent,6"
-        "SUPER_SHIFT,7,movetoworkspacesilent,7"
-        "SUPER_SHIFT,8,movetoworkspacesilent,8"
-        "SUPER_SHIFT,9,movetoworkspacesilent,9"
-        "SUPER_SHIFT,0,movetoworkspacesilent,10"
+      "SUPER_SHIFT,1,movetoworkspacesilent,1"
+      "SUPER_SHIFT,2,movetoworkspacesilent,2"
+      "SUPER_SHIFT,3,movetoworkspacesilent,3"
+      "SUPER_SHIFT,4,movetoworkspacesilent,4"
+      "SUPER_SHIFT,5,movetoworkspacesilent,5"
+      "SUPER_SHIFT,6,movetoworkspacesilent,6"
+      "SUPER_SHIFT,7,movetoworkspacesilent,7"
+      "SUPER_SHIFT,8,movetoworkspacesilent,8"
+      "SUPER_SHIFT,9,movetoworkspacesilent,9"
+      "SUPER_SHIFT,0,movetoworkspacesilent,10"
     ];
   };
 }

@@ -8,8 +8,6 @@
     mac-style-load = pkgs.callPackage mac-style-src {};
 in {
   boot = {
-    consoleLogLevel = 0;
-    initrd.verbose = false;
     tmp.cleanOnBoot = true;
     supportedFilesystems = [ "ntfs" "btrfs" ];
     kernelParams = [

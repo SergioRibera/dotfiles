@@ -3,8 +3,6 @@
   systemd.services."autovt@tty1".enable = false;
   security.pam.services.login.enableGnomeKeyring = true;
 
-  systemd.user.services.gnome-keyring = { };
-
   services = {
     upower.enable = true;
     ratbagd.enable = true;

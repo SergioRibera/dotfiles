@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{ pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules
@@ -15,11 +10,11 @@
     username = "s4rch";
     cfgType = "complete";
     shell = pkgs.fish;
-    groups = ["wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input"];
+    groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
   };
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }
