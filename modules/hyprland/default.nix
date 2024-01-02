@@ -73,7 +73,7 @@
         "float,dolphin"
         "float,sirula"
 
-        "pseudo,neovide"
+        "workspace 5,[Dd]iscord"
 
         #
         # Sbbw
@@ -99,7 +99,7 @@
         "opacity 0.90,[Cc]ode"
         "opacity 0.90,[Tt]hunar"
         "opacity 0.90,org.wezfurlong.wezterm"
-        "opacity 0.90,Discord"
+        "opacity 0.90,[Dd]iscord"
         "opacity 0.70,^*rofi*$"
         "opacity 0.70,^*osd*$"
     ];

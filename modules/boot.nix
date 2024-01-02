@@ -10,9 +10,12 @@ in {
   boot = {
     consoleLogLevel = 0;
     initrd.verbose = false;
-    kernelParams = [ "quiet" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail" "acpi_backlight=native" ];
     tmp.cleanOnBoot = true;
     supportedFilesystems = [ "ntfs" "btrfs" ];
+    kernelParams = [
+      "quiet" "splash" "rd.systemd.show_status=false" "rd.udev.log_level=3"
+      "udev.log_priority=3" "boot.shell_on_fail"
+    ];
 
     loader = {
       systemd-boot.enable = false;

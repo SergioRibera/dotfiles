@@ -12,8 +12,9 @@
         kernelModules = [ "kvm-amd" "v4l2loopback" ];
         extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
         initrd = {
+            verbose = false;
             availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
-            kernelModules = [ ];
+            kernelModules = [ "amdgpu" ];
         };
     };
 

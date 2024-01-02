@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
     enable = true;
     lfs.enable = true;
     userName = "Sergio Ribera";

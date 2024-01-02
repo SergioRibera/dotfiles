@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     # Js
     bun
@@ -22,13 +22,6 @@
     # Web Develoment
     nodePackages.tailwindcss
 
-    # Social
-    telegram-desktop
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = true;
-    })
-
     # Utils
     scrcpy
     statix
@@ -48,7 +41,7 @@
     hyprpicker
     swww
     xwaylandvideobridge
-    
+
     # Browser
     microsoft-edge
 
@@ -65,5 +58,22 @@
 
     # Audio plugins
     easyeffects
+
+    # Social
+    telegram-desktop
+    # Discord
+    ((discord.override {
+      nss = pkgs.nss_latest;
+      withOpenASAR = true;
+      withVencord = true;
+    }).overrideAttrs (old: {
+      libPath = old.libPath + ":${pkgs.libglvnd}/lib";
+      nativeBuildInputs = old.nativeBuildInputs ++ [ pkgs.makeWrapper ];
+
+      postFixup = ''
+        wrapProgram $out/opt/Discord/Discord --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland}}"
+      '';
+    }))
+
   ];
 }
