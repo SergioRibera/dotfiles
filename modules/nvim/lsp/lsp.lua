@@ -91,7 +91,7 @@ override_handlers()
 setup_sign_icons()
 
 -- default LSP
-local lsp_servers = {"bashls", "cssls", "jsonls", "html", "nil_ls", "pyright", "rnix", "tailwindcss", "taplo", "yamlls"}
+local lsp_servers = {"bashls", "cssls", "dockerls", "jsonls", "html", "nil_ls", "pyright", "rnix", "tailwindcss", "taplo", "yamlls"}
 for s in pairs(lsp_servers) do
     lspconfig[lsp_servers[s]].setup {
         on_attach = on_attach,
