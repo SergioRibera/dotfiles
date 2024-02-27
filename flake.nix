@@ -29,9 +29,10 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    sss.url = "github:SergioRibera/sss";
     hm = {
-        url = "github:nix-community/home-manager";
-	inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+	    inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   nixConfig = {

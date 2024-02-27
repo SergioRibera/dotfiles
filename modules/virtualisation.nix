@@ -1,8 +1,8 @@
 _: {
-    virtualisation = {
-        docker = {
-            enable = true;
-            enableOnBoot = true;
-        };
+  virtualisation = {
+    docker = {
+      enable = true;
+      enableOnBoot = true;
     };
+  };
 }

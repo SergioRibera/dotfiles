@@ -1,5 +1,6 @@
-{pkgs, user, ...}: let
-   lsp-progress = pkgs.vimUtils.buildVimPlugin {
+{ pkgs, user, ... }:
+let
+  lsp-progress = pkgs.vimUtils.buildVimPlugin {
     pname = "lsp-progress.nvim";
     version = "2023-12-21";
     src = pkgs.fetchFromGitHub {
@@ -10,7 +11,7 @@
     };
     meta.homepage = "https://github.com/linrongbin16/lsp-progress.nvim";
   };
-   cmp-dotenv = pkgs.vimUtils.buildVimPlugin {
+  cmp-dotenv = pkgs.vimUtils.buildVimPlugin {
     pname = "cmp-dotenv.nvim";
     version = "2023-12-26";
     src = pkgs.fetchFromGitHub {
@@ -21,94 +22,107 @@
     };
     meta.homepage = "https://github.com/SergioRibera/cmp-dotenv";
   };
-in {
-    packages = with pkgs; [
-    	# Rust
-	taplo
+  codeshot = pkgs.vimUtils.buildVimPlugin {
+    pname = "codeshot.nvim";
+    version = "2023-12-26";
+    src = pkgs.fetchFromGitHub {
+      owner = "SergioRibera";
+      repo = "codeshot.nvim";
+      rev = "4931944474a7c3d99ba97ca5c7e81ade1a199f10";
+      sha256 = "sha256-kvyiYsZV6BqGzkFa7moE9DAitP0uIM9yDQh378SGAjU=";
+    };
+    meta.homepage = "https://github.com/SergioRibera/codeshot.nvim";
+  };
+in
+{
+  packages = with pkgs; [
+    # Rust
+    taplo
 
-	# Js
-	nodejs
-	nodePackages.typescript-language-server
+    # Js
+    nodejs
+    nodePackages.typescript-language-server
 
-	# Python
-	python3
-	nodePackages.pyright
+    # Python
+    python3
+    nodePackages.pyright
 
-	# Lua
-	stylua
-	lua-language-server
+    # Lua
+    stylua
+    lua-language-server
 
-	# Nix
-	rnix-lsp
-	nil
-	alejandra
+    # Nix
+    rnix-lsp
+    nil
+    alejandra
 
-	# Web
-	nodePackages.tailwindcss
-	nodePackages.prettier
-	nodePackages."@tailwindcss/language-server"
-	nodePackages.vscode-html-languageserver-bin
-	nodePackages.vscode-css-languageserver-bin
+    # Web
+    nodePackages.tailwindcss
+    nodePackages.prettier
+    nodePackages."@tailwindcss/language-server"
+    nodePackages.vscode-html-languageserver-bin
+    nodePackages.vscode-css-languageserver-bin
 
-	# Utils
-        fd
-	ripgrep
+    # Utils
+    fd
+    ripgrep
 
-	# Others
-	nodePackages.bash-language-server
-	nodePackages.vscode-json-languageserver
-        nodePackages.yaml-language-server
+    # Others
+    nodePackages.bash-language-server
+    nodePackages.vscode-json-languageserver
+    nodePackages.yaml-language-server
 
-        # Extras
-        luajitPackages.jsregexp
-    ];
-    plugins = with pkgs.vimPlugins; [
-        # Colors
-        nvim-colorizer-lua
-        nvim-treesitter.withAllGrammars
-        rainbow-delimiters-nvim
-        # completion
-        neogen
-        cmp-nvim-lsp
-        cmp-dotenv
-        cmp-nvim-lsp-signature-help
-        # Snippets
-        luasnip
-        cmp_luasnip
-        friendly-snippets
-        # LSP
-        crates-nvim
-        trouble-nvim   # show diagnostics
-        lspkind-nvim   # icons for lsp
-        # status bar
-        nvim-navic
-        lsp-progress
-        # Editor
-        nvim-ufo
-        promise-async
-        cheatsheet-nvim
-        editorconfig-nvim
-        # UI
-        nvim-web-devicons
-        telescope-media-files-nvim
-        # Debug
-        # just println! xd
-        # nvim-dap
-        # nvim-dap-ui
-        # nvim-dap-virtual-text
-        #
-        # Extras
-        plenary-nvim
-        twilight-nvim
-        nvim-notify
-        # git
-        (import ./git.nix {inherit user pkgs;})
-        # misc
-        vim-wakatime
-        presence-nvim
-        # instant-nvim # no one I work with uses nvim so it makes no sense
-        dial-nvim
-        (import ./lsp_progress.nix {inherit pkgs;})
-        # (import ./nvim_conf.nix {inherit pkgs;})
-    ];
+    # Extras
+    luajitPackages.jsregexp
+  ];
+  plugins = with pkgs.vimPlugins; [
+    # Colors
+    nvim-colorizer-lua
+    nvim-treesitter.withAllGrammars
+    rainbow-delimiters-nvim
+    # completion
+    neogen
+    cmp-nvim-lsp
+    cmp-dotenv
+    cmp-nvim-lsp-signature-help
+    # Snippets
+    luasnip
+    cmp_luasnip
+    friendly-snippets
+    # LSP
+    crates-nvim
+    trouble-nvim # show diagnostics
+    lspkind-nvim # icons for lsp
+    # status bar
+    nvim-navic
+    lsp-progress
+    # Editor
+    nvim-ufo
+    promise-async
+    cheatsheet-nvim
+    editorconfig-nvim
+    # UI
+    nvim-web-devicons
+    telescope-media-files-nvim
+    # Debug
+    # just println! xd
+    # nvim-dap
+    # nvim-dap-ui
+    # nvim-dap-virtual-text
+    #
+    # Extras
+    codeshot
+    plenary-nvim
+    twilight-nvim
+    nvim-notify
+    # git
+    (import ./git.nix { inherit user pkgs; })
+    # misc
+    vim-wakatime
+    presence-nvim
+    # instant-nvim # no one I work with uses nvim so it makes no sense
+    dial-nvim
+    (import ./lsp_progress.nix { inherit pkgs; })
+    # (import ./nvim_conf.nix {inherit pkgs;})
+  ];
 }

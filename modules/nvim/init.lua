@@ -30,7 +30,7 @@ if g.neovide ~= nil then
 end
 
 -- vim.o.guifont = 'minecraft enchantment:h13;'
-vim.o.guifont = 'FiraCode Nerd Font:h13;CaskaydiaCove Nerd Font:h13'
+vim.o.guifont = 'FiraCode_Nerd_Font,CaskaydiaCove_Nerd_Font:h13'
 
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 local function opt(scope, key, value)
@@ -82,3 +82,10 @@ opt("o", "smartcase", true)
 require("ibl").setup()
 require("nvim-autopairs").setup()
 require("nvim-surround").setup()
+
+-- require("codeshot").setup {
+--   copy = true,
+--   window_controls = true,
+--   background = '#323232',
+--   output = "~/Pictures/Screenshot/CodeShot_${year}-${month}-${date}_${time}.png",
+-- }

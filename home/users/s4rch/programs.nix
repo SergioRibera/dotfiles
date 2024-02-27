@@ -11,6 +11,7 @@
     git = import ../../../modules/git { inherit pkgs; };
     rofi = import ../../../modules/rofi { inherit pkgs; };
     wezterm = import ../../../modules/wezterm { inherit pkgs; };
+    sss = import ../../../modules/sss.nix;
   };
 
   services = {

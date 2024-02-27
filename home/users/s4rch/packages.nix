@@ -15,6 +15,7 @@
     cargo-make
     cargo-expand
     cargo-generate
+    cargo-dist
 
     # python
     python3
@@ -23,6 +24,7 @@
     nodePackages.tailwindcss
 
     # Utils
+    gitui
     scrcpy
     statix
     jq
@@ -52,6 +54,7 @@
     font-manager
     obs-studio
     screenkey
+    poedit
 
     # Icons
     papirus-icon-theme
@@ -62,6 +65,7 @@
     # Social
     telegram-desktop
     # Discord
+    vesktop
     ((discord.override {
       nss = pkgs.nss_latest;
       withOpenASAR = true;

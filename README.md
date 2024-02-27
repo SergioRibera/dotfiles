@@ -9,7 +9,7 @@ To install it see the next steps:
 > [!IMPORTANT]
 > List of hosts:
 > - laptop: settings for personal laptop with 2 monitors
-> 
+>
 > List of users:
 > - s4rch: Personal user with graphical interface and ready-to-use environment
 
@@ -56,5 +56,5 @@ sudo chown -R $USER /etc/nixos
 ## Thanks to
 This good people who helped me when learning nix-related stuff! really, thanks!
 
-- [Lemin-n](https://github.com/Lemin-n)
-- [L I N U X](https://github.com/linuxmobile)
+- [Lemin-n](https://github.com/Lemin-n/dotfiles)
+- [L I N U X](https://github.com/linuxmobile/kaku)
