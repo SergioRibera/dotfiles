@@ -31,6 +31,7 @@
                     lsr = "eza -Tlxa --icons --group-directories-first";
                     lsd = "eza -GDx --icons --color always";
                     cat = "bat";
+                    nixdev = "nix develop -c 'fish'";
                     nixclear = "nix-store --gc";
                     nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
                     nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";

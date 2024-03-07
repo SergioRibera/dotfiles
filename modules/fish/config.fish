@@ -39,11 +39,16 @@ function promt_status -S -a last_status
     end
 
     if [ "$fish_private_mode" ]
-        set user_char "  "
+        set user_char " 󰊪 "
     end
 
     if [ -n "$SSH_CLIENT" ]
         set user_char "  "
+    end
+
+    if [ -n "$IN_NIX_SHELL" ]
+      set user_char_color '#82BCE5'
+      set user_char "  "
     end
 
     set_color --bold $user_char_color
@@ -57,7 +62,7 @@ function fish_prompt
 
     # Data row
     echo -n -s \n(set_color --bold green)\ (whoami)(set_color normal):\ \
-        (set_color blue)(prompt_pwd)(set_color normal)\ 
+        (set_color blue)(prompt_pwd)(set_color normal)\
 
     _is_git_folder; and _prompt_git
 
