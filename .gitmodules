@@ -1,6 +1,0 @@
-[submodule "configs/nvim"]
-	path = configs/nvim
-	url = https://github.com/SergioRibera/NvimDotFiles
-[submodule "configs/.\\spicetify\\Themes"]
-	path = configs/.\\spicetify\\Themes
-	url = git@github.com:morpheusthewhite/spicetify-themes.git
