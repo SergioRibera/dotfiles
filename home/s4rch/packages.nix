@@ -1,5 +1,8 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    # Compresion
+    ouch
+
     # Js
     bun
     nodejs
@@ -9,58 +12,55 @@
 
     # Rust Develoment
     fenix.stable.toolchain
-    cargo-leptos
     leptosfmt
     trunk
+
+    # Cargo extras
     cargo-make
+    cargo-leptos
     cargo-expand
     cargo-generate
     cargo-dist
+    cargo-release
 
     # python
     python3
 
-    # Web Develoment
-    nodePackages.tailwindcss
+    # cloudflare
+    cloudflared
+    nodePackages.wrangler
+
+    # Docker
+    docker-compose
 
     # Utils
     gitui
     scrcpy
-    statix
-    jq
     neofetch
     xdg-utils
     wev
+    ntfs3g
 
     # Bluetooth
-    bluez
-    blueman
+    # bluez
+    # blueman
 
     # Hyprland
-    grim
     slurp
     wl-clipboard
     hyprpicker
     swww
     xwaylandvideobridge
 
-    # Browser
-    microsoft-edge
-
     # GUI
     feh
     neovide
     pavucontrol
-    font-manager
     obs-studio
     screenkey
-    poedit
 
     # Icons
     papirus-icon-theme
-
-    # Audio plugins
-    easyeffects
 
     # Social
     telegram-desktop

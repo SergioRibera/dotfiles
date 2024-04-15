@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, ... }: {
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
   security.pam.services.login.enableGnomeKeyring = true;
@@ -25,6 +25,7 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
+
     xserver = {
       layout = "us";
       videoDrivers = [ "amdgpu" ];

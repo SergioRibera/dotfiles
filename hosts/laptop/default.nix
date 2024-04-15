@@ -1,20 +1,21 @@
 { pkgs, ... }: {
+
   imports = [
     ./hardware-configuration.nix
-    ../../modules
-    ../../home
   ];
 
-  laptop = {
+  # home-manager.useGlobalPkgs = true;
+  # home-manager.useUserPackages = true;
+
+  user = {
     isNormalUser = true;
+    enableHM = true;
+    enableMan = true;
+    enableGUI = true;
     username = "s4rch";
-    cfgType = "complete";
+    gitname = "Sergio Ribera";
+    gitemail = "56278796+SergioRibera@users.noreply.github.com";
     shell = pkgs.fish;
     groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
   };
-
-  nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  system.stateVersion = "23.11"; # Did you read the comment?
 }

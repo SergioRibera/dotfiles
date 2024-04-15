@@ -1,21 +1,21 @@
 { pkgs, config, ... }:
 let
-  user = config.laptop;
+  inherit (config) user;
 in
 {
   home-manager.users."${user.username}".xdg = {
-    enable = true;
+    enable = user.enableGUI;
     userDirs = {
-      enable = true;
+      enable = user.enableGUI;
       music = null;
       desktop = null;
       publicShare = null;
-      createDirectories = true;
+      createDirectories = user.enableGUI;
     };
   };
   xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
+    enable = user.enableGUI;
+    xdgOpenUsePortal = user.enableGUI;
     config = {
       common.default = [ "gtk" ];
       hyprland.default = [ "gtk" "hyprland" ];

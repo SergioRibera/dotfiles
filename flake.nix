@@ -1,40 +1,69 @@
 {
   description = "SergioRibera NixOS System Configuration";
-  outputs = inputs:
+  outputs = { nixpkgs, config, ... }@inputs:
+    let
+      # System types to support.
+      supportedSystems = [
+        "x86_64-linux"
+        # "x86_64-darwin"
+        "aarch64-linux"
+        # "aarch64-darwin"
+      ];
+
+      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+      # forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+    in
     inputs.flake-parts.lib.mkFlake
-    {
-      inherit inputs;
-    }
-    {
-      systems = ["x86_64-linux"];
-      imports = [./hosts];
-      perSystem = {
-        config,
-        pkgs,
-        ...
-      }: {
-        devShells.default = pkgs.mkShell {
-          packages = [pkgs.alejandra pkgs.git];
-          name = "nixdev";
-          DIRENV_LOG_FORMAT = "";
-        };
-        # Nix Formatter
-        formatter = pkgs.alejandra;
+      {
+        inherit inputs;
+      }
+      {
+        systems = supportedSystems;
+        imports = [ ./hosts ];
+
+        # packages =
+        #   let
+        #     neovim =
+        #       system:
+        #       let
+        #         pkgs = import nixpkgs { inherit system; };
+        #       in
+        #       import ./modules/nvim {
+        #         inherit pkgs;
+        #         colors = (import ./colorscheme/gruvbox-dark).dark;
+        #       };
+        #   in
+        #   {
+        #     # Package Neovim config into standalone package
+        #     x86_64-linux.neovim = neovim "x86_64-linux";
+        #     x86_64-darwin.neovim = neovim "x86_64-darwin";
+        #     aarch64-linux.neovim = neovim "aarch64-linux";
+        #     aarch64-darwin.neovim = neovim "aarch64-darwin";
+        #   };
+
+        # # Programs that can be run by calling this flake
+        # apps = forAllSystems (
+        #   system:
+        #   let
+        #     pkgs = import nixpkgs { inherit system; };
+        #   in
+        #   import ./apps { inherit pkgs; }
+        # );
       };
-    };
 
   inputs = {
     fenix = {
-        url = "github:nix-community/fenix";
+      url = "github:nix-community/fenix";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     sss.url = "github:SergioRibera/sss";
-    hm = {
+    home-manager = {
       url = "github:nix-community/home-manager";
-	    inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"

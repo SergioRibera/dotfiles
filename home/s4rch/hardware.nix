@@ -1,11 +1,6 @@
 { pkgs, ... }: {
   hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = false;
-    };
-
-    brillo.enable = true;
+    bluetooth.enable = false;
 
     opengl = {
       enable = true;

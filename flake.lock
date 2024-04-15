@@ -130,18 +130,18 @@
         "type": "github"
       }
     },
-    "hm": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1706435589,
-        "narHash": "sha256-yhEYJxMv5BkfmUuNe4QELKo+V5eq1pwhtVs6kEziHfE=",
+        "lastModified": 1713131281,
+        "narHash": "sha256-/Jm1X9MPfLXAxZSCdWmQAFNUQggEfNWHol5jSyyzFzw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4d54c29bce71f8c261513e0662cc573d30f3e33e",
+        "rev": "9f32c66a51d05e6d4ec0dea555bbff9135749ec7",
         "type": "github"
       },
       "original": {
@@ -268,7 +268,7 @@
       "inputs": {
         "fenix": "fenix",
         "flake-parts": "flake-parts",
-        "hm": "hm",
+        "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "sss": "sss"
       }
