@@ -1,6 +1,6 @@
 {
   description = "SergioRibera NixOS System Configuration";
-  outputs = { nixpkgs, config, ... }@inputs:
+  outputs = { nixpkgs, ... }@inputs:
     let
       # System types to support.
       supportedSystems = [

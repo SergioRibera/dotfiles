@@ -4,9 +4,6 @@
     ./hardware-configuration.nix
   ];
 
-  # home-manager.useGlobalPkgs = true;
-  # home-manager.useUserPackages = true;
-
   user = {
     isNormalUser = true;
     enableHM = true;

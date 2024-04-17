@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ lib, config, ... }:
 let
   inherit (config) user;
+  home = {
+    stateVersion = user.osVersion;
+    inherit (user) username;
+    homeDirectory = user.homepath;
+  };
 in
 {
   imports = [
@@ -11,11 +16,15 @@ in
     ./common/network.nix
     ./common/xdg.nix
     ./common/virtualisation.nix
-  ] ++ pkgs.lib.optionals user.enableGUI [
+  ] ++ lib.optionals user.enableGUI [
     ./common/fonts.nix
   ];
 
+  inherit home;
   programs.home-manager.enable = user.enableHM;
+  home-manager.useGlobalPkgs = user.enableHM;
+  home-manager.useUserPackages = user.enableHM;
+
 
   # homeConfigurations.${user.username} = home-manager.lib.homeManagerConfiguration {
   #   inherit pkgs;
@@ -28,23 +37,14 @@ in
   #   };
   # };
 
-  # home-manage.users.${user.username} = {}: {
-  #   home = {
-  #     stateVersion = user.osVersion;
-  #     inherit (user) username;
-  #     homeDirectory = user.homepath;
-  #   };
-  # };
-
-  home = {
-    stateVersion = user.osVersion;
-    inherit (user) username;
-    homeDirectory = user.homepath;
-  };
-
   manual = {
     json.enable = false;
     html.enable = false;
     manpages.enable = user.enableMan;
+  };
+
+  home-manager.users = lib.optionals user.enableHM {
+    inherit home;
+    "${user.username}" = { pkgs, ... }: { };
   };
 }

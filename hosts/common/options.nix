@@ -1,13 +1,12 @@
 { config
-, pkgs
+, lib
 , ...
 }:
 let
   inherit (config) user;
 in
 {
-
-  options.user = with pkgs.lib; {
+  options.user = with lib; {
     touchpad = mkEnableOption "Enable touchpad this host";
     enableHM = mkEnableOption "Enable home-manager this host";
     enableMan = mkEnableOption "Enable man pages this host";
@@ -49,9 +48,5 @@ in
       extraGroups = user.groups;
       ignoreShellProgramCheck = true;
     };
-
-    # home-manager.users = pkgs.lib.optionals user.enableHM {
-    #   "${user.username}" = { pkgs, ... }: { };
-    # };
   };
 }
