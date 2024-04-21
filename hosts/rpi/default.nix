@@ -24,7 +24,6 @@ inputs.nixpkgs.lib.nixosSystem {
         isNormalUser = true;
         enableHM = true;
         enableMan = true;
-        shell = "nushell";
         groups = [ "wheel" "docker" "networkmanager" "input" ];
       };
     }

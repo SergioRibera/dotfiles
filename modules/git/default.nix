@@ -1,8 +1,11 @@
-{ ... }: {
-  enable = true;
+{ config, lib, ... }:
+let
+  inherit (config.git) enable name email;
+in
+lib.mkIf enable {
   lfs.enable = true;
-  userName = "Sergio Ribera";
-  userEmail = "56278796+SergioRibera@users.noreply.github.com";
+  userName = name;
+  userEmail = email;
   extraConfig = {
     gpg.format = "ssh";
     init = {
@@ -17,7 +20,7 @@
     options = {
       line-number = true;
       side-by-side = true;
-      syntax-theme = "gruvbox-dark";
+      syntax-theme = config.gui.theme.colors.batTheme;
       whitespace-error-style = "22 reverse";
       features = "decorations";
       interactive = {

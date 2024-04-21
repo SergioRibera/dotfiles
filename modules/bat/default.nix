@@ -1,6 +1,7 @@
 { pkgs, config, ... }: {
   enable = true;
-  extraPackages = with pkgs.bat-extras; [ batman batpipe batdiff batgrep batwatch prettybat ];
+  # TODO: add aliases or config for bat-extras
+  extraPackages = with pkgs.bat-extras; [ batman batpipe batdiff batgrep ];
   config = {
     map-syntax = [
       "*.jenkinsfile:Groovy"

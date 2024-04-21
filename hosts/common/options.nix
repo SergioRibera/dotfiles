@@ -12,6 +12,7 @@ in
         description = "Enable graphics.";
         default = false;
       };
+      touchpad = mkEnableOption "Enable touchpad this host";
       theme = {
         description = "Define theming of configuration";
         name = mkOption {
@@ -36,8 +37,21 @@ in
         };
       };
     };
+    git = {
+      enable = mkEnableOption {
+        description = "Enable git.";
+        default = false;
+      };
+      name = mkOption {
+        type = types.str;
+        default = "Sergio Ribera";
+      };
+      email = mkOption {
+        type = types.str;
+        default = "56278796+SergioRibera@users.noreply.github.com";
+      };
+    };
     user = {
-      touchpad = mkEnableOption "Enable touchpad this host";
       enableHM = mkEnableOption "Enable home-manager this host";
       enableMan = mkEnableOption "Enable man pages this host";
       osVersion = mkOption {
@@ -45,12 +59,6 @@ in
         default = "24.05";
       };
       username = mkOption {
-        type = types.str;
-      };
-      gitname = mkOption {
-        type = types.str;
-      };
-      gitemail = mkOption {
         type = types.str;
       };
       isNormalUser = mkOption {
@@ -62,7 +70,7 @@ in
         default = "/home/${user.username}";
       };
       shell = mkOption {
-        type = types.enum ["fish" "nushell"];
+        type = types.enum ["fish"];
         default = "fish";
       };
       groups = mkOption {

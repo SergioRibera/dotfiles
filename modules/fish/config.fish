@@ -19,6 +19,13 @@ function promt_status -S -a last_status
     and [ (id -u) == 0 ]
     and set superuser 1
 
+    switch (uname)
+        case Darwin
+          set user_char = '  '
+        case '*'
+          set user_char = '  '
+    end
+
     # User Input row
     # Detect errors or other
     set_color normal
@@ -39,6 +46,7 @@ function promt_status -S -a last_status
     end
 
     if [ "$fish_private_mode" ]
+        set user_char_color '#D485AD'
         set user_char " 󰊪 "
     end
 

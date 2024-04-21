@@ -1,24 +1,24 @@
 { lib, config, inputs, ... }:
 let
-  inherit (config) user gui;
+  inherit (config) user git gui;
   inherit (user) username;
-  guiImports = lib.optionals gui.enable [
-    ./common/fonts.nix
-  ];
 in
 {
   imports = [
-    # ./${username} # Load home user configs
-    # ../modules/nvim # TODO
-    # ../modules/git # TODO
+    # ./${config.user.username}
     ./common/time.nix
     ./common/network.nix
     ./common/xdg.nix
     ./common/virtualisation.nix
-  ] ++ lib.optional (builtins.pathExists ./${username}) [ ./${username} ];
+    ./common/fonts.nix
+  ];
+  # Load home user configs
+  # ++ lib.optional (builtins.pathExists ./${username}) [ ./${username} ]
+  # Load GUI configs
+  # ++ guiImports;
 
   users.users."${username}" = {
-    inherit (user) isNormalUser;
+    isNormalUser = user.isNormalUser;
     name = username;
     home = user.homepath;
   };
@@ -27,14 +27,21 @@ in
   home-manager.useGlobalPkgs = user.enableHM;
   home-manager.useUserPackages = user.enableHM;
   home-manager.users = lib.mkIf user.enableHM {
-    "${username}" = { pkgs, config, ... }: {
+    "${username}" = { lib, pkgs, ... }: {
       programs.home-manager.enable = user.enableHM;
       home = {
         inherit username;
         homeDirectory = user.homepath;
         stateVersion = user.osVersion;
-        packages = import ./${username}/packages.nix { inherit pkgs; };
+        # packages = lib.optional (builtins.pathExists ./${username}/packages.nix) (import ./${username}/packages.nix { inherit pkgs; });
+        packages = import ./${username}/packages.nix { inherit pkgs config lib; };
       };
     };
+  };
+
+  programs = {
+    "${user.shell}".enable = true;
+    git.enable = git.enable;
+    # ../modules/nvim # TODO
   };
 }

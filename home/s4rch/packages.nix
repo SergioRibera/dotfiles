@@ -1,4 +1,4 @@
-{ pkgs, ... }: with pkgs;
+{ pkgs, lib, config, ... }: with pkgs;
 [
   # Compresion
   ouch
@@ -45,6 +45,16 @@
   # bluez
   # blueman
 
+  # GUI
+  neovide
+  obs-studio
+
+  # Social
+  telegram-desktop
+  # Discord
+  discord
+] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
+
   # Hyprland
   slurp
   wl-clipboard
@@ -62,20 +72,6 @@
   # Icons
   papirus-icon-theme
 
-  # Social
-  telegram-desktop
   # Discord
   vesktop
-  ((discord.override {
-    nss = pkgs.nss_latest;
-    withOpenASAR = true;
-    withVencord = true;
-  }).overrideAttrs (old: {
-    libPath = old.libPath + ":${pkgs.libglvnd}/lib";
-    nativeBuildInputs = old.nativeBuildInputs ++ [ pkgs.makeWrapper ];
-
-    postFixup = ''
-      wrapProgram $out/opt/Discord/Discord --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland}}"
-    '';
-  }))
 ]

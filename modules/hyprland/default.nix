@@ -1,10 +1,17 @@
-{
+{ gui, lib }: {
   enable = true;
   xwayland.enable = true;
   settings = {
     monitor = [ "eDP-1,1600x900@60,1080x1020,1" "HDMI-A-1,1920x1080@60,0x0,1,transform,3" ];
     workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
-    exec-once = [ "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY" "udiskie" "dunst" "thunar --daemon" "swww init" "wallpaper -t 8h --no-allow-video -d -b" ];
+    exec-once = [
+      "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY"
+      "udiskie"
+      "thunar --daemon"
+      "swww init"
+      "wallpaper -t 8h --no-allow-video -d -b"
+      "hyprctl dispatcher focusmonitor 1"
+    ];
     env = [ "XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH" ];
 
     input = {
@@ -17,7 +24,7 @@
       numlock_by_default = true;
       scroll_method = "on_button_down";
       scroll_button = 274;
-      touchpad = {
+      touchpad = lib.mkIf gui.touchpad {
         natural_scroll = true;
         middle_button_emulation = true;
       };
@@ -136,15 +143,16 @@
       "SUPER_SHIFT,F,fullscreen,"
       "SUPER,T,pseudo,"
       "SUPER,W,killactive,"
-      "SUPER,Q,exit,"
+      # TODO: replace MOD+Q by power menu
+      # "SUPER,Q,exit,"
       #
       # Custom Exec Keybinds
       #
       "SUPER,Return,exec,wezterm start"
-      "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
+      # "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
       "SUPER,E,exec,thunar"
-      "SUPER,D,exec,trilium"
-      "SUPER,Tab,exec,rofi -show window"
+      # "SUPER,D,exec,trilium"
+      "SUPER,Tab,exec,pkill .anyrun-wrapped || run-as-service anyrun"
       "SUPER_SHIFT,Tab,exec,rofi -show drun"
       "SUPER,N,exec,firefox"
       "SUPER_SHIFT,N,exec,firefox --private-window"

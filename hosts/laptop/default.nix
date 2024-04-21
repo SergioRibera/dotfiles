@@ -20,14 +20,14 @@ inputs.nixpkgs.lib.nixosSystem {
       powerManagement.cpuFreqGovernor = "performance";
 
       gui.enable = true;
+      gui.touchpad = true;
+      git.enable = true;
 
       user = {
         inherit username;
         isNormalUser = true;
         enableHM = true;
         enableMan = true;
-        gitname = "Sergio Ribera";
-        gitemail = "56278796+SergioRibera@users.noreply.github.com";
         groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
       };
     }
