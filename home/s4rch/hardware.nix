@@ -1,7 +1,5 @@
 { pkgs, ... }: {
   hardware = {
-    bluetooth.enable = false;
-
     opengl = {
       enable = true;
       # Vulkan

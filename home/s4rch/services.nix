@@ -27,7 +27,7 @@
     };
 
     xserver = {
-      layout = "us";
+      xkb.layout = "us";
       videoDrivers = [ "amdgpu" ];
     };
   };

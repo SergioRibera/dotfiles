@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  username = "s4rch";
+  username = "s3rver";
 in
 inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
@@ -19,16 +19,13 @@ inputs.nixpkgs.lib.nixosSystem {
       # Prioritize performance over efficiency
       powerManagement.cpuFreqGovernor = "performance";
 
-      gui.enable = true;
-
       user = {
         inherit username;
         isNormalUser = true;
         enableHM = true;
         enableMan = true;
-        gitname = "Sergio Ribera";
-        gitemail = "56278796+SergioRibera@users.noreply.github.com";
-        groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
+        shell = "nushell";
+        groups = [ "wheel" "docker" "networkmanager" "input" ];
       };
     }
   ];

@@ -1,50 +1,40 @@
-{ lib, config, ... }:
+{ lib, config, inputs, ... }:
 let
-  inherit (config) user;
-  home = {
-    stateVersion = user.osVersion;
-    inherit (user) username;
-    homeDirectory = user.homepath;
-  };
+  inherit (config) user gui;
+  inherit (user) username;
+  guiImports = lib.optionals gui.enable [
+    ./common/fonts.nix
+  ];
 in
 {
   imports = [
-    "./${user.username}" # Load home user configs
-    ../modules/nvim # TODO
-    ../modules/git # TODO
+    # ./${username} # Load home user configs
+    # ../modules/nvim # TODO
+    # ../modules/git # TODO
     ./common/time.nix
     ./common/network.nix
     ./common/xdg.nix
     ./common/virtualisation.nix
-  ] ++ lib.optionals user.enableGUI [
-    ./common/fonts.nix
-  ];
+  ] ++ lib.optional (builtins.pathExists ./${username}) [ ./${username} ];
 
-  inherit home;
-  programs.home-manager.enable = user.enableHM;
-  home-manager.useGlobalPkgs = user.enableHM;
-  home-manager.useUserPackages = user.enableHM;
-
-
-  # homeConfigurations.${user.username} = home-manager.lib.homeManagerConfiguration {
-  #   inherit pkgs;
-
-  #   programs.home-manager.enable = user.enableHM;
-  #   home = {
-  #     stateVersion = user.osVersion;
-  #     inherit (user) username;
-  #     homeDirectory = user.homepath;
-  #   };
-  # };
-
-  manual = {
-    json.enable = false;
-    html.enable = false;
-    manpages.enable = user.enableMan;
+  users.users."${username}" = {
+    inherit (user) isNormalUser;
+    name = username;
+    home = user.homepath;
   };
 
-  home-manager.users = lib.optionals user.enableHM {
-    inherit home;
-    "${user.username}" = { pkgs, ... }: { };
+  nixpkgs.overlays = [ inputs.fenix.overlays.default ];
+  home-manager.useGlobalPkgs = user.enableHM;
+  home-manager.useUserPackages = user.enableHM;
+  home-manager.users = lib.mkIf user.enableHM {
+    "${username}" = { pkgs, config, ... }: {
+      programs.home-manager.enable = user.enableHM;
+      home = {
+        inherit username;
+        homeDirectory = user.homepath;
+        stateVersion = user.osVersion;
+        packages = import ./${username}/packages.nix { inherit pkgs; };
+      };
+    };
   };
 }

@@ -1,21 +1,21 @@
 { config, ... }:
 let
-  inherit (config) user;
-  shell = user.shell.pname;
+  inherit (config) user gui;
+  shell = user.shell;
 in
 {
   programs = {
-    "${shell}".enable = true;
+    # "${shell}".enable = true;
 
     adb.enable = true;
     thunar = {
-      enable = user.enableGUI;
+      enable = gui.enable;
       plugins = [ ];
     };
 
-    hyprland.enable = user.enableGUI;
+    hyprland.enable = gui.enable;
     firefox = {
-      enable = user.enableGUI;
+      enable = gui.enable;
       preferencesStatus = "user";
     };
   };

@@ -7,7 +7,10 @@ in
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
     warn-dirty = false;
+    auto-optimise-store = true;
+    builders-use-substitutes = true;
     experimental-features = [ "nix-command" "flakes" ];
+    trustedUsers = [ "root" "@wheel" ];
   };
 
   system.stateVersion = osVersion;

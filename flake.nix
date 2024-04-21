@@ -1,9 +1,10 @@
 {
   description = "SergioRibera NixOS System Configuration";
-  outputs = { nixpkgs, ... }@inputs:
+  outputs =
+    { self, nixpkgs, ... }@inputs:
     let
       # System types to support.
-      supportedSystems = [
+      systems = [
         "x86_64-linux"
         # "x86_64-darwin"
         "aarch64-linux"
@@ -11,51 +12,34 @@
       ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-      # forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      forEachSystem = nixpkgs.lib.genAttrs systems;
+      nixpkgsFor = forEachSystem (system:
+        import nixpkgs { inherit system; }
+      );
     in
-    inputs.flake-parts.lib.mkFlake
-      {
-        inherit inputs;
-      }
-      {
-        systems = supportedSystems;
-        imports = [ ./hosts ];
-
-        # packages =
-        #   let
-        #     neovim =
-        #       system:
-        #       let
-        #         pkgs = import nixpkgs { inherit system; };
-        #       in
-        #       import ./modules/nvim {
-        #         inherit pkgs;
-        #         colors = (import ./colorscheme/gruvbox-dark).dark;
-        #       };
-        #   in
-        #   {
-        #     # Package Neovim config into standalone package
-        #     x86_64-linux.neovim = neovim "x86_64-linux";
-        #     x86_64-darwin.neovim = neovim "x86_64-darwin";
-        #     aarch64-linux.neovim = neovim "aarch64-linux";
-        #     aarch64-darwin.neovim = neovim "aarch64-darwin";
-        #   };
-
-        # # Programs that can be run by calling this flake
-        # apps = forAllSystems (
-        #   system:
-        #   let
-        #     pkgs = import nixpkgs { inherit system; };
-        #   in
-        #   import ./apps { inherit pkgs; }
-        # );
+    {
+      packages = forEachSystem (system:
+        import ./pkgs { pkgs = nixpkgsFor.${system}; }
+      );
+      # Contains my full system builds, including home-manager
+      # nixos-rebuild switch --flake .#laptop
+      nixosConfigurations = {
+        laptop = import ./hosts/laptop { inherit inputs; };
+        rpi = import ./hosts/rpi { inherit inputs; };
       };
 
-  inputs = {
-    fenix = {
-      url = "github:nix-community/fenix";
+      # For quickly applying home-manager settings with:
+      # home-manager switch --flake .#s4rch
+      # homeConfigurations = {
+      #   s4rch = nixosConfigurations.laptop.config.home-manager.users.s4rch.home;
+      #   s3rver = nixosConfigurations.rpi.config.home-manager.users.s3rver.home;
+      # };
     };
+
+  inputs = {
+    fenix.url = "github:nix-community/fenix";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    fu.url = "github:numtide/flake-utils";
     flake-parts.url = "github:hercules-ci/flake-parts";
     sss.url = "github:SergioRibera/sss";
     home-manager = {
@@ -67,7 +51,6 @@
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
-      "https://helix.cachix.org"
       "https://fufexan.cachix.org"
       "https://hyprland.cachix.org"
       "https://cache.privatevoid.net"

@@ -1,28 +1,28 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 let
-  inherit (config) user;
+  inherit (config) user gui;
 in
 {
-  home-manager.users."${user.username}".xdg = {
-    enable = user.enableGUI;
+  home-manager.users."${user.username}".xdg = lib.mkIf gui.enable {
+    enable = true;
     userDirs = {
-      enable = user.enableGUI;
+      enable = true;
       music = null;
       desktop = null;
       publicShare = null;
-      createDirectories = user.enableGUI;
+      createDirectories = true;
     };
-  };
-  xdg.portal = {
-    enable = user.enableGUI;
-    xdgOpenUsePortal = user.enableGUI;
-    config = {
-      common.default = [ "gtk" ];
-      hyprland.default = [ "gtk" "hyprland" ];
-    };
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      config = {
+        common.default = [ "gtk" ];
+        hyprland.default = [ "gtk" "hyprland" ];
+      };
 
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
   };
 }
