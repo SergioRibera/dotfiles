@@ -19,6 +19,11 @@ inputs.nixpkgs.lib.nixosSystem {
       # Prioritize performance over efficiency
       powerManagement.cpuFreqGovernor = "performance";
 
+      nvim = {
+        neovide = false;
+        complete = false;
+      };
+
       user = {
         inherit username;
         isNormalUser = true;

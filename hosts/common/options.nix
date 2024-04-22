@@ -40,7 +40,7 @@ in
     git = {
       enable = mkEnableOption {
         description = "Enable git.";
-        default = false;
+        default = true;
       };
       name = mkOption {
         type = types.str;
@@ -49,6 +49,20 @@ in
       email = mkOption {
         type = types.str;
         default = "56278796+SergioRibera@users.noreply.github.com";
+      };
+    };
+    nvim = {
+      enable = mkEnableOption {
+        description = "Enable nvim.";
+        default = true;
+      };
+      neovide = mkEnableOption {
+        description = "Enable nvim.";
+        default = true;
+      };
+      complete = mkEnableOption {
+        description = "Enable all configs for nvim.";
+        default = true;
       };
     };
     user = {

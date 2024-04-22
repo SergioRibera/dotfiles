@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: with pkgs;
+{ inputs, pkgs, lib, config, ... }: with pkgs;
 [
   # Compresion
   ouch
@@ -54,13 +54,13 @@
   # Discord
   discord
 ] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
-
   # Hyprland
   slurp
   wl-clipboard
   hyprpicker
   swww
   xwaylandvideobridge
+  # inputs.self.packages.${pkgs.system}.hyprswitch
 
   # GUI
   feh

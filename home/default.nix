@@ -13,7 +13,7 @@ in
     ./common/fonts.nix
   ];
   # Load home user configs
-  # ++ lib.optional (builtins.pathExists ./${username}) [ ./${username} ]
+  # ++ lib.lists.optionals (builtins.pathExists ./${username}) [ ./${username} ];
   # Load GUI configs
   # ++ guiImports;
 
@@ -28,13 +28,20 @@ in
   home-manager.useUserPackages = user.enableHM;
   home-manager.users = lib.mkIf user.enableHM {
     "${username}" = { lib, pkgs, ... }: {
-      programs.home-manager.enable = user.enableHM;
+      programs.home-manager.enable = true;
       home = {
         inherit username;
         homeDirectory = user.homepath;
         stateVersion = user.osVersion;
+
         # packages = lib.optional (builtins.pathExists ./${username}/packages.nix) (import ./${username}/packages.nix { inherit pkgs; });
-        packages = import ./${username}/packages.nix { inherit pkgs config lib; };
+        packages = import ./${username}/packages.nix { inherit inputs pkgs config lib; };
+      };
+
+      manual = {
+        html.enable = false;
+        json.enable = false;
+        manpages.enable = user.enableMan;
       };
     };
   };

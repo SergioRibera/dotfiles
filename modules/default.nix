@@ -3,10 +3,14 @@ let
   inherit (config) user gui;
 in
 {
+  imports = [
+      ./nvim
+  ];
+
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ pkgs, lib, ... }: {
     imports = [
       inputs.anyrun.homeManagerModules.default
-      # inputs.sss.nixosModules.home-manager
+      inputs.sss.nixosModules.home-manager
     ];
 
     programs = {
@@ -24,11 +28,10 @@ in
         });
 
       # enable and configure others
-      git = import ./git { inherit pkgs config lib; };
+      git = lib.mkIf config.git.enable (import ./git { inherit config; });
       # TODO: fix problems with sss
-      # sss = import ./sss.nix;
+      # sss = lib.mkIf gui.enable (import ./sss.nix { inherit config; });
       wezterm = lib.mkIf gui.enable (import ./wezterm);
-      # ../modules/nvim # TODO
     };
 
     wayland.windowManager.hyprland = lib.mkIf

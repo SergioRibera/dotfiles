@@ -21,7 +21,6 @@ inputs.nixpkgs.lib.nixosSystem {
 
       gui.enable = true;
       gui.touchpad = true;
-      git.enable = true;
 
       user = {
         inherit username;

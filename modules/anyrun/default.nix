@@ -12,11 +12,11 @@ in
     plugins = with inputs.anyrun.packages.${pkgs.system}; [
       applications
       rink
+      randr
       shell
     ];
 
     width.fraction = 0.3;
-    y.absolute = 15;
     hidePluginInfo = true;
     closeOnClick = true;
   };
@@ -31,9 +31,15 @@ in
     '';
     "shell.ron".text = ''
       Config(
-        prefix: ":sh",
+        prefix: "c",
         // Override the shell used to launch the command
         shell: Some("fish -P"),
+      )
+    '';
+    "randr.ron".text = ''
+      Config(
+        prefix: "r",
+        max_entries: 5,
       )
     '';
   };

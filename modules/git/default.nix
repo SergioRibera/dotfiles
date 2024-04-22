@@ -1,8 +1,9 @@
-{ config, lib, ... }:
+{ config }:
 let
-  inherit (config.git) enable name email;
+  inherit (config.git) name email;
 in
-lib.mkIf enable {
+{
+  enable = true;
   lfs.enable = true;
   userName = name;
   userEmail = email;
