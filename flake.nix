@@ -21,12 +21,21 @@
       packages = forEachSystem (system:
         import ./pkgs { pkgs = nixpkgsFor.${system}; }
       );
+
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#laptop
       nixosConfigurations = {
         laptop = import ./hosts/laptop { inherit inputs; };
         rpi = import ./hosts/rpi { inherit inputs; };
       };
+
+      # Programs that can be run by calling this flake
+      apps = forEachSystem (system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
+        import ./apps { inherit pkgs; }
+      );
 
       # For quickly applying home-manager settings with:
       # home-manager switch --flake .#s4rch
@@ -50,8 +59,24 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     anyrun.url = "github:Kirottu/anyrun";
+    # My tool to take screen/code screenshots
     sss = {
       url = "github:SergioRibera/sss";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # nixificate my neovim configs
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # Wallpapers
+    # wallpapers = {
+    #   url = "github:SergioRibera/wallpapers";
+    #   flake = false;
+    # };
+    # Used to generate NixOS images for other platforms
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
