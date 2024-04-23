@@ -22,6 +22,9 @@
         import ./pkgs { pkgs = nixpkgsFor.${system}; }
       );
 
+      overlays = {
+      };
+
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#laptop
       nixosConfigurations = {
@@ -34,7 +37,7 @@
         let
           pkgs = import nixpkgs { inherit system; };
         in
-        import ./apps { inherit pkgs; }
+        import ./apps { inherit inputs pkgs; }
       );
 
       # For quickly applying home-manager settings with:
