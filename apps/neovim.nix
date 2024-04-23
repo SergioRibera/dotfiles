@@ -1,7 +1,7 @@
-{ pkgs, complete, ... }:
+{ inputs, pkgs, complete, ... }:
 let
   src = (import ../modules/nvim/package {
-    inherit pkgs;
+    inherit inputs pkgs;
     lib = pkgs.lib;
     user = { };
     cfg = {
@@ -17,7 +17,7 @@ let
     };
   });
 
-  bin = if complete then "${pkgs.neovide}/bin/neovide" else "${pkgs.neovim}/bin/nvim";
+  bin = if complete then "${src}/bin/neovide" else "${src}/bin/nvim";
 in
 {
   type = "app";

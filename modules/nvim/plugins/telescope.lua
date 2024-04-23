@@ -86,7 +86,6 @@ require("telescope").load_extension("media_files")
 require("telescope").load_extension("ui-select")
 
 local opt = {noremap = true, silent = true}
--- vim.g.mapleader = " "
 -- mappings
 register_map("n", "<Leader>ff", [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], opt, "telescope", "Show and find files on workspace with preview")
 
