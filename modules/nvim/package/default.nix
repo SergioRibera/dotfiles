@@ -18,6 +18,7 @@ let
   completePlugins = optional cfg.complete (cfg.plugins ++ [ nvimLsp ]);
   modPluginsLua = optionalString cfg.complete (builtins.readFile ../plugins/mod.lua);
   miscLua = optionalString cfg.complete (builtins.readFile ../misc.lua);
+  cmpUtilsLua = optionalString cfg.complete (builtins.readFile ../plugins/cmp.lua);
 in
 inputs.nixvim.mkNixvim {
   enable = true;
@@ -28,7 +29,8 @@ inputs.nixvim.mkNixvim {
 
   extraPackages = [ pkgs.ripgrep pkgs.fd ] ++ completePackages;
 
-  extraLuaConfig = utilsLua
+  extraConfigLuaPre = utilsLua
+    + cmpUtilsLua
     + miscLua
     + modPluginsLua
     + mappingLua
@@ -56,6 +58,12 @@ inputs.nixvim.mkNixvim {
       event = [ "CursorHold" "CursorHoldI" ];
       pattern = [ "*" ];
       command = "checktime";
+    }
+    # Prevent correct works cmp with telescope
+    {
+      event = [ "FileType" ];
+      pattern = [ "TelescopePrompt" ];
+      command = "lua require('cmp').setup.buffer { enabled = false }";
     }
   ];
 
@@ -114,10 +122,9 @@ inputs.nixvim.mkNixvim {
   plugins = {
     # completion
     cmp = import ../plugins/cmp.nix { inherit cfg; };
-    # cmp-path
-    # cmp-buffer
-    # cmp-cmdline
-    # (import ../plugins/cmp.lua { inherit user pkgs; })
+    cmp-buffer.enable = true;
+    cmp-cmdline.enable = true;
+    cmp-path.enable = true;
     # # status bar
     # (import ../plugins/lualine.nix { inherit user pkgs; })
     # # Editor
