@@ -94,7 +94,6 @@ in
     trouble-nvim # show diagnostics
     lspkind-nvim # icons for lsp
     # status bar
-    nvim-navic
     lsp-progress
     # Editor
     nvim-ufo

@@ -40,6 +40,10 @@ inputs.nixvim.mkNixvim {
   # colorscheme
   highlight = import ../colorscheme.nix { inherit (gui) colors; };
 
+  autoGroups = {
+    lualine_augroup.clear = true;
+  };
+
   autoCmd = [
     # generate views to record state of file
     {
@@ -64,6 +68,14 @@ inputs.nixvim.mkNixvim {
       event = [ "FileType" ];
       pattern = [ "TelescopePrompt" ];
       command = "lua require('cmp').setup.buffer { enabled = false }";
+    }
+  ] ++ lib.lists.optiona cfg.complete [
+    # Refresh LSP progress on lualine
+    {
+      event = "User";
+      group = "lualine_augroup";
+      pattern = [ "LspProgressStatusUpdated" ];
+      callback = { __raw = "require('lualine').refresh"; };
     }
   ];
 
@@ -126,7 +138,7 @@ inputs.nixvim.mkNixvim {
     cmp-cmdline.enable = true;
     cmp-path.enable = true;
     # # status bar
-    # (import ../plugins/lualine.nix { inherit user pkgs; })
+    lualine = import ../plugins/lualine.nix { inherit user pkgs; colors = gui.colors; };
     # # Editor
     # nvim-autopairs
     # nvim-surround
@@ -136,5 +148,5 @@ inputs.nixvim.mkNixvim {
     # telescope-ui-select-nvim
     # popup-nvim
     # (import ../plugins/telescope.nix { inherit user pkgs; })
-  };
+  } // completePlugins;
 }
