@@ -136,9 +136,6 @@ inputs.nixvim.mkNixvim {
     nvim-autopairs.enable = true;
     indent-blankline.enable = true;
     # # UI
-    # telescope-file-browser-nvim
-    # telescope-ui-select-nvim
-    # popup-nvim
     telescope = import ../plugins/telescope.nix { inherit cfg lib; };
   } // completePlugins;
 
