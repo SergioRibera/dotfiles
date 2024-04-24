@@ -27,10 +27,12 @@ in
   viAlias = true;
   vimAlias = true;
 
+  # Packages
   extraPackages = [ pkgs.ripgrep pkgs.fd ]
-   ++ lists.optionals (gui.enable && cfg.neovide) [ pkgs.neovide ]
-   ++ completePackages;
+    ++ lists.optionals (gui.enable && cfg.neovide) [ pkgs.neovide ]
+    ++ completePackages;
 
+  # Raw lua
   extraConfigLuaPre = utilsLua
     + cmpUtilsLua
     + miscLua
@@ -38,14 +40,17 @@ in
     + mappingLua
     + tablineLua;
 
+  # Neovim options
   opts = import ../opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
-  # colorscheme
+  # Colorscheme
   highlightOverride = import ../colorscheme.nix { inherit (gui.theme) colors; };
 
+  # Groups
   autoGroups = {
     lualine_augroup.clear = true;
   };
 
+  # Neovim Commands
   autoCmd = [
     # generate views to record state of file
     {
@@ -81,6 +86,7 @@ in
     }
   ];
 
+  # Global Options
   globals = import ../globals.nix {
     lib = pkgs.lib;
     colors = gui.theme.colors;
@@ -88,6 +94,7 @@ in
     complete = cfg.complete;
   };
 
+  # Esential plugins
   plugins = {
     # completion
     cmp = import ../plugins/cmp.nix { inherit cfg; lib = pkgs.lib; };
@@ -104,6 +111,7 @@ in
     # telescope = import ../plugins/telescope.nix { inherit cfg; lib = pkgs.lib; };
   } // completePlugins;
 
+  # Plugins from GitHub
   extraPlugins = [
     # Editor
     (pkgs.vimUtils.buildVimPlugin {
