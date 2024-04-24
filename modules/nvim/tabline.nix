@@ -1,33 +1,33 @@
+{ colors }: ''
 local set_hl = hl.set_hl
 local gen_hl = hl.gen_hl
 
 local tabline = {}
 local fn = vim.fn
-local theme = require('base16-colorscheme').colors
 
 tabline.options = {
     show_index = false,
     show_modify = true,
     show_icon = true,
     show_close = false,
-    separator = '',
-    spacing = '',
-    close_icon = '×',
+    separator = "",
+    spacing = "",
+    close_icon = "×",
     close_command = "deletebuf !",
     indicators = {
-        modify = '•'
+        modify = "•"
     },
-    no_name = '[No Name]',
+    no_name = "[No Name]",
     colors = {
         selected = {
-            bg = theme.base01,
-            fg = theme.base0B
+            bg = "${colors.base01}",
+            fg = "${colors.base0B}"
         },
         disabled = {
-            bg = theme.base02,
-            fg = theme.base03
+            bg = "${colors.base02}",
+            fg = "${colors.base03}"
         },
-        empty = theme.base00
+        empty = "${colors.base00}"
     },
 }
 
@@ -57,7 +57,7 @@ function tabline.make_clickable(id, func_name, component)
 end
 
 function tabline.get_icon(name, extension, selected, opts)
-    local ok, devicons = pcall(require, 'nvim-web-devicons')
+    local ok, devicons = pcall(require, "nvim-web-devicons")
     if ok then
         local icon, icon_hgroup = devicons.get_icon(name, extension)
         if icon then
@@ -67,14 +67,14 @@ function tabline.get_icon(name, extension, selected, opts)
             end
             return gen_hl(icon_hgroup, new_icon_hgroup, selected, opts, icon)
         end
-        return ''
+        return ""
     else
-        ok = vim.fn.exists('*WebDevIconsGetFileTypeSymbol')
+        ok = vim.fn.exists("*WebDevIconsGetFileTypeSymbol")
         if ok ~= 0 then
-            return vim.fn.WebDevIconsGetFileTypeSymbol() .. ' '
+            return vim.fn.WebDevIconsGetFileTypeSymbol() .. " "
         end
     end
-    return ''
+    return ""
 end
 
 function tabline.set_tabline_hl()
@@ -111,20 +111,20 @@ function tabline.set_tabline_hl()
 end
 
 function tabline.render()
-    local s = ''
-    for index = 1, fn.tabpagenr('$') do
+    local s = ""
+    for index = 1, fn.tabpagenr("$") do
         local winnr = fn.tabpagewinnr(index)
         local buflist = fn.tabpagebuflist(index)
         local bufnr = buflist[winnr]
         local bufname = fn.bufname(bufnr)
         local bufmodified = fn.getbufvar(bufnr, "&mod")
-        local gengroup = '%#TabLine#'
+        local gengroup = "%#TabLine#"
         local separatorgroup = "%#TabLineSep#"
 
-        s = s .. '%' .. index .. 'T'
+        s = s .. "%" .. index .. "T"
         if index == fn.tabpagenr() then -- Current is selected
-            gengroup = '%#TabLineSel#'
-            if index == fn.tabpagenr('$') then
+            gengroup = "%#TabLineSel#"
+            if index == fn.tabpagenr("$") then
                 separatorgroup = "%#TabLineSepEndSel#"
             else
                 separatorgroup = "%#TabLineSepSel#"
@@ -132,7 +132,7 @@ function tabline.render()
             -- TODO: made color border on multiple case
         elseif (index + 1) == fn.tabpagenr() then -- Next is selected
             separatorgroup = "%#TabLineSepNextSel#"
-        elseif index == fn.tabpagenr('$') then
+        elseif index == fn.tabpagenr("$") then
             separatorgroup = "%#TabLineSepEnd#"
         else -- Not Selected
             separatorgroup = "%#TabLineSep#"
@@ -143,22 +143,22 @@ function tabline.render()
         if tabline.options.show_index then
             s = s .. index
         end
-        s = s .. ' '
+        s = s .. " "
         if tabline.options.show_icon then
             s = s ..
-                tabline.get_icon(fn.fnamemodify(bufname, ':e'), fn.fnamemodify(bufname, ':e'), index == fn.tabpagenr(), tabline.options)
-                .. gengroup .. ' '
+                tabline.get_icon(fn.fnamemodify(bufname, ":e"), fn.fnamemodify(bufname, ":e"), index == fn.tabpagenr(), tabline.options)
+                .. gengroup .. " "
         end
         -- buf name
-        if bufname ~= '' then
-            s = s .. fn.fnamemodify(bufname, ':t')
+        if bufname ~= "" then
+            s = s .. fn.fnamemodify(bufname, ":t")
         else
             s = s .. tabline.options.no_name
         end
 
         -- modification indicator
         if tabline.options.show_modify and bufmodified == 1 then
-            s = s .. ' ' .. tabline.options.indicators.modify .. ' '
+            s = s .. " " .. tabline.options.indicators.modify .. " "
         end
         if tabline.options.show_close then
             s = s ..
@@ -169,7 +169,7 @@ function tabline.render()
         s = s .. separatorgroup .. tabline.options.separator .. gengroup .. tabline.options.spacing
     end
 
-    s = s .. '%#TabLineFill#'
+    s = s .. "%#TabLineFill#"
     return s
 end
 
@@ -182,3 +182,4 @@ vim.o.showtabline = 2
 vim.o.tabline = "%!v:lua.s4rch_tabline()"
 
 vim.g.loaded_s4rch_tabline = 1
+''
