@@ -85,14 +85,6 @@ inputs.nixvim.mkNixvim {
     instant_username = user.username;
     autoread = true;
 
-    # Identline
-    indentLine_enabled = 1;
-    indentLine_char_list = [ "▏" "¦" "┆" "┊" ];
-    ident_blankline_ident_level = 4;
-    indent_blankline_show_current_context = true;
-    indent_blankline_use_treesitter = true;
-    indent_blankline_context_patterns = [ "class" "function" "method" "void" "keyword" ];
-
     neovide_cursor_antialiasing = cfg.complete; # Neovide cursor Antialiasing
     neovide_cursor_vfx_mode = optional cfg.complete "ripple";
   } // lib.mkIf (!cfg.complete) {
@@ -137,12 +129,12 @@ inputs.nixvim.mkNixvim {
     cmp-buffer.enable = true;
     cmp-cmdline.enable = true;
     cmp-path.enable = true;
-    # # status bar
+    # status bar
     lualine = import ../plugins/lualine.nix { inherit user pkgs; colors = gui.colors; };
-    # # Editor
-    # nvim-autopairs
-    # nvim-surround
-    # indent-blankline-nvim
+    # Editor
+    nvim-colorizer.enable = cfg.complete;
+    nvim-autopairs.enable = true;
+    indent-blankline.enable = true;
     # # UI
     # telescope-file-browser-nvim
     # telescope-ui-select-nvim
