@@ -125,12 +125,12 @@ inputs.nixvim.mkNixvim {
 
   plugins = {
     # completion
-    cmp = import ../plugins/cmp.nix { inherit cfg; };
+    cmp = import ../plugins/cmp.nix { inherit cfg lib; };
     cmp-buffer.enable = true;
     cmp-cmdline.enable = true;
     cmp-path.enable = true;
     # status bar
-    lualine = import ../plugins/lualine.nix { inherit user pkgs; colors = gui.colors; };
+    lualine = import ../plugins/lualine.nix { inherit lib cfg pkgs; colors = gui.colors; };
     # Editor
     nvim-colorizer.enable = cfg.complete;
     nvim-autopairs.enable = true;
@@ -139,7 +139,7 @@ inputs.nixvim.mkNixvim {
     # telescope-file-browser-nvim
     # telescope-ui-select-nvim
     # popup-nvim
-    # (import ../plugins/telescope.nix { inherit user pkgs; })
+    telescope = import ../plugins/telescope.nix { inherit cfg lib; };
   } // completePlugins;
 
   extraPlugins = [
