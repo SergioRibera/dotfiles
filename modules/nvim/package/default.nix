@@ -69,7 +69,7 @@ inputs.nixvim.mkNixvim {
       pattern = [ "TelescopePrompt" ];
       command = "lua require('cmp').setup.buffer { enabled = false }";
     }
-  ] ++ lib.lists.optiona cfg.complete [
+  ] ++ lib.lists.optional cfg.complete [
     # Refresh LSP progress on lualine
     {
       event = "User";
@@ -79,48 +79,11 @@ inputs.nixvim.mkNixvim {
     }
   ];
 
-  globals = {
-    loaded_s4rch_tabline = 1;
-    mapleader = " ";
-    instant_username = user.username;
-    autoread = true;
-
-    neovide_cursor_antialiasing = cfg.complete; # Neovide cursor Antialiasing
-    neovide_cursor_vfx_mode = optional cfg.complete "ripple";
-  } // lib.mkIf (!cfg.complete) {
-    # Nvim Terminal
-    terminal_color_0 = gui.theme.colors.base00;
-    terminal_color_1 = gui.theme.colors.base08;
-    terminal_color_2 = gui.theme.colors.base0B;
-    terminal_color_3 = gui.theme.colors.base0A;
-    terminal_color_4 = gui.theme.colors.base0D;
-    terminal_color_5 = gui.theme.colors.base0E;
-    terminal_color_6 = gui.theme.colors.base0C;
-    terminal_color_7 = gui.theme.colors.base05;
-    terminal_color_8 = gui.theme.colors.base03;
-    terminal_color_9 = gui.theme.colors.base08;
-    terminal_color_10 = gui.theme.colors.base0B;
-    terminal_color_11 = gui.theme.colors.base0A;
-    terminal_color_12 = gui.theme.colors.base0D;
-    terminal_color_13 = gui.theme.colors.base0E;
-    terminal_color_14 = gui.theme.colors.base0C;
-    terminal_color_15 = gui.theme.colors.base07;
-    base16_gui00 = gui.theme.colors.base00;
-    base16_gui01 = gui.theme.colors.base01;
-    base16_gui02 = gui.theme.colors.base02;
-    base16_gui03 = gui.theme.colors.base03;
-    base16_gui04 = gui.theme.colors.base04;
-    base16_gui05 = gui.theme.colors.base05;
-    base16_gui06 = gui.theme.colors.base06;
-    base16_gui07 = gui.theme.colors.base07;
-    base16_gui08 = gui.theme.colors.base08;
-    base16_gui09 = gui.theme.colors.base09;
-    base16_gui0A = gui.theme.colors.base0A;
-    base16_gui0B = gui.theme.colors.base0B;
-    base16_gui0C = gui.theme.colors.base0C;
-    base16_gui0D = gui.theme.colors.base0D;
-    base16_gui0E = gui.theme.colors.base0E;
-    base16_gui0F = gui.theme.colors.base0F;
+  globals = import ../globals.nix {
+    lib = lib;
+    colors = gui.colors;
+    username = user.username;
+    complete = cfg.complete;
   };
 
   plugins = {
