@@ -1,6 +1,6 @@
 { lib, config, inputs, ... }:
 let
-  inherit (config) user git gui;
+  inherit (config) user git;
   inherit (user) username;
 in
 {
@@ -49,6 +49,5 @@ in
   programs = {
     "${user.shell}".enable = true;
     git.enable = git.enable;
-    # ../modules/nvim # TODO
   };
 }

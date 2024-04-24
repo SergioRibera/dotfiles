@@ -1,7 +1,10 @@
 {lib, guiEnable}: {
-  o = {
     completeopt = "menu,menuone,noselect";
     guifont = lib.optional guiEnable "FiraCode_Nerd_Font,CaskaydiaCove_Nerd_Font:h13";
+    number = true;
+    # cul = true;
+    signcolumn = "yes";
+    relativenumber = true;
     hidden = true;
     ignorecase = true;
     splitbelow = true;
@@ -16,7 +19,7 @@
     formatoptions = "tcqrn1";
     autoindent = true;
     smartindent = true;
-    guicursor = "n-i:blinkon250";
+    # guicursor = "n-i:blinkon250";
     scrolloff = 1;
     backspace = "indent,eol,start";
     ttyfast = true;
@@ -27,15 +30,7 @@
     hlsearch = true;
     incsearch = true;
     smartcase = true;
-  };
-  bo = {
+
     expandtab = true;
     shiftwidth = 4;
-  };
-  wo = {
-    number = true;
-    cul = true;
-    signcolumn = "yes";
-    rnu = true;
-  };
 }

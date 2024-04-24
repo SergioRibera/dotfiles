@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-      ./nvim
+      ./nvim # TODO: import correctly nvim
   ];
 
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ pkgs, lib, ... }: {

@@ -1,33 +1,35 @@
-{ inputs
-, pkgs
+{ pkgs
 , cfg
 , user
 , gui
-, lib
 , ...
 }:
-with lib lib.lists;
+with pkgs.lib;
 let
   # import complete config
-  customPlugins = import ../plugins { inherit pkgs user; };
-  nvimLsp = import ../lsp { inherit pkgs; };
+  # customPlugins = import ../plugins { inherit pkgs user; };
+  # nvimLsp = import ../lsp { inherit pkgs; };
   mappingLua = builtins.readFile ../mapping.lua;
   utilsLua = builtins.readFile ../utils.lua;
-  tablineLua = builtins.readFile ../tabline.lua;
-  completePackages = optional cfg.complete customPlugins.packages;
-  completePlugins = optional cfg.complete (cfg.plugins ++ [ nvimLsp ]);
+  tablineLua = (import ../tabline.nix { inherit (gui.theme) colors; });
+  # completePackages = lists.optionals cfg.complete customPlugins.packages;
+  # completePlugins = lists.optionals cfg.complete (customPlugins.plugins ++ [ nvimLsp ]);
+  completePackages = [ ];
+  completePlugins = { };
   modPluginsLua = optionalString cfg.complete (builtins.readFile ../plugins/mod.lua);
   miscLua = optionalString cfg.complete (builtins.readFile ../misc.lua);
   cmpUtilsLua = optionalString cfg.complete (builtins.readFile ../plugins/cmp.lua);
 in
-inputs.nixvim.mkNixvim {
-  enable = true;
+{
+  # enable = true;
   enableMan = false;
-  defaultEditor = true;
+  # defaultEditor = true;
   viAlias = true;
   vimAlias = true;
 
-  extraPackages = [ pkgs.ripgrep pkgs.fd ] ++ completePackages;
+  extraPackages = [ pkgs.ripgrep pkgs.fd ]
+   ++ lists.optionals (gui.enable && cfg.neovide) [ pkgs.neovide ]
+   ++ completePackages;
 
   extraConfigLuaPre = utilsLua
     + cmpUtilsLua
@@ -36,9 +38,9 @@ inputs.nixvim.mkNixvim {
     + mappingLua
     + tablineLua;
 
-  opts = import ../opts.nix { };
+  opts = import ../opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
   # colorscheme
-  highlight = import ../colorscheme.nix { inherit (gui) colors; };
+  highlightOverride = import ../colorscheme.nix { inherit (gui.theme) colors; };
 
   autoGroups = {
     lualine_augroup.clear = true;
@@ -69,7 +71,7 @@ inputs.nixvim.mkNixvim {
       pattern = [ "TelescopePrompt" ];
       command = "lua require('cmp').setup.buffer { enabled = false }";
     }
-  ] ++ lib.lists.optional cfg.complete [
+  ] ++ pkgs.lib.lists.optionals cfg.complete [
     # Refresh LSP progress on lualine
     {
       event = "User";
@@ -80,26 +82,26 @@ inputs.nixvim.mkNixvim {
   ];
 
   globals = import ../globals.nix {
-    lib = lib;
-    colors = gui.colors;
+    lib = pkgs.lib;
+    colors = gui.theme.colors;
     username = user.username;
     complete = cfg.complete;
   };
 
   plugins = {
     # completion
-    cmp = import ../plugins/cmp.nix { inherit cfg lib; };
+    cmp = import ../plugins/cmp.nix { inherit cfg; lib = pkgs.lib; };
     cmp-buffer.enable = true;
     cmp-cmdline.enable = true;
     cmp-path.enable = true;
     # status bar
-    lualine = import ../plugins/lualine.nix { inherit lib cfg pkgs; colors = gui.colors; };
+    lualine = import ../plugins/lualine.nix { inherit cfg; colors = gui.theme.colors; lib = pkgs.lib; };
     # Editor
     nvim-colorizer.enable = cfg.complete;
     nvim-autopairs.enable = true;
     indent-blankline.enable = true;
     # # UI
-    telescope = import ../plugins/telescope.nix { inherit cfg lib; };
+    # telescope = import ../plugins/telescope.nix { inherit cfg; lib = pkgs.lib; };
   } // completePlugins;
 
   extraPlugins = [
@@ -111,20 +113,20 @@ inputs.nixvim.mkNixvim {
         owner = "kylechui";
         repo = "nvim-surround";
         rev = "f7bb9fc4d68ad319d94b1d98ed16f279811f5cc8";
-        sha256 = "";
+        sha256 = "sha256-zi6FtK//HlBhndEYmzUQQtHR4ix73eAxHyB2Z3kmQz8=";
       };
       meta.homepage = "https://github.com/kylechui/nvim-surround";
     })
-  ] ++ lib.lists.optional cfg.complete [
+  ] ++ pkgs.lib.lists.optionals cfg.complete [
     # Editor
-    ( pkgs.vimUtils.buildVimPlugin {
+    (pkgs.vimUtils.buildVimPlugin {
       pname = "lsp-progress.nvim";
       version = "2024-04-02";
       src = pkgs.fetchFromGitHub {
         owner = "linrongbin16";
         repo = "lsp-progress.nvim";
         rev = "47abfc74f21d6b4951b7e998594de085d6715791";
-        sha256 = "";
+        sha256 = "sha256-flM49FBI1z7Imvk5wZW44N9IyLFRIswIe+bskOZ2CT0=";
       };
       meta.homepage = "https://github.com/linrongbin16/lsp-progress.nvim";
     })

@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: rec {
+{ inputs, pkgs }: rec {
   # Show quick helper as default
   default = help;
   help = import ./help.nix { inherit pkgs; };

@@ -14,7 +14,7 @@ in
     home.packages = lib.lists.otpional (nvim.neovide && gui.enable) [ pkgs.neovide ];
 
     programs = {
-      neovim = import ./package { cfg = nvim; inherit gui user; };
+      nixvim = builtins.trace "Generating nxvim" (import ./package { cfg = nvim; inherit inputs pkgs lib gui user; });
       git = import ../git { inherit config; };
       fish = import ../fish { inherit pkgs config lib; };
       wezterm = lib.mkIf gui.enable (import ../wezterm);

@@ -12,11 +12,17 @@
   disabledFiletypes.winbar = [ "Term" ];
 
   sections = {
-    lualine_a = {
-      mode.upper = true;
-    };
-    lualine_b = {
-      branch.icon = "";
+    lualine_a = [
+      {
+        name = "mode";
+        extraConfig.upper = true;
+      }
+    ];
+    lualine_b = [
+      {
+        name = "branch";
+        icon = "";
+      }
       # I not need more this
       # diff = lib.mkIf cfg.complete {
       #   extraConfig = {
@@ -26,9 +32,17 @@
       #     color_removed = colors.base08;
       #   };
       # };
-    };
-    lualine_c = {
-      diagnostics = lib.mkIf cfg.complete {
+    ];
+    lualine_c = [
+      {
+        name = "filename";
+        extraConfig = {
+          fileStatus = true;
+          symbols = { modified = "•"; readonly = ""; };
+        };
+      }
+    ] ++ lib.lists.optionals cfg.complete [
+      {
         name = "diagnostics";
         extraConfig = {
           sources = [ "nvim_diagnostic" ];
@@ -47,16 +61,9 @@
             end
           '';
         };
-      };
-      filename = {
-        name = "filename";
-        icons_enabled = true;
-        file_status = true;
-        symbols = { modified = "•"; readonly = ""; };
-      };
-    };
-    # TODO: add lsp-progress as plugin https://github.com/linrongbin16/lsp-progress.nvim
-    lualine_y = lib.lists.optional cfg.complete [
+      }
+    ];
+    lualine_y = lib.lists.optionals cfg.complete [
       ''
         function() -- Setup lsp-progress component
             return require("lsp-progress").progress({
@@ -65,13 +72,10 @@
         end
       ''
     ];
-    lualine_z = [
-      "progress"
-      "location"
-    ];
+    lualine_z = [ "progress" "location" ];
   };
 
-  inactive_sections = {
+  inactiveSections = {
     lualine_c = [ "filetype" ];
     lualine_x = [ "location" ];
   };

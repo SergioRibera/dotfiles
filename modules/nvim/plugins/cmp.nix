@@ -13,11 +13,6 @@
       ];
     };
   };
-  config =
-    if cfg.complete
-    then builtins.readFile ./cmp.lua
-    else ''
-    '';
   settings = {
     window.documentation.border = [
       "┌"

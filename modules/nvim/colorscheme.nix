@@ -131,14 +131,14 @@
   LspReferenceText = { underline = true; sp = colors.base04; };
   LspReferenceRead = { underline = true; sp = colors.base04; };
   LspReferenceWrite = { underline = true; sp = colors.base04; };
-  LspDiagnosticsDefaultError = "DiagnosticError";
-  LspDiagnosticsDefaultWarning = "DiagnosticWarn";
-  LspDiagnosticsDefaultInformation = "DiagnosticInfo";
-  LspDiagnosticsDefaultHint = "DiagnosticHint";
-  LspDiagnosticsUnderlineError = "DiagnosticUnderlineError";
-  LspDiagnosticsUnderlineWarning = "DiagnosticUnderlineWarning";
-  LspDiagnosticsUnderlineInformation = "DiagnosticUnderlineInformation";
-  LspDiagnosticsUnderlineHint = "DiagnosticUnderlineHint";
+  LspDiagnosticsDefaultError = { link = "DiagnosticError"; };
+  LspDiagnosticsDefaultWarning = { link = "DiagnosticWarn"; };
+  LspDiagnosticsDefaultInformation = { link = "DiagnosticInfo"; };
+  LspDiagnosticsDefaultHint = { link = "DiagnosticHint"; };
+  LspDiagnosticsUnderlineError = { link = "DiagnosticUnderlineError"; };
+  LspDiagnosticsUnderlineWarning = { link = "DiagnosticUnderlineWarning"; };
+  LspDiagnosticsUnderlineInformation = { link = "DiagnosticUnderlineInformation"; };
+  LspDiagnosticsUnderlineHint = { link = "DiagnosticUnderlineHint"; };
 
   TSAnnotation = { fg = colors.base0F; }; # gui = "none"; };
   TSAttribute = { fg = colors.base0A; }; # gui = "none"; };
@@ -244,7 +244,7 @@
   IndentBlanklineChar = { fg = colors.base02; nocombine = true; };
   IndentBlanklineContextChar = { fg = colors.base04; nocombine = true; };
   IblIndent = { fg = colors.base02; nocombine = true; };
-  IblWhitespace = "Whitespace";
+  IblWhitespace = { link = "Whitespace"; };
   IblScope = { fg = colors.base04; nocombine = true; };
 
   # cmp
@@ -306,19 +306,19 @@
   # ["@lsp.type.decorator"] = "@function";
 
   # DapUI
-  DapUINormal = "Normal";
-  DapUIVariable = "Normal";
+  DapUINormal = { link = "Normal"; };
+  DapUIVariable = { link = "Normal"; };
   DapUIScope = { fg = colors.base0D; };
   DapUIType = { fg = colors.base0E; };
-  DapUIValue = "Normal";
+  DapUIValue = { link = "Normal"; };
   DapUIModifiedValue = { bold = true; fg = colors.base0D; };
   DapUIDecoration = { fg = colors.base0D; };
   DapUIThread = { fg = colors.base0B; };
   DapUIStoppedThread = { fg = colors.base0D; };
-  DapUIFrameName = "Normal";
+  DapUIFrameName = { link = "Normal"; };
   DapUISource = { fg = colors.base0E; };
   DapUILineNumber = { fg = colors.base0D; };
-  DapUIFloatNormal = "NormalFloat";
+  DapUIFloatNormal = { link = "NormalFloat"; };
   DapUIFloatBorder = { fg = colors.base0D; };
   DapUIWatchesEmpty = { fg = colors.base08; };
   DapUIWatchesValue = { fg = colors.base0B; };
@@ -326,9 +326,9 @@
   DapUIBreakpointsPath = { fg = colors.base0D; };
   DapUIBreakpointsInfo = { fg = colors.base0B; };
   DapUIBreakpointsCurrentLine = { bold = true; fg = colors.base0B; };
-  DapUIBreakpointsLine = "DapUILineNumber";
+  DapUIBreakpointsLine = { link = "DapUILineNumber"; };
   DapUIBreakpointsDisabledLine = { fg = colors.base02; };
-  DapUICurrentFrameName = "DapUIBreakpointsCurrentLine";
+  DapUICurrentFrameName = { link = "DapUIBreakpointsCurrentLine"; };
   DapUIStepOver = { fg = colors.base0D; };
   DapUIStepInto = { fg = colors.base0D; };
   DapUIStepBack = { fg = colors.base0D; };
@@ -338,8 +338,8 @@
   DapUIRestart = { fg = colors.base0B; };
   DapUIUnavailable = { fg = colors.base02; };
   DapUIWinSelect = { bold = true; fg = colors.base0D; };
-  DapUIEndofBuffer = "EndOfBuffer";
-  DapUINormalNC = "Normal";
+  DapUIEndofBuffer = { link = "EndOfBuffer"; };
+  DapUINormalNC = { link = "Normal"; };
   DapUIPlayPauseNC = { fg = colors.base0B; };
   DapUIRestartNC = { fg = colors.base0B; };
   DapUIStopNC = { fg = colors.base08; };
