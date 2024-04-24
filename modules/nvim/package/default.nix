@@ -141,4 +141,32 @@ inputs.nixvim.mkNixvim {
     # popup-nvim
     # (import ../plugins/telescope.nix { inherit user pkgs; })
   } // completePlugins;
+
+  extraPlugins = [
+    # Editor
+    (pkgs.vimUtils.buildVimPlugin {
+      pname = "nvim-surround";
+      version = "2024-04-11";
+      src = pkgs.fetchFromGitHub {
+        owner = "kylechui";
+        repo = "nvim-surround";
+        rev = "f7bb9fc4d68ad319d94b1d98ed16f279811f5cc8";
+        sha256 = "";
+      };
+      meta.homepage = "https://github.com/kylechui/nvim-surround";
+    })
+  ] ++ lib.lists.optional cfg.complete [
+    # Editor
+    ( pkgs.vimUtils.buildVimPlugin {
+      pname = "lsp-progress.nvim";
+      version = "2024-04-02";
+      src = pkgs.fetchFromGitHub {
+        owner = "linrongbin16";
+        repo = "lsp-progress.nvim";
+        rev = "47abfc74f21d6b4951b7e998594de085d6715791";
+        sha256 = "";
+      };
+      meta.homepage = "https://github.com/linrongbin16/lsp-progress.nvim";
+    })
+  ];
 }
