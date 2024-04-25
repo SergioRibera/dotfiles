@@ -50,28 +50,33 @@
           color_error = colors.base08;
           color_warn = colors.base0E;
           color_info = colors.base05;
-          on_click = ''
-            function(n, b)
-                if n ~= 1 then
-                    return
-                end
-                if b == 'l' or b == 'left' then
-                    vim.cmd(":Trouble<Cr>")
-                end
-            end
-          '';
+          on_click = {
+            __raw = ''
+              function(n, b)
+                  if n ~= 1 then
+                      return
+                  end
+                  if b == 'l' or b == 'left' then
+                      vim.cmd(":Trouble<Cr>")
+                  end
+              end
+            '';
+          };
         };
       }
     ];
-    lualine_y = lib.lists.optionals cfg.complete [
-      ''
-        function() -- Setup lsp-progress component
-            return require("lsp-progress").progress({
-                max_size = 80,
-            })
-        end
-      ''
-    ];
+    # TODO: fix this
+    # lualine_y = lib.lists.optionals cfg.complete [
+    #   {
+    #     __raw = ''
+    #       function() -- Setup lsp-progress component
+    #           return require("lsp-progress").progress({
+    #               max_size = 80,
+    #           })
+    #       end
+    #     '';
+    #   }
+    # ];
     lualine_z = [ "progress" "location" ];
   };
 

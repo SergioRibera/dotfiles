@@ -20,8 +20,8 @@ let
   # completePlugins = lists.optionals cfg.complete (customPlugins.plugins ++ [ nvimLsp ]);
   completePackages = [ ];
   completePlugins = { };
-  modPluginsLua = optionalString cfg.complete (builtins.readFile ../plugins/mod.lua);
-  miscLua = optionalString cfg.complete (builtins.readFile ../misc.lua);
+  # modPluginsLua = optionalString cfg.complete (builtins.readFile ../plugins/mod.lua);
+  # miscLua = optionalString cfg.complete (builtins.readFile ../misc.lua);
   cmpUtilsLua = optionalString cfg.complete (builtins.readFile ../plugins/cmp.lua);
 in
 {
@@ -39,8 +39,8 @@ in
   # Raw lua
   extraConfigLuaPre = utilsLua
     + cmpUtilsLua
-    + miscLua
-    + modPluginsLua
+    # + miscLua
+    # + modPluginsLua
     + tablineLua;
 
   # Neovim options
@@ -128,7 +128,7 @@ in
     nvim-autopairs.enable = true;
     indent-blankline.enable = true;
     # # UI
-    # telescope = import ../plugins/telescope.nix { inherit cfg; lib = pkgs.lib; };
+    telescope = import ../plugins/telescope.nix { inherit cfg; lib = pkgs.lib; };
     which-key.enable = true;
   } // completePlugins;
 

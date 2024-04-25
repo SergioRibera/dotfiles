@@ -19,7 +19,7 @@ in
     # help keymaps
     # register_map("n", "<Leader>hk", [[<Cmd>lua require('telescope.builtin').keymaps()<CR>]], opt, "telescope", "Show ")
     # register_map("n", "<Leader>hk", [[<Cmd>lua show_my_keymaps()<CR>]], opt, "telescope", "Show all my commands to help you")
-  ] ++ lib.lists.optional complete [
+  ] ++ lib.lists.optionals complete [
     #
     # COMPLETE VERSION
     #
@@ -34,7 +34,7 @@ in
     #
     # LSP ONLY IS AVAILABLE ON COMPLETE VERSION
     #
-    LspAttach = lib.lists.optional complete [
+    LspAttach = lib.lists.optionals complete [
       # Codeactions
       { key = "<leader>ga"; action = "<cmd>lua vim.lsp.buf.code_action()<Cr>"; options = opts "Show code actions on line"; }
       # telescope definitions

@@ -46,7 +46,7 @@
     file-browser = {
       enable = true;
       settings = {
-        depth = false;
+        depth = 0;
         hijack_netrw = true;
         select_buffer = true;
         collapse_dirs = true;
@@ -60,7 +60,7 @@
             "<C-c>" = "require('telescope._extensions.file_browser.actions').copy";
             "<C-d>" = "require('telescope._extensions.file_browser.actions').remove";
             "<C-o>" = "require('telescope._extensions.file_browser.actions').open";
-            "<C-t>" = "require('telescope._extensions.file_browser.actions').select_tab";
+            "<C-t>" = "require('telescope.actions').select_tab";
             "<bs>" = "require('telescope._extensions.file_browser.actions').backspace";
           };
           n = {
@@ -71,6 +71,7 @@
             "d" = "require('telescope._extensions.file_browser.actions').remove";
             "o" = "require('telescope._extensions.file_browser.actions').open";
             "h" = "require('telescope._extensions.file_browser.actions').goto_home_dir";
+            "t" = "require('telescope.actions').select_tab";
           };
         };
       };

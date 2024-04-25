@@ -4,6 +4,7 @@ let
     inherit pkgs;
     user = {
       username = "sergioribera";
+      shell = "fish";
     };
     cfg = {
       enable = true;
@@ -19,7 +20,7 @@ let
     };
   }));
 
-  bin = if complete then "${src}/bin/neovide" else "${src}/bin/nvim";
+  bin = if complete then "${src}/bin/nvim" else "${src}/bin/nvim";
 in
 {
   type = "app";
