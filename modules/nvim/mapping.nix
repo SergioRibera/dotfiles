@@ -7,11 +7,6 @@ let
 in
 {
   maps = [
-    # Overwrite to make my leader key work
-    # { key = " "; mode = [ "n" ]; action = "<Nop>"; options = { silent = true; noremap = true; }; }
-    # I have plans to remove this
-    # { key = "q"; action = "<cmd>lua require'telescope.builtin'.loclist()<CR>"; options = opts ""; }
-
     # Tabs
     { key = "<C-h>"; action = ":tabprevious<Cr>"; options = opts "Go to preview tab"; }
     { key = "<C-l>"; action = ":tabnext<Cr>"; options = opts "Go to next tab"; }
@@ -24,7 +19,6 @@ in
     # help keymaps
     # register_map("n", "<Leader>hk", [[<Cmd>lua require('telescope.builtin').keymaps()<CR>]], opt, "telescope", "Show ")
     # register_map("n", "<Leader>hk", [[<Cmd>lua show_my_keymaps()<CR>]], opt, "telescope", "Show all my commands to help you")
-    # register_map("n", "<Leader>?", [[<Cmd>Cheatsheet<CR>]], opt, "telescope", "Show all cheatsheet on Neovim config")
   ] ++ lib.lists.optional complete [
     #
     # COMPLETE VERSION
@@ -49,14 +43,10 @@ in
       { key = "<leader>K"; action = "<Cmd>lua vim.lsp.buf.hover()<CR>"; options = opts "Show details for element where hold cursor"; }
       # Show implementations
       { key = "<leader>gi"; action = "<cmd>lua require'telescope.builtin'.lsp_implementations()<CR>"; options = opts "Show implementations"; }
-      # I have plans to remove this
-      # { key = "<C-k>"; action = "<cmd>lua vim.lsp.buf.signature_help()<CR>"; options = opts ""; }
       # Rename
       { key = "<leader>rn"; action = "<cmd>lua vim.lsp.buf.rename()<CR>"; options = opts "Rename definition"; }
       # Telescope References
       { key = "<leader>gr"; action = "<cmd>lua require('telescope.builtin').lsp_references()<CR>"; options = opts "Show all references of definition"; }
-      # I have plans to remove this
-      # { key = "<leader>ws"; action = "<Cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>"; options = opts "Show all symbols on workspace"; }
       # Format File
       { key = "<C-f>"; action = "<Cmd>lua vim.lsp.buf.format({ tabSize = vim.o.shiftwidth or 4, aync = true })<CR>"; options = opts "Format the current document with LSP"; }
       # Floating Diagnostic
