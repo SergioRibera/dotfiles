@@ -6,7 +6,6 @@
 
   neovide_cursor_antialiasing = complete; # Neovide cursor Antialiasing
   neovide_cursor_vfx_mode = lib.optional complete "ripple";
-} // lib.mkIf (!complete) {
   # Nvim Terminal
   terminal_color_0 = colors.base00;
   terminal_color_1 = colors.base08;

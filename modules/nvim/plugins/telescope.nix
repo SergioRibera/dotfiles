@@ -86,11 +86,6 @@
       };
     };
 
-    # help keymaps
-    # register_map("n", "<Leader>hk", [[<Cmd>lua require('telescope.builtin').keymaps()<CR>]], opt, "telescope", "Show ")
-    # register_map("n", "<Leader>hk", [[<Cmd>lua show_my_keymaps()<CR>]], opt, "telescope", "Show all my commands to help you")
-    # register_map("n", "<Leader>?", [[<Cmd>Cheatsheet<CR>]], opt, "telescope", "Show all cheatsheet on Neovim config")
-
     # Extensions
     "<Leader>n" = {
       action = "file_browser";

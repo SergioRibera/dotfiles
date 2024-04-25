@@ -2,7 +2,9 @@
 let
   src = (inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvim (import ../modules/nvim/package {
     inherit pkgs;
-    user = { };
+    user = {
+      username = "sergioribera";
+    };
     cfg = {
       enable = true;
       neovide = complete;

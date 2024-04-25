@@ -9,7 +9,11 @@ let
   # import complete config
   # customPlugins = import ../plugins { inherit pkgs user; };
   # nvimLsp = import ../lsp { inherit pkgs; };
-  mappingLua = builtins.readFile ../mapping.lua;
+  mykeymaps = import ../mapping.nix {
+    lib = pkgs.lib;
+    shell = user.shell;
+    complete = cfg.complete;
+  };
   utilsLua = builtins.readFile ../utils.lua;
   tablineLua = (import ../tabline.nix { inherit (gui.theme) colors; });
   # completePackages = lists.optionals cfg.complete customPlugins.packages;
@@ -37,13 +41,15 @@ in
     + cmpUtilsLua
     + miscLua
     + modPluginsLua
-    + mappingLua
     + tablineLua;
 
   # Neovim options
   opts = import ../opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
   # Colorscheme
   highlightOverride = import ../colorscheme.nix { inherit (gui.theme) colors; };
+  # Keymaps
+  keymaps = mykeymaps.maps;
+  keymapsOnEvents = mykeymaps.events;
 
   # Groups
   autoGroups = {
