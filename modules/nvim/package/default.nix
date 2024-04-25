@@ -129,6 +129,22 @@ in
     indent-blankline.enable = true;
     # # UI
     telescope = import ../plugins/telescope.nix { inherit cfg; lib = pkgs.lib; };
+    lspkind = {
+      enable = true;
+      cmp = {
+        # ellipsisChar = "...";
+        maxWidth = 50;
+        after = ''
+          function()
+            local m = vim_item.menu and vim_item.menu or ""
+            if #m > 25 then
+              vim_item.menu = string.sub(m, 1, 20) .. "..."
+            end
+            return vim_item
+          end
+        '';
+      };
+    };
     which-key.enable = true;
   } // completePlugins;
 

@@ -14,6 +14,14 @@
     };
   };
   settings = {
+    formatting = {
+      fields = [ "kind" "abbr" "menu" ];
+    };
+    snippet.expand = ''
+      function(args)
+        require('luasnip').lsp_expand(args.body)
+      end
+    '';
     window.documentation.border = [
       "┌"
       "─"
@@ -40,27 +48,6 @@
       { name = "buffer"; }
       { name = "dotenv"; }
     ];
-    formatting = {
-      fields = [ "kind" "abbr" "menu" ];
-      format = lib.mkIf cfg.complete ''
-        lspkind.cmp_format({
-          with_text = false,
-          maxwidth = 50,
-          before = function(_, vim_item)
-            local m = vim_item.menu and vim_item.menu or ""
-            if #m > 25 then
-              vim_item.menu = string.sub(m, 1, 20) .. "..."
-            end
-            return vim_item
-          end,
-        })
-      '';
-    };
-    snippet.expand = ''
-      function(args)
-        require('luasnip').lsp_expand(args.body)
-      end
-    '';
     mapping = lib.mkIf cfg.complete {
       "<BS>" = ''
         cmp.mapping(function(_fallback)
