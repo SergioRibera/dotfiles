@@ -82,6 +82,20 @@ in
       pattern = [ "TelescopePrompt" ];
       command = "lua require('cmp').setup.buffer { enabled = false }";
     }
+    # Show wich-key on startup or blank buffers
+    {
+      event = [ "VimEnter" "BufNewFile" ];
+      pattern = [ "*" ];
+      callback = {
+        __raw = ''
+          function()
+            if vim.fn.empty(vim.fn.expand('%:t')) == 1 then
+              vim.cmd("WhichKey")
+            end
+          end
+        '';
+      };
+    }
   ] ++ pkgs.lib.lists.optionals cfg.complete [
     # Refresh LSP progress on lualine
     {
@@ -115,6 +129,7 @@ in
     indent-blankline.enable = true;
     # # UI
     # telescope = import ../plugins/telescope.nix { inherit cfg; lib = pkgs.lib; };
+    which-key.enable = true;
   } // completePlugins;
 
   # Plugins from GitHub
