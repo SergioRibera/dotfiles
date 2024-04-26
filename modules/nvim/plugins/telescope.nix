@@ -77,32 +77,4 @@
       };
     };
   };
-  keymaps = {
-    "<Leader>ff" = {
-      action = "find_files";
-      mode = [ "n" ];
-      options = {
-        silent = true;
-        desc = "Show and find files on workspace with preview";
-      };
-    };
-
-    # Extensions
-    "<Leader>n" = {
-      action = "file_browser";
-      mode = [ "n" ];
-      options = {
-        silent = true;
-        desc = "Find Files";
-      };
-    };
-    "<Leader>fp" = lib.mkIf cfg.complete {
-      action = "media_files";
-      mode = [ "n" ];
-      options = {
-        silent = true;
-        desc = "Show all media files on project with preview";
-      };
-    };
-  };
 }
