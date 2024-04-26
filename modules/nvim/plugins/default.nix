@@ -47,6 +47,10 @@ in
   telescope = import ../plugins/telescope.nix { inherit cfg; lib = pkgs.lib; };
   lspkind = {
     enable = true;
+    symbolMap = {
+      Folder = "";
+      Enum = "";
+    };
     cmp = {
       # ellipsisChar = "...";
       maxWidth = 50;
@@ -82,6 +86,7 @@ in
   friendly-snippets.enable = true;
 
   # LSP
+  lsp = import ../lsp;
   crates-nvim.enable = true;
 
   # Debug

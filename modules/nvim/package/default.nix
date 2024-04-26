@@ -6,13 +6,6 @@
 }:
 with pkgs.lib;
 let
-  # import complete config
-  # nvimLsp = import ../lsp { inherit pkgs; };
-  mykeymaps = import ../mapping.nix {
-    lib = pkgs.lib;
-    shell = user.shell;
-    complete = cfg.complete;
-  };
   utilsLua = builtins.readFile ../utils.lua;
   tablineLua = (import ../tabline.nix { inherit (gui.theme) colors; });
   # miscLua = optionalString cfg.complete (builtins.readFile ../misc.lua);
@@ -40,8 +33,11 @@ in
   # Colorscheme
   highlightOverride = import ../colorscheme.nix { inherit (gui.theme) colors; };
   # Keymaps
-  keymaps = mykeymaps.maps;
-  keymapsOnEvents = mykeymaps.events;
+  keymaps = import ../mapping.nix {
+    lib = pkgs.lib;
+    shell = user.shell;
+    complete = cfg.complete;
+  };
 
   # Groups
   autoGroups = {
