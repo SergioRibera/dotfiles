@@ -15,7 +15,6 @@ let
   };
   utilsLua = builtins.readFile ../utils.lua;
   tablineLua = (import ../tabline.nix { inherit (gui.theme) colors; });
-  # modPluginsLua = optionalString cfg.complete (builtins.readFile ../plugins/mod.lua);
   # miscLua = optionalString cfg.complete (builtins.readFile ../misc.lua);
   cmpUtilsLua = optionalString cfg.complete (builtins.readFile ../plugins/cmp.lua);
 in
@@ -34,7 +33,6 @@ in
   extraConfigLuaPre = utilsLua
     + cmpUtilsLua
     # + miscLua
-    # + modPluginsLua
     + tablineLua;
 
   # Neovim options
