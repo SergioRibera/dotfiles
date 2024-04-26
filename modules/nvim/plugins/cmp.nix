@@ -51,7 +51,7 @@
     mapping = lib.mkIf cfg.complete {
       "<BS>" = ''
         cmp.mapping(function(_fallback)
-          local keys = smart_bs()
+          local keys = cmp_utils.smart_bs()
           vim.api.nvim_feedkeys(keys, 'nt', true)
         end, { 'i', 's' })
       '';
@@ -64,12 +64,12 @@
             else
               cmp.select_next_item()
             end
-          elseif luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          elseif neogen.jumpable() then
-            neogen.jump_next()
-          elseif in_whitespace() then
-            smart_tab()
+          elseif require("luasnip").expand_or_locally_jumpable() then
+            require("luasnip").expand_or_jump()
+          elseif require("neogen").jumpable() then
+            require("neogen").jump_next()
+          elseif cmp_utils.in_whitespace() then
+            cmp_utils.smart_tab()
           else
             cmp.complete()
             -- else
@@ -82,10 +82,10 @@
         cmp.mapping(function(_fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) and in_snippet() then
-            luasnip.jump(-1)
-          elseif neogen.jumpable(true) then
-            neogen.jump_prev()
+          elseif require("luasnip").jumpable(-1) and cmp_utils.in_snippet() then
+            require("luasnip").jump(-1)
+          elseif require("neogen").jumpable(true) then
+            require("neogen").jump_prev()
           else
             -- cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert })
             cmp.complete()
