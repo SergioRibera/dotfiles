@@ -246,6 +246,13 @@
   IblIndent = { fg = colors.base02; nocombine = true; };
   IblWhitespace = { link = "Whitespace"; };
   IblScope = { fg = colors.base04; nocombine = true; };
+  RainbowRed = { fg = colors.base08; };
+  RainbowYellow = { fg = colors.base0A; };
+  RainbowBlue = { fg = colors.base0D; };
+  RainbowOrange = { fg = colors.base09; };
+  RainbowGreen = { fg = colors.base0B; };
+  RainbowViolet = { fg = colors.base0E; };
+  RainbowCyan = { fg = colors.base0C; };
 
   # cmp
   CmpDocumentationBorder = { fg = colors.base05; bg = colors.base00; };

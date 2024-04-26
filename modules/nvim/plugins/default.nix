@@ -37,7 +37,11 @@ in
 
   # Editor
   nvim-autopairs.enable = true;
-  indent-blankline.enable = true;
+  indent-blankline = {
+    enable = true;
+    settings.indent.char = "▎";
+    settings.indent.smart_indent_cap = true;
+  };
 
   # UI
   telescope = import ../plugins/telescope.nix { inherit cfg; lib = pkgs.lib; };
