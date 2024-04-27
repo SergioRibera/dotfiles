@@ -7,7 +7,7 @@
 with pkgs.lib;
 let
   utilsLua = builtins.readFile ../utils.lua;
-  tablineLua = (import ../tabline.nix { inherit (gui.theme) colors; });
+  tablineLua = import ../tabline.nix;
   cmpUtilsLua = optionalString cfg.complete (builtins.readFile ../plugins/cmp.lua);
 in
 {

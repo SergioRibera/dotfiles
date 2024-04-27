@@ -45,9 +45,14 @@
   QuickFixLine = { bg = colors.base01; }; # gui = "none"; };
   PMenu = { fg = colors.base05; bg = colors.base01; }; # gui = "none"; };
   PMenuSel = { fg = colors.base01; bg = colors.base05; };
-  TabLine = { fg = colors.base03; bg = colors.base01; }; # gui = "none"; };
-  TabLineFill = { fg = colors.base03; bg = colors.base01; }; # gui = "none"; };
+  TabLine = { fg = colors.base03; bg = colors.base02; }; # gui = "none"; };
+  TabLineFill = { fg = colors.base03; bg = colors.base00; }; # gui = "none"; };
   TabLineSel = { fg = colors.base0B; bg = colors.base01; }; # gui = "none"; };
+  TabLineSep = { bg = colors.base02; fg = colors.base02; };
+  TabLineSepSel = { bg = colors.base02; fg = colors.base01; };
+  TabLineSepNextSel = { bg = colors.base01; fg = colors.base02; };
+  TabLineSepEnd = { bg = colors.base00; fg = colors.base02; };
+  TabLineSepEndSel = { bg = colors.base00; fg = colors.base01; };
 
   # Standard syntax highlighting;
   Boolean = { fg = colors.base09; };

@@ -33,4 +33,7 @@
 
   expandtab = true;
   shiftwidth = 4;
+
+  showtabline = 2;
+  tabline = "%!v:lua.custom_tabline()";
 }

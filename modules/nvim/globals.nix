@@ -1,5 +1,5 @@
 { colors, username, complete, lib }: {
-  loaded_s4rch_tabline = 1;
+  loaded_custom_tabline = 1;
   mapleader = " ";
   instant_username = username;
   autoread = true;
