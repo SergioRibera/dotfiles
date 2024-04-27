@@ -23,7 +23,7 @@ in
   # Raw lua
   extraConfigLuaPre = cmpUtilsLua
     + tablineLua
-    + "\nrequire('lsp-progress').setup({ max_size = 80 })";
+    + optionalString cfg.complete "\nrequire('lsp-progress').setup({ max_size = 80 })";
 
   # Neovim options
   opts = import ../opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
