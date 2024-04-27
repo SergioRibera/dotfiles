@@ -8,7 +8,6 @@ with pkgs.lib;
 let
   utilsLua = builtins.readFile ../utils.lua;
   tablineLua = (import ../tabline.nix { inherit (gui.theme) colors; });
-  # miscLua = optionalString cfg.complete (builtins.readFile ../misc.lua);
   cmpUtilsLua = optionalString cfg.complete (builtins.readFile ../plugins/cmp.lua);
 in
 {
@@ -25,8 +24,8 @@ in
   # Raw lua
   extraConfigLuaPre = utilsLua
     + cmpUtilsLua
-    # + miscLua
-    + tablineLua;
+    + tablineLua
+    + "\nrequire('lsp-progress').setup({ max_size = 80 })";
 
   # Neovim options
   opts = import ../opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };

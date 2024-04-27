@@ -65,18 +65,15 @@
         };
       }
     ];
-    # TODO: fix this
-    # lualine_y = lib.lists.optionals cfg.complete [
-    #   {
-    #     __raw = ''
-    #       function() -- Setup lsp-progress component
-    #           return require("lsp-progress").progress({
-    #               max_size = 80,
-    #           })
-    #       end
-    #     '';
-    #   }
-    # ];
+    lualine_y = lib.lists.optionals cfg.complete [
+      {
+        fmt = ''
+          function()
+              return require("lsp-progress").progress()
+          end
+        '';
+      }
+    ];
     lualine_z = [ "progress" "location" ];
   };
 
