@@ -6,7 +6,6 @@
 }:
 with pkgs.lib;
 let
-  utilsLua = builtins.readFile ../utils.lua;
   tablineLua = import ../tabline.nix;
   cmpUtilsLua = optionalString cfg.complete (builtins.readFile ../plugins/cmp.lua);
 in
@@ -22,8 +21,7 @@ in
     ++ lists.optionals (gui.enable && cfg.neovide) [ pkgs.neovide ];
 
   # Raw lua
-  extraConfigLuaPre = utilsLua
-    + cmpUtilsLua
+  extraConfigLuaPre = cmpUtilsLua
     + tablineLua
     + "\nrequire('lsp-progress').setup({ max_size = 80 })";
 
