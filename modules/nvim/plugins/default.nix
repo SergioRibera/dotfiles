@@ -47,6 +47,7 @@ in
   telescope = import ../plugins/telescope.nix { inherit cfg; lib = pkgs.lib; };
   lspkind = {
     enable = true;
+    mode = "symbol";
     symbolMap = {
       Folder = "";
       Enum = "";
