@@ -23,15 +23,6 @@
         name = "branch";
         icon = "";
       }
-      # I not need more this
-      # diff = lib.mkIf cfg.complete {
-      #   extraConfig = {
-      #     symbols = { added = " "; modified = "柳"; removed = " "; };
-      #     color_added = colors.base0B;
-      #     color_modified = colors.base03;
-      #     color_removed = colors.base08;
-      #   };
-      # };
     ];
     lualine_c = [
       {
