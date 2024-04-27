@@ -49,10 +49,8 @@ function tabline.get_icon(name, extension, selected)
     if selected then
       new_hi_group = "TabLineSelect" .. extension
     end
-    print("New HI " .. new_hi_group)
     if vim.fn.hlexists(new_hi_group) == 0 then
       local bg = selected and vim.api.nvim_get_hl(0, { name = "TabLineSel" }).bg or vim.api.nvim_get_hl(0, { name = "TabLine" }).bg
-      print("Creating " .. new_hi_group .. " with " .. utils.dump_table(bg))
       vim.api.nvim_set_hl(0, new_hi_group, { bg = bg, fg = icon_fg })
     end
     return '%#' .. new_hi_group .. '#' .. icon
