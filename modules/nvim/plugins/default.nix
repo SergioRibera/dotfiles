@@ -1,30 +1,6 @@
 { pkgs, user, cfg, gui }:
 let
   lib = pkgs.lib;
-  # Migrate or contribute as custom package
-  # editorconfig-nvim
-  # cmp-dotenv = pkgs.vimUtils.buildVimPlugin {
-  #   pname = "cmp-dotenv.nvim";
-  #   version = "2023-12-26";
-  #   src = pkgs.fetchFromGitHub {
-  #     owner = "SergioRibera";
-  #     repo = "cmp-dotenv";
-  #     rev = "e82cb22a3ee0451592e2d4a4d99e80b97bc96045";
-  #     sha256 = "sha256-AmuFfbzQLSLkRT0xm3f0S4J+3XBpYjshKgjhhAasRLw=";
-  #   };
-  #   meta.homepage = "https://github.com/SergioRibera/cmp-dotenv";
-  # };
-  # codeshot = pkgs.vimUtils.buildVimPlugin {
-  #   pname = "codeshot.nvim";
-  #   version = "2023-12-26";
-  #   src = pkgs.fetchFromGitHub {
-  #     owner = "SergioRibera";
-  #     repo = "codeshot.nvim";
-  #     rev = "4931944474a7c3d99ba97ca5c7e81ade1a199f10";
-  #     sha256 = "sha256-kvyiYsZV6BqGzkFa7moE9DAitP0uIM9yDQh378SGAjU=";
-  #   };
-  #   meta.homepage = "https://github.com/SergioRibera/codeshot.nvim";
-  # };
 in
 {
   # completion

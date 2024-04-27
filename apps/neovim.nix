@@ -1,7 +1,7 @@
 { inputs, pkgs, complete, ... }:
 let
   src = (inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvim (import ../modules/nvim/package {
-    inherit pkgs;
+    inherit inputs pkgs;
     user = {
       username = "sergioribera";
       shell = "fish";
