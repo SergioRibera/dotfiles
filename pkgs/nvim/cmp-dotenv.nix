@@ -4,8 +4,8 @@
   src = pkgs.fetchFromGitHub {
     owner = "SergioRibera";
     repo = "cmp-dotenv";
-    rev = "e82cb22a3ee0451592e2d4a4d99e80b97bc96045";
-    sha256 = "sha256-AmuFfbzQLSLkRT0xm3f0S4J+3XBpYjshKgjhhAasRLw=";
+    rev = "7af67e7ed4fd9e5b20127a624d22452fbd505ccd";
+    sha256 = "sha256-/aQlOE92LPSSv+X968MDw8Mb1Yy4SeqS5xVb4PTBbcw=";
   };
   meta.homepage = "https://github.com/SergioRibera/cmp-dotenv";
 }

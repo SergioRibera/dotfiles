@@ -4,8 +4,8 @@
   src = pkgs.fetchFromGitHub {
     owner = "SergioRibera";
     repo = "codeshot.nvim";
-    rev = "4931944474a7c3d99ba97ca5c7e81ade1a199f10";
-    sha256 = "sha256-kvyiYsZV6BqGzkFa7moE9DAitP0uIM9yDQh378SGAjU=";
+    rev = "82fabc554c2a61c152def9f20c643b330418deb6";
+    sha256 = "sha256-9VJEo3RfFp1IlKRBq/ai1VJhGiV0wuWmN8YQA6Y+O9Y=";
   };
   meta.homepage = "https://github.com/SergioRibera/codeshot.nvim";
 }
