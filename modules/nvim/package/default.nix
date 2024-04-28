@@ -21,6 +21,7 @@ in
   # Packages
   extraPackages = [ pkgs.ripgrep pkgs.fd ]
     ++ lists.optionals (gui.enable && cfg.neovide) [ pkgs.neovide ];
+    # ++ lists.optionals cfg.complete [ pkgs.gdb ];
 
   # Raw lua
   extraConfigLuaPre = cmpUtilsLua

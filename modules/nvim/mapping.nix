@@ -29,12 +29,19 @@ in
   #
   # COMPLETE VERSION
   #
+
   # Telescope
   {
     key = "<Leader>fp";
     action = "<cmd>Telescop media_files<CR>";
     options = opts "Show all media files on project with preview";
   }
+
+  # Dap
+  { key = "<Leader>dt"; action = "<cmd>lua require('dapui').toggle()<CR>"; options = opts "Toggle dap-ui"; }
+  { key = "<Leader>db"; action = "<cmd>DapToggleBreakpoint<CR>"; options = opts "Toggle debug breakpoint"; }
+  { key = "<Leader>dc"; action = "<cmd>DapContinue<CR>"; options = opts "Continue debuggin"; }
+  { key = "<Leader>dr"; action = "<cmd>lua require('dapui).open({reset = true})<CR>"; options = opts "Reset dap-ui"; }
 
   # Take Screenshots using [sss](github:SergioRibera/sss)
   { mode = [ "v" ]; key = "<leader>ps"; action = ":SSSelected<Cr>"; options = opts "Take screenshot"; }

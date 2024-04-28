@@ -68,10 +68,7 @@ in
 
   # Debug
   trouble.enable = true; # show diagnostics
-  # just println! xd
-  # nvim-dap
-  # nvim-dap-ui
-  # nvim-dap-virtual-text
+  dap = import ../plugins/dap.nix;
 
   # Extras
 # codeshot
