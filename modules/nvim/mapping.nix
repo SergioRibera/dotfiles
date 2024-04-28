@@ -37,7 +37,7 @@ in
   }
 
   # Take Screenshots using [sss](github:SergioRibera/sss)
-  # { mode = [ "v" ]; key = "<leader>ps"; action = ":TakeScreenShot<Cr>"; options = opts "Take screenshot"; }
+  { mode = [ "v" ]; key = "<leader>ps"; action = ":SSSelected<Cr>"; options = opts "Take screenshot"; }
 
   # open shell
   { key = "<C-b>"; action = "<Cmd> split term://${shell} | resize 10 <CR>"; options = opts "Open Terminal"; }

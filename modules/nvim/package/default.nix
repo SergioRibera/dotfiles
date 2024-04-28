@@ -9,6 +9,7 @@ with pkgs.lib;
 let
   tablineLua = import ../tabline.nix;
   cmpUtilsLua = optionalString cfg.complete (builtins.readFile ../plugins/cmp.lua);
+  extraPlugins = optionalString cfg.complete (builtins.readFile ../plugins/mod.lua);
 in
 {
   # enable = true;
@@ -24,7 +25,7 @@ in
   # Raw lua
   extraConfigLuaPre = cmpUtilsLua
     + tablineLua
-    + optionalString cfg.complete "\nrequire('lsp-progress').setup({ max_size = 80 })";
+    + optionalString cfg.complete extraPlugins;
 
   # Neovim options
   opts = import ../opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
@@ -107,9 +108,11 @@ in
   extraPlugins = with inputs.self.packages.${pkgs.system}; [
     # Editor
     nvim-surround
+    nvim-cmp-dotenv
   ] ++ pkgs.lib.lists.optionals cfg.complete [
     # Editor
     nvim-lsp-progress
     nvim-wakatime
+    nvim-codeshot
   ];
 }
