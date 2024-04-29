@@ -69,6 +69,10 @@ in
   programs = {
     "${user.shell}".enable = true;
     git.enable = git.enable;
+    nh = lib.mkIf user.enableHM {
+      enable = true;
+      flake = "/etc/nixos";
+    };
     ssh = {
       startAgent = true;
       extraConfig = ''
