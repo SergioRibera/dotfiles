@@ -64,6 +64,7 @@
 
   # GUI
   feh
+  warp
   neovide
   pavucontrol
   obs-studio
