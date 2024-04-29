@@ -27,7 +27,6 @@ in
       efi.canTouchEfiVariables = true;
     };
 
-    # TODO: fix mac-style
     plymouth = lib.mkIf gui.enable {
       enable = true;
       theme = "mac-style";

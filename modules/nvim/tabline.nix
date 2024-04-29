@@ -43,7 +43,6 @@ end
 
 function tabline.get_icon(name, extension, selected)
   local icon, icon_fg = require("nvim-web-devicons").get_icon_color(name, extension)
-  -- TODO: fix devicons
   if icon and icon_fg then
     local new_hi_group = "TabLine" .. extension
     if selected then
@@ -77,7 +76,6 @@ function _G.custom_tabline()
             else
                 separatorgroup = "%#TabLineSepSel#"
             end
-            -- TODO: made color border on multiple case
         elseif (index + 1) == vim.fn.tabpagenr() then -- Next is selected
             separatorgroup = "%#TabLineSepNextSel#"
         elseif index == vim.fn.tabpagenr("$") then
