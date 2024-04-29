@@ -5,6 +5,7 @@ let
 in
 {
   imports = [
+    # TODO: fix import specific user from config
     # ./${config.user.username}
     ./common/time.nix
     ./common/network.nix
@@ -49,5 +50,17 @@ in
   programs = {
     "${user.shell}".enable = true;
     git.enable = git.enable;
+    ssh = {
+      startAgent = true;
+      extraConfig = ''
+        AddKeysToAgent yes
+
+        Host github.com
+            IdentityFile ~/.ssh/github
+
+        Host gitlab.com
+            IdentityFile ~/.ssh/gitlab
+      '';
+    };
   };
 }
