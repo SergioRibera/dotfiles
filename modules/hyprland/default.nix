@@ -1,4 +1,4 @@
-{ gui, lib }: {
+{ inputs, gui, lib }: {
   enable = true;
   xwayland.enable = true;
   settings = {
@@ -9,7 +9,7 @@
       "udiskie"
       "thunar --daemon"
       "swww init"
-      "wallpaper -t 8h --no-allow-video -d -b"
+      "wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\""
       "hyprctl dispatcher focusmonitor 1"
     ];
     env = [ "XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH" ];

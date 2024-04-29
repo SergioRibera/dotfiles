@@ -73,10 +73,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Wallpapers
-    # wallpapers = {
-    #   url = "github:SergioRibera/wallpapers";
-    #   flake = false;
-    # };
+    wallpapers = {
+      url = "github:SergioRibera/wallpapers";
+      flake = false;
+    };
     # Used to generate NixOS images for other platforms
     nixos-generators = {
       url = "github:nix-community/nixos-generators";

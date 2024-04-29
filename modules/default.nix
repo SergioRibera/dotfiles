@@ -36,7 +36,7 @@ in
 
     wayland.windowManager.hyprland = lib.mkIf
       (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
-      (import ./hyprland { inherit gui lib; });
+      (import ./hyprland { inherit inputs gui lib; });
 
     services = {
       swayosd.enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable);
