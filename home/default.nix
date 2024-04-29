@@ -1,6 +1,6 @@
 { lib, config, inputs, ... }:
 let
-  inherit (config) user git;
+  inherit (config) user gui git;
   inherit (user) username;
 in
 {
@@ -37,6 +37,25 @@ in
 
         # packages = lib.optional (builtins.pathExists ./${username}/packages.nix) (import ./${username}/packages.nix { inherit pkgs; });
         packages = import ./${username}/packages.nix { inherit inputs pkgs config lib; };
+
+        file = {
+          ".local/bin/wallpaper" = lib.mkIf gui.enable {
+            executable = true;
+            source = ../scripts/wallpaper;
+          };
+          ".local/bin/hyprshot" = lib.mkIf gui.enable {
+            executable = true;
+            source = ../scripts/hyprshot;
+          };
+          ".cargo/config" = {
+            executable = false;
+            source = ../.cargo/config;
+          };
+          ".cargo/cargo-generate.toml" = {
+            executable = false;
+            source = ../.cargo/cargo-generate.toml;
+          };
+        };
       };
 
       manual = {
