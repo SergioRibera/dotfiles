@@ -27,6 +27,7 @@ inputs.nixpkgs.lib.nixosSystem {
         isNormalUser = true;
         enableHM = true;
         enableMan = true;
+        browser = "chromium";
         groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
       };
     }

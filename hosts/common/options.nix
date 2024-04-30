@@ -68,6 +68,10 @@ in
     user = {
       enableHM = mkEnableOption "Enable home-manager this host";
       enableMan = mkEnableOption "Enable man pages this host";
+      browser = mkOption {
+        type = types.enum [ "firefox" "chromium" "none"];
+        default = "none";
+      };
       osVersion = mkOption {
         type = types.str;
         default = "24.05";
