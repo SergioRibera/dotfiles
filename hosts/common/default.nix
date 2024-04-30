@@ -10,7 +10,7 @@ in
     auto-optimise-store = true;
     builders-use-substitutes = true;
     experimental-features = [ "nix-command" "flakes" ];
-    trustedUsers = [ "root" "@wheel" ];
+    trusted-users = [ "root" "@wheel" ];
   };
 
   system.stateVersion = osVersion;
