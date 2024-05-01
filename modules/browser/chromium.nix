@@ -11,6 +11,7 @@
     "jlmafbaeoofdegohdhinkhilhclaklkp" # octolinker
     "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
   ];
+  # https://chromeenterprise.google/policies
   extraOpts = {
     "BrowserSignin" = 2;
     "BookmarkBarEnabled" = false;
