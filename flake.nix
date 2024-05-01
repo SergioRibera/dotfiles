@@ -88,6 +88,7 @@
   };
 
   nixConfig = {
+    builders-use-substitutes = true;
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://fufexan.cachix.org"

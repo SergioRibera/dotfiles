@@ -1,8 +1,22 @@
-{ inputs, pkgs, lib, config, ... }: with pkgs;
-[
+{ inputs, pkgs, lib, config, ... }: with pkgs; [
   # Compresion
   ouch
 
+  # python
+  python3
+
+  # cloudflare
+  cloudflared
+  nodePackages.wrangler
+
+  # Docker
+  docker-compose
+
+  # Utils
+  gitui
+  neofetch
+  ntfs3g
+] ++ lib.optionals config.nvim.complete [
   # Js
   bun
   nodejs
@@ -23,23 +37,10 @@
   cargo-dist
   cargo-release
 
-  # python
-  python3
-
-  # cloudflare
-  cloudflared
-  nodePackages.wrangler
-
-  # Docker
-  docker-compose
-
   # Utils
-  gitui
   scrcpy
-  neofetch
   xdg-utils
   wev
-  ntfs3g
 
   # Bluetooth
   # bluez

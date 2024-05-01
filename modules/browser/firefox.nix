@@ -1,6 +1,6 @@
-{ config, lib, stdenv }@args:
+{ config, lib, pkgs}@args:
 let
-  buildFirefoxXpiAddon = lib.makeOverridable ({ stdenv ? args.stdenv
+  buildFirefoxXpiAddon = lib.makeOverridable ({ pkgs ? args.pkgs
                                               , fetchurl ? args.fetchurl
                                               , pname
                                               , version
@@ -9,7 +9,7 @@ let
                                               , meta
                                               , ...
                                               }:
-    stdenv.mkDerivation rec {
+    pkgs.stdenv.mkDerivation rec {
       name = "${pname}-${version}";
 
       inherit meta;
@@ -38,7 +38,7 @@ in
   # Search firefox extension
   # https://nur.nix-community.org/repos/rycee/
   # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons
-  extensions = [
+  profiles.${config.user.username}.extensions = [
     (buildFirefoxXpiAddon {
       pname = "4263752/bitwarden_password_manager";
       version = "2024.4.1";

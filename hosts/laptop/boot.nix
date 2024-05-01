@@ -16,15 +16,23 @@ in
     ];
 
     initrd = {
-      systemd.enable = true;
+      systemd.enable = false;
       supportedFilesystems = [ "ntfs" ];
     };
 
     loader = {
       timeout = 0;
-      grub.devices = [ "nodev" ];
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      # grub.devices = [ "nodev" ];
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+      };
     };
 
     plymouth = lib.mkIf gui.enable {

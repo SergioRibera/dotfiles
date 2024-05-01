@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  hardware = {
+{ pkgs, lib, config, ... }: {
+  hardware = lib.mkIf config.gui.enable {
     opengl = {
       enable = true;
       # Vulkan

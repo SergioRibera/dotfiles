@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  inherit (config.user) osVersion;
+  inherit (config.user) username osVersion;
 in
 {
   imports = [ ./packages.nix ./options.nix ];
@@ -35,4 +35,6 @@ in
     nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
     nixforceclean = "sudo nix-collect-garbage -d";
   };
+
+  services.getty.autologinUser = username;
 }

@@ -1,4 +1,4 @@
-{
+{...}: {
   enable = true;
   extensions = [
     "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin

@@ -2,21 +2,22 @@
 let
   inherit (config) user gui git;
   inherit (user) username;
+  # username = "s4rch";
 in
 {
   imports = [
-    # TODO: fix import specific user from config
-    # ./${config.user.username}
+    ./hardware.nix
+    ./programs.nix
+    ./services.nix
+    ./environment.nix
     ./common/time.nix
     ./common/network.nix
     ./common/xdg.nix
     ./common/virtualisation.nix
     ./common/fonts.nix
   ];
-  # Load home user configs
-  # ++ lib.lists.optionals (builtins.pathExists ./${username}) [ ./${username} ];
-  # Load GUI configs
-  # ++ guiImports;
+
+  sound.enable = gui.enable;
 
   users.users."${username}" = {
     isNormalUser = user.isNormalUser;
@@ -36,7 +37,7 @@ in
         stateVersion = user.osVersion;
 
         # packages = lib.optional (builtins.pathExists ./${username}/packages.nix) (import ./${username}/packages.nix { inherit pkgs; });
-        packages = import ./${username}/packages.nix { inherit inputs pkgs config lib; };
+        packages = import ./packages.nix { inherit inputs pkgs config lib; };
 
         file = {
           ".local/bin/wallpaper" = lib.mkIf gui.enable {
