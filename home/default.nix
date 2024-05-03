@@ -1,8 +1,7 @@
 { lib, config, inputs, pkgs, ... }:
 let
-  inherit (config) user gui git;
+  inherit (config) user gui;
   inherit (user) username;
-  # username = "s4rch";
 in
 {
   imports = [
@@ -38,6 +37,13 @@ in
         stateVersion = user.osVersion;
 
         packages = import ./packages.nix { inherit inputs pkgs config lib; };
+
+        pointerCursor = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
+          gtk.enable = true;
+          name = "Bibata-Modern-Ice";
+          package = pkgs.bibata-cursors;
+          size = 18;
+        };
 
         file = {
           ".local/bin/wallpaper" = lib.mkIf gui.enable {
