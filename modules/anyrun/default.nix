@@ -3,7 +3,7 @@
 , config
 }:
 let
-  inherit (config) gui;
+  inherit (config.gui.theme) colors;
 in
 {
   enable = true;
@@ -49,18 +49,11 @@ in
     * {
       all: unset;
       font-size: 1.3rem;
-    }
-
-    #window,
-    #match,
-    #entry,
-    #plugin,
-    #main {
-      background: transparent;
+      color: ${colors.base07};
     }
 
     #match.activatable {
-      border-radius: 16px;
+      border-radius: 5px;
       padding: 0.3rem 0.9rem;
       margin-top: 0.01rem;
     }
@@ -81,15 +74,14 @@ in
     #match:selected,
     #match:hover,
     #plugin:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: ${colors.base02};
     }
 
     #entry {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
+      background: ${colors.base01};
+      border-radius: 5px;
       margin: 0.5rem;
-      padding: 0.3rem 1rem;
+      padding: 0.5rem 1rem;
     }
 
     list > #plugin {
@@ -107,11 +99,8 @@ in
     }
 
     box#main {
-      background: rgba(0, 0, 0, 0.5);
-      box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-        0 0 0 1px rgba(0, 0, 0, 0.5);
-      border-radius: 24px;
+      background: ${colors.base00};
+      border-radius: 5px;
       padding: 0.3rem;
     }
   '';
