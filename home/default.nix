@@ -1,4 +1,4 @@
-{ lib, config, inputs, ... }:
+{ lib, config, inputs, pkgs, ... }:
 let
   inherit (config) user gui git;
   inherit (user) username;
@@ -7,7 +7,6 @@ in
 {
   imports = [
     ./hardware.nix
-    ./programs.nix
     ./services.nix
     ./environment.nix
     ./common/time.nix
@@ -19,10 +18,12 @@ in
 
   sound.enable = gui.enable;
 
+  users.defaultUserShell = pkgs."${user.shell}";
   users.users."${username}" = {
     isNormalUser = user.isNormalUser;
     name = username;
     home = user.homepath;
+    extraGroups = user.groups;
   };
 
   nixpkgs.overlays = [ inputs.fenix.overlays.default ];
@@ -36,7 +37,6 @@ in
         homeDirectory = user.homepath;
         stateVersion = user.osVersion;
 
-        # packages = lib.optional (builtins.pathExists ./${username}/packages.nix) (import ./${username}/packages.nix { inherit pkgs; });
         packages = import ./packages.nix { inherit inputs pkgs config lib; };
 
         file = {
@@ -69,7 +69,6 @@ in
 
   programs = {
     "${user.shell}".enable = true;
-    git.enable = git.enable;
     nh = lib.mkIf user.enableHM {
       enable = true;
       flake = "/etc/nixos";
@@ -86,5 +85,13 @@ in
             IdentityFile ~/.ssh/gitlab
       '';
     };
+    adb.enable = config.nvim.complete;
+    thunar = {
+      enable = gui.enable;
+      plugins = [ ];
+    };
+
+    # firefox = lib.mkIf (gui.enable && user.browser == "firefox") (import ./browser/firefox.nix { inherit lib pkgs config; });
+    chromium = lib.mkIf (gui.enable && user.browser == "chromium") (import ../modules/browser/chromium.nix { inherit config; });
   };
 }

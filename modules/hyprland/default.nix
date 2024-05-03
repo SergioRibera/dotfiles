@@ -128,7 +128,26 @@
     };
 
     # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-    binde = [ ];
+    binde = [
+      #
+      # Volume keybinds
+      #
+      ",XF86AudioRaiseVolume,exec,swayosd --output-volume raise"
+      ",XF86AudioLowerVolume,exec,swayosd --output-volume lower"
+      ",XF86AudioMute,exec,swayosd --output-volume mute-toggle"
+      ",XF86AudioMicMute,exec,swayosd --input-volume mute-toggle"
+      #
+      # Brightness keys
+      #
+      ",XF86MonBrightnessUp,exec,swayosd --brightness raise"
+      ",XF86MonBrightnessDown,exec,swayosd --brightness lower"
+      #
+      # Others
+      #
+      ",Caps_Lock,exec,swayosd --caps-lock"
+      ",Num_Lock,exec,swayosd --num-lock"
+    ];
+
     # Move/resize windows with mainMod + LMB/RMB and dragging
     bindm = [
       "SUPER,mouse:272,movewindow"
@@ -152,26 +171,13 @@
       # "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
       "SUPER,E,exec,thunar"
       # "SUPER,D,exec,trilium"
-      "SUPER,Tab,exec,pkill .anyrun-wrapped || run-as-service anyrun"
-      "SUPER_SHIFT,Tab,exec,rofi -show drun"
-      "SUPER,N,exec,firefox"
-      "SUPER_SHIFT,N,exec,firefox --private-window"
+      "SUPER,Tab,exec,anyrun"
+      # "SUPER,N,exec,${user.browser}"
+      # "SUPER_SHIFT,N,exec,${user.browser} --private-window"
       "SUPER,S,exec,hyprshot --clipboard-only -m region"
       "SUPER_SHIFT,S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
       "SUPER,P,exec,~/.config/rofi/scripts/proyects.sh"
       "SUPER,C,exec,hyprpicker -a -f hex"
-      #
-      # Volume keybinds
-      #
-      ",XF86AudioRaiseVolume,exec,swayosd --output-volume raise"
-      ",XF86AudioLowerVolume,exec,swayosd --output-volume lower"
-      ",XF86AudioMute,exec,swayosd --output-volume mute-toggle"
-      ",XF86AudioMicMute,exec,swayosd --input-volume mute-toggle"
-      #
-      # Brightness keys
-      #
-      ",XF86MonBrightnessUp,exec,swayosd --brightness raise"
-      ",XF86MonBrightnessDown,exec,swayosd --brightness lower"
       #
       # Windows Navigations
       #

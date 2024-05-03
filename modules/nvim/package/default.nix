@@ -12,7 +12,6 @@ let
   extraPlugins = optionalString cfg.complete (builtins.readFile ../plugins/mod.lua);
 in
 {
-  # enable = true;
   enableMan = false;
   # defaultEditor = true;
   viAlias = true;

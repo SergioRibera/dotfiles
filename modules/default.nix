@@ -1,19 +1,20 @@
-{ config, inputs, lib, ... }:
+{ config, inputs, lib, pkgs, ... }:
 let
   inherit (config) user gui;
 in
 {
-  imports = [
-      ./nvim # TODO: import correctly nvim
-  ];
-
-  home-manager.users.${user.username} = lib.mkIf user.enableHM ({ pkgs, lib, ... }: {
+  home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {
     imports = [
       inputs.anyrun.homeManagerModules.default
       inputs.sss.nixosModules.home-manager
+    ] ++ lib.optionals pkgs.stdenv.buildPlatform.isLinux [
+      inputs.nixvim.homeManagerModules.nixvim
+    ] ++ lib.optionals pkgs.stdenv.buildPlatform.isDarwin [
+      inputs.nixvim.nixosDarwinModules.nixvim
     ];
 
     programs = {
+      nixvim = { enable = config.nvim.enable; } // (import ./nvim/package { cfg = config.nvim; inherit inputs pkgs lib gui user; });
       anyrun = lib.mkIf
         (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM)
         (import ./anyrun { inherit pkgs inputs config; });

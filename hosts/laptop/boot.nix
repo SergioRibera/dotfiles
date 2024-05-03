@@ -15,23 +15,15 @@ in
       "boot.shell_on_fail"
     ];
 
-    initrd = {
-      systemd.enable = false;
-      supportedFilesystems = [ "ntfs" ];
-    };
+    initrd.supportedFilesystems = [ "ntfs" ];
 
     loader = {
-      timeout = 0;
-      # grub.devices = [ "nodev" ];
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
-      };
+      timeout = 3;
+      efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
         device = "nodev";
         efiSupport = true;
-        useOSProber = true;
       };
     };
 

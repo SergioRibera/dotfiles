@@ -21,9 +21,9 @@ function promt_status -S -a last_status
 
     switch (uname)
         case Darwin
-          set user_char = '  '
+          set user_char '  '
         case '*'
-          set user_char = '  '
+          set user_char '  '
     end
 
     # User Input row

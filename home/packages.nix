@@ -16,6 +16,20 @@
   gitui
   neofetch
   ntfs3g
+] ++ lib.optionals config.gui.enable [
+  # GUI
+  chromium
+  obs-studio
+
+  # Social
+  telegram-desktop
+  # Discord
+  discord
+
+  # Utils
+  scrcpy
+  xdg-utils
+  wev
 ] ++ lib.optionals config.nvim.complete [
   # Js
   bun
@@ -36,24 +50,6 @@
   cargo-generate
   cargo-dist
   cargo-release
-
-  # Utils
-  scrcpy
-  xdg-utils
-  wev
-
-  # Bluetooth
-  # bluez
-  # blueman
-
-  # GUI
-  neovide
-  obs-studio
-
-  # Social
-  telegram-desktop
-  # Discord
-  discord
 ] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
   # Hyprland
   slurp
@@ -66,7 +62,6 @@
   # GUI
   feh
   warp
-  neovide
   pavucontrol
   obs-studio
   screenkey
@@ -76,4 +71,4 @@
 
   # Discord
   vesktop
-]
+] ++ lib.optionals (config.nvim.neovide && config.gui.enable) [ neovide ]

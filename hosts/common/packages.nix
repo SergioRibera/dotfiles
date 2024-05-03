@@ -12,8 +12,5 @@
 
     # ssl
     openssl
-
-    # Development
-    git
   ];
 }
