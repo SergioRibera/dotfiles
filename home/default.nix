@@ -2,6 +2,13 @@
 let
   inherit (config) user gui;
   inherit (user) username;
+  inherit (pkgs.stdenv.buildPlatform) isLinux;
+
+  darkTheme = {
+    Settings = ''
+      gtk-application-prefer-dark-theme=1
+    '';
+  };
 in
 {
   imports = [
@@ -31,6 +38,10 @@ in
   home-manager.users = lib.mkIf user.enableHM {
     "${username}" = { lib, pkgs, ... }: {
       programs.home-manager.enable = true;
+
+      gtk.gtk3.extraConfig = lib.mkIf (isLinux && gui.theme.dark) darkTheme;
+      gtk.gtk4.extraConfig = lib.mkIf (isLinux && gui.theme.dark) darkTheme;
+
       home = {
         inherit username;
         homeDirectory = user.homepath;
@@ -38,7 +49,7 @@ in
 
         packages = import ./packages.nix { inherit inputs pkgs config lib; };
 
-        pointerCursor = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
+        pointerCursor = lib.mkIf (isLinux && gui.enable) {
           gtk.enable = true;
           name = "Bibata-Modern-Ice";
           package = pkgs.bibata-cursors;
