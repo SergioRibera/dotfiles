@@ -94,7 +94,7 @@ set -g ICON_VCS_STAGED            \UF06B" "     #  (added) →
 set -g ICON_VCS_DELETED           "✘"           # 
 set -g ICON_VCS_RENAME            \UF06E" "     # 
 set -g ICON_VCS_STASH             \UF0CF" "     #✭: there are stashed commits
-set -g ICON_VCS_BRANCH            "שׂ"
+set -g ICON_VCS_BRANCH            "󰘬"
 set -g ICON_VCS_PUSH              printf "\UF005 " # bugs out in fish: \UF005 (printf "\UF005")
 set -g ICON_VCS_DIRTY             ±             #
 set -g ICON_ARROW_UP              \UF03D""      #  ↑
@@ -108,7 +108,7 @@ function _prompt_git -a current_dir -d 'Display the actual git state'
     set -l dirty (command git diff --no-ext-diff --quiet --exit-code; or echo -n ' ')
     set -l branch (git branch --show-current)
 
-    echo -n "$ICON_VCS_BRANCH "(set_color magenta)"$branch"(set_color normal)\
+    echo -n " $ICON_VCS_BRANCH "(set_color magenta)"$branch"(set_color normal)\
         (_git_status)
 end
 
