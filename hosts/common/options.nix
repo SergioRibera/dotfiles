@@ -35,6 +35,11 @@ in
           default = true;
           description = "Enable dark mode.";
         };
+        round = mkOption {
+          type = types.number;
+          default = 5;
+          description = "Set rounding for theme.";
+        };
       };
     };
     git = {
