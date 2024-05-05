@@ -51,6 +51,10 @@ in
             tweaks = [ "solid" "compact" ];
           });
         };
+        iconTheme = {
+          name = "Tela-icon";
+          package = pkgs.tela-icon-theme;
+        };
       };
 
       home = {
