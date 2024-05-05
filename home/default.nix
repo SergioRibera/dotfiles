@@ -4,10 +4,9 @@ let
   inherit (user) username;
   inherit (pkgs.stdenv.buildPlatform) isLinux;
 
+  extraCss = (import ../modules/theme.nix { inherit (gui.theme) colors;});
   darkTheme = {
-    Settings = ''
-      gtk-application-prefer-dark-theme=1
-    '';
+    gtk-application-prefer-dark-theme = 1;
   };
 in
 {
@@ -39,13 +38,26 @@ in
     "${username}" = { lib, pkgs, ... }: {
       programs.home-manager.enable = true;
 
-      gtk.gtk3.extraConfig = lib.mkIf (isLinux && gui.theme.dark) darkTheme;
-      gtk.gtk4.extraConfig = lib.mkIf (isLinux && gui.theme.dark) darkTheme;
+      gtk = lib.mkIf (isLinux && gui.enable) {
+        enable = true;
+        gtk3.extraConfig = lib.mkIf (gui.theme.dark) darkTheme;
+        gtk4.extraConfig = lib.mkIf (gui.theme.dark) darkTheme;
+        gtk3.extraCss = extraCss;
+        gtk4.extraCss = extraCss;
+        theme = {
+          name = "Orchis";
+          package = pkgs.orchis-theme.overrideAttrs (oldAttrs: {
+            border-radius = gui.theme.round;
+            tweaks = [ "solid" "compact" ];
+          });
+        };
+      };
 
       home = {
         inherit username;
         homeDirectory = user.homepath;
         stateVersion = user.osVersion;
+        sessionVariables.GTK_THEME = "Orchis";
 
         packages = import ./packages.nix { inherit inputs pkgs config lib; };
 
