@@ -7,6 +7,7 @@ in
     imports = [
       inputs.anyrun.homeManagerModules.default
       inputs.sss.nixosModules.home-manager
+      inputs.wired.homeManagerModules.default
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isLinux [
       inputs.nixvim.homeManagerModules.nixvim
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isDarwin [
@@ -41,6 +42,14 @@ in
 
     services = {
       swayosd.enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable);
+      wired = {
+        package = inputs.wired.packages.${pkgs.system}.default;
+        enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable);
+      };
     };
+
+    xdg.configFile."wired/wired.ron".text = lib.optionalString
+      (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
+      (import ./wired { colors = gui.theme.colors; });
   });
 }

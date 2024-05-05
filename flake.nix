@@ -65,6 +65,10 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wired = {
+      url = "github:Toqozz/wired-notify";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # My tool to take screen/code screenshots
     sss = {
       url = "github:SergioRibera/sss";

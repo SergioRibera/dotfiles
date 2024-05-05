@@ -52,7 +52,9 @@
   cargo-release
 ] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
   # Hyprland
+  grim
   slurp
+  libnotify
   wl-clipboard
   hyprpicker
   swww
