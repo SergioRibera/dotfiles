@@ -1,5 +1,6 @@
 { config
 , lib
+, pkgs
 , ...
 }:
 let
@@ -39,6 +40,23 @@ in
           type = types.number;
           default = 5;
           description = "Set rounding for theme.";
+        };
+      };
+      cursor = {
+        name = mkOption {
+          type = types.str;
+          default = "Bibata-Modern-Ice";
+          description = "Cursor theme name.";
+        };
+        package = mkOption {
+          type = types.package;
+          default = pkgs.bibata-cursors;
+          description = "Cursor theme package.";
+        };
+        size = mkOption {
+          type = types.number;
+          default = 18;
+          description = "Cursor size.";
         };
       };
     };
