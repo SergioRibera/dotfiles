@@ -8,9 +8,8 @@
       "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY"
       "udiskie"
       "thunar --daemon"
-      "swww init"
+      "swww-daemon"
       "wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\""
-      "hyprctl dispatcher focusmonitor 1"
     ];
     env = [ "XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH" ];
 
