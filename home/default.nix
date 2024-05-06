@@ -67,9 +67,9 @@ in
 
         pointerCursor = lib.mkIf (isLinux && gui.enable) {
           gtk.enable = true;
-          name = "Bibata-Modern-Ice";
-          package = pkgs.bibata-cursors;
-          size = 18;
+          name = gui.cursor.name;
+          package = gui.cursor.package;
+          size = gui.cursor.size;
         };
 
         file = {
