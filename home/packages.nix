@@ -59,6 +59,7 @@
   hyprpicker
   swww
   xwaylandvideobridge
+  (import ./wm/dwl.nix { inherit inputs pkgs config; })
   # inputs.self.packages.${pkgs.system}.hyprswitch
 
   # GUI
