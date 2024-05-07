@@ -103,6 +103,7 @@ in
   programs = {
     "${user.shell}".enable = true;
     dconf.enable = (isLinux && gui.enable);
+    xwayland.enable = (isLinux && gui.enable);
     nh = lib.mkIf user.enableHM {
       enable = true;
       flake = "/etc/nixos";
