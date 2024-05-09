@@ -52,7 +52,7 @@ in
           });
         };
         iconTheme = {
-          name = "Tela-icon";
+          name = "Tela";
           package = pkgs.tela-icon-theme;
         };
       };

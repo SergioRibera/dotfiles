@@ -1,7 +1,5 @@
 # With Home Manager, do:
 #
-# gtk.gtk3.extraCss = myTheme.adwaitaGtkCss;
-# gtk.gtk4.extraCss = myTheme.adwaitaGtkCss;
 { colors }: ''
 @define-color accent_color ${colors.base0A};
 @define-color accent_bg_color ${colors.base0A};
@@ -91,4 +89,6 @@
 @define-color dark_3 ${colors.base01};
 @define-color dark_4 ${colors.base01};
 @define-color dark_5 ${colors.base01};
+
+.thunar .sidebar { background: ${colors.base00}b3; }
 ''

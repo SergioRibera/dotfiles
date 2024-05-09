@@ -55,7 +55,7 @@ in
         };
         size = mkOption {
           type = types.number;
-          default = 18;
+          default = 24;
           description = "Cursor size.";
         };
       };

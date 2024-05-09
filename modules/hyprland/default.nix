@@ -96,12 +96,7 @@
       "noanim,class:^(xwaylandvideobridge)$"
       "nofocus,class:^(xwaylandvideobridge)$"
       "noinitialfocus,class:^(xwaylandvideobridge)$"
-
-      #
-      # Style
-      #
-      "opacity 0.90,[Tt]hunar"
-      "opacity 0.70,^*osd*$"
+      "noblur,class:^(google-chrome)$"
     ];
 
     dwindle = {
