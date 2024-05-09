@@ -5,7 +5,11 @@
   security.pam.services.login.enableGnomeKeyring = true;
 
   services = {
-    upower.enable = true;
+    upower = {
+      enable = true;
+      percentageLow = 30;
+      percentageCritical = 15;
+    };
     ratbagd.enable = true;
     dbus.packages = [ pkgs.gcr ];
     gnome.gnome-keyring.enable = true;
