@@ -26,6 +26,10 @@
     ];
     lualine_c = [
       {
+        name = "filetype";
+        extraConfig.icon_only = true;
+      }
+      {
         name = "filename";
         extraConfig = {
           fileStatus = true;
@@ -56,6 +60,7 @@
         };
       }
     ];
+    lualine_x = [ { name = ""; } ];
     lualine_y = lib.lists.optionals cfg.complete [
       {
         fmt = ''
@@ -65,7 +70,7 @@
         '';
       }
     ];
-    lualine_z = [ "progress" "location" ];
+    lualine_z = [ "location" ];
   };
 
   inactiveSections = {
