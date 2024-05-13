@@ -1,4 +1,5 @@
 require('lsp-progress').setup({ max_size = 80 })
+require('nvim-surround').setup({ })
 
 -- Screenshots
 require('codeshot').setup ({
