@@ -1,6 +1,20 @@
+# chars get from: https://jrgraphix.net/r/Unicode/2500-257F
+#                 https://en.wikipedia.org/wiki/Box-drawing_characters
+#                 https://gist.github.com/dsample/79a97f38bf956f37a0f99ace9df367b9
+#                 https://waylonwalker.com/drawing-ascii-boxes
+#                 https://asciiflow.com
 { pkgs, user, cfg, gui }:
 let
   lib = pkgs.lib;
+  ibl-hl = [
+    "RainbowRed"
+    "RainbowYellow"
+    "RainbowBlue"
+    "RainbowOrange"
+    "RainbowGreen"
+    "RainbowViolet"
+    "RainbowCyan"
+  ];
 in
 {
   # completion
@@ -15,8 +29,11 @@ in
   nvim-autopairs.enable = true;
   indent-blankline = {
     enable = true;
-    settings.indent.char = "▎";
+    settings.indent.char = "▏";
     settings.indent.smart_indent_cap = true;
+    # settings.scope.char = [ "╭" "─" ];
+    # settings.indent.highlight = ibl-hl;
+    # settings.scope.highlight = ibl-hl;
   };
 
   # UI
@@ -46,7 +63,10 @@ in
 } // lib.optionalAttrs cfg.complete {
   # Colors
   nvim-colorizer.enable = true;
-  rainbow-delimiters.enable = true;
+  rainbow-delimiters = {
+    enable = true;
+    highlight = ibl-hl;
+  };
   treesitter.enable = true;
 
   # completion
@@ -76,7 +96,7 @@ in
   gitsigns = import ../plugins/git.nix;
   presence-nvim = {
     enable = true;
-    buttons = [{ label = "Cosas/Things"; url = "https://rustlang-es.org"; }];
+    # buttons = [{ label = "Cosas/Things"; url = "https://rustlang-es.org"; }];
   };
   # instant.enable = true; # no one I work with uses nvim so it makes no sense
 }
