@@ -29,8 +29,8 @@
     (
       name: "root_image",
       parent: "",
-      hook: Hook(parent_anchor: TL, self_anchor: TL),
-      offset: Vec2(x: 7.0, y: 7.0),
+      hook: Hook(parent_anchor: RB, self_anchor: RB),
+      offset: Vec2(x: -15.0, y: -15.0),
       render_criteria: [HintImage],
       // https://github.com/Toqozz/wired-notify/wiki/NotificationBlock
       params: NotificationBlock((
@@ -104,8 +104,8 @@
     (
       name: "root",
       parent: "",
-      hook: Hook(parent_anchor: TL, self_anchor: TL),
-      offset: Vec2(x: 7.0, y: 7.0),
+      hook: Hook(parent_anchor: BR, self_anchor: BR),
+      offset: Vec2(x: -15.0, y: -15.0),
       render_anti_criteria: [HintImage],
       // https://github.com/Toqozz/wired-notify/wiki/NotificationBlock
       params: NotificationBlock((
