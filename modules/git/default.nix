@@ -15,6 +15,10 @@ in
     credential = {
       helper = "store";
     };
+    push = {
+      autoSetupRemote = true;
+      default = "current";
+    };
   };
   delta = {
     enable = true;
@@ -38,8 +42,7 @@ in
   aliases = {
     s = "status";
     b = "branch";
-    pm = "push origin main";
-    pp = "push origin";
+    p = "push";
     lg = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
   };
 }
