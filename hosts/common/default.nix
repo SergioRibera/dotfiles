@@ -25,9 +25,13 @@ in
     lsr = "eza -Tlxa --icons --group-directories-first";
     lsd = "eza -GDx --icons --color always";
     cat = "bat";
+    catn = "bat --plain";
+    catnp = "bat --plain --paging=never";
     ga = "git add -A && git commit -m";
-    gs = "git switch";
-    gsc = "git switch -c";
+    gs = "git s";
+    gb = "git switch";
+    gp = "git p";
+    gbc = "git switch -c";
     glg = "git lg";
     nixdev = "nix develop -c 'fish'";
     nixclear = "nix-store --gc";
