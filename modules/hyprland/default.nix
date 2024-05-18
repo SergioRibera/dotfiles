@@ -173,9 +173,11 @@
       # "SUPER_SHIFT,Tab,exec,anyrun"
       # "SUPER,N,exec,${user.browser}"
       # "SUPER_SHIFT,N,exec,${user.browser} --private-window"
-      "SUPER,S,exec,hyprshot --clipboard-only -m region"
-      "SUPER_SHIFT,S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
-      "SUPER,P,exec,~/.config/rofi/scripts/proyects.sh"
+      "SUPER,S,exec,sss --area \"$(slurp -d)\" -o raw | wl-copy"
+      "SUPER_SHIFT,S,exec,sss --area \"$(slurp -d)\" -o \"$HOME/Pictures/Screenshot/$(date '+%Y-%m-%d-%H:%M:%S')_sss.png\""
+      "SUPER,ALT_S,exec,hyprshot --clipboard-only -m region"
+      "SUPER_SHIFT,ALT_S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
+
       "SUPER,C,exec,hyprpicker -a -f hex"
       #
       # Windows Navigations
