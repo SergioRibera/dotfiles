@@ -1,6 +1,9 @@
-{ inputs, gui, lib }: {
+{ inputs, gui, lib, pkgs }: {
   enable = true;
   xwayland.enable = true;
+  # plugins = [
+  #   inputs.hyprspace.packages.${pkgs.system}.Hyprspace
+  # ];
   settings = {
     monitor = [ "eDP-1,1600x900@60,1080x1020,1" "HDMI-A-1,1920x1080@60,0x0,1,transform,3" ];
     workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
@@ -69,6 +72,12 @@
       ];
     };
 
+    plugin = {
+      overview = {
+        showEmptyWorkspace = true;
+      };
+    };
+
     windowrule = [
       #
       # Implementation
@@ -122,8 +131,6 @@
       #
       ",XF86AudioRaiseVolume,exec,swayosd --output-volume raise"
       ",XF86AudioLowerVolume,exec,swayosd --output-volume lower"
-      ",XF86AudioMute,exec,swayosd --output-volume mute-toggle"
-      ",XF86AudioMicMute,exec,swayosd --input-volume mute-toggle"
       #
       # Brightness keys
       #
@@ -152,6 +159,8 @@
       "SUPER,W,killactive,"
       # TODO: replace MOD+Q by power menu
       # "SUPER,Q,exit,"
+      ",XF86AudioMute,exec,swayosd --output-volume mute-toggle"
+      ",XF86AudioMicMute,exec,swayosd --input-volume mute-toggle"
       #
       # Custom Exec Keybinds
       #
@@ -160,6 +169,8 @@
       "SUPER,E,exec,thunar"
       # "SUPER,D,exec,trilium"
       "SUPER,Tab,exec,anyrun"
+      # "SUPER,Tab,overview:toggle," # Hyprspace plugin
+      # "SUPER_SHIFT,Tab,exec,anyrun"
       # "SUPER,N,exec,${user.browser}"
       # "SUPER_SHIFT,N,exec,${user.browser} --private-window"
       "SUPER,S,exec,hyprshot --clipboard-only -m region"
