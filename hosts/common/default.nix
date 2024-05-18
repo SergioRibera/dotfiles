@@ -33,6 +33,7 @@ in
     gp = "git p";
     gbc = "git switch -c";
     glg = "git lg";
+    tree = "eza --tree --icons=always";
     nixdev = "nix develop -c 'fish'";
     nixclear = "nix-store --gc";
     nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
