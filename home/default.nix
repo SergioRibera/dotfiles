@@ -81,7 +81,7 @@ in
             executable = true;
             source = ../scripts/hyprshot;
           };
-          ".cargo/config" = {
+          ".cargo/config.toml" = {
             executable = false;
             source = ../.cargo/config;
           };
