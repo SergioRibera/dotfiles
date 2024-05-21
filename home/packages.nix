@@ -19,7 +19,6 @@
 ] ++ lib.optionals config.gui.enable [
   # GUI
   chromium
-  obs-studio
 
   # Social
   telegram-desktop
@@ -59,14 +58,13 @@
   hyprpicker
   swww
   xwaylandvideobridge
-  (import ./wm/dwl.nix { inherit inputs pkgs config; })
+  # (import ./wm/dwl.nix { inherit inputs pkgs config; })
   # inputs.self.packages.${pkgs.system}.hyprswitch
 
   # GUI
   feh
   warp
   pavucontrol
-  obs-studio
   screenkey
 
   # Icons

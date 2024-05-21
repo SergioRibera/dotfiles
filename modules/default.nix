@@ -31,9 +31,14 @@ in
 
       # enable and configure others
       git = lib.mkIf config.git.enable (import ./git { inherit config; });
-      # TODO: fix problems with sss
       sss = lib.mkIf gui.enable (import ./sss.nix { inherit config; });
       wezterm = lib.mkIf gui.enable (import ./wezterm);
+
+      obs-studio = {
+        enable = gui.enable;
+        # plugins = with pkgs.obs-studio-plugins; [
+        # ];
+      };
     };
 
     wayland.windowManager.hyprland = lib.mkIf
