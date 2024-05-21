@@ -36,7 +36,6 @@ in
   servers = (makeServers [
     "astro"
     "bashls"
-    "biome"
     "cssls"
     "dockerls"
     "html"
@@ -45,7 +44,16 @@ in
     "ruff"
     "tailwindcss"
     "taplo"
+    "tsserver"
+    # "volar"
   ]) // {
+    # biome = {
+    #   enable = true;
+    #   rootDir = ''
+    #     require 'lspconfig.util'.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")
+    #   '';
+    #   extraOptions.single_file_support = true;
+    # };
     rust-analyzer = {
       enable = true;
       installCargo = false;
