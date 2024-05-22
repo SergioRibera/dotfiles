@@ -8,14 +8,17 @@ in
     ./services.nix
     ./programs.nix
     ./theme.nix
-    ./common/time.nix
-    ./common/network.nix
     ./common/xdg.nix
-    ./common/virtualisation.nix
     ./common/fonts.nix
   ];
 
   sound.enable = gui.enable;
+  virtualisation = {
+    docker = {
+      enable = true;
+      enableOnBoot = true;
+    };
+  };
 
   users.defaultUserShell = pkgs."${user.shell}";
   users.users."${username}" = {

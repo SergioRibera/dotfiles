@@ -24,7 +24,16 @@ in
 
   system.stateVersion = osVersion;
 
+  time.timeZone = "America/La_Paz";
   i18n.defaultLocale = "en_US.UTF-8";
+
+  networking = {
+    hostName = "nixos";
+    networkmanager = {
+      enable = true;
+    };
+  };
+
   environment.shellAliases = {
     ll = "eza -lh --icons --group-directories-first";
     la = "eza -a --icons --group-directories-first";
