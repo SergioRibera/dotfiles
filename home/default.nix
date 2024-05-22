@@ -14,6 +14,7 @@ in
     ./hardware.nix
     ./services.nix
     ./environment.nix
+    ./programs.nix
     ./common/time.nix
     ./common/network.nix
     ./common/xdg.nix
@@ -127,6 +128,6 @@ in
     };
 
     # firefox = lib.mkIf (gui.enable && user.browser == "firefox") (import ./browser/firefox.nix { inherit lib pkgs config; });
-    chromium = lib.mkIf (gui.enable && user.browser == "chromium") (import ../modules/browser/chromium.nix { inherit config; });
+    chromium = lib.mkIf (gui.enable && user.browser == "chromium") (import ./desktop/browser/chromium.nix { inherit config; });
   };
 }

@@ -9,7 +9,6 @@ inputs.nixpkgs.lib.nixosSystem {
     ./hardware-configuration.nix
     ./boot.nix
     ../common
-    ../../modules
     ../../home
     inputs.home-manager.nixosModules.home-manager
     {

@@ -15,24 +15,24 @@ in
     ];
 
     programs = {
-      nixvim = { enable = config.nvim.enable; } // (import ./nvim/package { cfg = config.nvim; inherit inputs pkgs lib gui user; });
+      nixvim = { enable = config.nvim.enable; } // (import ../modules/nvim/package { cfg = config.nvim; inherit inputs pkgs lib gui user; });
       anyrun = lib.mkIf
         (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM)
-        (import ./anyrun { inherit pkgs inputs config; });
+        (import ./desktop/anyrun.nix { inherit pkgs inputs config; });
 
-      bat = import ./bat { inherit pkgs config; };
+      bat = import ./tools/bat.nix { inherit pkgs config; };
 
       # enable and config shell selected
       "${user.shell}" = lib.mkIf
-        (builtins.pathExists ./${user.shell})
-        (import ./${user.shell} {
+        (builtins.pathExists ./shells/${user.shell})
+        (import ./shells/${user.shell} {
           inherit pkgs config lib;
         });
 
       # enable and configure others
-      git = lib.mkIf config.git.enable (import ./git { inherit config; });
-      sss = lib.mkIf gui.enable (import ./sss.nix { inherit config; });
-      wezterm = lib.mkIf gui.enable (import ./wezterm);
+      git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });
+      sss = lib.mkIf gui.enable (import ./tools/sss.nix { inherit config; });
+      wezterm = lib.mkIf gui.enable (import ./desktop/terminal/wezterm.nix);
 
       obs-studio = {
         enable = gui.enable;
@@ -43,7 +43,7 @@ in
 
     wayland.windowManager.hyprland = lib.mkIf
       (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
-      (import ./hyprland { inherit inputs gui lib pkgs; });
+      (import ./wm/hyprland.nix { inherit inputs gui lib pkgs; });
 
     services = {
       swayosd.enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable);
@@ -55,6 +55,6 @@ in
 
     xdg.configFile."wired/wired.ron".text = lib.optionalString
       (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
-      (import ./wired { colors = gui.theme.colors; });
+      (import ./desktop/wired.nix { colors = gui.theme.colors; });
   });
 }
