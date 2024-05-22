@@ -44,17 +44,5 @@ in
     wayland.windowManager.hyprland = lib.mkIf
       (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
       (import ./wm/hyprland.nix { inherit inputs gui lib pkgs; });
-
-    services = {
-      swayosd.enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable);
-      wired = {
-        package = inputs.wired.packages.${pkgs.system}.default;
-        enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable);
-      };
-    };
-
-    xdg.configFile."wired/wired.ron".text = lib.optionalString
-      (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
-      (import ./desktop/wired.nix { colors = gui.theme.colors; });
   });
 }

@@ -1,9 +1,18 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   inherit (config.user) username osVersion;
 in
 {
-  imports = [ ./packages.nix ./options.nix ];
+  imports = [
+    ./hardware.nix
+    ./options.nix
+    ./packages.nix
+    ./programs.nix
+    ./services.nix
+  ];
+
+  environment.sessionVariables.NIXOS_OZONE_WL = lib.optionalString (config.gui.enable) "1";
+
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
     warn-dirty = false;

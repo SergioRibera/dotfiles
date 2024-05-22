@@ -12,7 +12,11 @@ in
       publicShare = null;
       createDirectories = true;
     };
+    configFile."wired/wired.ron".text = lib.optionalString
+      (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
+      (import ../desktop/wired.nix { colors = gui.theme.colors; });
   };
+
   xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
     portal = {
       enable = true;
