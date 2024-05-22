@@ -22,8 +22,6 @@
 
   # Social
   telegram-desktop
-  # Discord
-  discord
 
   # Utils
   scrcpy

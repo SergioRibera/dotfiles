@@ -1,0 +1,150 @@
+/*
+  With Home Manager, set `xdg.configFile."Vencord/settings/quickCss.css"` to this:
+
+  xdg.configFile."Vencord/settings/quickCss.css".text = myTheme.discordCss;
+
+  These instructions only work for Vencord.
+  Consult your client mods docs if you don't use Vencord.
+*/
+:root {
+    --base00: @base00@; /* Black */
+    --base01: @base01@; /* Bright Black */
+    --base02: @base02@; /* Grey */
+    --base03: @base03@; /* Brighter Grey */
+    --base04: @base04@; /* Bright Grey */
+    --base05: @base05@; /* White */
+    --base06: @base06@; /* Brighter White */
+    --base07: @base07@; /* Bright White */
+    --base08: @base08@; /* Red */
+    --base09: @base09@; /* Orange */
+    --base0A: @base0A@; /* Yellow */
+    --base0B: @base0B@; /* Green */
+    --base0C: @base0C@; /* Cyan */
+    --base0D: @base0D@; /* Blue */
+    --base0E: @base0E@; /* Purple */
+    --base0F: @base0F@; /* Magenta */
+
+    --primary-630: var(--base00); /* Autocomplete background */
+    --primary-660: var(--base00); /* Search input background */
+}
+
+.theme-light, .theme-dark {
+    --search-popout-option-fade: none; /* Disable fade for search popout */
+    --bg-overlay-2: var(--base00); /* These 2 are needed for proper threads coloring */
+    --home-background: var(--base00);
+    --background-primary: var(--base00);
+    --channels-default: var(--base0D);
+    /* --background-secondary: var(--base01);
+    --background-secondary-alt: var(--base01);*/
+    --background-secondary: var(--base00);
+    --background-secondary-alt: var(--base00);
+    /*--channeltextarea-background: var(--base01);*/
+    --channeltextarea-background: var(--base00);
+    /*--background-tertiary: var(--base00);*/
+    --background-tertiary: var(--base01);
+    --background-accent: var(--base0E);
+    --background-floating: var(--base01);
+    --background-modifier-selected: var(--base00);
+    --text-normal: var(--base05);
+    --text-secondary: var(--base00);
+    --text-muted: var(--base03);
+    --text-link: var(--base0C);
+    --interactive-normal: var(--base05);
+    --interactive-hover: var(--base0C);
+    --interactive-active: var(--base0A);
+    --interactive-muted: var(--base03);
+    --header-primary: var(--base06);
+    --header-secondary: var(--base03);
+    --scrollbar-thin-track: transparent;
+    --scrollbar-auto-track: transparent;
+}
+
+nav {
+  background-color: @base01@bd !important;
+}
+
+.sidebar_e031be {
+  background-color: @base00@bd !important;
+}
+
+.hljs-deletion,
+.hljs-formula,
+.hljs-keyword,
+.hljs-link,
+.hljs-selector-tag {
+  color: @base08@;
+}
+
+.hljs-built_in,
+.hljs-emphasis,
+.hljs-name,
+.hljs-quote,
+.hljs-strong,
+.hljs-title,
+.hljs-variable {
+  color: @base0D@;
+}
+
+.hljs-attr,
+.hljs-params,
+.hljs-template-tag,
+.hljs-type {
+  color: @base0A@;
+}
+
+.hljs-builtin-name,
+.hljs-doctag,
+.hljs-literal,
+.hljs-number {
+  color: @base0E@;
+}
+
+.hljs-code,
+.hljs-meta,
+.hljs-regexp,
+.hljs-selector-id,
+.hljs-template-variable {
+  color: @base09@;
+}
+
+.hljs-addition,
+.hljs-meta-string,
+.hljs-section,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-string,
+.hljs-symbol {
+  color: @base0B@;
+}
+
+.hljs-attribute,
+.hljs-bullet,
+.hljs-class,
+.hljs-function,
+.hljs-function .hljs-keyword,
+.hljs-meta-keyword,
+.hljs-selector-pseudo,
+.hljs-tag {
+  color: @base0C@;
+}
+
+.hljs-comment {
+  color: @base03@;
+}
+
+.hljs-link_label,
+.hljs-literal,
+.hljs-number {
+  color: @base0E@;
+}
+
+.hljs-comment,
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-section,
+.hljs-strong,
+.hljs-tag {
+  font-weight: bold;
+}
