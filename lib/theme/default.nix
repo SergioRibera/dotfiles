@@ -23,5 +23,5 @@ colors: let
 in {
   adwaitaGtk = replace ./adwaitaGtk.css;
   discord = replace ./discord.css;
-  # tmTheme = replace ./tmTheme.xml;
+  tmTheme = replace ./tmTheme.xml;
 }
