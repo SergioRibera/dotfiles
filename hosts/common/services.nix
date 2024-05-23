@@ -43,14 +43,14 @@
 
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland --time-format '%F %R'";
-          user = "greeter";
-        };
-
-        initial_session = {
-          command = "${pkgs.hyprland}/bin/Hyprland";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd dwl --time-format '%F %R'";
           user = config.user.username;
         };
+
+        # initial_session = {
+        #   command = "${pkgs.hyprland}/bin/Hyprland";
+        #   user = config.user.username;
+        # };
       };
     };
   };

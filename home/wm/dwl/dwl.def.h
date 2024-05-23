@@ -49,19 +49,22 @@ static const int shadow_blur_sigma = 20;
 static const int shadow_blur_sigma_focus = 40;
 static const char *const shadow_ignore_list[] = { NULL }; /* list of app-id to ignore */
 
-static const int corner_radius = @round@; /* 0 disables corner_radius */
+static const int numlock = 1;
+static const int capslock = 0;
 
-static const int blur = 1; /* flag to enable blur */
-static const int blur_optimized = 1;
-static const int blur_ignore_transparent = 1;
-static const struct blur_data blur_data = {
-	.radius = 10,
-	.num_passes = 2,
-	.noise = 0.0150,
-	.brightness = 0.9,
-	.contrast = 0.9,
-	.saturation = 1.1,
-};
+// static const int corner_radius = @round@; /* 0 disables corner_radius */
+
+// static const int blur = 1; /* flag to enable blur */
+// static const int blur_optimized = 1;
+// static const int blur_ignore_transparent = 1;
+// static const struct blur_data blur_data = {
+// 	.radius = 10,
+// 	.num_passes = 2,
+// 	.noise = 0.0150,
+// 	.brightness = 0.9,
+// 	.contrast = 0.9,
+// 	.saturation = 1.1,
+// };
 
 
 /* tagging - TAGCOUNT must be no greater than 31 */
@@ -103,7 +106,7 @@ static const Rule rules[] = {
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },
-	{ "TTT",      bstack },
+	// { "TTT",      bstack },
 	{ "[M]",      monocle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{  NULL,      NULL },
@@ -189,20 +192,20 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,  KEY,                      view,       {.ui = 1 << TAG} }, \
-	{ MODKEY|MOD_SHIFT, KEY,             tag,        {.ui = 1 << TAG} },
+	{ MODKEY|MOD_SHIFT, KEY,             tag,        {.ui = 1 << TAG} }
 	// { MODKEY|MOD_CONTROL, KEY,           toggleview, {.ui = 1 << TAG} }, \
 	// { MODKEY|MOD_CONTROL|MOD_SHIFT, KEY, toggletag,  {.ui = 1 << TAG} }
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-static const Gesture gestures[] = {
-  /* modifier  gesture       fingers_count   function    argument */
-  { MOD_NONE,         SWIPE_LEFT,   3,              shiftview,  { .i = 1 } },
-  { MOD_NONE,         SWIPE_RIGHT,  3,              shiftview,  { .i = -1 } },
-  // Swipe down to kill app
-  // { MOD_NONE,         SWIPE_DOWN,  3,              shiftview,  { .i = -1 } },
-};
+// static const Gesture gestures[] = {
+//   /* modifier  gesture       fingers_count   function    argument */
+//   { MOD_NONE,         SWIPE_LEFT,   3,              shiftview,  { .i = 1 } },
+//   { MOD_NONE,         SWIPE_RIGHT,  3,              shiftview,  { .i = -1 } },
+//   // Swipe down to kill app
+//   // { MOD_NONE,         SWIPE_DOWN,  3,              shiftview,  { .i = -1 } },
+// };
 
 // TODO: configure keymaps
 static const Key keys[] = {
@@ -212,7 +215,7 @@ static const Key keys[] = {
   // ### MEDIA KEYBINDINGS
   { MOD_NONE,               XF86XK_AudioRaiseVolume,  spawn,        SHCMD("swayosd --output-volume raise") },
   { MOD_NONE,               XF86XK_AudioLowerVolume,  spawn,        SHCMD("swayosd --output-volume lower") },
-  { MOD_NONE,               XF86XK_AudioMute,exec,    spawn,        SHCMD("swayosd --output-volume mute-toggle") },
+  { MOD_NONE,               XF86XK_AudioMute,         spawn,        SHCMD("swayosd --output-volume mute-toggle") },
   { MOD_NONE,               XF86XK_AudioMicMute,      spawn,        SHCMD("swayosd --input-volume mute-toggle") },
 
   { MOD_NONE,             XF86XK_MonBrightnessUp,     spawn,       SHCMD("swayosd --brightness raise") },
@@ -222,8 +225,9 @@ static const Key keys[] = {
   { MOD_NONE,             Key_Caps_Lock,              spawn,       SHCMD("swayosd --caps-lock") },
   { MOD_NONE,             Key_Num_Lock,               spawn,       SHCMD("swayosd --num-lock") },
 
-  { MODKEY,                    XKB_KEY_Return,     spawn,          SHCMD("wezterm start")}
-  { MODKEY|MOD_SHIFT,          XKB_KEY_Return,     spawn,          SHCMD("wezterm start -- fish --private")}
+  { MODKEY,                    XKB_KEY_p,          spawn,          {.v = {"wmenu-run", NULL}}},
+  { MODKEY,                    XKB_KEY_Return,     spawn,          SHCMD("wezterm start")},
+  { MODKEY|MOD_SHIFT,          XKB_KEY_Return,     spawn,          SHCMD("wezterm start -- fish --private")},
 	{ MODKEY,                    XKB_KEY_w,          killclient,     {0} },
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
