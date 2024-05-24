@@ -87,10 +87,9 @@
 @define-color dark_4 @base01@;
 @define-color dark_5 @base01@;
 
-.thunar .sidebar { background: @base00@b3; }
 .thunar .sidebar .view, .thunar .sidebar iconview {
-  background-color: #4A4A4A;
-  color: #ffffff; }
+  background-color: @base00@b3;
+  color: @base0A@; }
 .thunar .sidebar .view:selected, .thunar .sidebar iconview:selected, .thunar .sidebar .view:active, .thunar .sidebar iconview:active {
-  background: #8BB158;
-  color: #ffffff; }
+  background: @base0B@b3;
+  color: @base0A@; }
