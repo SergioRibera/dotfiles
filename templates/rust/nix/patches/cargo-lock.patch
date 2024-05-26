@@ -1,0 +1,169 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 8aeb376..311f337 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -737,6 +737,12 @@ dependencies = [
+  "typenum",
+ ]
+ 
++[[package]]
++name = "cursor-icon"
++version = "1.1.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "96a6ac251f4a2aca6b3f91340350eab87ae57c3f127ffeb585e92bd336717991"
++
+ [[package]]
+ name = "dark-light"
+ version = "1.0.0"
+@@ -841,13 +847,13 @@ checksum = "bd0c93bb4b0c6d9b77f4435b0ae98c24d17f1c45b2ff844c6151a07256ca923b"
+ 
+ [[package]]
+ name = "display-info"
+-version = "0.4.4"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "b28a01de1778c53501831bc6d83cb9a2a12021ea1010dab6194c64bc6da90ca2"
++version = "0.4.8"
++source = "git+https://github.com/SergioRibera/display-info?branch=master#5f97822533d703d9b3a7dca3761f31e93629e38f"
+ dependencies = [
+  "anyhow",
+  "core-graphics 0.23.1",
+  "fxhash",
++ "smithay-client-toolkit 0.18.1",
+  "widestring",
+  "windows 0.52.0",
+  "xcb",
+@@ -1690,6 +1696,15 @@ dependencies = [
+  "libc",
+ ]
+ 
++[[package]]
++name = "memmap2"
++version = "0.9.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "fe751422e4a8caa417e13c3ea66452215d7d63e19e604f4980461212f3ae1322"
++dependencies = [
++ "libc",
++]
++
+ [[package]]
+ name = "memoffset"
+ version = "0.6.5"
+@@ -2487,7 +2502,7 @@ dependencies = [
+  "ab_glyph",
+  "log",
+  "memmap2 0.5.10",
+- "smithay-client-toolkit",
++ "smithay-client-toolkit 0.16.1",
+  "tiny-skia 0.8.4",
+ ]
+ 
+@@ -2611,17 +2626,40 @@ dependencies = [
+  "nix 0.24.3",
+  "pkg-config",
+  "wayland-client 0.29.5",
+- "wayland-cursor",
++ "wayland-cursor 0.29.5",
+  "wayland-protocols 0.29.5",
+ ]
+ 
++[[package]]
++name = "smithay-client-toolkit"
++version = "0.18.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "922fd3eeab3bd820d76537ce8f582b1cf951eceb5475c28500c7457d9d17f53a"
++dependencies = [
++ "bitflags 2.4.1",
++ "cursor-icon",
++ "libc",
++ "log",
++ "memmap2 0.9.4",
++ "rustix 0.38.28",
++ "thiserror",
++ "wayland-backend 0.3.2",
++ "wayland-client 0.31.1",
++ "wayland-csd-frame",
++ "wayland-cursor 0.31.1",
++ "wayland-protocols 0.31.0",
++ "wayland-protocols-wlr",
++ "wayland-scanner 0.31.0",
++ "xkeysym",
++]
++
+ [[package]]
+ name = "smithay-clipboard"
+ version = "0.6.6"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "0a345c870a1fae0b1b779085e81b51e614767c239e93503588e54c5b17f4b0e8"
+ dependencies = [
+- "smithay-client-toolkit",
++ "smithay-client-toolkit 0.16.1",
+  "wayland-client 0.29.5",
+ ]
+ 
+@@ -3190,6 +3228,17 @@ dependencies = [
+  "wayland-sys 0.29.5",
+ ]
+ 
++[[package]]
++name = "wayland-csd-frame"
++version = "0.3.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "625c5029dbd43d25e6aa9615e88b829a5cad13b2819c4ae129fdbb7c31ab4c7e"
++dependencies = [
++ "bitflags 2.4.1",
++ "cursor-icon",
++ "wayland-backend 0.3.2",
++]
++
+ [[package]]
+ name = "wayland-cursor"
+ version = "0.29.5"
+@@ -3201,6 +3250,17 @@ dependencies = [
+  "xcursor",
+ ]
+ 
++[[package]]
++name = "wayland-cursor"
++version = "0.31.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "71ce5fa868dd13d11a0d04c5e2e65726d0897be8de247c0c5a65886e283231ba"
++dependencies = [
++ "rustix 0.38.28",
++ "wayland-client 0.31.1",
++ "xcursor",
++]
++
+ [[package]]
+ name = "wayland-protocols"
+ version = "0.29.5"
+@@ -3622,7 +3682,7 @@ dependencies = [
+  "raw-window-handle",
+  "redox_syscall 0.3.5",
+  "sctk-adwaita",
+- "smithay-client-toolkit",
++ "smithay-client-toolkit 0.16.1",
+  "wasm-bindgen",
+  "wayland-client 0.29.5",
+  "wayland-commons",
+@@ -3778,6 +3838,12 @@ dependencies = [
+  "winapi",
+ ]
+ 
++[[package]]
++name = "xkeysym"
++version = "0.2.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "054a8e68b76250b253f671d1268cb7f1ae089ec35e195b2efb2a4e9a836d0621"
++
+ [[package]]
+ name = "xml-rs"
+ version = "0.8.19"
+@@ -3899,8 +3965,3 @@ dependencies = [
+  "quote",
+  "syn 1.0.109",
+ ]
+-
+-[[patch.unused]]
+-name = "display-info"
+-version = "0.4.8"
+-source = "git+https://github.com/SergioRibera/display-info?branch=master#5f97822533d703d9b3a7dca3761f31e93629e38f"

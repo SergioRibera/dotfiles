@@ -58,3 +58,5 @@ This good people who helped me when learning nix-related stuff! really, thanks!
 
 - [Lemin-n](https://github.com/Lemin-n/dotfiles)
 - [L I N U X](https://github.com/linuxmobile/kaku)
+- [nmasur](https://github.com/nmasur/dotfiles)
+- [badele](https://github.com/badele/nix-homelab)

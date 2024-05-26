@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  username = "s4rch";
+  username = "s3rver";
 in
 inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
@@ -18,15 +18,9 @@ inputs.nixpkgs.lib.nixosSystem {
       # Prioritize performance over efficiency
       powerManagement.cpuFreqGovernor = "performance";
 
-      git.enable = true;
-      gui.enable = true;
-      gui.touchpad = true;
-
-
       nvim = {
-        enable = true;
-        neovide = true;
-        complete = true;
+        neovide = false;
+        complete = false;
       };
 
       user = {
@@ -34,8 +28,7 @@ inputs.nixpkgs.lib.nixosSystem {
         isNormalUser = true;
         enableHM = true;
         enableMan = true;
-        browser = "chromium";
-        groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
+        groups = [ "wheel" "docker" "networkmanager" "input" ];
       };
     }
   ];
