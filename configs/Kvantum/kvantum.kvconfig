@@ -1,6 +1,0 @@
-[General]
-theme=KvArcDark#
-
-[Applications]
-Default=alacritty
-KvArcDark%23=dolphin, Dolphin, Preferenciasdelsistema, code, Code-OSS
