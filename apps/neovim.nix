@@ -20,9 +20,14 @@ let
     };
   }));
 
-  bin = if complete then "${src}/bin/nvim" else "${src}/bin/nvim";
+  script = pkgs.writeShellScriptBin "run-neovide" ''
+    ${pkgs.neovide}/bin/neovide --neovim-bin ${src}/bin/nvim
+  '';
 in
 {
   type = "app";
-  program = bin;
+  program = if complete then
+      "${script}/bin/run-neovide"
+    else
+      "${src}/bin/nvim";
 }
