@@ -7,9 +7,9 @@
 }:
 with pkgs.lib;
 let
-  tablineLua = import ../tabline.nix;
-  cmpUtilsLua = optionalString cfg.complete (builtins.readFile ../plugins/cmp.lua);
-  extraPlugins = optionalString cfg.complete (builtins.readFile ../plugins/mod.lua);
+  tablineLua = import ./tabline.nix;
+  cmpUtilsLua = optionalString cfg.complete (builtins.readFile ./plugins/cmp.lua);
+  extraPlugins = optionalString cfg.complete (builtins.readFile ./plugins/mod.lua);
 in
 {
   enableMan = false;
@@ -28,11 +28,11 @@ in
     + optionalString cfg.complete extraPlugins;
 
   # Neovim options
-  opts = import ../opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
+  opts = import ./opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
   # Colorscheme
-  highlightOverride = import ../colorscheme.nix { inherit (gui.theme) colors; };
+  highlightOverride = import ./colorscheme.nix { inherit (gui.theme) colors; };
   # Keymaps
-  keymaps = import ../mapping.nix {
+  keymaps = import ./mapping.nix {
     lib = pkgs.lib;
     shell = user.shell;
     complete = cfg.complete;
@@ -80,7 +80,7 @@ in
   ];
 
   # Global Options
-  globals = import ../globals.nix {
+  globals = import ./globals.nix {
     lib = pkgs.lib;
     colors = gui.theme.colors;
     username = user.username;
@@ -88,7 +88,7 @@ in
   };
 
   # Esential plugins
-  plugins = import ../plugins { inherit pkgs user cfg gui; };
+  plugins = import ./plugins { inherit pkgs user cfg gui; };
 
   # Plugins from GitHub
   extraPlugins = with inputs.self.packages.${pkgs.system}; [

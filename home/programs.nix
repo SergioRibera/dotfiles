@@ -15,7 +15,7 @@ in
     ];
 
     programs = {
-      nixvim = { enable = config.nvim.enable; } // (import ../modules/nvim/package { cfg = config.nvim; inherit inputs pkgs lib gui user; });
+      nixvim = { enable = config.nvim.enable; } // (import ./editors/nvim { cfg = config.nvim; inherit inputs pkgs lib gui user; });
       anyrun = lib.mkIf
         (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM)
         (import ./desktop/anyrun.nix { inherit pkgs inputs config; });
