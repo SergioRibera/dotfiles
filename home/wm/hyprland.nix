@@ -125,22 +125,24 @@
     };
 
     # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-    binde = [
+    # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
+    # r -> release, will trigger on release of a key.
+    # e -> repeat, will repeat when held.
+    # n -> non-consuming, key/mouse events will be passed to the active window in addition to triggering the dispatcher.
+    # m -> mouse, see below
+    # t -> transparent, cannot be shadowed by other binds.
+    # i -> ignore mods, will ignore modifiers.
+    bindel = [
       #
       # Volume keybinds
       #
-      ",XF86AudioRaiseVolume,exec,swayosd --output-volume raise"
-      ",XF86AudioLowerVolume,exec,swayosd --output-volume lower"
+      ",XF86AudioRaiseVolume,exec,swayosd-client --output-volume raise"
+      ",XF86AudioLowerVolume,exec,swayosd-client --output-volume lower"
       #
       # Brightness keys
       #
-      ",XF86MonBrightnessUp,exec,swayosd --brightness raise"
-      ",XF86MonBrightnessDown,exec,swayosd --brightness lower"
-      #
-      # Others
-      #
-      ",Caps_Lock,exec,swayosd --caps-lock"
-      ",Num_Lock,exec,swayosd --num-lock"
+      ",XF86MonBrightnessUp,exec,swayosd-client --brightness raise"
+      ",XF86MonBrightnessDown,exec,swayosd-client --brightness lower"
     ];
 
     # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -159,8 +161,10 @@
       "SUPER,W,killactive,"
       # TODO: replace MOD+Q by power menu
       # "SUPER,Q,exit,"
-      ",XF86AudioMute,exec,swayosd --output-volume mute-toggle"
-      ",XF86AudioMicMute,exec,swayosd --input-volume mute-toggle"
+      ",XF86AudioMute,exec,swayosd-client --output-volume mute-toggle"
+      ",XF86AudioMicMute,exec,swayosd-client --input-volume mute-toggle"
+      ",Caps_Lock,exec,sleep 1s && swayosd-client --caps-lock"
+      ",Num_Lock,exec,sleep 1s && swayosd-client --num-lock"
       #
       # Custom Exec Keybinds
       #
@@ -174,7 +178,7 @@
       # "SUPER,N,exec,${user.browser}"
       # "SUPER_SHIFT,N,exec,${user.browser} --private-window"
       "SUPER,S,exec,sss --area \"$(slurp -d)\" -o raw | wl-copy"
-      "SUPER_SHIFT,S,exec,sss --area \"$(slurp -d)\" -o \"$HOME/Pictures/Screenshot/$(date '+%Y-%m-%d-%H:%M:%S')_sss.png\""
+      "SUPER_SHIFT,S,exec,sss --area \"$(slurp -d)\" -o \"$HOME/Pictures/Screenshot/$(date '+%Y-%m-%d-%H%M%S')_sss.png\""
       "SUPER,ALT_S,exec,hyprshot --clipboard-only -m region"
       "SUPER_SHIFT,ALT_S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
 
