@@ -9,7 +9,6 @@ with pkgs.lib;
 let
   tablineLua = import ./tabline.nix;
   cmpUtilsLua = optionalString cfg.complete (builtins.readFile ./plugins/cmp.lua);
-  extraPlugins = optionalString cfg.complete (builtins.readFile ./plugins/mod.lua);
 in
 {
   enableMan = false;
@@ -24,8 +23,7 @@ in
 
   # Raw lua
   extraConfigLuaPre = cmpUtilsLua
-    + tablineLua
-    + optionalString cfg.complete extraPlugins;
+    + tablineLua;
 
   # Neovim options
   opts = import ./opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
@@ -88,17 +86,11 @@ in
   };
 
   # Esential plugins
-  plugins = import ./plugins { inherit pkgs user cfg gui; };
-
-  # Plugins from GitHub
-  extraPlugins = with inputs.self.packages.${pkgs.system}; [
-    # Editor
-    nvim-surround
-    nvim-cmp-dotenv
-  ] ++ pkgs.lib.lists.optionals cfg.complete [
-    # Editor
-    nvim-lsp-progress
-    nvim-wakatime
-    nvim-codeshot
-  ];
+  plugins = {
+    lsp = pkgs.lib.mkIf cfg.complete (import ./lsp);
+    lazy = {
+      enable = true;
+      plugins = import ./plugins { inherit inputs pkgs user cfg gui; };
+    };
+  };
 }

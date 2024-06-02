@@ -1,7 +1,5 @@
 { cfg, lib }: {
-  enable = true;
-  keymapsSilent = true;
-  settings.defaults = {
+  defaults = {
     vimgrep_arguments = [
       "rg"
       "--color=never"
