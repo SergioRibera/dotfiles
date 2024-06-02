@@ -12,47 +12,45 @@
   sections = {
     lualine_a = [
       {
-        name = "mode";
+        __unkeyed = "mode";
         upper = true;
       }
     ];
     lualine_b = [
       {
-        name = "branch";
+        __unkeyed = "branch";
         icon = "";
       }
     ];
     lualine_c = [
       {
-        name = "filetype";
+        __unkeyed = "filetype";
         icon_only = true;
       }
       {
-        name = "filename";
+        __unkeyed = "filename";
         file_status = true;
         symbols = { modified = "•"; readonly = ""; };
       }
     ] ++ lib.lists.optionals cfg.complete [
       {
-        name = "diagnostics";
+        __unkeyed = "diagnostics";
         sources = [ "nvim_diagnostic" ];
         symbols = { error = " "; warn = " "; info = " "; };
         color_error = colors.base08;
         color_warn = colors.base0E;
         color_info = colors.base05;
-        on_click.__raw = ''
-          function(n, b)
-            if n ~= 1 then
-              return
-            end
-            if b == 'l' or b == 'left' then
-              vim.cmd(":Trouble<Cr>")
-            end
+        on_click.__raw = ''function(n, b)
+          if n ~= 1 then
+            return
           end
-        '';
+          if b == 'l' or b == 'left' then
+            vim.cmd(":Trouble<CR>")
+          end
+        end'';
       }
     ];
-    lualine_x = [ { name = ""; } ];
+    lualine_x = { __empty = {}; };
     lualine_y = lib.lists.optionals cfg.complete [
       {
         fmt.__raw = ''

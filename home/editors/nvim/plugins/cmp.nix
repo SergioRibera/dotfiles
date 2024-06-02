@@ -65,56 +65,56 @@
       { name = "buffer"; }
       { name = "dotenv"; }
     ];
-    mapping = lib.mkIf cfg.complete {
-      "<BS>".__raw = ''
-        require("cmp").mapping(function(_fallback)
-          local keys = cmp_utils.smart_bs()
-          vim.api.nvim_feedkeys(keys, 'nt', true)
-        end, { 'i', 's' })
-      '';
-      "<Tab>".__raw = ''
-        require("cmp").mapping(function(_fallback)
-          if require("cmp").visible() then
-            -- If there is only one completion candidate, use it.
-            if #require("cmp").get_entries() == 1 then
-              require("cmp").confirm({ select = true })
-            else
-              require("cmp").select_next_item()
-            end
-          elseif require("luasnip").expand_or_locally_jumpable() then
-            require("luasnip").expand_or_jump()
-          elseif require("neogen").jumpable() then
-            require("neogen").jump_next()
-          elseif cmp_utils.in_whitespace() then
-            cmp_utils.smart_tab()
-          else
-            require("cmp").complete()
-            -- else
-            -- require("cmp").mapping.select_next_item({ behavior = require("cmp.types").cmp.SelectBehavior.Insert })
-            -- fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-          end
-        end, { "i", "s" })
-      '';
-      "<S-Tab>".__raw = ''
-        require("cmp").mapping(function(_fallback)
-          if require("cmp").visible() then
-            require("cmp").select_prev_item()
-          elseif require("luasnip").jumpable(-1) and cmp_utils.in_snippet() then
-            require("luasnip").jump(-1)
-          elseif require("neogen").jumpable(true) then
-            require("neogen").jump_prev()
-          else
-            -- require("cmp").mapping.select_prev_item({ behavior = require("cmp.types").cmp.SelectBehavior.Insert })
-            require("cmp").complete()
-          end
-        end, { "i", "s" })
-      '';
-      "<C-Space>".__raw = ''require("cmp").mapping(require("cmp").mapping.complete(), { 'i', 'c' })'';
-      "<CR>".__raw = ''
-        require("cmp").mapping({
-          i = require("cmp").mapping.confirm({ select = true }),
-          c = require("cmp").mapping.confirm({ select = false }),
-        })
-      '';
-    };
+    # mapping = lib.mkIf cfg.complete {
+    #   "<BS>".__raw = ''
+    #     require("cmp").mapping(function(_fallback)
+    #       local keys = cmp_utils.smart_bs()
+    #       vim.api.nvim_feedkeys(keys, 'nt', true)
+    #     end, { 'i', 's' })
+    #   '';
+    #   "<Tab>".__raw = ''
+    #     require("cmp").mapping(function(_fallback)
+    #       if require("cmp").visible() then
+    #         -- If there is only one completion candidate, use it.
+    #         if #require("cmp").get_entries() == 1 then
+    #           require("cmp").confirm({ select = true })
+    #         else
+    #           require("cmp").select_next_item()
+    #         end
+    #       elseif require("luasnip").expand_or_locally_jumpable() then
+    #         require("luasnip").expand_or_jump()
+    #       elseif require("neogen").jumpable() then
+    #         require("neogen").jump_next()
+    #       elseif cmp_utils.in_whitespace() then
+    #         cmp_utils.smart_tab()
+    #       else
+    #         require("cmp").complete()
+    #         -- else
+    #         -- require("cmp").mapping.select_next_item({ behavior = require("cmp.types").cmp.SelectBehavior.Insert })
+    #         -- fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+    #       end
+    #     end, { "i", "s" })
+    #   '';
+    #   "<S-Tab>".__raw = ''
+    #     require("cmp").mapping(function(_fallback)
+    #       if require("cmp").visible() then
+    #         require("cmp").select_prev_item()
+    #       elseif require("luasnip").jumpable(-1) and cmp_utils.in_snippet() then
+    #         require("luasnip").jump(-1)
+    #       elseif require("neogen").jumpable(true) then
+    #         require("neogen").jump_prev()
+    #       else
+    #         -- require("cmp").mapping.select_prev_item({ behavior = require("cmp.types").cmp.SelectBehavior.Insert })
+    #         require("cmp").complete()
+    #       end
+    #     end, { "i", "s" })
+    #   '';
+    #   "<C-Space>".__raw = ''require("cmp").mapping(require("cmp").mapping.complete(), { 'i', 'c' })'';
+    #   "<CR>".__raw = ''
+    #     require("cmp").mapping({
+    #       i = require("cmp").mapping.confirm({ select = true }),
+    #       c = require("cmp").mapping.confirm({ select = false }),
+    #     })
+    #   '';
+    # };
 }

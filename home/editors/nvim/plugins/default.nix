@@ -15,14 +15,23 @@ let
     "RainbowViolet"
     "RainbowCyan"
   ];
-  mkLazyPlugin = pkg: { lazy ? null, event ? null, cmd ? null, main ? null, dependencies ? null, opts ? null }: {
-    inherit pkg opts lazy event main dependencies;
+  mkLazyPlugin = pkg: {
+    ft ? null, init ? null,
+    lazy ? null, event ? null,
+    cmd ? null, main ? null,
+    dependencies ? null, opts ? {}
+  }: {
+    inherit pkg ft opts lazy event main dependencies;
   };
-  mkTreesitter = list: map (x: pkgs.vimPlugins.nvim-treesitter-parsers.${x}) list;
+  mkTreesitter = lang: ft: {
+    pkg = pkgs.vimPlugins.nvim-treesitter-parsers.${lang};
+    inherit ft;
+  };
 in
 with pkgs.vimPlugins;
+with inputs.self.packages.${pkgs.system};
 [
-  inputs.self.packages.${pkgs.system}.nvim-surround
+  (mkLazyPlugin nvim-surround { event = "BufReadPost"; })
 
   nvim-web-devicons
   # completion
@@ -31,13 +40,18 @@ with pkgs.vimPlugins;
     opts = import ./cmp.nix { inherit cfg; lib = pkgs.lib; };
     event = ["InsertEnter" "CmdlineEnter"];
     dependencies = with pkgs.vimPlugins; [
-      cmp-buffer
-      cmp-cmdline
       cmp-path
+      (mkLazyPlugin cmp-buffer { event = ["InsertEnter"]; })
+      (mkLazyPlugin cmp-cmdline { event = ["CmdlineEnter"]; })
     ] ++ lib.optionals cfg.complete [
-      cmp-nvim-lsp
-      cmp-nvim-lsp-signature-help
-      inputs.self.packages.${pkgs.system}.nvim-cmp-dotenv
+      (mkLazyPlugin cmp-nvim-lsp { event = ["BufEnter *.*"]; })
+      (mkLazyPlugin cmp-nvim-lsp-signature-help { event = ["BufEnter *.*"]; })
+      (mkLazyPlugin nvim-cmp-dotenv { event = ["BufEnter *.*"]; })
+      (mkLazyPlugin neogen {
+        event = ["BufEnter *.*"];
+        opts.snippetEngine = "luasnip";
+        dependencies = [ luasnip friendly-snippets ];
+      })
     ];
   })
   # status bar
@@ -47,10 +61,10 @@ with pkgs.vimPlugins;
   })
 
   # Editor
-  nvim-autopairs
+  (mkLazyPlugin nvim-autopairs { event = ["InsertEnter"]; })
   (mkLazyPlugin indent-blankline-nvim-lua {
     main = "ibl";
-    lazy = false;
+    event = "BufReadPost";
     opts = {
       indent.char = "▏";
       indent.smart_indent_cap = true;
@@ -69,11 +83,13 @@ with pkgs.vimPlugins;
     ];
   })
 ] ++ lib.optionals cfg.complete [
-  inputs.self.packages.${pkgs.system}.nvim-wakatime
-  (mkLazyPlugin inputs.self.packages.${pkgs.system}.nvim-lsp-progress {
+  nvim-wakatime
+  (mkLazyPlugin nvim-lsp-progress {
+    event = ["VimEnter" "LspAttach"];
     opts.max_size = 80;
   })
-  (mkLazyPlugin inputs.self.packages.${pkgs.system}.nvim-codeshot {
+  (mkLazyPlugin nvim-codeshot {
+    cmd = ["SSSelected" "SSFocused"];
     opts = {
       copy = "%c | wl-copy";
       fonts = "";
@@ -85,92 +101,77 @@ with pkgs.vimPlugins;
     };
   })
 
-  nvim-lspconfig
+  (mkLazyPlugin nvim-lspconfig { event = "LspAttach"; })
   # Colors
   nvim-colorizer-lua
-  nvim-treesitter
+  (mkLazyPlugin nvim-treesitter { event = "BufReadPost"; })
   (mkLazyPlugin rainbow-delimiters-nvim {
+    event = "BufReadPost";
     main = "rainbow-delimiters.setup";
     opts.highlight = ibl-hl;
    })
 
   # completion
-  (mkLazyPlugin neogen {
-    opts.snippetEngine = "luasnip";
-    dependencies = with pkgs.vimPlugins; [ luasnip ];
-  })
-# cmp-dotenv
-
-  # Snippets
-  luasnip
-  friendly-snippets
 
   # LSP
-  crates-nvim
+  (mkLazyPlugin crates-nvim { ft = ["toml"]; })
 
   # Debug
-  trouble-nvim # show diagnostics
+  (mkLazyPlugin trouble-nvim { cmd = "Trouble"; }) # show diagnostics
   # dap = import ../plugins/dap.nix;
 
   # Extras
-# codeshot
-  twilight-nvim
-  (mkLazyPlugin gitsigns-nvim { opts = import ./git.nix; })
-  presence-nvim
+  (mkLazyPlugin twilight-nvim { cmd = "Twilight"; })
+  (mkLazyPlugin gitsigns-nvim { event = "BufReadPost"; opts = import ./git.nix; })
+  (mkLazyPlugin presence-nvim { lazy = false; })
   # instant.enable = true; # no one I work with uses nvim so it makes no sense
-] ++ mkTreesitter [
-  "c"
-  "go"
-  "sql"
-  "vue"
-  "nix"
-  "vim"
-  "lua"
-  "cpp"
-  "ini"
-  "ron"
-  "asm"
-  "fish"
-  "css"
-  "tsx"
-  "xml"
-  "scss"
-  "glsl"
-  "json"
-  "bash"
-  "yaml"
-  "rust"
-  "wgsl"
-  "llvm"
-  "luau"
-  "hlsl"
-  "toml"
-  "diff"
-  "make"
-  "http"
-  "html"
-  "mlir"
-  "regex"
-  "hjson"
-  "json5"
-  "astro"
-  "cmake"
-  "query"
-  "ocaml"
-  "jsonc"
-  "elixir"
-  "liquid"
-  "python"
-  "c_sharp"
-  "haskell"
-  "comment"
-  "markdown"
-  "gitignore"
-  "wgsl_bevy"
-  "gitcommit"
-  "typescript"
-  "javascript"
-  "git_config"
-  "ssh_config"
-  "dockerfile"
+] ++ [
+  (mkTreesitter "c" ["c" "cuda"])
+  (mkTreesitter "go" ["go" "gomod" "gowork" "gotmpl"])
+  (mkTreesitter "sql" ["sql"])
+  (mkTreesitter "vue" ["vue"])
+  (mkTreesitter "nix" ["nix"])
+  (mkTreesitter "lua" ["lua"])
+  (mkTreesitter "cpp" ["cpp"])
+  (mkTreesitter "ini" ["ini"])
+  (mkTreesitter "ron" ["ron"])
+  (mkTreesitter "fish" ["fish"])
+  (mkTreesitter "css" ["css" "less"])
+  (mkTreesitter "tsx" ["javascript.jsx" "typescript" "typescriptreact" "typescript.tsx"])
+  (mkTreesitter "xml" ["xml"])
+  (mkTreesitter "scss" ["scss"])
+  (mkTreesitter "glsl" ["glsl" "vert" "tesc" "tese" "frag" "geom" "comp"])
+  (mkTreesitter "json" ["json"])
+  (mkTreesitter "bash" ["sh" "bash"])
+  (mkTreesitter "yaml" ["yaml" "yml"])
+  (mkTreesitter "rust" ["rs"])
+  (mkTreesitter "wgsl" ["wgsl"])
+  (mkTreesitter "llvm" ["llvm"])
+  (mkTreesitter "luau" ["luau"])
+  (mkTreesitter "hlsl" ["hlsl"])
+  (mkTreesitter "toml" ["toml"])
+  (mkTreesitter "diff" ["diff"])
+  (mkTreesitter "make" ["cmake" "make" "mak" "makefile"])
+  (mkTreesitter "http" ["http"])
+  (mkTreesitter "html" ["html" "templ"])
+  (mkTreesitter "mlir" ["mlir"])
+  (mkTreesitter "regex" ["regex"])
+  (mkTreesitter "astro" ["astro"])
+  (mkTreesitter "cmake" ["cmake"])
+  (mkTreesitter "query" ["query"])
+  (mkTreesitter "ocaml" ["ocaml" "menhir" "ocamlinterface" "ocamllex" "reason" "dune"])
+  (mkTreesitter "jsonc" ["jsonc"])
+  (mkTreesitter "liquid" ["liquid"])
+  (mkTreesitter "python" ["python"])
+  (mkTreesitter "c_sharp" ["cs"])
+  (mkTreesitter "haskell" ["haskell" "lhaskell"])
+  (mkTreesitter "comment" ["*"])
+  (mkTreesitter "markdown" ["markdown"])
+  (mkTreesitter "gitignore" ["gitignore"])
+  (mkTreesitter "wgsl_bevy" ["wgsl_bevy"])
+  (mkTreesitter "gitcommit" ["gitcommit"])
+  (mkTreesitter "javascript" ["javascript" "javascriptreact"])
+  (mkTreesitter "git_config" ["gitconfig"])
+  (mkTreesitter "ssh_config" ["sshconfig"])
+  (mkTreesitter "dockerfile" ["dockerfile"])
 ]
