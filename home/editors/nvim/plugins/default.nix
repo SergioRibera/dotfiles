@@ -16,6 +16,7 @@ let
     "RainbowCyan"
   ];
   mkLazyPlugin = pkg: {
+    config ? null,
     ft ? null, init ? null,
     lazy ? null, event ? null,
     cmd ? null, main ? null,
@@ -37,7 +38,7 @@ with inputs.self.packages.${pkgs.system};
   # completion
   which-key-nvim
   (mkLazyPlugin nvim-cmp {
-    opts = import ./cmp.nix { inherit cfg; lib = pkgs.lib; };
+    opts.__raw = import ./cmp.nix { inherit cfg; lib = pkgs.lib; };
     event = ["InsertEnter" "CmdlineEnter"];
     dependencies = with pkgs.vimPlugins; [
       cmp-path
