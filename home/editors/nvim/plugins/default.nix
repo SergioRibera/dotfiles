@@ -16,9 +16,9 @@ let
     "RainbowCyan"
   ];
   mkLazyPlugin = pkg: {
-    config ? null,
+    config ? null, optional ? false,
     ft ? null, init ? null,
-    lazy ? null, event ? null,
+    lazy ? true, event ? null,
     cmd ? null, main ? null,
     dependencies ? null, opts ? {}
   }: {
@@ -38,23 +38,12 @@ with inputs.self.packages.${pkgs.system};
   # completion
   which-key-nvim
   (mkLazyPlugin nvim-cmp {
+    event = ["CmdlineEnter" "InsertEnter"];
     opts.__raw = import ./cmp.nix { inherit cfg; lib = pkgs.lib; };
-    event = ["InsertEnter" "CmdlineEnter"];
-    dependencies = with pkgs.vimPlugins; [
-      cmp-path
-      (mkLazyPlugin cmp-buffer { event = ["InsertEnter"]; })
-      (mkLazyPlugin cmp-cmdline { event = ["CmdlineEnter"]; })
-    ] ++ lib.optionals cfg.complete [
-      (mkLazyPlugin cmp-nvim-lsp { event = ["BufEnter *.*"]; })
-      (mkLazyPlugin cmp-nvim-lsp-signature-help { event = ["BufEnter *.*"]; })
-      (mkLazyPlugin nvim-cmp-dotenv { event = ["BufEnter *.*"]; })
-      (mkLazyPlugin neogen {
-        event = ["BufEnter *.*"];
-        opts.snippetEngine = "luasnip";
-        dependencies = [ luasnip friendly-snippets ];
-      })
-    ];
   })
+  (mkLazyPlugin cmp-cmdline { event = ["CmdlineEnter"]; })
+  (mkLazyPlugin cmp-buffer { event = ["InsertEnter"]; })
+  (mkLazyPlugin cmp-path { event = ["InsertEnter" "CmdlineEnter"]; })
   # status bar
   (mkLazyPlugin lualine-nvim {
     event = ["VimEnter"];
@@ -62,7 +51,7 @@ with inputs.self.packages.${pkgs.system};
   })
 
   # Editor
-  (mkLazyPlugin nvim-autopairs { event = ["InsertEnter"]; })
+  (mkLazyPlugin nvim-autopairs { event = "InsertEnter"; })
   (mkLazyPlugin indent-blankline-nvim-lua {
     main = "ibl";
     event = "BufReadPost";
@@ -85,10 +74,7 @@ with inputs.self.packages.${pkgs.system};
   })
 ] ++ lib.optionals cfg.complete [
   nvim-wakatime
-  (mkLazyPlugin nvim-lsp-progress {
-    event = ["VimEnter" "LspAttach"];
-    opts.max_size = 80;
-  })
+  nvim-lsp-progress
   (mkLazyPlugin nvim-codeshot {
     cmd = ["SSSelected" "SSFocused"];
     opts = {
@@ -102,20 +88,27 @@ with inputs.self.packages.${pkgs.system};
     };
   })
 
+  (mkLazyPlugin cmp-nvim-lsp { event = "LspAttach"; })
+  (mkLazyPlugin cmp-nvim-lsp-signature-help { event = "LspAttach"; })
+  (mkLazyPlugin nvim-cmp-dotenv { event = ["BufEnter *.*"]; })
+  (mkLazyPlugin neogen { event = "LspAttach"; opts.snippetEngine = "luasnip"; })
+  (mkLazyPlugin luasnip { event = "LspAttach"; })
+  (mkLazyPlugin friendly-snippets { event = "LspAttach"; })
+
   (mkLazyPlugin nvim-lspconfig { event = "LspAttach"; })
   # Colors
-  nvim-colorizer-lua
-  (mkLazyPlugin nvim-treesitter { event = "BufReadPost"; })
+  (mkLazyPlugin nvim-colorizer-lua { event = ["BufReadPost"]; })
+  (mkLazyPlugin nvim-treesitter { event = ["BufReadPost"]; })
   (mkLazyPlugin rainbow-delimiters-nvim {
     event = "BufReadPost";
     main = "rainbow-delimiters.setup";
     opts.highlight = ibl-hl;
-   })
+  })
 
   # completion
 
   # LSP
-  (mkLazyPlugin crates-nvim { ft = ["toml"]; })
+  (mkLazyPlugin crates-nvim { event = "BufRead Cargo.toml"; })
 
   # Debug
   (mkLazyPlugin trouble-nvim { cmd = "Trouble"; }) # show diagnostics
@@ -145,7 +138,7 @@ with inputs.self.packages.${pkgs.system};
   (mkTreesitter "json" ["json"])
   (mkTreesitter "bash" ["sh" "bash"])
   (mkTreesitter "yaml" ["yaml" "yml"])
-  (mkTreesitter "rust" ["rs"])
+  (mkTreesitter "rust" ["rust"])
   (mkTreesitter "wgsl" ["wgsl"])
   (mkTreesitter "llvm" ["llvm"])
   (mkTreesitter "luau" ["luau"])

@@ -50,7 +50,7 @@ in
   local cmp = require("cmp")
 
   cmp.setup({
-    -- window = { documentation = { border = { "┌" "─" "┐" "│" "┘" "─" "└" "│" } } },
+    window = { documentation = { border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" } } },
     snippet = {
       expand = function(args)
         require('luasnip').lsp_expand(args.body)

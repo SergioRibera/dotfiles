@@ -55,7 +55,7 @@
       {
         fmt.__raw = ''
           function()
-              return require("lsp-progress").progress()
+              return require("lsp-progress").progress({ max_size = 80 })
           end
         '';
       }
