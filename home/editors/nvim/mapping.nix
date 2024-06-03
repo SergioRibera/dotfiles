@@ -44,7 +44,7 @@ in
   { key = "<Leader>dr"; action = "<cmd>lua require('dapui).open({reset = true})<CR>"; options = opts "Reset dap-ui"; }
 
   # Take Screenshots using [sss](github:SergioRibera/sss)
-  { mode = [ "v" ]; key = "<leader>ps"; action = ":SSSelected<Cr>"; options = opts "Take screenshot"; }
+  { mode = [ "v" ]; key = "<leader>ss"; action = ":SSSelected<Cr>"; options = opts "Take screenshot"; }
 
   # open shell
   { key = "<C-b>"; action = "<Cmd> split term://${shell} | resize 10 <CR>"; options = opts "Open Terminal"; }
