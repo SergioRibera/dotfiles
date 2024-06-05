@@ -15,6 +15,9 @@ in
     configFile."wired/wired.ron".text = lib.optionalString
       (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
       (import ../desktop/wired.nix { colors = gui.theme.colors; });
+    configFile."nushell/env.nu".text = lib.mkIf (user.shell == "nushell") {
+      sourve = ../shells/nushell/env.nu;
+    };
   };
 
   xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {

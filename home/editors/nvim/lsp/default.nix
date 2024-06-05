@@ -41,6 +41,7 @@ in
     "html"
     "jsonls"
     "nil_ls"
+    "nushell"
     "ruff"
     "tailwindcss"
     "taplo"
