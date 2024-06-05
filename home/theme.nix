@@ -34,6 +34,11 @@ in {
       };
 
       xdg.configFile."vesktop/settings/quickCss.css".text = theme.discord;
+      xdg.configFile."vesktop/settings.json".text = lib.mkIf (gui.enable)
+        (builtins.toJSON ({
+          arRPC = "on";
+          discordBranch = "stable";
+        } // theme.vesktopSplash));
 
       home = {
         sessionVariables.GTK_THEME = lib.optionalString (isLinux && gui.enable) "Orchis";

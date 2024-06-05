@@ -23,5 +23,9 @@ colors: let
 in {
   adwaitaGtk = replace ./adwaitaGtk.css;
   discord = replace ./discord.css;
+  vesktopSplash = {
+    splashColor = colors.base01;
+    splashBackground = colors.base01;
+  };
   tmTheme = replace ./tmTheme.xml;
 }
