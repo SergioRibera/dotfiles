@@ -1,0 +1,20 @@
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Wed Jun  5 13:19:40 2024
+Invocation: foremost -t all -i /dev/sda 
+Output directory: /etc/nixos/output
+Configuration file: /usr/local
+------------------------------------------------------------------
+File: stdin
+Start: Wed Jun  5 13:19:40 2024
+Length: Unknown
+ 
+Num	 Name (bs=512)	       Size	 File Offset	 Comment 
+
+
+0 FILES EXTRACTED
+	
+------------------------------------------------------------------
+
+Foremost finished at Wed Jun  5 13:19:50 2024

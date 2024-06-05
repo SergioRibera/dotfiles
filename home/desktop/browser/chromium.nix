@@ -12,6 +12,7 @@ in {
     "pljfkbaipkidhmaljaaakibigbcmmpnc" # atom material icons (github, gitlab, azure, etc)
     "jlmafbaeoofdegohdhinkhilhclaklkp" # octolinker
     "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+    "mbjlndilmncbcnpdiidabbgppiolapmg" # Hyper Read
   ];
   # https://chromeenterprise.google/policies
   extraOpts = {

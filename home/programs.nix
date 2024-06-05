@@ -23,6 +23,7 @@ in
       bat = import ./tools/bat.nix { inherit pkgs config; };
 
       # enable and config shell selected
+      nushell = import ./shells/nushell { inherit pkgs config lib; };
       "${user.shell}" = lib.mkIf
         (builtins.pathExists ./shells/${user.shell})
         (import ./shells/${user.shell} {

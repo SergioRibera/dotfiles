@@ -32,8 +32,7 @@ in
 with pkgs.vimPlugins;
 with inputs.self.packages.${pkgs.system};
 [
-  (mkLazyPlugin nvim-surround { event = "BufReadPost"; })
-
+  nvim-surround
   nvim-web-devicons
   # completion
   which-key-nvim
@@ -74,7 +73,6 @@ with inputs.self.packages.${pkgs.system};
   })
 ] ++ lib.optionals cfg.complete [
   nvim-wakatime
-  nvim-lsp-progress
   (mkLazyPlugin nvim-codeshot {
     cmd = ["SSSelected" "SSFocused"];
     opts = {
@@ -99,6 +97,7 @@ with inputs.self.packages.${pkgs.system};
   # Colors
   (mkLazyPlugin nvim-colorizer-lua { event = ["BufReadPost"]; })
   (mkLazyPlugin nvim-treesitter { event = ["BufReadPost"]; })
+  ({ pkg = pkgs.vimPlugins.nvim-treesitter-parsers.comment; event = "BufReadPost"; })
   (mkLazyPlugin rainbow-delimiters-nvim {
     event = "BufReadPost";
     main = "rainbow-delimiters.setup";
@@ -159,7 +158,6 @@ with inputs.self.packages.${pkgs.system};
   (mkTreesitter "python" ["python"])
   (mkTreesitter "c_sharp" ["cs"])
   (mkTreesitter "haskell" ["haskell" "lhaskell"])
-  (mkTreesitter "comment" ["*"])
   (mkTreesitter "markdown" ["markdown"])
   (mkTreesitter "gitignore" ["gitignore"])
   (mkTreesitter "wgsl_bevy" ["wgsl_bevy"])
