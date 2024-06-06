@@ -8,30 +8,30 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" "rtsx_usb_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/558627b2-3592-46c4-906e-29b1b05e17f8";
-      fsType = "xfs";
-    };
-
-  fileSystems."/nix/store" =
-    { device = "/dev/disk/by-uuid/0e398f1d-5bf8-4ecb-8670-83ca4c8d3ae7";
-      fsType = "xfs";
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/61b81b81-da9c-4123-9819-b2c88629c512";
+    { device = "/dev/disk/by-uuid/675d81d3-5a89-49f4-bd04-ca69e1634afb";
       fsType = "xfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/B917-E195";
+    { device = "/dev/disk/by-uuid/12CE-A600";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/845f6b00-4aa6-4147-bd82-70b89d59a0cb";
+      fsType = "xfs";
+    };
+
+  fileSystems."/nix/store" =
+    { device = "/dev/disk/by-uuid/628ad9a6-fb1d-47ea-b54f-8f0644ec8ad6";
+      fsType = "xfs";
     };
 
   swapDevices = [ ];
@@ -41,7 +41,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp3s0f3u3.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
