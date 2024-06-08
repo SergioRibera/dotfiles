@@ -19,9 +19,6 @@ in
     configFile."vesktop/settings/settings.json" = lib.mkIf (gui.enable) {
       source = ../desktop/vesktop.json;
     };
-    configFile."nushell/env.nu" = lib.mkIf (user.shell == "nushell") {
-      source = ../shells/nushell/env.nu;
-    };
   };
 
   xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
