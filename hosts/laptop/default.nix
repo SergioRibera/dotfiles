@@ -29,6 +29,8 @@ inputs.nixpkgs.lib.nixosSystem {
         complete = true;
       };
 
+      shell.name = "nushell";
+
       user = {
         inherit username;
         isNormalUser = true;

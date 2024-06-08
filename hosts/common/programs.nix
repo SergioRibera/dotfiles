@@ -1,6 +1,6 @@
 { lib, config, pkgs, ... }:
 let
-  inherit (config) user gui;
+  inherit (config) shell user gui;
   inherit (pkgs.stdenv.buildPlatform) isLinux;
 in {
   programs = {
@@ -34,7 +34,7 @@ in {
     chromium = lib.mkIf
       (gui.enable && user.browser == "chromium")
       (import ../../home/desktop/browser/chromium.nix { inherit config; });
-  } // lib.mkIf (user.shell == "fish") {
+  } // lib.mkIf (shell.name == "fish") {
     fish.enable = true;
   };
 }

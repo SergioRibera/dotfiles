@@ -89,30 +89,6 @@ $env.PROMPT_MULTILINE_INDICATOR = {|| prompt_status "ml" }
 # $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = {|| "" }
 # $env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| "" }
 
-alias nuls = ls
-alias ll = eza -lh --icons --group-directories-first
-alias la = eza -a --icons --group-directories-first
-alias lla = eza -lah --icons
-alias llag = eza -lah --git --icons
-alias ls = eza -Gx --icons --group-directories-first
-alias lsr = eza -Tlxa --icons --group-directories-first
-alias lsd = eza -GDx --icons --color always
-alias cat = bat
-alias catn = bat --plain
-alias catnp = bat --plain --paging=never
-alias ga = git add -A and git commit -m
-alias gs = git s
-alias gb = git switch
-alias gp = git p
-alias gbc = git switch -c
-alias glg = git lg
-alias tree = eza --tree --icons=always
-alias nixdev = nix develop -c "$SHELL"
-alias nixclear = nix-store --gc
-alias nixcleanup = sudo nix-collect-garbage --delete-older-than 1d
-alias nixlistgen = sudo nix-env -p /nix/var/nix/profiles/system --list-generations
-alias nixforceclean = sudo nix-collect-garbage -d
-
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
 # - converted from a value back to a string when running external commands (to_string)

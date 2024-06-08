@@ -3,6 +3,7 @@
 , cfg
 , user
 , gui
+, shell
 , ...
 }:
 with pkgs.lib;
@@ -32,7 +33,7 @@ in
   # Keymaps
   keymaps = import ./mapping.nix {
     lib = pkgs.lib;
-    shell = user.shell;
+    shell = shell.name;
     complete = cfg.complete;
   };
 

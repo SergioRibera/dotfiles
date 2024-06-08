@@ -20,7 +20,7 @@ in
     };
   };
 
-  users.defaultUserShell = pkgs."${user.shell}";
+  users.defaultUserShell = pkgs."${config.shell.name}";
   users.users."${username}" = {
     isNormalUser = user.isNormalUser;
     name = username;

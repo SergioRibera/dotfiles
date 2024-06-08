@@ -1,6 +1,6 @@
 { config, inputs, lib, pkgs, ... }:
 let
-  inherit (config) user gui;
+  inherit (config) shell user gui;
 in
 {
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {
@@ -15,7 +15,7 @@ in
     ];
 
     programs = {
-      nixvim = { enable = config.nvim.enable; } // (import ./editors/nvim { cfg = config.nvim; inherit inputs pkgs lib gui user; });
+      nixvim = { enable = config.nvim.enable; } // (import ./editors/nvim { cfg = config.nvim; inherit inputs pkgs lib gui user shell; });
       anyrun = lib.mkIf
         (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM)
         (import ./desktop/anyrun.nix { inherit pkgs inputs config; });
@@ -23,9 +23,9 @@ in
       bat = import ./tools/bat.nix { inherit pkgs config; };
 
       # enable and config shell selected
-      "${user.shell}" = lib.mkIf
-        (builtins.pathExists ./shells/${user.shell})
-        (import ./shells/${user.shell} {
+      "${shell.name}" = lib.mkIf
+        (builtins.pathExists ./shells/${shell.name})
+        (import ./shells/${shell.name} {
           inherit pkgs config lib;
         });
 

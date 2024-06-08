@@ -110,13 +110,46 @@ in
         type = types.str;
         default = "/home/${user.username}";
       };
-      shell = mkOption {
-        type = types.enum ["fish" "nushell"];
-        default = "fish";
-      };
       groups = mkOption {
         type = types.listOf types.str;
         default = [ ];
+      };
+    };
+    shell = {
+      name = mkOption {
+        type = types.enum ["fish" "nushell"];
+        default = "fish";
+      };
+      privSession = mkOption {
+        type = types.arr types.str;
+        default = ["fish" "-P"];
+      };
+      aliases = mkOption {
+        type = types.attrs;
+        default = {
+          ll = "eza -lh --icons --group-directories-first";
+          la = "eza -a --icons --group-directories-first";
+          lla = "eza -lah --icons";
+          llag = "eza -lah --git --icons";
+          ls = "eza -Gx --icons --group-directories-first";
+          lsr = "eza -Tlxa --icons --group-directories-first";
+          lsd = "eza -GDx --icons --color always";
+          cat = "bat";
+          catn = "bat --plain";
+          catnp = "bat --plain --paging=never";
+          ga = "git add -A; git commit -m";
+          gs = "git s";
+          gb = "git switch";
+          gp = "git p";
+          gbc = "git switch -c";
+          glg = "git lg";
+          tree = "eza --tree --icons=always";
+          nixdev = "nix develop -c 'fish'";
+          nixclear = "nix-store --gc";
+          nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
+          nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
+          nixforceclean = "sudo nix-collect-garbage -d";
+        };
       };
     };
   };
