@@ -1,6 +1,12 @@
+def custom_path [] {
+  let curr = pwd | str replace -r "/home/\\w+/" "~/" | split row "/"
+
+  return ($curr | reverse | enumerate | each {|p| if $p.index != 0 { str substring 0..1 item } else { $p }} | get item | reverse | str join '/')
+}
+
 def prompt [] {
     # Data row
-    print -n "\n" (ansi { fg: green, attr: b }) " " (whoami) (ansi reset) ": " (ansi blue) (pwd) (ansi reset)
+    print -n "\n" (ansi { fg: green, attr: b }) " " (whoami) (ansi reset) ": " (ansi blue) (custom_path) (ansi reset)
 
     # Check if in a git folder and show git status if true
     # if (is_git_repo) {
