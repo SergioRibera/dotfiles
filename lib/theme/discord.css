@@ -59,12 +59,27 @@
     --scrollbar-auto-track: transparent;
 }
 
-nav {
-  background-color: @base01@bd !important;
+body,
+.appMount_c99875,
+.app_de4237,
+.bg__12180,
+.sidebar_e031be,
+.panels__58331,
+.scroller__89969 {
+    background: transparent !important;
 }
 
-.sidebar_e031be {
-  background-color: @base00@bd !important;
+nav {
+  background-color: @base01@8f !important;
+}
+
+.container_debb33,
+.selected__37292 {
+  background-color: @base00@96 !important;
+}
+
+.modeSelected__473f1 .link_ddbb36, .modeSelected__473f1:hover .link_ddbb36 {
+  background-color: @base00@b0 !important;
 }
 
 .hljs-deletion,
