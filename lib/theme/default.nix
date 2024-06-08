@@ -28,4 +28,5 @@ in {
     splashBackground = colors.base01;
   };
   tmTheme = replace ./tmTheme.xml;
+  swayosd = replace ./swayosd.css;
 }
