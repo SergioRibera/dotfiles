@@ -4,6 +4,7 @@ let
   inherit (pkgs.stdenv.buildPlatform) isLinux;
 in {
   programs = {
+    fish.enable = shell.name == "fish";
     dconf.enable = (isLinux && gui.enable);
     xwayland.enable = (isLinux && gui.enable);
     nh = lib.mkIf user.enableHM {
@@ -34,7 +35,5 @@ in {
     chromium = lib.mkIf
       (gui.enable && user.browser == "chromium")
       (import ../../home/desktop/browser/chromium.nix { inherit config; });
-  } // lib.mkIf (shell.name == "fish") {
-    fish.enable = true;
   };
 }
