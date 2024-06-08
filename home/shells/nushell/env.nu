@@ -4,16 +4,33 @@ def custom_path [] {
   return ($curr | reverse | enumerate | each {|p| if $p.index != 0 { str substring 0..1 item } else { $p }} | get item | reverse | str join '/')
 }
 
+def git_prompt [] {
+  let stat = gstat
+
+  if $stat.repo_name == "no_repository" {
+    return ''
+  }
+
+  let branch = if $stat.tag != "no_tag" {
+    ["", $stat.tag]
+  } else {
+    ["󰘬", $stat.branch]
+  }
+  let untracked = if $stat.wt_untracked >= 1 { $"(ansi { fg: c })" } else { "" }
+  let stash     = if $stat.stashes >= 1 { $"(ansi { fg: r })" } else { "" }
+  let staged    = if $stat.idx_added_staged >= 1 { $"(ansi { fg: g })" } else { "" }
+  let unmerged  = if $stat.conflicts >= 1 { $"(ansi { fg: r })" } else { "" }
+  let modified  = if $stat.wt_modified >= 1 { $"(ansi '#FF8C00')±" } else { "" } # 
+  let rename    = if $stat.wt_renamed >= 1 { $"(ansi { fg: p })󱅅" } else { "" }
+  let deleted   = if $stat.wt_deleted >= 1 { $"(ansi { fg: r })✘" } else { "" }
+  let push      = if $stat.ahead >= 1 { $"(ansi { fg: u })" } else { "" }
+
+  return $"($branch.0) (ansi magenta)($branch.1) ($stash)($untracked)($staged)($unmerged)($modified)($rename)($deleted)($push)(ansi reset)"
+}
+
 def prompt [] {
     # Data row
-    print -n "\n" (ansi { fg: green, attr: b }) " " (whoami) (ansi reset) ": " (ansi blue) (custom_path) (ansi reset)
-
-    # Check if in a git folder and show git status if true
-    # if (is_git_repo) {
-    #     _prompt_git
-    # }
-
-    ansi reset
+    print -n $"\n(ansi { fg: green, attr: b }) (whoami)(ansi reset): (ansi blue)(custom_path) (ansi reset)(git_prompt)"
 }
 
 # Define a custom prompt function

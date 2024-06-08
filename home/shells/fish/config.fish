@@ -86,19 +86,17 @@ end
 #
 #
 ##############################
-set -g ORANGE                     FF8C00        #FF8C00 dark orange, FFA500 orange, another one fa0 o
-set -g ICON_VCS_UNTRACKED         \UF02C" "     #    #●: there are untracked (new) files
-set -g ICON_VCS_UNMERGED          \UF026" "     #    #═: there are unmerged commits
-set -g ICON_VCS_MODIFIED          \UF06D" "     # 
-set -g ICON_VCS_STAGED            \UF06B" "     #  (added) →
-set -g ICON_VCS_DELETED           "✘"           # 
-set -g ICON_VCS_RENAME            \UF06E" "     # 
-set -g ICON_VCS_STASH             \UF0CF" "     #✭: there are stashed commits
+set -g ORANGE                     FF8C00   # dark orange, FFA500 orange
+set -g ICON_VCS_UNTRACKED         ""
+set -g ICON_VCS_UNMERGED          ""
+set -g ICON_VCS_MODIFIED          ""
+set -g ICON_VCS_STAGED            ""
+set -g ICON_VCS_DELETED           "✘"
+set -g ICON_VCS_RENAME            "󱅅"
+set -g ICON_VCS_STASH             ""
 set -g ICON_VCS_BRANCH            "󰘬"
-set -g ICON_VCS_PUSH              printf "\UF005 " # bugs out in fish: \UF005 (printf "\UF005")
-set -g ICON_VCS_DIRTY             ±             #
-set -g ICON_ARROW_UP              \UF03D""      #  ↑
-set -g ICON_ARROW_DOWN            \UF03F""      #  ↓
+set -g ICON_VCS_PUSH              ""
+set -g ICON_VCS_DIRTY             "±"
 
 function _is_git_folder -d "Check if current folder is a git folder"
     git status 1>/dev/null 2>/dev/null
