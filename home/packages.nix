@@ -71,3 +71,4 @@
   # Discord
   vesktop
 ] ++ lib.optionals (config.nvim.neovide && config.gui.enable) [ neovide ]
+++ lib.optionals (config.user.shell == "nushell") [ nushellPlugins.gstat ]
