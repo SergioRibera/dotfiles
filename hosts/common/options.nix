@@ -111,7 +111,7 @@ in
         default = "/home/${user.username}";
       };
       shell = mkOption {
-        type = types.enum ["fish"];
+        type = types.enum ["fish" "nushell"];
         default = "fish";
       };
       groups = mkOption {
