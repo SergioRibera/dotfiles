@@ -1,45 +1,21 @@
-def update-git-status [
-    status: record
-    m: string
-] {
-    if $m == 'A' {
-        ($status | update a (($status.a | into int) + 1))
-    } else if $m == 'M' {
-        ($status | update m (($status.m | into int) + 1))
-    } else if $m == 'D' {
-        ($status | update d (($status.d | into int) + 1))
-    } else {
-        $status
-    }
+export def gc [comment: string, ...paths: path] {
+  if ($paths | length) == 0 {
+    git add -A
+  } else {
+    git add $paths
+  }
+
+  git commit -m $comment
 }
 
-#
-# Helper
-#
-def in_git_repo [] {
-  (do --ignore-errors { git rev-parse --abbrev-ref HEAD } | is-empty) == false
-}
+export def gm [...paths: path] {
+  if ($paths | length) == 0 {
+    git add -A
+  } else {
+    git add $paths
+  }
 
-def get-username [] {
-    if 'USERNAME' in $env {
-        $env.USERNAME
-    } else if 'USER' in $env {
-        $env.USER
-    } else {
-        ''
-    }
-}
-
-def is-ssh-session [] {
-    if 'SSH_CONNECTION' in $env {
-        true
-    } else if 'SSH_CLIENT' in $env {
-        true
-    } else if 'SSH_TTY' in $env {
-        true
-    } else {
-        false
-    }
+  git commit --amend --no-edit
 }
 
 $env.config = {

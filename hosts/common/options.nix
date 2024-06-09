@@ -137,7 +137,6 @@ in
           cat = "bat";
           catn = "bat --plain";
           catnp = "bat --plain --paging=never";
-          ga = "git add -A; git commit -m";
           gs = "git s";
           gb = "git switch";
           gp = "git p";

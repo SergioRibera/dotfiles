@@ -1,3 +1,15 @@
+def is-ssh-session [] {
+    if 'SSH_CONNECTION' in $env {
+        true
+    } else if 'SSH_CLIENT' in $env {
+        true
+    } else if 'SSH_TTY' in $env {
+        true
+    } else {
+        false
+    }
+}
+
 def custom_path [] {
   let curr = pwd | str replace -r "/home/\\w+/" "~/" | split row "/"
 
@@ -51,7 +63,7 @@ def prompt_status [indicator_ty: string] {
       let name = (uname | get kernel-name)
       if $superuser { # is root
         "☠"
-      } else if "SSH_CLIENT" in $env { # conected to ssh
+      } else if is-ssh-session { # conected to ssh
         ""
       } else if not $nu.history-enabled { # private mode
         "󰊪"
