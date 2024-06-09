@@ -144,7 +144,7 @@ in
           gbc = "git switch -c";
           glg = "git lg";
           tree = "eza --tree --icons=always";
-          nixdev = "nix develop -c 'fish'";
+          nixdev = "nix develop -c '${config.shell.name}'";
           nixclear = "nix-store --gc";
           nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
           nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
