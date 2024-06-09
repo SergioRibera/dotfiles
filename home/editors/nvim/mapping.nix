@@ -4,6 +4,7 @@
 }:
 let
   opts = desc: { inherit desc; silent = true; };
+  shellCmd = if (shell == "nushell") then "nu" else shell;
 in
 [
   # Tabs
@@ -47,5 +48,5 @@ in
   { mode = [ "v" ]; key = "<leader>ss"; action = ":SSSelected<Cr>"; options = opts "Take screenshot"; }
 
   # open shell
-  { key = "<C-b>"; action = "<Cmd> split term://${shell} | resize 10 <CR>"; options = opts "Open Terminal"; }
+  { key = "<C-b>"; action = "<Cmd> split term://${shellCmd} | resize 10 <CR>"; options = opts "Open Terminal"; }
 ]
