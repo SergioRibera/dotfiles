@@ -1,4 +1,7 @@
-{
+{ config, lib }: let
+  toLuaArr = arr: "{ " + (lib.strings.concatMapStringsSep ", " (i: "'${i}'") arr) + " }";
+  privCmdLua = toLuaArr config.shell.privSession;
+in {
   enable = true;
   colorSchemes = {
     custom = {
@@ -87,7 +90,7 @@
             { key = "n", mods = "CTRL|SHIFT", action = wezterm.action.SplitPane {
                 direction = 'Down',
                 top_level = true,
-                command = { args = { 'fish', '-P' } }
+                command = { args = ${privCmdLua} }
             } },
             { key = "l", mods = "CTRL|SHIFT", action = wezterm.action{ SplitHorizontal={ domain="CurrentPaneDomain" } } },
             { key = "h", mods = "CTRL|SHIFT", action = wezterm.action{ SplitVertical={ domain="CurrentPaneDomain" } } },

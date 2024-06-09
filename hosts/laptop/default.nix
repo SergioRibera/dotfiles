@@ -29,7 +29,10 @@ inputs.nixpkgs.lib.nixosSystem {
         complete = true;
       };
 
-      shell.name = "nushell";
+      shell = {
+        name = "nushell";
+        privSession = ["nu" "--no-history"];
+      };
 
       user = {
         inherit username;

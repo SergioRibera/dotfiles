@@ -32,7 +32,7 @@ in
       # enable and configure others
       git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });
       sss = lib.mkIf gui.enable (import ./tools/sss.nix { inherit config; });
-      wezterm = lib.mkIf gui.enable (import ./desktop/terminal/wezterm.nix);
+      wezterm = lib.mkIf gui.enable (import ./desktop/terminal/wezterm.nix { inherit config lib; });
 
       obs-studio = {
         enable = gui.enable;

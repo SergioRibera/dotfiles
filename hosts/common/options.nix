@@ -121,7 +121,7 @@ in
         default = "fish";
       };
       privSession = mkOption {
-        type = types.arr types.str;
+        type = types.listOf types.str;
         default = ["fish" "-P"];
       };
       aliases = mkOption {
