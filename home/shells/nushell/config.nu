@@ -25,10 +25,7 @@ $env.config = {
     quick: true,
     partial: true,
     algorithm: "fuzzy",
-    external: {
-      enable: true,
-      max_results: 100,
-      # completer: $carapace_completer # check 'carapace_completer'
-    }
   }
 }
+
+source ./carapace.nu

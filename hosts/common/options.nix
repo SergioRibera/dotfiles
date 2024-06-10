@@ -5,6 +5,7 @@
 }:
 let
   inherit (config) user gui;
+  shellCmd = if (config.shell.name == "nushell") then "nu" else config.shell.name;
 in
 {
   options = with lib; {
@@ -143,7 +144,7 @@ in
           gbc = "git switch -c";
           glg = "git lg";
           tree = "eza --tree --icons=always";
-          nixdev = "nix develop -c '${config.shell.name}'";
+          nixdev = "nix develop -c '${shellCmd}'";
           nixclear = "nix-store --gc";
           nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
           nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";

@@ -28,6 +28,10 @@ in
         (import ./shells/${shell.name} {
           inherit pkgs config lib;
         });
+      carapace = lib.mkIf (shell.name == "nushell") {
+        enable = true;
+        enableNushellIntegration = true;
+      };
 
       # enable and configure others
       git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });

@@ -1,4 +1,4 @@
-def is-ssh-session [] {
+def is_ssh_session [] {
     if 'SSH_CONNECTION' in $env {
         true
     } else if 'SSH_CLIENT' in $env {
@@ -11,7 +11,7 @@ def is-ssh-session [] {
 }
 
 def custom_path [] {
-  let curr = pwd | str replace -r "/home/\\w+/" "~/" | split row "/"
+  let curr = pwd | str replace -r "/home/\\w+" "~" | split row "/"
 
   return ($curr | reverse | enumerate | each {|p| if $p.index != 0 { str substring 0..1 item } else { $p }} | get item | reverse | str join '/')
 }
@@ -63,7 +63,7 @@ def prompt_status [indicator_ty: string] {
       let name = (uname | get kernel-name)
       if $superuser { # is root
         "☠"
-      } else if is-ssh-session { # conected to ssh
+      } else if (is_ssh_session) { # conected to ssh
         ""
       } else if not $nu.history-enabled { # private mode
         "󰊪"

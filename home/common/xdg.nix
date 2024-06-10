@@ -23,6 +23,9 @@ in
     configFile."nushell/prompt.nu" = lib.mkIf (config.shell.name == "nushell") {
       source = ../shells/nushell/prompt.nu;
     };
+    configFile."nushell/carapace.nu" = lib.mkIf (config.shell.name == "nushell") {
+      source = ../shells/nushell/carapace.nu;
+    };
   };
 
   xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
