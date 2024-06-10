@@ -1,6 +1,6 @@
-{ cfg, lib }: {
-  defaults = {
-    vimgrep_arguments = [
+{ cfg, lib }: let
+  git_cwd = ''vim.fn.fnamemodify(vim.fn.finddir(".git", ".;"), ":h") or vim.fn.getcwd()'';
+  vimgrep = [
       "rg"
       "--color=never"
       "--no-heading"
@@ -8,71 +8,70 @@
       "--line-number"
       "--column"
       "--smart-case"
+      "--hidden"
+      "--glob" "!**/.git/*" "--glob" "!**/target/*" "--glob" "!**/node_modules/*"
     ];
+in {
+  defaults = {
     prompt_prefix = "❯ ";
     selection_caret = "❯ ";
-    entry_prefix = "  ";
-    initial_mode = "insert";
-    selection_strategy = "reset";
+    path_display.shorten = 1;
+    history.limit = 5;
     sorting_strategy = "descending";
-    layout_strategy = "horizontal";
+    layout_strategy = "horizontal"; # ideally dynamic
     layout_config = {
       horizontal.mirror = false;
       vertical.mirror = false;
     };
-    # file_sorter =  require"telescope.sorters".get_fuzzy_file
-    file_ignore_patterns = [ "^target/" "***/target/" "^node_modules/" ];
-    # generic_sorter =  require"telescope.sorters".get_generic_fuzzy_sorter
-    borderchars = [ "─" "│" "─" "│" "╭" "╮" "╯" "╰" ];
-    color_devicons = true;
-    use_less = true;
-    path_display = { };
     set_env = { COLORTERM = "truecolor"; }; # default = nil
-    # file_previewer = require"telescope.previewers".vim_buffer_cat.new
-    # grep_previewer = require"telescope.previewers".vim_buffer_vimgrep.new
-    # qflist_previewer = require"telescope.previewers".vim_buffer_qflist.new
-
-    # Developer configurations: Not meant for general override
-    # buffer_previewer_maker = require"telescope.previewers".buffer_previewer_maker
+    vimgrep_arguments = vimgrep;
   };
-  extensions = {
-    ui-select.enable = true;
-    media-files = lib.mkIf cfg.complete {
-      enable = true;
-      settings.filetypes = [ "png" "jpg" "webm" ];
+
+  pickers = {
+    live_grep = {
+      cwd.__raw = git_cwd;
     };
-    file-browser = {
-      enable = true;
-      settings = {
-        depth = 0;
-        hijack_netrw = true;
-        select_buffer = true;
-        collapse_dirs = true;
-        hide_parent_dir = true;
-        mappings = {
-          i = {
-            "<C-a>" = "require('telescope._extensions.file_browser.actions').create";
-            "<C-i>" = "require('telescope._extensions.file_browser.actions').create_from_prompt";
-            "<C-r>" = "require('telescope._extensions.file_browser.actions').rename";
-            "<C-m>" = "require('telescope._extensions.file_browser.actions').move";
-            "<C-c>" = "require('telescope._extensions.file_browser.actions').copy";
-            "<C-d>" = "require('telescope._extensions.file_browser.actions').remove";
-            "<C-o>" = "require('telescope._extensions.file_browser.actions').open";
-            "<C-t>" = "require('telescope.actions').select_tab";
-            "<bs>" = "require('telescope._extensions.file_browser.actions').backspace";
-          };
-          n = {
-            "a" = "require('telescope._extensions.file_browser.actions').create";
-            "r" = "require('telescope._extensions.file_browser.actions').rename";
-            "m" = "require('telescope._extensions.file_browser.actions').move";
-            "c" = "require('telescope._extensions.file_browser.actions').copy";
-            "d" = "require('telescope._extensions.file_browser.actions').remove";
-            "o" = "require('telescope._extensions.file_browser.actions').open";
-            "h" = "require('telescope._extensions.file_browser.actions').goto_home_dir";
-            "t" = "require('telescope.actions').select_tab";
-          };
-        };
+    find_files = {
+      cwd.__raw = git_cwd;
+      hidden = true;
+      no_ignore = false;
+      no_ignore_parent = false;
+      find_command = vimgrep ++ [ "--files" ];
+    };
+  };
+
+  extensions = {
+    ui-select = {
+      theme = "dropdown";
+      layout_strategy = "center";
+      layout_config = {
+        preview_cutoff = 1;
+        width.__raw = ''function(_, max_columns, _)
+          return math.min(max_columns, 80)
+        end'';
+        height = ''function(_, _, max_lines)
+          return math.min(max_lines, 15)
+        end'';
       };
+    };
+    project = {
+      base_dirs = [
+        "/etc/nixos"
+        "~/Projects/rustlanges"
+        "~/Projects/rust"
+        "~/Contributions"
+        { __unkeyed = "~/Projects/rustlanges/books"; max_depth = 2; }
+        { __unkeyed = "~/Projects/rustlanges/webs"; max_depth = 2; }
+        { __unkeyed = "~/Projects/rustlanges/workers"; max_depth = 2; }
+        { __unkeyed = "~/Tutorials/rust"; max_depth = 2; }
+        { __unkeyed = "~/Tutorials/nix"; max_depth = 2; }
+        { __unkeyed = "~/Tutorials/tests"; max_depth = 2; }
+      ];
+      theme = "dropdown";
+      search_by = [ "title" "path" ];
+      on_project_selected.__raw = ''function(prompt_bufnr)
+        require("telescope._extensions.project.actions").change_working_directory(prompt_bufnr, false)
+      end'';
     };
   };
 }

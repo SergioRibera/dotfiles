@@ -16,7 +16,7 @@ let
     "RainbowCyan"
   ];
   mkLazyPlugin = pkg: {
-    config ? null, optional ? false,
+    config ? true, optional ? false,
     ft ? null, init ? null,
     lazy ? true, event ? null,
     cmd ? null, main ? null,
@@ -32,10 +32,10 @@ in
 with pkgs.vimPlugins;
 with inputs.self.packages.${pkgs.system};
 [
-  nvim-surround
   nvim-web-devicons
+  (mkLazyPlugin nvim-surround { event = "BufReadPost"; })
   # completion
-  which-key-nvim
+  (mkLazyPlugin which-key-nvim { lazy = false; })
   (mkLazyPlugin nvim-cmp {
     event = ["CmdlineEnter" "InsertEnter"];
     opts.__raw = import ./cmp.nix { inherit cfg; lib = pkgs.lib; };
@@ -50,7 +50,6 @@ with inputs.self.packages.${pkgs.system};
   })
 
   # Editor
-  (mkLazyPlugin nvim-autopairs { event = "InsertEnter"; })
   (mkLazyPlugin indent-blankline-nvim-lua {
     main = "ibl";
     event = "BufReadPost";
@@ -95,7 +94,7 @@ with inputs.self.packages.${pkgs.system};
 
   (mkLazyPlugin nvim-lspconfig { event = "LspAttach"; })
   # Colors
-  (mkLazyPlugin nvim-colorizer-lua { event = ["BufReadPost"]; })
+  (mkLazyPlugin nvim-colorizer-lua { event = ["BufReadPost" "BufNewFile"]; })
   (mkLazyPlugin nvim-treesitter { event = ["BufReadPost"]; })
   ({ pkg = pkgs.vimPlugins.nvim-treesitter-parsers.comment; event = "BufReadPost"; })
   (mkLazyPlugin rainbow-delimiters-nvim {
@@ -104,9 +103,11 @@ with inputs.self.packages.${pkgs.system};
     opts.highlight = ibl-hl;
   })
 
-  # completion
-
   # LSP
+  (mkLazyPlugin telescope-ui-select-nvim {
+    event = "LspAttach";
+    config = { __raw = ''function() require("telescope").load_extension("ui-select") end''; };
+  })
   (mkLazyPlugin crates-nvim { event = "BufRead Cargo.toml"; })
 
   # Debug
@@ -114,6 +115,7 @@ with inputs.self.packages.${pkgs.system};
   # dap = import ../plugins/dap.nix;
 
   # Extras
+  telescope-project-nvim
   (mkLazyPlugin twilight-nvim { cmd = "Twilight"; })
   (mkLazyPlugin gitsigns-nvim { event = "BufReadPost"; opts = import ./git.nix; })
   (mkLazyPlugin presence-nvim { lazy = false; })

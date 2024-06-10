@@ -23,20 +23,11 @@ in
   # Telescope
   { key = "<Leader>ff"; action = "<cmd>lua require('telescope.builtin').find_files()<CR>"; options = opts "Show and find files on workspace with preview"; }
   { key = "<Leader>lg"; action = "<cmd>lua require('telescope.builtin').live_grep()<CR>"; options = opts "Show regex content on all files on workspace"; }
-
-  # Extensions
-  { key = "<Leader>n"; action = "<cmd>Telescope file_browser<CR>"; options = opts "Find Files"; }
 ] ++ lib.lists.optionals complete [
   #
   # COMPLETE VERSION
   #
-
-  # Telescope
-  {
-    key = "<Leader>fp";
-    action = "<cmd>Telescop media_files<CR>";
-    options = opts "Show all media files on project with preview";
-  }
+  { key = "<Leader>pp"; action = "<cmd>lua require'telescope'.extensions.project.project()<CR>"; options = opts "Show regex content on all files on workspace"; }
 
   # Dap
   { key = "<Leader>dt"; action = "<cmd>lua require('dapui').toggle()<CR>"; options = opts "Toggle dap-ui"; }
