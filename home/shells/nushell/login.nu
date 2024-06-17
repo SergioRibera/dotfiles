@@ -24,3 +24,5 @@ $env.NU_LIB_DIRS = [
 $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
+
+$env.Path = ($env.Path | prepend $"($env.HOME)/.cargo/bin")

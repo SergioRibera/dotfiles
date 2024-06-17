@@ -2,7 +2,7 @@ export def gc [comment: string, ...paths: path] {
   if ($paths | length) == 0 {
     git add -A
   } else {
-    git add $paths
+    git add ...$paths
   }
 
   git commit -m $comment
@@ -12,7 +12,7 @@ export def gm [...paths: path] {
   if ($paths | length) == 0 {
     git add -A
   } else {
-    git add $paths
+    git add ...$paths
   }
 
   git commit --amend --no-edit
