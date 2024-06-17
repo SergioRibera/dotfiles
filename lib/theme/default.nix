@@ -29,4 +29,5 @@ in {
   };
   tmTheme = replace ./tmTheme.xml;
   swayosd = replace ./swayosd.css;
+  helix = (import ./helix.nix colors);
 }

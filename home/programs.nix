@@ -33,6 +33,7 @@ in
         enableNushellIntegration = true;
       };
 
+      helix = (import ./editors/helix { inherit pkgs gui lib; });
       # enable and configure others
       git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });
       sss = lib.mkIf gui.enable (import ./tools/sss.nix { inherit config; });
