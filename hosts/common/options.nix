@@ -128,6 +128,10 @@ in
       aliases = mkOption {
         type = types.attrs;
         default = {
+          clippy = "cargo clippy -- -D warnings";
+          pedantic = "cargo clippy -- -D clippy::pedantic";
+          fmtc = "cargo fmt --all --check";
+          fmtf = "cargo fmt --all";
           ll = "eza -lh --icons --group-directories-first";
           la = "eza -a --icons --group-directories-first";
           lla = "eza -lah --icons";
@@ -140,6 +144,7 @@ in
           catnp = "bat --plain --paging=never";
           gs = "git s";
           gb = "git switch";
+          gbl = "git branch";
           gp = "git p";
           gbc = "git switch -c";
           glg = "git lg";
