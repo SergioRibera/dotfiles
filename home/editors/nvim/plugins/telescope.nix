@@ -15,7 +15,6 @@ in {
   defaults = {
     prompt_prefix = "❯ ";
     selection_caret = "❯ ";
-    path_display.shorten = 1;
     history.limit = 5;
     sorting_strategy = "descending";
     layout_strategy = "horizontal"; # ideally dynamic
