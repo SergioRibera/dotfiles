@@ -1,6 +1,7 @@
 { pkgs, gui, ... }: let
   libx = import ../../../lib { inherit pkgs; };
   theme = (libx.mkTheme gui.theme.colors);
+  keymapping = (import ./mapping.nix);
 in {
   enable = false;
   themes.base16 = theme.helix;
@@ -9,6 +10,7 @@ in {
   settings = {
     theme = "base16";
     editor = {
+      line-number = "relative";
       color-modes = true;
       cursorline = true;
       cursor-shape = {
@@ -27,9 +29,10 @@ in {
         display-messages = true;
         display-inlay-hints = false;
       };
-      gutters = ["diagnostics" "line-numbers" "spacer" "diff"];
+      gutters = ["diff" "diagnostics" "line-numbers"];
       statusline = {
-        left = ["mode" "version-control" "diagnostics" "file-base-name"];
+        separator = "";
+        left = ["mode" "version-control"  "file-base-name" "diagnostics"];
         center = [];
         right = ["position"];
         mode = {
@@ -40,30 +43,5 @@ in {
       };
       auto-pairs = true;
     };
-
-    keys.insert = {
-      C-h = "move_char_left";
-      C-j = "move_line_down";
-      C-k = "move_line_up";
-      C-l = "move_char_right";
-      C-e = "goto_line_end";
-      C-b = "goto_line_start";
-    };
-
-    keys.normal = {
-      C-h = ["jump_view_left"];
-      C-j = ["jump_view_down"];
-      C-k = ["jump_view_up"];
-      C-l = ["jump_view_right"];
-
-      C-f = [":format"];
-
-      tab = ["goto_next_buffer"];
-      S-tab = ["goto_previous_buffer"];
-
-      space = {
-        x = ":buffer-close";
-      };
-    };
-  };
+  } // keymapping;
 }

@@ -8,15 +8,6 @@
       command = "${pkgs.deno}/bin/deno";
       args = ["fmt" "-" "--ext" lang];
     };
-    prettier = lang: {
-      command = "${pkgs.nodePackages.prettier}/bin/prettier";
-      args = ["--parser" lang];
-    };
-    prettierLangs = map (e: {
-      name = e;
-      formatter = prettier e;
-    });
-    langs = ["css" "scss" "json" "html"];
   in
     [
       {
@@ -128,8 +119,7 @@
           "biome-lsp"
         ];
       }
-    ]
-    ++ prettierLangs langs;
+    ];
 
   language-server = {
     astro-lsp = {
