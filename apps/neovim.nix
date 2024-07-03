@@ -18,6 +18,7 @@ let
         colors = (import ../colorscheme/gruvbox-dark).dark;
       };
     };
+    shell.name = "nushell";
   }));
 
   script = pkgs.writeShellScriptBin "run-neovide" ''
