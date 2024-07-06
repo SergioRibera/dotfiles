@@ -18,6 +18,14 @@ export def gm [...paths: path] {
   git commit --amend --no-edit
 }
 
+export def gundo [count?: int] {
+  if ($count == null) {
+    git reset --soft HEAD~1
+  } else {
+    git reset --soft HEAD~$count
+  }
+}
+
 $env.config = {
 	show_banner: false,
   completions: {
