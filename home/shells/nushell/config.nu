@@ -28,6 +28,12 @@ export def gundo [count?: int] {
 
 $env.config = {
 	show_banner: false,
+  history: {
+      max_size: 100_000,
+      sync_on_enter: true,
+      file_format: "sqlite",
+      isolation: false,
+  }
   completions: {
     case_sensitive: false,
     quick: true,
