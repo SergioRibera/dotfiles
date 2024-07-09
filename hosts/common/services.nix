@@ -51,10 +51,6 @@
           command = "${pkgs.hyprland}/bin/Hyprland";
           user = config.user.username;
         };
-        dwl = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd dwl --time-format '%F %R'";
-          user = config.user.username;
-        };
       };
     };
   };
