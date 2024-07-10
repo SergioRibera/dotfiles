@@ -10,6 +10,7 @@ in
     ./theme.nix
     ./common/xdg.nix
     ./common/fonts.nix
+    ./desktop
     ./wm
   ];
 

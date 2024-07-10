@@ -74,9 +74,7 @@ in {
         dist_in = 7;
         dist_out = 5;
       in {
-        focus-ring = {
-          width = 2;
-        };
+        focus-ring.active = false;
         preset-column-widths = [
           {proportion = 1.0 / 3.0;}
           {proportion = 1.0 / 2.0;}
@@ -93,6 +91,8 @@ in {
         };
       };
       binds = with config.lib.niri.actions; let
+        # terminal = spawn "wezterm" "start";
+        terminal = spawn "foot";
         set-volume = spawn "swayosd-client" "--output-volume";
         brightness = spawn "swayosd-client" "--brightness";
         playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
@@ -121,7 +121,8 @@ in {
 
           "Mod+Tab".action = spawn "anyrun";
           "Mod+E".action = spawn "thunar";
-          "Mod+Return".action = spawn "wezterm" "start";
+          "Mod+Return".action = terminal;
+          "Mod+Shift+Return".action = terminal config.shell.privSession;
           "Mod+C".action = spawn "hyprpicker" "-a" "-f" "hex";
 
           "Mod+W".action = close-window;
