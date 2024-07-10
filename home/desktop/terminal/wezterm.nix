@@ -45,7 +45,7 @@ in {
         -- No updates
         check_for_updates = false,
         -- Wayland
-        enable_wayland = false,
+        enable_wayland = true,
         -- Get rid of close prompt
         window_close_confirmation = "NeverPrompt",
 

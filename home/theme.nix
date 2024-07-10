@@ -33,6 +33,8 @@ in {
         };
       };
 
+      dconf.settings."org/gnome/desktop/interface".color-scheme = lib.optionalString (isLinux && gui.enable) "prefer-dark";
+
       xdg.configFile."vesktop/settings/quickCss.css".text = theme.discord;
       xdg.configFile."vesktop/settings.json".text = lib.mkIf (gui.enable)
         (builtins.toJSON ({

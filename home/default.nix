@@ -10,6 +10,7 @@ in
     ./theme.nix
     ./common/xdg.nix
     ./common/fonts.nix
+    ./wm
   ];
 
   sound.enable = gui.enable;
@@ -34,6 +35,7 @@ in
   home-manager.users = lib.mkIf user.enableHM {
     "${username}" = { lib, pkgs, ... }: {
       programs.home-manager.enable = true;
+      _module.args = { inherit inputs config; };
 
       home = {
         inherit username;

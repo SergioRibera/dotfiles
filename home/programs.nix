@@ -7,9 +7,9 @@ in
     imports = [
       inputs.anyrun.homeManagerModules.default
       inputs.sss.nixosModules.home-manager
-      inputs.wired.homeManagerModules.default
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isLinux [
       inputs.nixvim.homeManagerModules.nixvim
+      inputs.wired.homeManagerModules.default
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isDarwin [
       inputs.nixvim.nixosDarwinModules.nixvim
     ];
@@ -37,7 +37,9 @@ in
       # enable and configure others
       git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });
       sss = lib.mkIf gui.enable (import ./tools/sss.nix { inherit config; });
+
       wezterm = lib.mkIf gui.enable (import ./desktop/terminal/wezterm.nix { inherit config lib; });
+      # foot = import ./desktop/terminal/foot.nix { inherit config lib; };
 
       obs-studio = {
         enable = gui.enable;
@@ -45,9 +47,5 @@ in
         # ];
       };
     };
-
-    wayland.windowManager.hyprland = lib.mkIf
-      (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
-      (import ./wm/hyprland.nix { inherit inputs gui lib pkgs; });
   });
 }

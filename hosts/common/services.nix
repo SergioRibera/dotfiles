@@ -3,6 +3,7 @@
   systemd.services."autovt@tty1".enable = false;
 
   security.pam.services.login.enableGnomeKeyring = true;
+  # security.pam.services.greetd.enableGnomeKeyring = true;
 
   services = {
     udisks2.enable = true;
@@ -42,15 +43,15 @@
       enable = true;
       restart = false;
 
-      settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland --time-format '%F %R'";
+      settings = let
+        session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri-session";
+          # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
           user = config.user.username;
         };
-        initial_session = {
-          command = "${pkgs.hyprland}/bin/Hyprland";
-          user = config.user.username;
-        };
+      in {
+        default_session = session;
+        initial_session = session;
       };
     };
   };
