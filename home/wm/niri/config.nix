@@ -74,7 +74,7 @@ in {
         dist_in = 7;
         dist_out = 5;
       in {
-        focus-ring.active = false;
+        focus-ring.enable = false;
         preset-column-widths = [
           {proportion = 1.0 / 3.0;}
           {proportion = 1.0 / 2.0;}
