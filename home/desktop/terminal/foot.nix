@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       main = {
-        font = "CaskaydiaCove Nerd Font:size=7.0:fontfeatures=calt:fontfeatures=dlig:fontfeatures=liga;FiraCode Nerd Font:size=7.0:fontfeatures=calt:fontfeatures=dlig:fontfeatures=liga;Noto Color Emoji:size=7.0:fontfeatures=calt:fontfeatures=dlig";
+        font = "CaskaydiaCove Nerd Font:size=10.0:fontfeatures=calt:fontfeatures=dlig:fontfeatures=liga;FiraCode Nerd Font:size=10.0:fontfeatures=calt:fontfeatures=dlig:fontfeatures=liga;Noto Color Emoji:size=10.0:fontfeatures=calt:fontfeatures=dlig";
         box-drawings-uses-font-glyphs = "yes";
         dpi-aware = "yes";
         horizontal-letter-offset = 0;
