@@ -33,7 +33,7 @@ in
       Config(
         prefix: "c",
         // Override the shell used to launch the command
-        shell: Some("fish -P"),
+        shell: Some("${builtins.concatStringsSep " " config.shell.privSession}"),
       )
     '';
     "randr.ron".text = ''
