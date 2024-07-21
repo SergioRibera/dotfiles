@@ -128,6 +128,7 @@ in
       aliases = mkOption {
         type = types.attrs;
         default = {
+          cmake = "cargo make";
           clippy = "cargo clippy -- -D warnings";
           pedantic = "cargo clippy -- -D clippy::pedantic";
           fmtc = "cargo fmt --all --check";
@@ -150,6 +151,7 @@ in
           glg = "git lg";
           tree = "eza --tree --icons=always";
           nixdev = "nix develop -c '${shellCmd}'";
+          nixdevpriv = "nix develop -c '${builtins.concatStringsSep " " config.shell.privSession}'";
           nixclear = "nix-store --gc";
           nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
           nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
