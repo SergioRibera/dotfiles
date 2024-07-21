@@ -17,7 +17,7 @@ in {
         (makeCommand "udiskie")
         (makeCommand "thunar --daemon")
         (makeCommand "swww-daemon")
-        (makeCommand "wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\"")
+        (makeCommand "$HOME/.local/bin/wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\"")
         {
           command = [
             "dbus-update-activation-environment"
@@ -32,6 +32,7 @@ in {
             "XCURSOR_SIZE"
             "XDG_DATA_DIRS"
             "FLAKE"
+            "PATH"
           ];
         }
       ];
@@ -150,6 +151,15 @@ in {
           "Mod+Shift+L".action = move-column-right;
           "Mod+Shift+J".action = move-window-down-or-to-workspace-down;
           "Mod+Shift+K".action = move-window-up-or-to-workspace-up;
+
+          "Mod+WheelScrollDown" = {
+            action = focus-workspace-down;
+            cooldown-ms = 150;
+          };
+          "Mod+WheelScrollUp" = {
+            action = focus-workspace-up;
+            cooldown-ms = 150;
+          };
         }
         // (lib.attrsets.mergeAttrsList (
           map (x: let
