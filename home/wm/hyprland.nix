@@ -1,16 +1,12 @@
 { inputs, gui, lib, pkgs }: {
   enable = true;
   xwayland.enable = true;
-  # plugins = [
-  #   inputs.hyprspace.packages.${pkgs.system}.Hyprspace
-  # ];
   settings = {
     monitor = [ "eDP-1,1600x900@60,1080x1020,1" "HDMI-A-1,1920x1080@60,0x0,1,transform,3" ];
     workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
     exec-once = [
       "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY"
-      "udiskie"
-      "thunar --daemon"
+      # "udiskie"
       "swww-daemon"
       "wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\""
     ];
@@ -170,7 +166,7 @@
       #
       "SUPER,Return,exec,wezterm start"
       # "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
-      "SUPER,E,exec,thunar"
+      "SUPER,E,exec,cosmic-files"
       # "SUPER,D,exec,trilium"
       "SUPER,Tab,exec,anyrun"
       # "SUPER,Tab,overview:toggle," # Hyprspace plugin

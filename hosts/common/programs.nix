@@ -24,10 +24,6 @@ in {
       '';
     };
     adb.enable = config.nvim.complete;
-    thunar = {
-      enable = gui.enable;
-      plugins = [ ];
-    };
 
     # firefox = lib.mkIf
     #   (gui.enable && user.browser == "firefox")

@@ -14,8 +14,7 @@ in {
         QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       };
       spawn-at-startup = [
-        (makeCommand "udiskie")
-        (makeCommand "thunar --daemon")
+        # (makeCommand "udiskie")
         (makeCommand "swww-daemon")
         (makeCommand "$HOME/.local/bin/wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\"")
         {
@@ -128,7 +127,7 @@ in {
           "Mod+Shift+S".action = screenshot;
 
           "Mod+Tab".action = spawn "anyrun";
-          "Mod+E".action = spawn "thunar";
+          "Mod+E".action = spawn "cosmic-files";
           "Mod+Return".action = terminal;
           "Mod+Shift+Return".action = terminal config.shell.privSession;
           "Mod+C".action = spawn "hyprpicker" "-a" "-f" "hex";

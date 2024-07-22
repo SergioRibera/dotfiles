@@ -63,6 +63,7 @@
   warp
   pavucontrol
   screenkey
+  cosmic-files
 
   # Icons
   papirus-icon-theme
