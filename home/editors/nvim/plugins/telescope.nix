@@ -59,9 +59,9 @@ in {
         "~/Projects/rustlanges"
         "~/Projects/rust"
         "~/Contributions"
-        { __unkeyed = "~/Projects/rustlanges/books"; max_depth = 2; }
-        { __unkeyed = "~/Projects/rustlanges/webs"; max_depth = 2; }
-        { __unkeyed = "~/Projects/rustlanges/workers"; max_depth = 2; }
+        # { __unkeyed = "~/Projects/rustlanges/books"; max_depth = 2; }
+        # { __unkeyed = "~/Projects/rustlanges/webs"; max_depth = 2; }
+        # { __unkeyed = "~/Projects/rustlanges/workers"; max_depth = 2; }
         { __unkeyed = "~/Tutorials/rust"; max_depth = 2; }
         { __unkeyed = "~/Tutorials/nix"; max_depth = 2; }
         { __unkeyed = "~/Tutorials/tests"; max_depth = 2; }
