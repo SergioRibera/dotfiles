@@ -31,9 +31,11 @@ in
   xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
     portal = {
       enable = true;
+      gtkUsePortal = true;
       xdgOpenUsePortal = true;
+      config.common.default = ["cosmic"];
       extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-cosmic
       ];
     };
   };
