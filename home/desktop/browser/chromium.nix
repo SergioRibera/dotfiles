@@ -6,13 +6,12 @@ in {
     "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
     "nngceckbapebfimnlniiiahkandclblb" # bitwarden
     "icallnadddjmdinamnolclfjanhfoafe" # fastforward
-    "cfahdpkjihoomfomffdbmamapgdpohoe" # seven json viewer
     "ihcjicgdanjaechkgeegckofjjedodee" # malwarebytes
     "hlepfoohegkhhmjieoechaddaejaokhf" # refined github
-    "pljfkbaipkidhmaljaaakibigbcmmpnc" # atom material icons (github, gitlab, azure, etc)
-    "jlmafbaeoofdegohdhinkhilhclaklkp" # octolinker
     "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
     "mbjlndilmncbcnpdiidabbgppiolapmg" # Hyper Read
+    "ennpfpdlaclocpomkiablnmbppdnlhoh" # Rust Search Extension
+    "aflkmfhebedbjioipglgcbcmnbpgliof" # Backpack
   ];
   # https://chromeenterprise.google/policies
   extraOpts = {
@@ -32,6 +31,7 @@ in {
       "browsing_history"
     ];
     "RestoreOnStartup" = 1;
+    # "MemorySaverModeSavings" = 2;
     "ShowHomeButton" = false;
     "BrowserLabsEnabled" = false;
     "AdsSettingForIntrusiveAdsSites" = 2;
