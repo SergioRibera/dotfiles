@@ -1,10 +1,9 @@
 { pkgs, lib, config, ... }: {
   hardware = lib.mkIf config.gui.enable {
-    opengl = {
+    graphics = {
       enable = true;
+      enable32Bit = true;
       # Vulkan
-      driSupport = true;
-      driSupport32Bit = true;
       extraPackages = with pkgs; [
         amdvlk
         mesa.drivers

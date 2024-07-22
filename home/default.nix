@@ -14,7 +14,6 @@ in
     ./wm
   ];
 
-  sound.enable = gui.enable;
   virtualisation = {
     docker = {
       enable = true;
