@@ -111,11 +111,15 @@
   gitcommitDiscardedFile = { fg = colors.base08; bold = true; };
   gitcommitSelectedFile = { fg = colors.base0B; bold = true; };
 
-  # GitGutter highlighting
-  GitGutterAdd = { fg = colors.base0B; bg = colors.base00; };
-  GitGutterChange = { fg = colors.base0D; bg = colors.base00; };
-  GitGutterDelete = { fg = colors.base08; bg = colors.base00; };
-  GitGutterChangeDelete = { fg = colors.base0E; bg = colors.base00; };
+  # GitSigns highlighting
+  GitSignsAdd = { fg = colors.base0B; bg = colors.base00; };
+  GitSignsChange = { fg = colors.base0D; bg = colors.base00; };
+  GitSignsDelete = { fg = colors.base08; bg = colors.base00; };
+  GitSignsChangeDelete = { fg = colors.base0E; bg = colors.base00; };
+  GitSignsAddNr = { link = "GitSignsAdd"; };
+  GitSignsChangeNr = { link = "GitSignsChange"; };
+  GitSignsDeleteNr = { link = "GitSignsDelete"; };
+  GitSignsChangeDeleteNr = { link = "GitSignsChangeDelete"; };
 
   # Spelling highlighting
   SpellBad = { undercurl = true; sp = colors.base08; };
