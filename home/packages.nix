@@ -48,7 +48,7 @@
   cargo-dist
   cargo-release
 ] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
-  # Hyprland
+  # Wayland
   grim
   slurp
   libnotify
@@ -56,14 +56,13 @@
   hyprpicker
   swww
   xwaylandvideobridge
-  # inputs.self.packages.${pkgs.system}.hyprswitch
 
   # GUI
   feh
   warp
   pavucontrol
   screenkey
-  cosmic-files
+  inputs.self.packages.${pkgs.system}.cosmic-files
 
   # Icons
   papirus-icon-theme
@@ -71,4 +70,3 @@
   # Discord
   vesktop
 ] ++ lib.optionals (config.nvim.neovide && config.gui.enable) [ neovide ]
-++ lib.optionals (config.shell.name == "nushell") [ nushellPlugins.gstat ]
