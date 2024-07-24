@@ -22,12 +22,6 @@ in
 
       bat = import ./tools/bat.nix { inherit pkgs config; };
 
-      # enable and config shell selected
-      "${shell.name}" = lib.mkIf
-        (builtins.pathExists ./shells/${shell.name})
-        (import ./shells/${shell.name} {
-          inherit pkgs config lib;
-        });
       carapace = lib.mkIf (shell.name == "nushell") {
         enable = true;
         enableNushellIntegration = true;

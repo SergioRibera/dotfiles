@@ -11,6 +11,7 @@ in
     ./common/xdg.nix
     ./common/fonts.nix
     ./desktop
+    ./shells
     ./wm
   ];
 
