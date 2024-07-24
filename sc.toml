@@ -1,0 +1,47 @@
+[git]
+skip_preview = true
+skip_emojis = true
+
+[[scopes]]
+name = "apps"
+description = "The apps to use without install"
+
+[[scopes]]
+name = "home"
+description = "Home user layer config"
+
+[[scopes]]
+name = "host"
+description = "Host layer config"
+
+[[scopes]]
+name = "pkgs"
+description = "NixOs packages or programs"
+
+[[scopes]]
+name = "wm"
+description = "Window Manager config"
+
+[[scopes]]
+name = "shell"
+description = "Shell config"
+
+[[scopes]]
+name = "nvim"
+description = "Nvim config/plugins"
+
+[[scopes]]
+name = "gui"
+description = "Modify gui settings"
+
+[[scopes]]
+name = "theme"
+description = "Theme styling settings"
+
+[[scopes]]
+name = "terminal"
+description = "Terminal settings"
+
+[[scopes]]
+name = "browser"
+description = "Browsers settings"

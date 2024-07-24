@@ -11,6 +11,9 @@
   nvim-cmp-dotenv = pkgs.callPackage ./nvim/cmp-dotenv.nix { inherit pkgs; };
   nvim-codeshot = pkgs.callPackage ./nvim/codeshot.nix { inherit pkgs; };
 
+  # Utils
+  simple-commits = pkgs.callPackage ./simple-commits { inherit pkgs; };
+
   # Cosmic
   libcosmicAppHook = pkgs.callPackage ./cosmic/libcosmic-app-hook { inherit pkgs; };
   cosmic-files = pkgs.callPackage ./cosmic/files { inherit libcosmicAppHook pkgs; };

@@ -16,6 +16,7 @@
   gitui
   neofetch
   ntfs3g
+  inputs.self.packages.${pkgs.system}.simple-commits
 ] ++ lib.optionals config.gui.enable [
   # GUI
   chromium
