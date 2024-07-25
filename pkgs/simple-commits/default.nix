@@ -1,14 +1,14 @@
 { pkgs }:
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "sc";
-  version = "v0.2.0";
+  version = "v1.0.2";
 
   doCheck = false;
   src = pkgs.fetchFromGitHub {
     owner = "romancitodev";
     repo = "simple-commits";
     rev = version;
-    hash = "sha256-x9lExmWH1NAfV7js7h3wC54Dkot+Q/TAZyKNYADENxQ=";
+    hash = "sha256-xW5nObtmVtT+qlnjbHIvuvUcyI8AXScd9EC1CE8oSQY=";
   };
 
   cargoLock.lockFile = ./Cargo.lock;

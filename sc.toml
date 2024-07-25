@@ -1,3 +1,5 @@
+# Tool from https://github.com/romancitodev/simple-commits
+
 [git]
 skip_preview = true
 skip_emojis = true
