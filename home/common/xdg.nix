@@ -1,8 +1,7 @@
-{ pkgs, config, lib, inputs, ... }:
+{ pkgs, config, lib, ... }:
 let
   inherit (config) user gui;
 in
-with inputs.self.packages.${pkgs.system};
 {
   home-manager.users."${user.username}".xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
     enable = true;
@@ -33,14 +32,12 @@ with inputs.self.packages.${pkgs.system};
     mime.enable = true;
     portal = {
       enable = true;
-      gtkUsePortal = true;
+      # gtkUsePortal = true;
       xdgOpenUsePortal = true;
-      config.common.default = ["*"];
-      extraPortals = [
-        xdg-desktop-portal-cosmic
-      ];
-      configPackages = [
-        xdg-desktop-portal-cosmic
+      # config.common.default = ["*"];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gnome
+        xdg-desktop-portal-gtk
       ];
     };
   };
