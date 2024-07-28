@@ -17,6 +17,12 @@ def custom_path [] {
 }
 
 def git_prompt [] {
+  # very perform alternative if we are on ignored folder
+  if 'GITSTATUS_IGNORE_PATH' in $env and ($env.GITSTATUS_IGNORE_PATH | split row ";" | any {|el| $el == (pwd) }) {
+    let branch = git rev-parse --abbrev-ref HEAD
+    return $"󰘬 (ansi magenta)($branch)"
+  }
+
   let stat = gstat
 
   if $stat.repo_name == "no_repository" {

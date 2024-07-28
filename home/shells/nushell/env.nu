@@ -13,6 +13,8 @@ $env.PROMPT_MULTILINE_INDICATOR = {|| prompt_status "ml" }
 
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
 
+$env.GITSTATUS_IGNORE_PATH = $"($env.HOME)/Contributions/nixpkgs"
+
 ^ssh-agent -c
     | lines
     | first 2
