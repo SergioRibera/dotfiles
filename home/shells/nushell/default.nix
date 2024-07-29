@@ -1,10 +1,10 @@
-{pkgs, config, ... }: let
+{pkgs, config, lib, ... }: let
   inherit (config) shell user;
   nuPkg = (pkgs.nushell.overrideAttrs (prev: {
     doCheck = false;
   }));
 in {
-  system.userActivationScripts.nushell.text = with pkgs.nushellPlugins; ''
+  system.userActivationScripts.nushell.text = with pkgs.nushellPlugins; lib.optionalString (shell.name == "nushell") ''
   ${nuPkg}/bin/nu -c "plugin add ${gstat}/bin/nu_plugin_gstat"
   ${nuPkg}/bin/nu -c "plugin use ${gstat}/bin/nu_plugin_gstat"
   '';
