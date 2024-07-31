@@ -69,5 +69,21 @@
   papirus-icon-theme
 
   # Discord
-  vesktop
+  # Dorion Client: Rust + Tauri
+  # https://github.com/SpikeHD/Dorion
+  # WebRTC Support explained here: https://github.com/tauri-apps/tauri/discussions/8426#discussioncomment-8268622
+  dorion
+  # (dorion.overrideAttrs (final: prev: {
+  #   buildInputs = prev.buildInputs ++ [
+  #     (webkitgtk_4_1.overrideAttrs (final: prev: {
+  #       doCheck = false;
+  #       cmakeFlags = prev.cmakeFlags ++ [
+  #         "-DENABLE_MEDIA_STREAM=ON"
+  #         "-DENABLE_WEB_RTC=ON"
+  #       ];
+  #       buildInputs = prev.buildInputs ++ [ openssl ];
+  #       # GIO_MODULE_DIR = "${glib-networking}/lib/gio/modules";
+  #     }))
+  #   ];
+  # }))
 ] ++ lib.optionals (config.nvim.neovide && config.gui.enable) [ neovide ]

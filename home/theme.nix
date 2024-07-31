@@ -35,12 +35,7 @@ in {
 
       dconf.settings."org/gnome/desktop/interface".color-scheme = lib.optionalString (isLinux && gui.enable) "prefer-dark";
 
-      xdg.configFile."vesktop/settings/quickCss.css".text = theme.discord;
-      xdg.configFile."vesktop/settings.json".text = lib.mkIf (gui.enable)
-        (builtins.toJSON ({
-          arRPC = "on";
-          discordBranch = "stable";
-        } // theme.vesktopSplash));
+      xdg.configFile."dorion/themes/default.css".text = theme.discord;
 
       home = {
         sessionVariables.GTK_THEME = lib.optionalString (isLinux && gui.enable) "Orchis";

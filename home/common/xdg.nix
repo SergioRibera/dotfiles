@@ -16,8 +16,8 @@ in
       (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
       (import ../desktop/wired.nix { colors = gui.theme.colors; });
 
-    configFile."vesktop/settings/settings.json" = lib.mkIf (gui.enable) {
-      source = ../desktop/vesktop.json;
+    configFile."dorion/config.json" = lib.mkIf (gui.enable) {
+      source = ../desktop/dorion.json;
     };
 
     configFile."nushell/prompt.nu" = lib.mkIf (config.shell.name == "nushell") {

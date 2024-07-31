@@ -1,0 +1,34 @@
+{
+  "theme": "default.css",
+  "zoom": "1",
+  "client_type": "default",
+  "sys_tray": false,
+  "block_telemetry": false,
+  "push_to_talk": false,
+  "push_to_talk_keys": [
+    "RControl"
+  ],
+  "cache_css": true,
+  "use_native_titlebar": true,
+  "start_maximized": false,
+  "profile": "default",
+  "streamer_mode_detection": false,
+  "rpc_server": true,
+  "open_on_startup": false,
+  "startup_minimized": false,
+  "autoupdate": false,
+  "update_notify": false,
+  "desktop_notifications": true,
+  "auto_clear_cache": false,
+  "multi_instance": false,
+  "disable_hardware_accel": false,
+  "blur": "none",
+  "blur_css": true,
+  "client_mods": [
+    "Shelter"
+  ],
+  "unread_badge": true,
+  "client_plugins": true,
+  "keybinds": {},
+  "keybinds_enabled": true
+}
