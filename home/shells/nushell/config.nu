@@ -1,3 +1,11 @@
+export def ga [...paths: path] {
+  if ($paths | length) == 0 {
+    git add -A
+  } else {
+    git add ...$paths
+  }
+}
+
 export def gc [comment: string, ...paths: path] {
   if ($paths | length) == 0 {
     git add -A
