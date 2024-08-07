@@ -13,7 +13,7 @@ export def gc [comment: string, ...paths: path] {
     git add ...$paths
   }
 
-  git commit -m $comment
+  sc -m $comment
 }
 
 export def gm [...paths: path] {
