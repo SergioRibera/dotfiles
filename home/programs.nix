@@ -1,6 +1,7 @@
 { config, inputs, lib, pkgs, ... }:
 let
-  inherit (config) shell user gui;
+  inherit (config) shell user gui age;
+  inherit (age) secrets;
 in
 {
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {
@@ -36,6 +37,10 @@ in
         enable = gui.enable;
         # plugins = with pkgs.obs-studio-plugins; [
         # ];
+      };
+
+      ssh = {
+        addKeysToAgent = "yes";
       };
     };
   });

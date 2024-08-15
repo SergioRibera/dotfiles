@@ -10,6 +10,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ./boot.nix
     ../common
     ../../home
+    inputs.agenix.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     {
       # Hardware
@@ -21,7 +22,7 @@ inputs.nixpkgs.lib.nixosSystem {
       git.enable = true;
       gui.enable = true;
       gui.touchpad = true;
-
+      sshKeys = true;
 
       nvim = {
         enable = true;

@@ -53,6 +53,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     fu.url = "github:numtide/flake-utils";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    agenix.url = "github:ryantm/agenix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

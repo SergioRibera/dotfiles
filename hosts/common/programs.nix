@@ -1,6 +1,7 @@
 { lib, config, pkgs, ... }:
 let
-  inherit (config) shell user gui;
+  inherit (config) shell user gui age;
+  inherit (age) secrets;
   inherit (pkgs.stdenv.buildPlatform) isLinux;
 in {
   programs = {
@@ -15,10 +16,8 @@ in {
       startAgent = true;
       extraConfig = ''
         AddKeysToAgent yes
-
         Host github.com
-            IdentityFile ~/.ssh/github
-
+            IdentityFile ${secrets.github.path}
         Host gitlab.com
             IdentityFile ~/.ssh/gitlab
       '';

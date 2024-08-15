@@ -4,7 +4,8 @@
 , ...
 }:
 let
-  inherit (config) user gui;
+  inherit (config) user gui age;
+  inherit (age) secrets;
   shellCmd = if (config.shell.name == "nushell") then "nu" else config.shell.name;
 in
 {
@@ -89,6 +90,11 @@ in
         default = true;
       };
     };
+    sshKeys = mkOption {
+      description = "Enable ssh keys this host";
+      type = types.bool;
+      default = false;
+    };
     user = {
       enableHM = mkEnableOption "Enable home-manager this host";
       enableMan = mkEnableOption "Enable man pages this host";
@@ -156,6 +162,8 @@ in
           nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
           nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
           nixforceclean = "sudo nix-collect-garbage -d";
+
+          ssh-rs = ''ssh -i ${secrets.rustlanges.path} $"root@(open ${secrets.hosts.path} | lines | get 0)"'';
         };
       };
     };
