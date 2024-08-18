@@ -17,6 +17,7 @@
   neofetch
   ntfs3g
   inputs.self.packages.${pkgs.system}.simple-commits
+  inputs.self.packages.${pkgs.system}.thorium
 ] ++ lib.optionals config.gui.enable [
   # GUI
   chromium
