@@ -39,7 +39,6 @@ inputs.nixpkgs.lib.nixosSystem {
         inherit username;
         isNormalUser = true;
         enableHM = true;
-        enableMan = false;
         browser = "chromium";
         groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
       };

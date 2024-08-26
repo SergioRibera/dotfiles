@@ -27,7 +27,6 @@ inputs.nixpkgs.lib.nixosSystem {
         inherit username;
         isNormalUser = true;
         enableHM = true;
-        enableMan = true;
         groups = [ "wheel" "docker" "networkmanager" "input" ];
       };
     }
