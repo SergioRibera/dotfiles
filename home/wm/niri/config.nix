@@ -45,9 +45,8 @@ in {
           tap = true;
           tap-button-map = "left-right-middle";
         };
-        focus-follows-mouse = true;
+        focus-follows-mouse.enable = true;
         warp-mouse-to-focus = true;
-        workspace-auto-back-and-forth = true;
       };
       outputs = {
         "eDP-1" = {
@@ -141,13 +140,13 @@ in {
           "Mod+Comma".action = consume-window-into-column;
           "Mod+Period".action = expel-window-from-column;
 
-          "Mod+H".action = focus-window-down-or-column-left;
-          "Mod+L".action = focus-window-down-or-column-right;
+          "Mod+H".action = focus-column-or-monitor-left;
+          "Mod+L".action = focus-column-or-monitor-right;
           "Mod+J".action = focus-window-or-workspace-down;
           "Mod+K".action = focus-window-or-workspace-up;
 
-          "Mod+Shift+H".action = move-column-left;
-          "Mod+Shift+L".action = move-column-right;
+          "Mod+Shift+H".action = move-column-left-or-to-monitor-left;
+          "Mod+Shift+L".action = move-column-right-or-to-monitor-right;
           "Mod+Shift+J".action = move-window-down-or-to-workspace-down;
           "Mod+Shift+K".action = move-window-up-or-to-workspace-up;
 
@@ -182,10 +181,10 @@ in {
           clip-to-geometry = true;
           open-maximized = true;
         }
-        {
-          matches = [{ app-id = "org.telegram.desktop"; }];
-          block-out-from = "screen-capture";
-        }
+        # {
+        #   matches = [{ app-id = "org.telegram.desktop"; }];
+        #   block-out-from = "screen-capture";
+        # }
       ];
     };
   };
