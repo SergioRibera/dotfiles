@@ -1,7 +1,6 @@
 { config, inputs, lib, pkgs, ... }:
 let
-  inherit (config) shell user gui age;
-  inherit (age) secrets;
+  inherit (config) shell user gui;
 in
 {
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {
@@ -16,7 +15,6 @@ in
     ];
 
     programs = {
-      nixvim = { enable = config.nvim.enable; } // (import ./editors/nvim { cfg = config.nvim; inherit inputs pkgs lib gui user shell; });
       anyrun = lib.mkIf
         (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM)
         (import ./desktop/anyrun.nix { inherit pkgs inputs config; });
@@ -28,7 +26,6 @@ in
         enableNushellIntegration = true;
       };
 
-      helix = (import ./editors/helix { inherit pkgs gui lib; });
       # enable and configure others
       git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });
       sss = lib.mkIf gui.enable (import ./tools/sss.nix { inherit config; });
