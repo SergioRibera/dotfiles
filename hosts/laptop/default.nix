@@ -11,6 +11,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ../common
     ../../home
     inputs.agenix.nixosModules.default
+    inputs.grub2-themes.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     {
       # Hardware

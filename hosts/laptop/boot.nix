@@ -25,6 +25,12 @@ in
         device = "nodev";
         efiSupport = true;
       };
+      grub2-theme = {
+        enable = true;
+        theme = "stylish";
+        icon = "color";
+        splashImage = ./grub_bg.png;
+      };
     };
 
     plymouth = lib.mkIf gui.enable {
