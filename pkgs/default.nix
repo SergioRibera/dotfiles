@@ -2,7 +2,6 @@
   mac-style = pkgs.callPackage ./plymouth-macstyle { };
   hyprswitch = pkgs.callPackage ./hyprswitch { };
   scenefx = pkgs.callPackage ./scenefx { };
-  thorium = pkgs.callPackage ./thorium { };
 
   # Nvim Extra Plugins
   nvim-surround = pkgs.callPackage ./nvim/surround.nix { };
