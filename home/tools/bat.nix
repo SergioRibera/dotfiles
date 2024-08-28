@@ -1,7 +1,5 @@
-{ pkgs, config, ... }: {
+{ config, ... }: {
   enable = true;
-  # TODO: add aliases or config for bat-extras
-  extraPackages = with pkgs.bat-extras; [ batman batpipe batdiff batgrep ];
   config = {
     map-syntax = [
       "*.jenkinsfile:Groovy"

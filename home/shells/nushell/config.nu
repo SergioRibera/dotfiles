@@ -34,6 +34,8 @@ export def gundo [count?: int] {
   }
 }
 
+export def batdiff [...files: path] { diff ...$files | bat --language=diff }
+
 $env.config = {
 	show_banner: false,
   history: {
