@@ -15,6 +15,10 @@ in
     ];
 
     programs = {
+      eww = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
+        enable = true;
+        configDir = ./desktop/eww;
+      };
       anyrun = lib.mkIf
         (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM)
         (import ./desktop/anyrun.nix { inherit pkgs inputs config; });
