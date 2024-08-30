@@ -22,6 +22,7 @@ in {
       vscode-langservers-extracted
       dockerfile-language-server-nodejs
     ];
+    xdg.configFile."zed/keymap.json".source = ./keymap.jsonc;
     xdg.configFile."zed/settings.json".text = jsonGenerator ({
       # The extensions that Zed should automatically install on startup.
       auto_install_extensions = {
