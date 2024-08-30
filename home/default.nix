@@ -58,7 +58,7 @@ in
           };
           ".cargo/config.toml" = {
             executable = false;
-            source = ../.cargo/config;
+            source = ../.cargo/config.toml;
           };
           ".cargo/cargo-generate.toml" = {
             executable = false;
