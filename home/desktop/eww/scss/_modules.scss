@@ -1,0 +1,100 @@
+.notification {
+	font-family: "DM Sans", "Sarasa Mono CL Nerd Font";
+	background-color: $darker-background;
+	border-radius: 10px;
+	margin-bottom: 1em;
+
+	// box-shadow: 4px 3px 8px 1px rgba(0, 0, 0, 0.55);
+
+	.notification-title {
+		// background-color: $background-secondary;
+		background-color: inherit;
+		padding: .95em 0em .75em;
+		font-size: 14px;
+
+		border-radius: 10px 10px 0px 0px;
+
+		.notification-title-text {
+			margin: 0em 0em 0em 1em;
+			font-weight: bold;
+		}
+
+		.notification-close {
+			margin: 0em 1em 0em 0em;
+			color: $red;
+		}
+	}
+
+	.notification-body {
+		padding: .05em 0em .9em;
+		font-size: 14px;
+		border-radius: 0px 0px 10px 10px;
+
+		.notification-image {
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			border-radius: 8px;
+			min-height: 64px;
+			min-width: 64px;
+			margin-left: 1.5em;
+		}
+
+		.notification-content {
+			margin: .5em 1em 1em;
+
+			.notification-summary {
+				font-size: 16px;
+				font-weight: bold;
+				margin: .25em 0em;
+			}
+
+			.notification-message {
+				font-size: 12px;
+				color: $foreground-secondary;
+			}
+		}
+	}
+
+	.notification-screenshot-opt, .notification-opt {
+		margin: 0em 1em 1em;
+		border-radius: inherit;
+
+		button {
+			background-color: $lighter-background;
+			border-radius: 6px;
+			padding: .5em;
+			margin: 0em .5em;
+		}
+	}
+}
+
+.cc-button {
+	font-family: "DM Sans";
+	margin: 1em .5;
+
+	.cc-button-btn {
+		font-family: "Material Icons";
+		padding: .5em;
+		margin: .5em;
+		border-radius: 6px;
+		font-size: 18px;
+
+		.sep-column {
+			font-size: 24px;
+			color: $foreground-tertiary;
+		}
+	}
+
+	.cc-button-title {
+		font-size: 13px;
+	}
+}
+
+.layout-btn {
+	font-size: 24px;
+	margin: .4em .5em .4em 0em;
+	padding: .0em .6em;
+	background-color: $lighter-background;
+	border-radius: 10px;
+}
