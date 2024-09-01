@@ -72,18 +72,24 @@
 		 			;; 	:tooltip "Status: ${bluetooth_status}" :disabled {bluetooth_supported == "false"}
 		 			;; )
 		 			(cc_button :title "${EWW_BATTERY.BAT0.capacity}%"
-						:icon "󰁹" :is_active false
+						:icon {battery_icon} :is_active false :disabled {battery_has}
+						:color {battery_color}
 		 				:tooltip "Status: ${EWW_BATTERY.BAT0.status}"
 		 			)
 		 		)
 		 		(box :orientation "h" :style "margin-top: -1.5em;"
-		 			;; (cc_button :title "Do Not Disturb" :icon ""
-		 			;; 	:is_active {dnd_status == "#1c2325"} :onclick "sh ./scripts/dashActions.sh dnd"
-		 			;; 	:tooltip "Status: ${dnd_status == '#1c2325' ? 'On' : 'Off'}"
-		 			;; )
-		 			(cc_button :disabled "true")
-		 			(cc_button :disabled "true")
-		 			(cc_button :disabled "true")
+		 			(cc_button :title "Do Not Disturb"
+		 				:is_active false
+		 				:tooltip "Toggle Notifications"
+		 			)
+		 			(cc_button :title ""
+						:icon "" :is_active false
+		 				:tooltip "Toggle Audio"
+		 			)
+		 			(cc_button :title ""
+						:icon "" :is_active false
+		 				:tooltip "Toggle Mute Micro"
+		 			)
 		 		)
 		 	)
 		 	;; (box :class "second-row" :orientation "v"

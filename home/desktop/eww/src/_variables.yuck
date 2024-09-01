@@ -18,8 +18,9 @@
 	"sh -c \"cat /sys/class/backlight/*/brightness\"")
 
 ;; BATTERY
-(defpoll battery_capacity :interval "1s"
-	"sh -c \"cat /sys/class/power_supply/BAT*/capacity\"")
+(defpoll battery_icon :interval "1s" "nu scripts/battery.nu icon")
+(defpoll battery_has :interval "12h" "nu scripts/battery.nu exists")
+(defpoll battery_color :interval "1s" "nu scripts/battery.nu color")
 
 ;; MUSIC PLAYER VARS
 (defpoll art :interval "1s"
