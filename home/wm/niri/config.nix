@@ -128,6 +128,8 @@ in {
           "Mod+Tab".action = spawn "anyrun";
           "Mod+E".action = spawn "cosmic-files";
           "Mod+Return".action = terminal;
+          "Mod+B".action = spawn "nu" "$HOME/.config/eww/scripts/extras.nu" "toggle" "sidebar";
+          "Mod+P".action = spawn "nu" "$HOME/.config/eww/scripts/extras.nu" "toggle" "power-screen";
           "Mod+Shift+Return".action = terminal config.shell.privSession;
           "Mod+C".action = spawn "hyprpicker" "-a" "-f" "hex";
 
