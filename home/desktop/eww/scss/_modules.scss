@@ -73,6 +73,10 @@
 	font-family: "DM Sans";
 	margin: 1em .5;
 
+	.cc-button-clicker {
+		font-size: 10px;
+	}
+
 	.cc-button-btn {
 		font-family: "Material Icons";
 		padding: .5em;
@@ -89,12 +93,4 @@
 	.cc-button-title {
 		font-size: 13px;
 	}
-}
-
-.layout-btn {
-	font-size: 24px;
-	margin: .4em .5em .4em 0em;
-	padding: .0em .6em;
-	background-color: $lighter-background;
-	border-radius: 10px;
 }

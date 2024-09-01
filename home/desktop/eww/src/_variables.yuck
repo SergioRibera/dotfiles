@@ -1,16 +1,10 @@
 ;; DATE VARS
 (defpoll minute :interval "5s"
-	"date '+%M'")
+	"sh -c 'date \'+%M\''")
 (defpoll hour :interval "5s"
-	"date '+%H'")
-(defpoll weekday :interval "24h"
-	"date '+%A'")
-(defpoll monthday :interval "24h"
-	"date '+%d %b'")
-(defpoll month_year :interval "24h"
-    "date '+%B %Y'")
+	"sh -c 'date \'+%H\''")
 (defpoll wd-m-d :interval "24h"
-	"date '+%d %B %Y'")
+	"sh -c \"date '+%d %B %Y'\"")
 
 ;; SYSTEM INFO VARS
 (defpoll volume :interval "500ms"
@@ -19,14 +13,17 @@
 	"[[ -f $HOME/.cache/vol-muted.lock ]] && echo 'true' || echo 'false'")
 (defpoll micro :interval "1s"
 	"amixer -D pulse sget Capture | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+
 (defpoll brightness :interval "500ms"
-	"brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
+	"sh -c \"cat /sys/class/backlight/*/brightness\"")
+
+;; BATTERY
 (defpoll battery_capacity :interval "1s"
-	"./scripts/getBattery.sh capacity")
+	"sh -c \"cat /sys/class/power_supply/BAT*/capacity\"")
 
 ;; MUSIC PLAYER VARS
 (defpoll art :interval "1s"
-	"echo \"$HOME/.cache/eww/cover.png\"")
+	"echo \"$HOME/Pictures/Frieren_Holding_The_Rust_Programming_Language.png\"")
 (defpoll song_art :interval "3s"
 	"./scripts/getSongArt.sh")
 (defpoll song_artist :interval "1s"
@@ -41,32 +38,21 @@
 	"./scripts/getSongMetadata.sh player_status_text")
 
 ;; LOCK SCREEN VARS
-(defpoll username :interval "24h"
-	"echo $USER")
-(defpoll hostname :interval "24h"
-	"hostname")
+(defpoll username :interval "24h" "echo $USER")
+(defpoll hostname :interval "24h" "hostname")
 
 ;; CALENDAR VARS
-(defpoll calendar_day :interval "10h"
-	"date '+%d'")
-(defpoll calendar_month :interval "10h"
-	"date '+%m'")
-(defpoll calendar_year :interval "10h"
-	"date '+%Y'")
+(defpoll calendar_day :interval "10h" "sh -c \"date '+%d'\"")
+(defpoll calendar_month :interval "10h" "sh -c \"date '+%m'\"")
+(defpoll calendar_year :interval "10h" "sh -c \"date '+%Y'\"")
 
 ;; UTILITY ROW VARS
-(defpoll network_status :interval "1s"
-	"./scripts/getNetwork.sh color")
-(defpoll network_icon :interval "1s"
-	"./scripts/getNetwork.sh icon")
-(defpoll network_name :interval "1s"
-	"./scripts/getNetwork.sh name")
-(defpoll network_name_truncated :interval "1s"
-	"./scripts/getNetwork.sh trname")
-(defpoll redshift_status :interval "1s"
-	"./scripts/getRedshift.sh color")
-(defpoll dnd_status :interval "1s"
-	"./scripts/dashActions.sh dndstat")
+(defpoll network_status :interval "1s" "nu scripts/network.nu status")
+(defpoll network_icon :interval "1s" "nu scripts/network.nu icon")
+(defpoll network_name :interval "1s" "nu scripts/network.nu name")
+
+;; (defpoll dnd_status :interval "1s"
+;; 	"./scripts/dashActions.sh dndstat")
 
 ;; NOTIFICATION CENTER/POPUP VARS
 (defpoll dunst_history :interval "250ms" :run-while noticenter
@@ -77,13 +63,9 @@
 	"./scripts/getNotificationCount.sh")
 
 ;; BLUETOOTH VARS
-(defpoll bluetooth_icon :interval "1s"
-	"./scripts/getBluetooth.sh icon")
-(defpoll bluetooth_status :interval "1s"
-	"./scripts/getBluetooth.sh status")
-(defpoll bluetooth_supported :interval "1s"
-	"./scripts/getBluetooth.sh supported")
-
-;; UNSORTED VARS
-(defpoll uptime :interval "30s"
-	"./scripts/getUptime.sh")
+;; (defpoll bluetooth_icon :interval "1s"
+;; 	"./scripts/getBluetooth.sh icon")
+;; (defpoll bluetooth_status :interval "1s"
+;; 	"./scripts/getBluetooth.sh status")
+;; (defpoll bluetooth_supported :interval "1s"
+;; 	"./scripts/getBluetooth.sh supported")

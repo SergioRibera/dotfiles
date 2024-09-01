@@ -29,6 +29,29 @@
 	)
 )
 
+(defwidget cc_button [?title ?icon ?is_active ?has_arrow_if_active ?onclick ?disabled ?tooltip]
+	(box :orientation "v" :space-evenly "false" :class "cc-button" :tooltip {tooltip ?: "Disabled"}
+		(box :orientation "h" :class "cc-button-btn" :style {disabled == true ? "background-color: #101415;" : (is_active == true ? "background-color: #1C2325;" : "background-color: #151a1c;")}
+			(box
+				:orientation "h"
+				:style {disabled == true ? "" : (is_active == true ? "background-color: #96D6B0; margin: 0em .75em 0em .25em; border-radius: 6px;" : "")})
+			(button
+				:class "cc-button-icon"
+				:style {disabled == true ? "color: #6e7071;" : ""}
+				:onclick {onclick ?: "echo 'debugger'"}
+				{icon ?: ""})
+			(box
+				:class "sep-column"
+				:style "min-height: calc(16px + 8px);")
+			(button
+				:visible {has_arrow_if_active == false ? false : (is_active == true ?: false)}
+				:class "cc-button-clicker" :onclick {onclick ?: "echo 'debugger'"}
+				:style {disabled == true ? "color: #6e7071;" : ""} "")
+		)
+		(label :class "cc-button-title" :text {title ?: ""} :style {disabled == true ? "color: #6e7071;" : ""})
+	)
+)
+
 (defwidget separator [text]
 	(box :orientation "h"
 		(label :class "separator" :text text)

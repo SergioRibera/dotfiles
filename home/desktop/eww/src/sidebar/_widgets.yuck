@@ -1,0 +1,125 @@
+(defwidget sidebar []
+	(box :class "sidebar" :orientation "v" :space-evenly "false"
+		;; User Info
+		(box :orientation "v" :space-evenly "false"
+			(box :class "profile-row" :orientation "h" :space-evenly "true"
+				(box :class "user-info" :orientation "h" :halign "start" :space-evenly "false"
+					(label :class "user-info-avatar" :xalign 0.3 :text "")
+					(box :orientation "v" :space-evenly "false" :style "margin-top: .25em;"
+						(label :class "user-info-label" :halign "start" :text "${username}")
+						(label :class "user-info-hostname" :halign "start" :text "@${hostname}")
+					)
+				)
+				(box :class "system-section" :halign "end" :orientation "h" :space-evenly "false"
+					(button :class "exit-btn" :onclick "sh $HOME/.local/bin/lck &" :tooltip "Lock Screen" "󰌆 ")
+					(button :class "lock-btn" :onclick "bspc quit &" :tooltip "Close Session" "󰍃")
+				)
+			)
+		)
+	    ;; Time
+    	(box :orientation "h" :class "time" :halign "center" (label :text "${hour}:${minute}"))
+    	(box :orientation "h" :class "date" :halign "center" (label :text "${wd-m-d}"))
+		;; Media Player
+		(box :class "mp-separator" :style "margin-top: 2em;")
+		(revealer :class "mp-revealer" :reveal mp :transition "crossfade" :duration "600ms"
+			(box :class "music-player" :orientation "h" :space-evenly "false"
+				(box :class "song-art" :orientation "v" :style "background-image: url('${art}')"
+					(box :class "music-info" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "false"
+						(label :class "now-playing" :halign "start"
+						    ;; :text player_status_text
+							:text "Now Playing - via Spotify")
+						(label :class "song-title" :halign "start"
+							;; :text song_title
+							:text "BIRDS OF A FEATHER (BILLIE BY FINNEAS)"
+							:limit-width 27)
+						(label :class "song-artist" :halign "start"
+							;; :text song_artist
+							:text "Billie Eilish"
+							:limit-width 35)
+						(box :orientation "h"
+							(label :class "song-position" :halign "start"
+								;; :text song_position
+								:text "00:30 / 03:25")
+							;; song_art
+							""
+						)
+					)
+				)
+				(box :class "song-controls" :orientation "v"
+					(button :onclick "playerctl previous" "󰒮")
+					(button :onclick "playerctl play-pause"
+					   ;; player_status
+					   "") ;; 
+					(button :onclick "playerctl next" "󰒭")
+				)
+			)
+		)
+		(box :class "mp-separator" :style "margin-top: 1em;")
+		(box :class "control-center" :orientation "v" :space-evenly "false"
+		 	(box :class "first-row" :orientation "v" :space-evenly "false"
+		 		(box :orientation "h"
+		 			(cc_button :title "${network_name}" :icon network_icon
+		 				:is_active {network_status == "connected"}
+						;; :onclick "iwgtk &"
+		 				:tooltip "Connected to ${network_name}"
+		 			)
+		 			(cc_button :title "Bluetooth" :icon "󰂲"
+		 				:is_active false
+		 				:tooltip "Status: TODO"
+		 			)
+		 			;; (cc_button :title {bluetooth_status != "Off" ? hostname : "Bluetooth"} :icon bluetooth_icon
+		 			;; 	:is_active {bluetooth_status != "Off"} :onclick "blueman-manager &"
+		 			;; 	:tooltip "Status: ${bluetooth_status}" :disabled {bluetooth_supported == "false"}
+		 			;; )
+		 			(cc_button :title "${EWW_BATTERY.BAT0.capacity}%"
+						:icon "󰁹" :is_active false
+		 				:tooltip "Status: ${EWW_BATTERY.BAT0.status}"
+		 			)
+		 		)
+		 		(box :orientation "h" :style "margin-top: -1.5em;"
+		 			;; (cc_button :title "Do Not Disturb" :icon ""
+		 			;; 	:is_active {dnd_status == "#1c2325"} :onclick "sh ./scripts/dashActions.sh dnd"
+		 			;; 	:tooltip "Status: ${dnd_status == '#1c2325' ? 'On' : 'Off'}"
+		 			;; )
+		 			(cc_button :disabled "true")
+		 			(cc_button :disabled "true")
+		 			(cc_button :disabled "true")
+		 		)
+		 	)
+		 	;; (box :class "second-row" :orientation "v"
+		 	;; 	(box :class "volume-slider" :orientation "h" :space-evenly "false"
+		 	;; 		(label :class "volume-icon" :text {volume_muted ? "" :
+		 	;; 			volume <= 30 ? "" : volume <= 60 ? "" : ""
+		 	;; 		})
+		 	;; 		(scale :min 0
+		 	;; 			:max 101
+		 	;; 			:value volume
+		 	;; 			:orientation "h"
+		 	;; 			:tooltip "Volume: ${volume}%"
+		 	;; 			:onchange "amixer -D pulse sset Master {}%"
+		 	;; 		)
+		 	;; 		(label :class "volume-text" :text "${volume}%")
+		 	;; 	)
+		 	;; 	(box :class "brightness-slider" :orientation "h" :space-evenly "false"
+		 	;; 		(label :class "brightness-icon" :text {
+		 	;; 			brightness <= 30 ? "" : brightness <= 60 ? "" : ""
+		 	;; 		})
+		 	;; 		(scale :min 0
+		 	;; 			:max 101
+		 	;; 			:value brightness
+		 	;; 			:orientation "h"
+		 	;; 			:tooltip "Brightness: ${brightness}%"
+		 	;; 			:onchange "brightnessctl set {}%"
+		 	;; 		)
+		 	;; 		(label :class "brightness-text" :text "${brightness}%")
+		 	;; 	)
+		 	;; )
+		)
+		(box :class "mp-separator" :style "margin-top: .5em;")
+		(box :class "power-section" :orientation "h" :space-evenly "false" :halign "center" :valign "center"
+			(button :class "reboot-btn" :onclick "reboot" :tooltip "Reboot" "⏼")
+			(button :class "shutdown-btn" :onclick "poweroff" :tooltip "Shutdown" "⏻")
+		)
+	)
+)
+(defvar mp true)
