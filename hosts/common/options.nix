@@ -90,6 +90,10 @@ in
         default = true;
       };
     };
+    bluetooth = mkEnableOption {
+      description = "Enable bluetooth.";
+      default = false;
+    };
     sshKeys = mkOption {
       description = "Enable ssh keys this host";
       type = types.bool;

@@ -24,6 +24,7 @@ inputs.nixpkgs.lib.nixosSystem {
       gui.enable = true;
       gui.touchpad = true;
       sshKeys = true;
+      bluetooth = true;
 
       nvim = {
         enable = true;

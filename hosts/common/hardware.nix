@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }: {
-  hardware = lib.mkIf config.gui.enable {
-    graphics = {
+  hardware = {
+    graphics = lib.mkIf config.gui.enable {
       enable = true;
       enable32Bit = true;
       # Vulkan
@@ -13,6 +13,10 @@
       extraPackages32 = with pkgs; [
         driversi686Linux.amdvlk
       ];
+    };
+    bluetooth = lib.mkIf config.bluetooth {
+        enable = true;
+        powerOnBoot = false;
     };
   };
 }
