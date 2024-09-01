@@ -63,9 +63,9 @@
 						;; :onclick "iwgtk &"
 		 				:tooltip "Connected to ${network_name}"
 		 			)
-		 			(cc_button :title "Bluetooth" :icon "󰂲"
-		 				:is_active false
-		 				:tooltip "Status: TODO"
+		 			(cc_button :title {bluetooth_device} :icon {bluetooth_icon}
+		 				:is_active {bluetooth_connected} :onclick "nu scripts/bluetooth.nu toggle"
+		 				:tooltip "Status: ${bluetooth_connected ? 'Connected' : 'Disconnected'}"
 		 			)
 		 			;; (cc_button :title {bluetooth_status != "Off" ? hostname : "Bluetooth"} :icon bluetooth_icon
 		 			;; 	:is_active {bluetooth_status != "Off"} :onclick "blueman-manager &"

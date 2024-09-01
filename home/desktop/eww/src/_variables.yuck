@@ -64,9 +64,8 @@
 	"./scripts/getNotificationCount.sh")
 
 ;; BLUETOOTH VARS
-;; (defpoll bluetooth_icon :interval "1s"
-;; 	"./scripts/getBluetooth.sh icon")
-;; (defpoll bluetooth_status :interval "1s"
-;; 	"./scripts/getBluetooth.sh status")
-;; (defpoll bluetooth_supported :interval "1s"
-;; 	"./scripts/getBluetooth.sh supported")
+(defpoll bluetooth_icon :interval "10s" "nu scripts/bluetooth.nu icon")
+(defpoll bluetooth_has :interval "12h" "nu scripts/bluetooth.nu has")
+(defpoll bluetooth_powered :interval "12h" "nu scripts/bluetooth.nu powered")
+(defpoll bluetooth_device :interval "10s" "nu scripts/bluetooth.nu device")
+(defpoll bluetooth_connected :interval "10s" "nu scripts/bluetooth.nu connected")
