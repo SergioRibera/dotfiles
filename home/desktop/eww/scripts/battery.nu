@@ -1,4 +1,4 @@
-def battery [] -> string {
+def battery []: nothing -> string {
     if ('/sys/class/power_supply/BAT0' | path exists) {
         return '/sys/class/power_supply/BAT0'
     } else if ('/sys/class/power_supply/BAT' | path exists) {
@@ -43,31 +43,14 @@ def "main icon" [] {
         print '󱉝'
     } else {
         let status = cat $"($bat_path)/status"
-        let level = (cat $"($bat_path)/capacity" | into int)
+        let level = ((cat $"($bat_path)/capacity" | into int) / 10)
+        let charging = ['󰂄', '󰂋', '󰂊', '󰢞', '󰂉', '󰢝', '󰂈', '󰂇', '󰂆', '󰢜', '󰢟']
+        let discharging = [ '󰁹', '󰂂', '󰂁', '󰂀', '󰁿', '󰁾', '󰁽', '󰁼', '󰁻', '󰁺', '󰂃']
 
-        match [$status, $level] {
-            ["Charging", $x] if $x == 100 => { print '󰂄' },
-            ["Charging", $x] if $x >= 90 => { print '󰂋' },
-            ["Charging", $x] if $x >= 80 => { print '󰂊' },
-            ["Charging", $x] if $x >= 70 => { print '󰢞' },
-            ["Charging", $x] if $x >= 60 => { print '󰂉' },
-            ["Charging", $x] if $x >= 50 => { print '󰢝' },
-            ["Charging", $x] if $x >= 40 => { print '󰂈' },
-            ["Charging", $x] if $x >= 30 => { print '󰂇' },
-            ["Charging", $x] if $x >= 20 => { print '󰂆' },
-            ["Charging", $x] if $x >= 10 => { print '󰢜' },
-            ["Charging", $x] => { print '󰢟' },
-            ["Discharging", $x] if $x == 100 => { print '󰂃' },
-            ["Discharging", $x] if $x >= 90 => { print '󰂂' },
-            ["Discharging", $x] if $x >= 80 => { print '󰂁' },
-            ["Discharging", $x] if $x >= 70 => { print '󰂀' },
-            ["Discharging", $x] if $x >= 60 => { print '󰁿' },
-            ["Discharging", $x] if $x >= 50 => { print '󰁾' },
-            ["Discharging", $x] if $x >= 40 => { print '󰁽' },
-            ["Discharging", $x] if $x >= 30 => { print '󰁼' },
-            ["Discharging", $x] if $x >= 20 => { print '󰁻' },
-            ["Discharging", $x] if $x >= 10 => { print '󰁺' },
-            _ => { print '󰁹' }
+        if $status == "Charging" {
+            print ($charging | reverse | get $level)
+        } else {
+            print ($discharging | reverse | get $level)
         }
     }
 }
