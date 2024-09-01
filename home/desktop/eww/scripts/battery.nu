@@ -30,9 +30,9 @@ def "main color" [] {
 
         match [$status, $level] {
             ["Charging", $x] if $x >= 40 => { print '' },
-            ["Charging", $x] => { print '#ffb29b' },
-            ["Discharging", $x] if $x >= 30 => { print '' },
-            _ => { print '#ee6a70' }
+            ["Charging", $x] => { print '#ffb29b' }, # yellow
+            ["Discharging", $x] if $x <= 30 => { print '#ee6a70' }, # red
+            _ => { print '' }
         }
     }
 }
