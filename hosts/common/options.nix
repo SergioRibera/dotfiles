@@ -94,6 +94,10 @@ in
       description = "Enable bluetooth.";
       default = false;
     };
+    audio = mkEnableOption {
+      description = "Enable audio.";
+      default = true;
+    };
     sshKeys = mkOption {
       description = "Enable ssh keys this host";
       type = types.bool;

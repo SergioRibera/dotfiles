@@ -95,7 +95,7 @@ in {
         terminal = spawn "foot";
         playerctl = cmd: {
           allow-when-locked = true;
-          action.spawn = ["${pkgs.playerctl}/bin/playerctl"] ++ cmd;
+          action.spawn = ["playerctl"] ++ cmd;
         };
 
         swayosd = ms: cmd: {

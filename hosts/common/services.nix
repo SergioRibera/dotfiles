@@ -25,7 +25,7 @@
       };
     };
 
-    pipewire = lib.mkIf config.gui.enable {
+    pipewire = lib.mkIf config.audio {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;

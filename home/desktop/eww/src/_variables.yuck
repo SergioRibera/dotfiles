@@ -31,22 +31,17 @@
 (defpoll micro_icon :interval "1s" "nu scripts/audio.nu micro icon")
 
 ;; MUSIC PLAYER VARS
-(defpoll art :interval "1s"
-	"echo \"$HOME/Pictures/Frieren_Holding_The_Rust_Programming_Language.png\"")
-(defpoll song_art :interval "3s"
-	"./scripts/getSongArt.sh")
-(defpoll song_artist :interval "1s"
-	"./scripts/getSongMetadata.sh artist")
-(defpoll song_title :interval "1s"
-	"./scripts/getSongMetadata.sh title")
-(defpoll song_position :interval "250ms"
-	"./scripts/getSongMetadata.sh position")
-(defpoll player_status :interval "1s"
-	"./scripts/getSongMetadata.sh player_status")
-(defpoll player_status_text :interval "1s"
-	"./scripts/getSongMetadata.sh player_status_text")
+;; (defpoll art :interval "1s"
+;; 	"echo \"$HOME/Pictures/Frieren_Holding_The_Rust_Programming_Language.png\"")
+(defpoll player_status :interval "1s" "nu scripts/media.nu")
+(defpoll song_art :interval "3s" "nu scripts/media.nu song art")
+(defpoll song_artist :interval "1s" "nu scripts/media.nu meta artist")
+(defpoll song_title :interval "1s" "nu scripts/media.nu meta title")
+(defpoll song_position :interval "250ms" "nu scripts/media.nu meta position")
+(defpoll song_percent:interval "250ms" "nu scripts/media.nu meta percent")
+(defpoll player_status_text :interval "1s" "nu scripts/media.nu player")
 
-;; LOCK SCREEN VARS
+;; USER VARS
 (defpoll username :interval "24h" "echo $USER")
 (defpoll hostname :interval "24h" "hostname")
 

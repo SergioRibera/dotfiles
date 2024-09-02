@@ -40,20 +40,32 @@
 					background: linear-gradient(to right, rgba(16, 20, 21, 1), rgba(16, 20, 21, 0.5));
 
 					padding-top: 10px;
-					padding-left: 1em;
 
 					.now-playing {
 						margin-bottom: 6px;
+					    padding-left: 1em;
 					}
 					.song-title {
 						font-size: 16px;
 						font-weight: bolder;
+					    padding-left: 1em;
 					}
 					.song-artist, .song-position {
 						color: $foreground-secondary;
+					    padding-left: 1em;
 					}
 					.song-position {
-						margin-top: 5.4em;
+						margin-top: 5em;
+						margin-bottom: .2em;
+					    padding-left: 1em;
+					}
+					.song-progress {
+					    trough {
+					        background-color: #ccc;
+					        progress {
+					           background-color: #fff;
+							}
+						}
 					}
 				}
 			}

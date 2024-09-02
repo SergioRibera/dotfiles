@@ -23,33 +23,26 @@
 		(box :class "mp-separator" :style "margin-top: 2em;")
 		(revealer :class "mp-revealer" :reveal mp :transition "crossfade" :duration "600ms"
 			(box :class "music-player" :orientation "h" :space-evenly "false"
-				(box :class "song-art" :orientation "v" :style "background-image: url('${art}')"
+				(box :class "song-art" :orientation "v" :style "background-image: url('${song_art}')"
 					(box :class "music-info" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "false"
-						(label :class "now-playing" :halign "start"
-						    ;; :text player_status_text
-							:text "Now Playing - via Spotify")
+						(label :class "now-playing" :halign "start" :text player_status_text)
 						(label :class "song-title" :halign "start"
-							;; :text song_title
-							:text "BIRDS OF A FEATHER (BILLIE BY FINNEAS)"
+							:text song_title
 							:limit-width 27)
 						(label :class "song-artist" :halign "start"
-							;; :text song_artist
-							:text "Billie Eilish"
+							:text song_artist
 							:limit-width 35)
-						(box :orientation "h"
-							(label :class "song-position" :halign "start"
-								;; :text song_position
-								:text "00:30 / 03:25")
-							;; song_art
-							""
-						)
+						(label :class "song-position" :halign "start"
+							:text song_position)
+						(progress :class "song-progress" :value {song_percent} :orientation 'h'
+						    :width "100%" :height "2px" :valign "left")
 					)
 				)
 				(box :class "song-controls" :orientation "v"
 					(button :onclick "playerctl previous" "󰒮")
 					(button :onclick "playerctl play-pause"
-					   ;; player_status
-					   "") ;; 
+					   "${player_status == 'Playing' ? '' : ''}"
+					   )
 					(button :onclick "playerctl next" "󰒭")
 				)
 			)

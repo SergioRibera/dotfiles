@@ -1,6 +1,6 @@
 { config, inputs, lib, pkgs, ... }:
 let
-  inherit (config) shell user gui;
+  inherit (config) shell user gui audio;
 in
 {
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {
@@ -13,6 +13,8 @@ in
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isDarwin [
       inputs.nixvim.nixosDarwinModules.nixvim
     ];
+
+    home.packages = with pkgs; lib.mkIf (audio) [ playerctl ];
 
     programs = {
       eww = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
