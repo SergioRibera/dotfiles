@@ -56,14 +56,14 @@
 					}
 					.song-position {
 						margin-top: 5em;
-						margin-bottom: .2em;
+						margin-bottom: .4em;
 					    padding-left: 1em;
 					}
 					.song-progress {
 					    trough {
-					        background-color: #ccc;
+					        background-color: $background-tertiary;
 					        progress {
-					           background-color: #fff;
+					           background-color: $foreground-tertiary;
 							}
 						}
 					}

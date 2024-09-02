@@ -43,7 +43,7 @@ def "main icon" [] {
         print '󱉝'
     } else {
         let status = cat $"($bat_path)/status"
-        let level = ((cat $"($bat_path)/capacity" | into int) / 10)
+        let level = ((cat $"($bat_path)/capacity" | into int) / 10) | into int
         let charging = ['󰂄', '󰂋', '󰂊', '󰢞', '󰂉', '󰢝', '󰂈', '󰂇', '󰂆', '󰢜', '󰢟']
         let discharging = [ '󰁹', '󰂂', '󰂁', '󰂀', '󰁿', '󰁾', '󰁽', '󰁼', '󰁻', '󰁺', '󰂃']
 

@@ -3,5 +3,5 @@
 						:y "0%"
 						:width "20%"
 						:height "100%"
-						:anchor "top right")
+						:anchor "top left")
 	(sidebar))

@@ -1,4 +1,3 @@
-
 def "main toggle" [name: string] {
     if (eww active-windows | str contains $name) {
         eww close $name

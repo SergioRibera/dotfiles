@@ -38,7 +38,7 @@
 (defpoll song_artist :interval "1s" "nu scripts/media.nu meta artist")
 (defpoll song_title :interval "1s" "nu scripts/media.nu meta title")
 (defpoll song_position :interval "250ms" "nu scripts/media.nu meta position")
-(defpoll song_percent:interval "250ms" "nu scripts/media.nu meta percent")
+(defpoll song_percent :interval "250ms" "nu scripts/media.nu meta percent")
 (defpoll player_status_text :interval "1s" "nu scripts/media.nu player")
 
 ;; USER VARS

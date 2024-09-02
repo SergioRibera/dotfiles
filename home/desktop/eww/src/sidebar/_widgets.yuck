@@ -35,7 +35,7 @@
 						(label :class "song-position" :halign "start"
 							:text song_position)
 						(progress :class "song-progress" :value {song_percent} :orientation 'h'
-						    :width "100%" :height "2px" :valign "left")
+						    :width "100%" :valign "left")
 					)
 				)
 				(box :class "song-controls" :orientation "v"
