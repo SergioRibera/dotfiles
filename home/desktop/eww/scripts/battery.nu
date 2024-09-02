@@ -23,7 +23,7 @@ def "main exists" [] {
 def "main color" [] {
     let bat_path = battery
     if ($bat_path | str length) == 0 {
-        print ''
+        print '#C5C8C9'
     } else {
         let status = cat $"($bat_path)/status"
         let level = (cat $"($bat_path)/capacity" | into int)
@@ -32,7 +32,7 @@ def "main color" [] {
             ["Charging", $x] if $x >= 40 => { print '' },
             ["Charging", $x] => { print '#ffb29b' }, # yellow
             ["Discharging", $x] if $x <= 30 => { print '#ee6a70' }, # red
-            _ => { print '' }
+            _ => { print '#C5C8C9' }
         }
     }
 }
