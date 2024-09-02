@@ -22,6 +22,14 @@
 (defpoll battery_has :interval "12h" "nu scripts/battery.nu exists")
 (defpoll battery_color :interval "1s" "nu scripts/battery.nu color")
 
+;; SOUND
+(defpoll sound_vol :interval "1s" "nu scripts/audio.nu sound")
+(defpoll sound_icon :interval "1s" "nu scripts/audio.nu sound icon")
+
+;; MICROPHONE
+(defpoll micro_vol :interval "1s" "nu scripts/audio.nu micro")
+(defpoll micro_icon :interval "1s" "nu scripts/audio.nu micro icon")
+
 ;; MUSIC PLAYER VARS
 (defpoll art :interval "1s"
 	"echo \"$HOME/Pictures/Frieren_Holding_The_Rust_Programming_Language.png\"")

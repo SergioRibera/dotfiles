@@ -82,13 +82,13 @@
 		 				:is_active false
 		 				:tooltip "Toggle Notifications"
 		 			)
-		 			(cc_button :title ""
-						:icon "" :is_active false
-		 				:tooltip "Toggle Audio"
+		 			(cc_button :title "${sound_vol}%" :onscroll "nu scripts/audio.nu sound set {}"
+						:icon {sound_icon} :is_active false
+		 				:tooltip "Toggle Audio" :onclick "nu scripts/audio.nu sound toggle"
 		 			)
-		 			(cc_button :title ""
-						:icon "" :is_active false
-		 				:tooltip "Toggle Mute Micro"
+		 			(cc_button :title "${micro_vol}%" :onscroll "nu scripts/audio.nu micro set {}"
+						:icon {micro_icon} :is_active false
+		 				:tooltip "Toggle Mute Micro" :onclick "nu scripts/audio.nu micro toggle"
 		 			)
 		 		)
 		 	)
