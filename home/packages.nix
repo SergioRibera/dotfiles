@@ -70,10 +70,11 @@
   papirus-icon-theme
 
   # Discord
+  vesktop
   # Dorion Client: Rust + Tauri
   # https://github.com/SpikeHD/Dorion
   # WebRTC Support explained here: https://github.com/tauri-apps/tauri/discussions/8426#discussioncomment-8268622
-  dorion
+  # dorion
   # (dorion.overrideAttrs (final: prev: {
   #   buildInputs = prev.buildInputs ++ [
   #     (webkitgtk_4_1.overrideAttrs (final: prev: {
