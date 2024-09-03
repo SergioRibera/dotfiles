@@ -32,16 +32,20 @@
 						(label :class "song-artist" :halign "start"
 							:text song_artist
 							:limit-width 35)
-						(label :class "song-position" :halign "start"
-							:text song_position)
-						(progress :class "song-progress" :value {song_percent} :orientation 'h'
-						    :width "100%" :valign "left")
+		                (revealer :reveal {strlength(song_position) > 0} :transition "crossfade" :duration "600ms"
+    						(label :class "song-position" :halign "start"
+    							:text song_position)
+						)
+		                (revealer :reveal {strlength(song_percent) > 0 || song_percent > 0} :transition "crossfade" :duration "600ms"
+    						(progress :class "song-progress" :value {song_percent ?: 0} :orientation 'h'
+    						    :width "100%" :valign "left")
+                        )
 					)
 				)
 				(box :class "song-controls" :orientation "v"
 					(button :onclick "playerctl previous" "󰒮")
 					(button :onclick "playerctl play-pause"
-					   "${player_status == 'Playing' ? '' : ''}"
+					   "${matches(player_status, 'Playing') ? '' : ''}"
 					   )
 					(button :onclick "playerctl next" "󰒭")
 				)

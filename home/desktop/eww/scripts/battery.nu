@@ -29,7 +29,7 @@ def "main color" [] {
         let level = (cat $"($bat_path)/capacity" | into int)
 
         match [$status, $level] {
-            ["Charging", $x] if $x >= 40 => { print '' },
+            ["Charging", $x] if $x >= 40 => { print '#C5C8C9' },
             ["Charging", $x] => { print '#ffb29b' }, # yellow
             ["Discharging", $x] if $x <= 30 => { print '#ee6a70' }, # red
             _ => { print '#C5C8C9' }

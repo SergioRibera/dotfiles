@@ -1,5 +1,5 @@
 def _status []: nothing -> string {
-    return (playerctl status)
+    return (playerctl -a status)
 }
 
 def "main song art" [] {
@@ -21,15 +21,26 @@ def "main meta artist" [] {
 }
 
 def "main meta position" [] {
-    let pos = (playerctl -a position --format "{{ duration(position) }}")
-    let dur = (playerctl -a metadata --format "{{ duration(mpris:length) }}")
+    let pos = (playerctl -a -s position --format "{{ duration(position) }}" | lines | get 0)
+    let dur = (playerctl -a -s metadata --format "{{ duration(mpris:length) }}" | lines | get 0)
 
-    print $"($pos) / ($dur)"
+    if ($dur | str length) == 0 {
+        print ''
+    } else {
+        print $"($pos) / ($dur)"
+    }
 }
 
 def "main meta percent" [] {
-    let pos = (playerctl -a position | str replace '.' '' | into float)
-    let dur = (playerctl -a metadata mpris:length | into float)
+    let pos = (playerctl -a -s position | into string)
+    let dur = (playerctl -a -s metadata mpris:length | into float)
+
+    if ($pos | str length) == 0 {
+        print ''
+        return
+    }
+
+    let pos = ($pos | str replace '.' '' | into float)
 
     print (($pos / $dur) * 100)
 }
@@ -38,7 +49,7 @@ def "main player" [] {
     let player = playerctl -a -l | lines | get 0 | split row '.' | get 0
     let status = _status
 
-    if $status == "Playing" {
+    if ($status | str contains "Playing") {
         print $"Now Playing - via ($player)"
     } else {
         print ""
