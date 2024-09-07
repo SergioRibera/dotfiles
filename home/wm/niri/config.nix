@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }: let
+{ lib, config, inputs, ... }: let
   makeCommand = command: {
     command = [command];
   };
@@ -128,8 +128,10 @@ in {
           "Mod+Tab".action = spawn "anyrun";
           "Mod+E".action = spawn "cosmic-files";
           "Mod+Return".action = terminal;
-          "Mod+B".action = spawn "nu" "$HOME/.config/eww/scripts/extras.nu" "toggle" "sidebar";
-          "Mod+P".action = spawn "nu" "$HOME/.config/eww/scripts/extras.nu" "toggle" "power-screen";
+          # TODO: replace harcoded path by dynamic path from config
+          "Mod+B".action = spawn "nu" "/home/s4rch/.config/eww/scripts/extras.nu" "toggle" "sidebar";
+          "Mod+P".action = spawn "nu" "/home/s4rch/.config/eww/scripts/extras.nu" "toggle" "power-screen";
+          "Mod+M".action = spawn "nu" "/home/s4rch/.config/eww/scripts/extras.nu" "toggle" "screenkey";
           "Mod+Shift+Return".action = terminal config.shell.privSession;
           "Mod+C".action = spawn "hyprpicker" "-a" "-f" "hex";
 

@@ -80,7 +80,6 @@ generate_eww_kbd_component() {
 generate_eww_mouse() {
     IFS=':' read -r ev press <<< "$mouse_events"
     if [ -n "$ev" ]; then
-        echo "mouse_$ev=$press"
         eww update "mouse_$ev=$press"
         mouse_events=""
     fi
