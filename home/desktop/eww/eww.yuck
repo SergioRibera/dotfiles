@@ -6,3 +6,4 @@
 
 (include "./src/sidebar/_widgets.yuck")
 (include "./src/sidebar/_windows.yuck")
+(include "./src/screenkey/_windows.yuck")

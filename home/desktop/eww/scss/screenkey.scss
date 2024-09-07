@@ -1,0 +1,66 @@
+window {
+  background: transparent;
+}
+
+.keybox {
+    border-radius: .5rem;
+    background: $darker-background;
+    color: #282c34;
+    font-size: 1.7rem;
+    padding: 0.6rem 1.2rem;
+    font-family: Iosevka;
+}
+
+.keys-containers {
+}
+
+.last {
+    color: #EF8891;
+}
+
+.mouse {
+    min-width: 60px;
+    min-height: 80px;
+
+    .btn {
+        min-width: 30px;
+        min-height: 30px;
+        background-color: #282c34;
+        border: 1px solid #fff;
+    }
+
+    .middle {
+        min-width: 20px;
+        min-height: 30px;
+
+        & .wheel {
+            min-width: 20px;
+            min-height: 40px;
+            border-radius: 30%;
+            border: 1px solid #fff;
+            background-color: #282c34;
+        }
+
+        & .arrow {
+            font-size: .4em;
+            border-radius: 50%;
+            // border: 1px solid #fff;
+            // background-color: #282c34;
+        }
+    }
+
+    .left {
+        border-radius: 30% 0px 0px 0px;
+    }
+    .right {
+        border-radius: 0 30% 0px 0px;
+    }
+
+    .base {
+        min-width: 60px;
+        min-height: 50px;
+        border: 1px solid #fff;
+        background-color: #282c34;
+        border-radius: 2px 2px 30% 30%;
+    }
+}
