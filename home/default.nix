@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./services.nix
+    ./packages.nix
     ./programs.nix
     ./theme.nix
     ./common/xdg.nix
@@ -44,8 +45,6 @@ in
         inherit username;
         homeDirectory = user.homepath;
         stateVersion = user.osVersion;
-
-        packages = import ./packages.nix { inherit inputs pkgs config lib; };
 
         file = {
           ".local/bin/wallpaper" = lib.mkIf gui.enable {
