@@ -36,6 +36,7 @@
 
     xserver = {
       xkb.layout = "us";
+      xkb.variant = "altgr-intl";
       videoDrivers = lib.optionals config.gui.enable [ "amdgpu" ];
     };
 
