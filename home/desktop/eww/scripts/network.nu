@@ -9,12 +9,24 @@ def "main name" [n: number = 7] {
 }
 
 def "main icon" [] {
-    let status = nmcli d status | detect columns | where TYPE == 'wifi' | get STATE | get 0
+    let data = (nmcli -f ACTIVE,SIGNAL,SSID d wifi | detect columns --combine-columns 2.. | where ACTIVE == 'yes')
+    let status = (nmcli -t -f NAME c show --active | lines | get 0)
 
-    if $status == 'connected' {
-        print '󰤨 '
+    if $status == 'lo' {
+        print '󰤭'
+    } else if $status == '' {
+        print '󰤩'
     } else {
-        print '󰤭 '
+        let level = $data | get SIGNAL | get 0 | into int
+        if $level <= 25 {
+            print '󰤟'
+        } else if $level <= 50 {
+            print '󰤢'
+        } else if $level <= 75 {
+            print '󰤥'
+        } else {
+            print '󰤨 '
+        }
     }
 }
 
