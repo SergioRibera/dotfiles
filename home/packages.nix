@@ -20,7 +20,8 @@ with pkgs; {
     gitui
     neofetch
     ntfs3g
-    inputs.self.packages.${pkgs.system}.simple-commits
+    # self overlay
+    simple-commits
     inputs.zen-browser.packages.${pkgs.system}.specific
     # inputs.cartero.packages.${pkgs.system}.default
   ] ++ lib.optionals config.gui.enable [
@@ -68,7 +69,8 @@ with pkgs; {
     warp
     pavucontrol
     screenkey
-    inputs.self.packages.${pkgs.system}.cosmic-files
+    # self overlay
+    cosmic-files
 
     # Icons
     papirus-icon-theme

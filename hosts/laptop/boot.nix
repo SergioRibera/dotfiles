@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   inherit (config) gui;
 in
@@ -36,7 +36,7 @@ in
     plymouth = lib.mkIf gui.enable {
       enable = true;
       theme = "mac-style";
-      themePackages = [ inputs.self.packages.${pkgs.system}.mac-style ];
+      themePackages = [ pkgs.mac-style ];
     };
   };
 }

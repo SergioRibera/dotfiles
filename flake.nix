@@ -1,7 +1,7 @@
 {
   description = "SergioRibera NixOS System Configuration";
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    { nixpkgs, ... }@inputs:
     let
       # System types to support.
       systems = [
@@ -12,39 +12,61 @@
       ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+      overlay = import ./pkgs;
       forEachSystem = nixpkgs.lib.genAttrs systems;
-      nixpkgsFor = forEachSystem (system:
-        import nixpkgs { inherit system; }
+      pkgs = forEachSystem (system:
+        import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [ overlay ];
+        }
       );
+      mkNixosCfg = system: name: inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules = [
+          {
+            # Hardware
+            networking.hostName = name;
+            nixpkgs.overlays = [ overlay ];
+          }
+          ./hosts/${name}/hardware-configuration.nix
+          ./hosts/${name}/boot.nix
+          ./hosts/common
+          ./home
+          # { nixpkgs.overlays = [(import ./pkgs)]; }
+          inputs.agenix.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
+        ] ++ (import ./hosts/${name} { inherit inputs; });
+      };
     in
     {
-      packages = forEachSystem (system:
-        import ./pkgs { pkgs = nixpkgsFor.${system}; }
-      );
-
-      overlays = {
-      };
-
+      # packages = forEachSystem (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      overlays.default = overlay;
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#laptop
       nixosConfigurations = {
-        laptop = import ./hosts/laptop { inherit inputs; };
-        rpi = import ./hosts/rpi { inherit inputs; };
+        laptop = mkNixosCfg "x86_64-linux" "laptop";
+        rpi = mkNixosCfg "aarch64-linux" "rpi";
       };
 
       # Programs that can be run by calling this flake
-      apps = forEachSystem (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
-        import ./apps { inherit inputs pkgs; }
-      );
+      apps =  import ./apps { inherit inputs pkgs; };
 
       # For quickly applying home-manager settings with:
       # home-manager switch --flake .#s4rch
       # homeConfigurations = {
       #   s4rch = nixosConfigurations.laptop.config.home-manager.users.s4rch.home;
       #   s3rver = nixosConfigurations.rpi.config.home-manager.users.s3rver.home;
+      # };
+
+      # devShells."${system}".default = pkgs.mkShell {
+      #   buildInputs = with pkgs; [
+      #     # TODO: disko implementation
+      #     # disko.packages.${system}.default
+      #     git
+      #     nixos-generators
+      #   ];
       # };
     };
 

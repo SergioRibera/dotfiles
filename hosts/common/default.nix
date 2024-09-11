@@ -35,12 +35,7 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   console.useXkbConfig = true;
 
-  networking = {
-    hostName = "nixos";
-    networkmanager = {
-      enable = true;
-    };
-  };
+  networking.networkmanager.enable = true;
 
   environment.shellAliases = config.shell.aliases;
   services.getty.autologinUser = username;

@@ -2,49 +2,36 @@
 let
   username = "s4rch";
 in
-inputs.nixpkgs.lib.nixosSystem {
-  system = "x86_64-linux";
-  specialArgs = { inherit inputs; };
-  modules = [
-    ./hardware-configuration.nix
-    ./boot.nix
-    ../common
-    ../../home
-    inputs.agenix.nixosModules.default
-    inputs.grub2-themes.nixosModules.default
-    inputs.home-manager.nixosModules.home-manager
-    {
-      # Hardware
-      networking.hostName = "nixos";
+[
+  inputs.grub2-themes.nixosModules.default
+  {
+    # Prioritize performance over efficiency
+    powerManagement.cpuFreqGovernor = "performance";
 
-      # Prioritize performance over efficiency
-      powerManagement.cpuFreqGovernor = "performance";
+    git.enable = true;
+    gui.enable = true;
+    gui.touchpad = true;
+    sshKeys = true;
+    audio = true;
+    bluetooth = true;
 
-      git.enable = true;
-      gui.enable = true;
-      gui.touchpad = true;
-      sshKeys = true;
-      audio = true;
-      bluetooth = true;
-
-      nvim = {
+    nvim = {
         enable = true;
         neovide = true;
         complete = true;
-      };
+    };
 
-      shell = {
+    shell = {
         name = "nushell";
         privSession = ["nu" "--no-history"];
-      };
+    };
 
-      user = {
+    user = {
         inherit username;
         isNormalUser = true;
         enableHM = true;
         browser = "chromium";
         groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
-      };
-    }
-  ];
-}
+    };
+  }
+]
