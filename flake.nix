@@ -76,7 +76,6 @@
     fu.url = "github:numtide/flake-utils";
     flake-parts.url = "github:hercules-ci/flake-parts";
     agenix.url = "github:ryantm/agenix";
-    grub2-themes.url = "github:vinceliuice/grub2-themes";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

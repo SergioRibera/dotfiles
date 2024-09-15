@@ -3,7 +3,6 @@ let
   username = "s4rch";
 in
 [
-  inputs.grub2-themes.nixosModules.default
   {
     # Prioritize performance over efficiency
     powerManagement.cpuFreqGovernor = "performance";

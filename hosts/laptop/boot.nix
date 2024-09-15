@@ -24,12 +24,7 @@ in
         enable = true;
         device = "nodev";
         efiSupport = true;
-      };
-      grub2-theme = {
-        enable = true;
-        theme = "stylish";
-        icon = "color";
-        splashImage = ./grub_bg.png;
+        theme = pkgs.catppuccin-grub;
       };
     };
 
