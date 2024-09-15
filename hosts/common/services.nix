@@ -4,6 +4,7 @@
 
   security.pam.services.login.enableGnomeKeyring = true;
   # security.pam.services.greetd.enableGnomeKeyring = true;
+  environment.systemPackages = with pkgs; [ catppuccin-sddm ];
 
   services = {
     udisks2.enable = true;
@@ -34,25 +35,23 @@
       wireplumber.enable = true;
     };
 
-    xserver = {
+    xserver = lib.mkIf pkgs.stdenv.buildPlatform.isLinux {
       xkb.layout = "us";
       xkb.variant = "altgr-intl";
       videoDrivers = lib.optionals config.gui.enable [ "amdgpu" ];
     };
 
-    greetd = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) {
-      enable = true;
-      restart = false;
-
-      settings = let
-        session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri-session";
-          # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-          user = config.user.username;
+    displayManager = {
+      sessionPackages = [ pkgs.niri ];
+      sddm = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) {
+        enable = true;
+        theme = "catppuccin-mocha";
+        wayland.enable = true;
+        package = pkgs.kdePackages.sddm;
+        settings = {
+          Theme.CursorTheme = config.gui.cursor.name;
+          Wayland.CursorTheme = config.gui.cursor.name;
         };
-      in {
-        default_session = session;
-        initial_session = session;
       };
     };
   };
