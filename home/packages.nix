@@ -22,7 +22,6 @@ with pkgs; {
     ntfs3g
     # self overlay
     simple-commits
-    inputs.zen-browser.packages.${pkgs.system}.specific
     # inputs.cartero.packages.${pkgs.system}.default
   ] ++ lib.optionals config.gui.enable [
     # Social

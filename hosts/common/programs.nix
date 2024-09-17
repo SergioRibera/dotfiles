@@ -23,12 +23,5 @@ in {
       '';
     };
     adb.enable = config.nvim.complete;
-
-    # firefox = lib.mkIf
-    #   (gui.enable && user.browser == "firefox")
-    #   (import ./browser/firefox.nix { inherit lib pkgs config; });
-    chromium = lib.mkIf
-      (gui.enable && user.browser == "chromium")
-      (import ../../home/desktop/browser/chromium.nix { inherit config; });
   };
 }

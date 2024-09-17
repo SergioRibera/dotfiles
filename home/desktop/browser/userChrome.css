@@ -1,0 +1,217 @@
+/*
+
+  Sidebar
+
+*/
+
+#TabsToolbar-customization-target {
+  display: grid;
+  margin: auto;
+  grid-template-rows: auto auto 1fr;
+  height: fit-content !important;
+
+  #alltabs-button {
+    grid-row: 2;
+  }
+
+  #tabbrowser-tabs {
+    overflow: hidden !important;
+    height: 360px !important;
+  }
+
+  #tabbrowser-arrowscrollbox {
+    scrollbar-width: none;
+  }
+}
+
+/* audio icons */
+.tab-icon-overlay {
+  -moz-box-ordinal-group: 0 !important;
+  border-radius: 50% !important;
+  margin: initial !important;
+  visibility: visible !important;
+  margin-right: -16px !important;
+  opacity: 1 !important;
+  transform: translate(60%, -35%) scale(0.7) !important;
+  color: light-dark(white, black) !important;
+  background-color: light-dark(black, white) !important;
+}
+
+.tab-icon-overlay:hover {
+  color: light-dark(white, black) !important;
+  background-color: light-dark(black, white) !important;
+}
+
+.tab-icon-overlay:is([soundplaying], [muted]):not([selected]) {
+  display: block !important;
+}
+
+/*
+
+  Search bar
+
+*/
+#urlbar-container {
+  --toolbar-field-background-color: transparent;
+
+  display: flex;
+  justify-content: center;
+
+  #urlbar[breakout][breakout-extend] {
+    left: auto !important;
+
+    .urlbarView {
+      z-index: 2;
+      margin: 0 !important;
+      width: 100% !important;
+    }
+  }
+
+  #urlbar[breakout] {
+    --toolbarbutton-border-radius: 8px !important;
+    border: none !important;
+    width: 40% !important;
+    height: 100%;
+    left: 35%;
+
+
+    .urlbar-input-container .urlbar-input-box {
+      text-align: center;
+    }
+
+  }
+}
+
+/*
+
+  Disabled Component
+
+*/
+
+/* Tabs elements  */
+.tab-close-button {
+  display: none;
+}
+
+#nav-bar:not([tabs-hidden='true']) {
+  box-shadow: none;
+}
+
+#nav-bar #unified-extensions-button {
+  display: none;
+}
+
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
+  > #tabbrowser-arrowscrollbox
+  > .tabbrowser-tab[first-visible-unpinned-tab] {
+  margin-inline-start: 0 !important;
+}
+
+:root {
+  --toolbarbutton-border-radius: 0 !important;
+  --tab-border-radius: 0 !important;
+  --tab-block-margin: 0 !important;
+}
+
+.tab-background {
+  border-right: 0px solid rgba(0, 0, 0, 0) !important;
+  margin-left: -4px !important;
+}
+
+.tabbrowser-tab:is([visuallyselected='true'], [multiselected])
+  > .tab-stack
+  > .tab-background {
+  box-shadow: none !important;
+}
+
+.tabbrowser-tab[last-visible-tab='true'] {
+  padding-inline-end: 0 !important;
+}
+
+#tabs-newtab-button {
+  padding-left: 0 !important;
+}
+
+/* Url Bar  */
+#urlbar-input-container {
+  background-color: var(--sfsecondary) !important;
+  border: 1px solid rgba(0, 0, 0, 0) !important;
+}
+
+#urlbar-container {
+  margin-left: 0 !important;
+}
+
+#urlbar[focused='true'] > #urlbar-background {
+  box-shadow: none !important;
+}
+
+#navigator-toolbox {
+  border: none !important;
+}
+
+/* Bookmarks bar  */
+.bookmark-item .toolbarbutton-icon {
+  display: none;
+}
+toolbarbutton.bookmark-item:not(.subviewbutton) {
+  min-width: 1.6em;
+}
+
+/* Toolbar  */
+#tracking-protection-icon-container,
+#urlbar-zoom-button,
+#star-button-box,
+#pageActionButton,
+#pageActionSeparator,
+#tabs-newtab-button,
+#back-button,
+/* #PanelUI-button, */
+#home-button,
+#stop-reload-button,
+#forward-button,
+.tab-secondary-label,
+.titlebar-close,
+.urlbar-icon .urlbar-go-button {
+  display: none !important;
+}
+
+.urlbarView-url {
+  color: #dedede !important;
+}
+
+/* Disable elements  */
+#context-navigation,
+#context-savepage,
+#context-pocket,
+#context-sendpagetodevice,
+#context-selectall,
+#context-viewsource,
+#context-inspect-a11y,
+#context-sendlinktodevice,
+#context-openlinkinusercontext-menu,
+#context-bookmarklink,
+#context-savelink,
+#context-savelinktopocket,
+#context-sendlinktodevice,
+#context-searchselect,
+#context-sendimage,
+#context-print-selection,
+#newtab-button-container,
+#identity-box,
+#page-action-buttons,
+.urlbar-icon.urlbar-go-button {
+  display: none !important;
+}
+
+#context_bookmarkTab,
+#context_moveTabOptions,
+#context_sendTabToDevice,
+#context_reopenInContainer,
+#context_selectAllTabs,
+#context_closeTabOptions,
+
+/* sidebar extra buttons */
+#zen-sidebar-icons-wrapper{
+  display: none !important;
+}

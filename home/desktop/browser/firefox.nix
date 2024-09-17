@@ -1,133 +1,161 @@
-{ config, lib, pkgs}@args:
+{ config, lib, pkgs, inputs, ... }:
 let
-  buildFirefoxXpiAddon = lib.makeOverridable ({ pkgs ? args.pkgs
-                                              , fetchurl ? args.fetchurl
-                                              , pname
-                                              , version
-                                              , addonId
-                                              , sha256
-                                              , meta
-                                              , ...
-                                              }:
-    pkgs.stdenv.mkDerivation rec {
-      name = "${pname}-${version}";
+  inherit (config) gui user;
+  mkPrefs = attrs:
+    let
+      toPrefsValue = value:
+      if builtins.isBool value then
+          if value then "true" else "false"
+      else if builtins.isInt value then
+          toString value
+      else if builtins.isString value then
+          ''"${value}"''
+      else
+          throw "Tipo de valor no soportado: ${builtins.typeOf value}";
 
-      inherit meta;
-
-      src = fetchurl {
-        url = "https://addons.mozilla.org/firefox/downloads/file/${name}.xpi";
-        inherit sha256;
-      };
-
-      preferLocalBuild = true;
-      allowSubstitutes = true;
-
-      passthru = { inherit addonId; };
-
-      buildCommand = ''
-        dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-        mkdir -p "$dst"
-        install -v -m644 "$src" "$dst/${addonId}.xpi"
-      '';
-    });
+      prefsLines = lib.mapAttrsToList (name: value:
+      ''user_pref("${name}", ${toPrefsValue value});''
+      ) attrs;
+    in
+      lib.concatStringsSep "\n" prefsLines;
 in
 {
-  enable = true;
-  preferencesStatus = "user";
+  # xdg.mimeApps.defaultApplications = lib.mkIf (gui.enable && user.browser == "firefox") {
+  #   "x-scheme-handler/http" = "zen-browser.desktop";
+  #   "x-scheme-handler/https" = "zen-browser.desktop";
+  #   "application/xhtml+xml" = "zen-browser.desktop";
+  #   "text/html" = "zen-browser.desktop";
+  # };
+  home-manager.users."${user.username}" = {
+    # programs.firefox = {
+    #   enable = true;
+    #   package = inputs.zen-browser.packages.${pkgs.system}.specific;
+    #   profiles.default = {
+    #     isDefault = true;
+    #     name = user.username;
+    #     userChrome = builtins.readFile ./userChrome.css;
+    #     extensions = with pkgs.firefoxAddons; [
+    #       vimium-ff
+    #       hyper-read
+    #       ublock-origin
+    #       refined-github-
+    #       rust-search-extension
+    #       bitwarden-password-manager
+    #     ];
+    #   };
+    # };
+    #
+    home = lib.mkIf (gui.enable && user.enableHM && user.browser == "firefox") {
+      packages = [ inputs.zen-browser.packages.${pkgs.system}.specific ];
+      file.".zen/chrome/userChrome.css".source = ./userChrome.css;
+      file.".zen/profiles.ini".text = lib.generators.toINI {} {
+        General = {
+          StartWithLastProfile = 1;
+          Version = 2;
+        };
 
-  # Search firefox extension
-  # https://nur.nix-community.org/repos/rycee/
-  # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons
-  profiles.${config.user.username}.extensions = [
-    (buildFirefoxXpiAddon {
-      pname = "4263752/bitwarden_password_manager";
-      version = "2024.4.1";
-      addonId = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
-      sha256 = "1ba1e66cb9a4ee3bf80a81fc31348b04162385455d2b02f9902473e3931d9693";
-      meta = with lib;
-        {
-          homepage = "https://bitwarden.com";
-          description = "At home, at work, or on the go, Bitwarden easily secures all your passwords, passkeys, and sensitive information.";
-          license = licenses.gpl3;
-          mozPermissions = [
-            "<all_urls>"
-            "*://*/*"
-            "tabs"
-            "contextMenus"
-            "storage"
-            "unlimitedStorage"
-            "clipboardRead"
-            "clipboardWrite"
-            "idle"
-            "webRequest"
-            "webRequestBlocking"
-            "file:///*"
-            "https://*/*"
-            "https://lastpass.com/export.php"
-          ];
-          platforms = platforms.all;
+        Profile0 = {
+          Name = user.username;
+          Path = user.username;
+          IsRelative = 1;
+          ZenAvatarPath = "chrome://browser/content/zen-avatars/avatar-46.svg";
+          Default = 1;
         };
-    })
-    (buildFirefoxXpiAddon {
-      pname = "4258067/fastforwardteam";
-      version = "0.2383";
-      addonId = "addon@fastforward.team";
-      sha256 = "eec6328df3df1afe2cb6a331f6907669d804235551ea766d48655f8f831caf28";
-      meta = with lib;
-        {
-          homepage = "https://fastforward.team";
-          description = "Don't waste time with compliance. Use FastForward to skip annoying URL \"shorteners\".";
-          license = licenses.unlicense;
-          mozPermissions = [
-            "alarms"
-            "storage"
-            "webNavigation"
-            "tabs"
-            "declarativeNetRequestWithHostAccess"
-            "<all_urls>"
-          ];
-          platforms = platforms.all;
-        };
-    })
-    (buildFirefoxXpiAddon {
-      pname = "ublock-origin";
-      version = "1.57.2";
-      addonId = "uBlock0@raymondhill.net";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4261710/ublock_origin-1.57.2.xpi";
-      sha256 = "9928e79a52cecf7cfa231fdb0699c7d7a427660d94eb10d711ed5a2f10d2eb89";
-      meta = with lib;
-        {
-          homepage = "https://github.com/gorhill/uBlock#ublock-origin";
-          description = "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.";
-          license = licenses.gpl3;
-          mozPermissions = [
-            "alarms"
-            "dns"
-            "menus"
-            "privacy"
-            "storage"
-            "tabs"
-            "unlimitedStorage"
-            "webNavigation"
-            "webRequest"
-            "webRequestBlocking"
-            "<all_urls>"
-            "http://*/*"
-            "https://*/*"
-            "file://*/*"
-            "https://easylist.to/*"
-            "https://*.fanboy.co.nz/*"
-            "https://filterlists.com/*"
-            "https://forums.lanik.us/*"
-            "https://github.com/*"
-            "https://*.github.io/*"
-            "https://*.letsblock.it/*"
-            "https://github.com/uBlockOrigin/*"
-            "https://ublockorigin.github.io/*"
-            "https://*.reddit.com/r/uBlockOrigin/*"
-          ];
-          platforms = platforms.all;
-        };
-    })
-  ];
+      };
+      file.".zen/default/extensions" = {
+          source = let
+          env = pkgs.buildEnv {
+              name = "zen-extensions";
+              paths = with pkgs.firefoxAddons; [
+                vimium-ff
+                hyper-read
+                ublock-origin
+                refined-github-
+                rust-search-extension
+                bitwarden-password-manager
+              ];
+          };
+          in "${env}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}";
+          recursive = true;
+          force = true;
+      };
+      file.".zen/default/search.json.mozlz4" = {
+        force = true;
+        source = let
+          settings = {
+            version = 6;
+            force = true;
+            default = "DuckDuckGo";
+            order = [ "DuckDuckGo" "Google" ];
+            engines = {
+              "MyNixOs" = {
+                urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
+                icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                definedAliases = [ "nx" ];
+              };
+              "Bing".metaData.hidden = true;
+              "Google".metaData.alias = "g"; # builtin engines only support specifying one additional alias
+            };
+
+          };
+        in pkgs.runCommand "search.json.mozlz4" {
+          nativeBuildInputs = with pkgs; [ mozlz4a ];
+          json = builtins.toJSON settings;
+        } ''
+          mozlz4a <(echo "$json") "$out"
+        '';
+      };
+      file.".zen/default/prefs.js".text = mkPrefs {
+        # Disable auto update
+        "app.update.auto" = false;
+        "app.update.enabled" = false;
+        "app.update.silent" = false;
+        "app.update.lastUpdateTime.background-update-timer" = 0;
+        "app.update.lastUpdateTime.browser-cleanup-thumbnails" = 0;
+        "app.update.lastUpdateTime.search-engine-update-timer" = 0;
+
+        # Privacity and Security
+        "privacy.trackingprotection.enabled" = true;
+        "privacy.trackingprotection.socialtracking.enabled" = true;
+        "privacy.trackingprotection.fingerprinting.enabled" = true;
+        "privacy.trackingprotection.cryptomining.enabled" = true;
+        "privacy.donottrackheader.enabled" = true;
+        "browser.contentblocking.category" = "strict";
+        "network.cookie.cookieBehavior" = 1; # Disable other cookies
+        "browser.safebrowsing.malware.enabled" = true;
+        "browser.safebrowsing.phishing.enabled" = true;
+
+        # Performance
+        "gfx.webrender.all" = true;
+        "layers.acceleration.force-enabled" = true;
+        "browser.cache.disk.enable" = false;
+        "browser.cache.memory.enable" = true;
+
+        # User Experience
+        "browser.tabs.loadInBackground" = false;
+        "browser.urlbar.suggest.history" = false;
+        "browser.urlbar.suggest.bookmark" = true;
+        "browser.urlbar.suggest.openpage" = false;
+        "browser.urlbar.suggest.topsites" = false;
+        "browser.search.suggest.enabled" = false;
+        "browser.startup.page" = 3; # Restore last session
+        "browser.newtabpage.enabled" = false;
+
+        # Customization
+        "browser.uidensity" = 1; # Compact UI
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "svg.context-properties.content.enabled" = true;
+        # "browser.startup.homepage" = "https://self.host/homepage";
+
+        # Desactivar telemetría
+        "datareporting.healthreport.uploadEnabled" = false;
+        "datareporting.policy.dataSubmissionEnabled" = false;
+        "toolkit.telemetry.enabled" = false;
+
+        # Zen
+        "zen.keyboard.shortcuts" = "{\"zenSplitViewGrid\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"G\"},\"zenSplitViewVertical\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"V\"},\"zenSplitViewHorizontal\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"H\"},\"zenSplitViewClose\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"U\"},\"zenChangeWorkspace\":{\"ctrl\":true,\"alt\":false,\"shift\":true,\"meta\":false,\"key\":\"E\"},\"zenToggleCompactMode\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"C\"},\"zenToggleCompactModeSidebar\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"S\"},\"zenToggleCompactModeToolbar\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"T\"},\"zenToggleWebPanels\":{\"ctrl\":true,\"alt\":false,\"shift\":true,\"meta\":false,\"key\":\"P\"},\"openScreenCapture\":{\"ctrl\":true,\"alt\":false,\"shift\":false,\"meta\":false,\"key\":\"s\"},\"openNewPrivateWindow\":{\"ctrl\":true,\"alt\":false,\"shift\":true,\"meta\":false,\"key\":\"N\"}}";
+
+      };
+    };
+  };
 }
