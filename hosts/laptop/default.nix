@@ -29,7 +29,7 @@ in
         inherit username;
         isNormalUser = true;
         enableHM = true;
-        browser = "chromium";
+        browser = "zen";
         groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
     };
   }
