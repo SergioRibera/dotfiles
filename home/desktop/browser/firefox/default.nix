@@ -6,10 +6,11 @@ in
   home-manager.users."${user.username}" = {
     programs.firefox = {
       enable = (gui.enable && user.enableHM && user.browser == "firefox");
+      package = pkgs.firefox-devedition-bin;
       profiles.default = {
         isDefault = true;
         name = user.username;
-        userChrome = builtins.readFile ./userChrome.css;
+        # userChrome = builtins.readFile ./userChrome.css;
         extensions = with pkgs.firefoxAddons; [
           vimium-ff
           hyper-read
@@ -70,7 +71,9 @@ in
           "browser.newtabpage.enabled" = false;
 
           # Customization
-          "browser.uidensity" = 1; # Compact UI
+          # "browser.uidensity" = 1; # Compact UI
+          "devtools.chrome.enabled" = true;
+          "devtools.debugger.remote-enabled" = true;
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           "svg.context-properties.content.enabled" = true;
           # "browser.startup.homepage" = "https://self.host/homepage";

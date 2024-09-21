@@ -1,3 +1,6 @@
+#
+# This browser have some issues with replication settings
+#
 { config, lib, pkgs, inputs, ... }:
 let
   inherit (config) gui user;
@@ -11,7 +14,7 @@ let
       else if builtins.isString value then
           ''"${value}"''
       else
-          throw "Tipo de valor no soportado: ${builtins.typeOf value}";
+          throw "Type value not supported: ${builtins.typeOf value}";
 
       prefsLines = lib.mapAttrsToList (name: value:
       ''user_pref("${name}", ${toPrefsValue value});''
