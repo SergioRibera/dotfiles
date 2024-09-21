@@ -77,6 +77,9 @@ in
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           "svg.context-properties.content.enabled" = true;
           # "browser.startup.homepage" = "https://self.host/homepage";
+          # Enable sidebar
+          "sidebar.revamp" = true;
+          "sidebar.verticalTabs" = true;
 
           # Disable telemetry
           "datareporting.healthreport.uploadEnabled" = false;
