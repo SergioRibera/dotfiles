@@ -17,6 +17,7 @@ in
           ublock-origin
           refined-github-
           rust-search-extension
+          adaptive-tab-bar-colour
           bitwarden-password-manager
         ];
         search = {

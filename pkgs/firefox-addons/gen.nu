@@ -2,6 +2,7 @@
 
 def fetch-addon [slug: string] {
   let url = $'https://addons.mozilla.org/api/v5/addons/addon/($slug)/?app=firefox&lang=en-US'
+  print $'Try get: ($slug)'
   let response = http get $url
 
   let addon = {
@@ -19,9 +20,22 @@ def fetch-addon [slug: string] {
 }
 
 export def main [...slugs: string] {
+  let addons = if ($slugs | length) == 0 {
+    [
+      vimium-ff
+      hyper-read
+      ublock-origin
+      refined-github-
+      rust-search-extension
+      adaptive-tab-bar-colour
+      bitwarden-password-manager
+    ]
+  } else {
+    $slugs
+  }
   # change this when the following gets resolved
   # https://github.com/nushell/nushell/issues/12195
   let file = $"(pwd)/default.lock"
-  let addons = $slugs | each { |slug| fetch-addon $slug }
+  let addons = $addons | each { |slug| fetch-addon $slug }
   $addons | to json | save --force $file
 }
