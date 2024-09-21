@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }:
 let
   username = "s4rch";
 in
@@ -29,7 +29,7 @@ in
         inherit username;
         isNormalUser = true;
         enableHM = true;
-        browser = "zen";
+        browser = "firefox";
         groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
     };
   }
