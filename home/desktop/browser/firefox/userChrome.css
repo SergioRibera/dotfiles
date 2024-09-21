@@ -1,0 +1,104 @@
+/*
+ * Disables
+ */
+#titlebar,
+/* Control Buttons */
+#back-button,
+#forward-button,
+/* Extensions Button */
+#unified-extensions-button,
+/*
+  Search bar
+*/
+#page-action-buttons,
+/* Sidebar */
+#newtab-button-container,
+.bottom-actions,
+.tools-and-extensions
+{
+    display: none !important;
+}
+
+/* Sidebar Color */
+#sidebar-main {
+    background: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+}
+
+#vertical-tabs[visible] {
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*
+* Tabs
+*/
+#tabbrowser-tabs[orient="vertical"] {
+    max-height: 350px;
+    overflow: auto !important;
+}
+#tabbrowser-arrowscrollbox[orient="vertical"] { max-height: 450px; }
+#tabbrowser-tabs[orient="vertical"]:has(> #tabbrowser-arrowscrollbox[overflowing="true"]) {
+    border: none !important;
+}
+/* audio icons */
+.tab-icon-overlay {
+  -moz-box-ordinal-group: 0 !important;
+  border-radius: 50% !important;
+  margin: initial !important;
+  visibility: visible !important;
+  margin-right: -16px !important;
+  opacity: 1 !important;
+  transform: translate(60%, -35%) scale(0.7) !important;
+  color: light-dark(white, black) !important;
+  background-color: light-dark(black, white) !important;
+}
+.tab-icon-overlay:hover {
+  color: light-dark(white, black) !important;
+  background-color: light-dark(black, white) !important;
+}
+
+.tab-icon-overlay:is([soundplaying], [muted]):not([selected]) {
+  display: block !important;
+}
+.tab-icon-overlay
+  :is(:root[uidensity="compact"],
+  #tabbrowser-tabs[secondarytext-unsupported],
+  :root:not([uidensity="compact"]) #tabbrowser-tabs:not([secondarytext-unsupported]) .tabbrowser-tab:hover) .tab-icon-stack[indicator-replaces-favicon] > :not(&) {
+      opacity: 1 !important;
+}
+
+/*
+* Searchbar
+*/
+#urlbar-container {
+  --toolbar-field-background-color: transparent;
+
+  display: flex;
+  justify-content: center;
+
+  #urlbar[breakout][breakout-extend] {
+    left: auto !important;
+
+    .urlbarView {
+      z-index: 2;
+      margin: 0 !important;
+      width: 100% !important;
+    }
+  }
+
+  #urlbar[breakout] {
+    --toolbarbutton-border-radius: 8px !important;
+    border: none !important;
+    width: 40% !important;
+    height: 100%;
+    left: 30%;
+
+
+    .urlbar-input-container .urlbar-input-box {
+      text-align: center;
+    }
+
+  }
+}

@@ -10,7 +10,7 @@ in
       profiles.default = {
         isDefault = true;
         name = user.username;
-        # userChrome = builtins.readFile ./userChrome.css;
+        userChrome = builtins.readFile ./userChrome.css;
         extensions = with pkgs.firefoxAddons; [
           vimium-ff
           hyper-read
