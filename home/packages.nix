@@ -95,6 +95,5 @@ with pkgs; {
     # }))
   ]
   ++ lib.optionals (config.user.browser == "chromium" && config.gui.enable) [ chromium ]
-  ++ lib.optionals (config.user.browser == "firefox" && config.gui.enable) [ inputs.zen-browser.packages.${pkgs.system}.specific ]
   ++ lib.optionals (config.nvim.neovide && config.gui.enable) [ neovide ];
 }
