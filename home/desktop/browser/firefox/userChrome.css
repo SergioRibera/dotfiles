@@ -102,3 +102,14 @@
 
   }
 }
+
+/*
+* Content
+*/
+#tabbrowser-tabbox #tabbrowser-tabpanels .browserSidebarContainer {
+  border-radius: 10px;
+}
+#tabbrowser-tabpanels {
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
