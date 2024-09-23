@@ -8,3 +8,6 @@ git = "https://github.com/SrTemplates/Bevy"
 
 [favorites.bbin]
 git = "https://github.com/SrTemplates/BasicBin"
+
+[favorites.zed]
+git = "https://github.com/RustLangES/zed_plugin_template"
