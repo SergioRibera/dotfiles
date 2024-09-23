@@ -4,10 +4,7 @@
 		"context": "Workspace",
 		"bindings": {
 			"ctrl-`": "workspace::ToggleBottomDock",
-			"\\ \\": "tab_switcher::Toggle",
-			"alt-q": "pane::CloseActiveItem",
-			"ctrl-n": "workspace::ToggleRightDock",
-			"ctrl-b": "workspace::NewTerminal"
+			"ctrl-b": "terminal_panel::ToggleFocus"
 		}
 	},
 	// File panel (netrw)
@@ -22,8 +19,7 @@
 			"y": "project_panel::Copy",
 			"p": "project_panel::Paste",
 			// Close
-			"space n": "workspace::ToggleRightDock",
-			"q": "workspace::ToggleRightDock"
+			"q": "workspace::ToggleLeftDock"
 		}
 	},
 	// Surround. Select word and press shift-s and add the surround
@@ -51,8 +47,6 @@
 		"context": "Editor && VimControl && !VimWaiting && !menu",
 		"bindings": {
 			// Git
-			"space g h d": "editor::ToggleHunkDiff",
-			"space g h r": "editor::RevertSelectedHunks",
 			"space g b": "editor::ToggleGitBlame",
 			// Toggle inlay hints
 			"space t i": "editor::ToggleInlayHints",
@@ -64,18 +58,22 @@
 			"space c z": "workspace::ToggleCenteredLayout",
 			// Open markdown preview
 			"space m p": "markdown::OpenPreviewToTheSide",
-			// Open recent project
-			"; o": "projects::OpenRecent",
-			// Search word under cursor
-			"n": "pane::DeploySearch",
+			// Search word
+			"n": "search::SelectNextMatch",
+			"shift-n": "search::SelectPrevMatch",
 			// Go to file with `gf`
-			"g f f": "editor::OpenExcerpts"
+			"space g f": "editor::OpenExcerpts"
 		}
 	},
 	// Normal mode
 	{
 		"context": "Editor && vim_mode == normal && !VimWaiting && !menu",
 		"bindings": {
+			// Open recent project
+			"space p p": ["projects::OpenRecent", { "separate_history": true }],
+			// Close active panel
+			"space q": "pane::CloseActiveItem",
+			"space f f": ["file_finder::Toggle", { "separate_history": true }],
 			// Move between panes
 			// "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
 			// "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
@@ -83,7 +81,7 @@
 			// "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
 			// LSP
 			"space g a": "editor::ToggleCodeActions",
-			"space g r": "editor::Rename",
+			"space r n": "editor::Rename",
 			"g d": "editor::GoToDefinition",
 			"g D": "editor::GoToDefinitionSplit",
 			"g i": "editor::GoToImplementation",
@@ -92,18 +90,13 @@
 			"g T": "editor::GoToTypeDefinitionSplit",
 			"g r": "editor::FindAllReferences",
 			"space k": "editor::Hover",
+			"ctrl-f": "editor::Format",
 			// Switch between buffers
 			"ctrl-h": "pane::ActivatePrevItem",
 			"ctrl-l": "pane::ActivateNextItem",
-			// Close active panel
-			"space q": "pane::CloseActiveItem",
-			"space b d": "pane::CloseActiveItem",
-			// Close other items
-			"space b o": "pane::CloseInactiveItems",
 			// Save file
 			"ctrl-s": "workspace::Save",
 			"space w": "workspace::Save",
-			"space f": ["file_finder::Toggle", { "separate_history": true }],
 			// Show project panel with current file
 			"space e": "pane::RevealInProjectPanel",
 			// Split panes
@@ -117,8 +110,6 @@
 	{
 		"context": "EmptyPane || SharedScreen",
 		"bindings": {
-			// Open file finder
-			"space f": ["file_finder::Toggle", { "separate_history": true }],
 			// Open recent project
 			"space p": "projects::OpenRecent"
 		}
@@ -129,15 +120,6 @@
 		"bindings": {
 			"j j": "vim::NormalBefore", // remap jj in insert mode to escape
 			"j k": "vim::NormalBefore" // remap jk in insert mode to escape
-		}
-	},
-	// Rename
-	{
-		"context": "Editor && vim_operator == c",
-		"bindings": {
-			"c": "vim::CurrentLine",
-			"r": "editor::Rename", // zed specific
-			"a": "editor::ToggleCodeActions" // zed specific
 		}
 	},
 	// Panel nagivation
