@@ -41,7 +41,7 @@
       };
     in
     {
-      # packages = forEachSystem (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      packages = pkgs;
       overlays.default = overlay;
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#laptop
