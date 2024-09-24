@@ -46,6 +46,10 @@ in {
       command = "${pkgs.nushell}/bin/nu";
       args = ["--lsp"];
     };
+    discord-presence = {
+      command = "${pkgs.discord-presence}/bin/discord-presence-lsp";
+      args = [];
+    };
   }
     // (lsp_pkg "nixd")
     // (lsp_pkg "vue-language-server")

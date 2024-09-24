@@ -11,6 +11,9 @@ final: prev: rec {
   nvim-cmp-dotenv = prev.callPackage ./nvim/cmp-dotenv.nix { };
   nvim-codeshot = prev.callPackage ./nvim/codeshot.nix { };
 
+  # LSP
+  discord-presence = prev.callPackage ./lsp/discord { };
+
   # Utils
   simple-commits = prev.callPackage ./simple-commits { };
 
