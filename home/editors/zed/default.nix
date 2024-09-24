@@ -11,8 +11,8 @@
 in {
   home-manager.users."${config.user.username}" = lib.mkIf config.gui.enable {
     home.packages = with pkgs; (lib.optionals config.gui.enable) [
-      zedNodeFixScript
       zed-editor
+      zedNodeFixScript
       nixd
       biome
       nodejs
@@ -29,7 +29,6 @@ in {
       auto_install_extensions = {
         astro = true;
         biome = true;
-        env = true;
         html = true;
         liquid = true; # TODO: lsp
         nix = true;
@@ -37,7 +36,7 @@ in {
         vue = true;
         toml = true;
         dockerfile = true;
-        "Vitesse Theme" = true;
+        vitesse = true;
         discord-presence = true;
       };
       auto_update = false;
