@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }: let
-  lsp = import ./lsp.nix { inherit config pkgs lib; };
+  lsp-raw = import ./lsp.nix { inherit config pkgs lib; };
+  lsp = (lib.removeAttrs lsp-raw ["__functor"]);
   zedNodeFixScript = pkgs.writeShellScriptBin "zedNodeFixScript" ''
     nodeVersion="node-v${pkgs.nodejs.version}-linux-x64"
     zedNodePath="/home/${config.user.username}/zed/node/$nodeVersion"
@@ -13,10 +14,14 @@ in {
     home.packages = with pkgs; (lib.optionals config.gui.enable) [
       zed-editor
       zedNodeFixScript
+      # LSP
       nixd
       biome
       nodejs
+      wakatime-ls
+      wakatime-cli
       taplo-lsp
+      discord-presence
       vue-language-server
       typescript-language-server
       vscode-langservers-extracted
@@ -38,6 +43,7 @@ in {
         dockerfile = true;
         vitesse = true;
         discord-presence = true;
+        wakatime = true;
       };
       auto_update = false;
       ui_font_size = 16;
@@ -77,6 +83,6 @@ in {
         show_parameter_hints = true;
         show_other_hints = true;
       };
-    } // (lib.removeAttrs lsp ["__functor"]));
+    } // lsp);
   };
 }

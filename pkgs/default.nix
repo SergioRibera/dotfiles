@@ -13,6 +13,7 @@ final: prev: rec {
 
   # LSP
   discord-presence = prev.callPackage ./lsp/discord { };
+  wakatime-ls = prev.callPackage ./lsp/wakatime { };
 
   # Utils
   simple-commits = prev.callPackage ./simple-commits { };
