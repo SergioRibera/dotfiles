@@ -54,12 +54,6 @@ in {
       relative_line_numbers = true;
       jupyter.enabled = false;
       vim_mode = true;
-      formatter = {
-        external = {
-          command = "${pkgs.biome}/bin/biome";
-          arguments = ["format" "--write" "--stdin-file-path" "{buffer_path}"];
-        };
-      };
       theme = {
         mode = "system";
         dark = "Vitesse Dark Soft";
