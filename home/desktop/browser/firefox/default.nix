@@ -4,6 +4,10 @@ let
 in
 {
   home-manager.users.${user.username} = {
+    home.sessionVariables = {
+      MOZ_LEGACY_PROFILES = 1;
+      MOZ_ALLOW_DOWNGRADE = 1;
+    };
     programs.firefox = {
       enable = (gui.enable && user.enableHM && user.browser == "firefox");
       package = pkgs.firefox-devedition-bin;
@@ -11,15 +15,18 @@ in
         BackgroundAppUpdate = false;
         DisableAppUpdate = true;
       };
-      profiles.${user.username} = {
+      profiles.dev-edition-default = {
+        id = 0;
         isDefault = true;
         name = user.username;
         userChrome = builtins.readFile ./userChrome.css;
         extensions = with pkgs.firefoxAddons; [
           vimium-ff
           hyper-read
+          malwarebytes
           ublock-origin
           refined-github-
+          fastforwardteam
           rust-search-extension
           adaptive-tab-bar-colour
           bitwarden-password-manager
@@ -32,7 +39,7 @@ in
           engines = {
             "MyNixOs" = {
               urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
-              icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = [ "nx" ];
             };
             "Bing".metaData.hidden = true;
@@ -60,6 +67,8 @@ in
           "browser.safebrowsing.phishing.enabled" = true;
           "privacy.clearOnShutdown.history" = true;
           "privacy.clearOnShutdown.downloads" = true;
+          "privacy.userContext.enabled" = true;
+          "privacy.userContext.ui.enabled" = true;
 
           # Performance
           "gfx.webrender.all" = true;

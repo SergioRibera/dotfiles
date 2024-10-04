@@ -22,12 +22,23 @@
     "license": "MPL-2.0"
   },
   {
+    "slug": "malwarebytes",
+    "name": "Malwarebytes Browser Guard",
+    "version": "2.6.27",
+    "addonId": "{242af0bb-db11-4734-b7a0-61cb8a9b20fb}",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4301528/malwarebytes-2.6.27.xpi",
+    "sha256": "sha256:08df30eaf90c879f35104841f5b6985d1ad657d5fcd3050b653e4f7d5a6910eb",
+    "homepage": "https://www.malwarebytes.com",
+    "description": "The fastest and safest web browsing experience. Secure your privacy by blocking trackers, blocking ads, and blocking malicious content.",
+    "license": null
+  },
+  {
     "slug": "ublock-origin",
     "name": "uBlock Origin",
-    "version": "1.59.0",
+    "version": "1.60.0",
     "addonId": "uBlock0@raymondhill.net",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4328681/ublock_origin-1.59.0.xpi",
-    "sha256": "sha256:1db9c676a07d141f8d36dbbc24f9e3d64a6cc2340dbfc6c848bc4395f96cfb14",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4359936/ublock_origin-1.60.0.xpi",
+    "sha256": "sha256:e2cda9b2a1b0a7f6e5ef0da9f87f28df52f8560587ba2e51a3003121cfb81600",
     "homepage": "https://github.com/gorhill/uBlock#ublock-origin",
     "description": "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.",
     "license": "GPL-3.0-or-later"
@@ -35,13 +46,24 @@
   {
     "slug": "refined-github-",
     "name": "Refined GitHub",
-    "version": "24.8.30",
+    "version": "24.10.1",
     "addonId": "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4345066/refined_github-24.8.30.xpi",
-    "sha256": "sha256:5ac5e48e8805182ba9dc1ff4fc6039139a7205f50db185ac1a25584140981560",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4362555/refined_github-24.10.1.xpi",
+    "sha256": "sha256:d922b9094365977860ec490d66fa96b004bb8446084930111514b2d8a6143c1d",
     "homepage": "https://github.com/refined-github/refined-github",
     "description": "Simplifies the GitHub interface and adds many useful features.",
     "license": "MIT"
+  },
+  {
+    "slug": "fastforwardteam",
+    "name": "FastForward",
+    "version": "0.2383",
+    "addonId": "addon@fastforward.team",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4258067/fastforwardteam-0.2383.xpi",
+    "sha256": "sha256:eec6328df3df1afe2cb6a331f6907669d804235551ea766d48655f8f831caf28",
+    "homepage": "https://fastforward.team",
+    "description": "Don't waste time with compliance. Use FastForward to skip annoying URL \"shorteners\".",
+    "license": null
   },
   {
     "slug": "rust-search-extension",
@@ -68,10 +90,10 @@
   {
     "slug": "bitwarden-password-manager",
     "name": "Bitwarden Password Manager",
-    "version": "2024.9.0",
+    "version": "2024.9.1",
     "addonId": "{446900e4-71c2-419f-a6a7-df9c091e268b}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4350677/bitwarden_password_manager-2024.9.0.xpi",
-    "sha256": "sha256:8c8b97b445fe65cbdd91eda4bd07e8946d6c1b21ac89c771205a3b9225e2ef12",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4355865/bitwarden_password_manager-2024.9.1.xpi",
+    "sha256": "sha256:f484fbcd1e45e4a68f2eec8fb8c22fed5a77f1a00b515f38c167e36b4d6118bf",
     "homepage": "https://bitwarden.com",
     "description": "At home, at work, or on the go, Bitwarden easily secures all your passwords, passkeys, and sensitive information.",
     "license": "GPL-3.0-or-later"

@@ -24,8 +24,10 @@ export def main [...slugs: string] {
     [
       vimium-ff
       hyper-read
+      malwarebytes
       ublock-origin
       refined-github-
+      fastforwardteam
       rust-search-extension
       adaptive-tab-bar-colour
       bitwarden-password-manager

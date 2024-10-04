@@ -32,9 +32,9 @@ let
         inherit (addon) version addonId url;
         sha256 = builtins.substring 7 64 addon.sha256;
         meta = {
-          homepage = addon.homepage or null;
-          description = addon.description or null;
-          license = if addon ? license then lib.getLicenseFromSpdxId addon.license else null;
+          homepage = addon.homepage or "";
+          description = addon.description or "";
+          license = [ lib.licenses.free ];
         };
       }
     ) jsonAsAttrs
