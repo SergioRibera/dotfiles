@@ -36,7 +36,10 @@ in {
         }
       ];
       input = {
-        keyboard.xkb.layout = "us";
+        keyboard.xkb = {
+          layout = "us";
+          variant = "altgr-intl";
+        };
         touchpad = {
           dwt = true;
           dwtp = true;
