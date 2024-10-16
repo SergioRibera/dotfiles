@@ -3,7 +3,7 @@ let
   inherit (config) user gui;
 in
 {
-  home-manager.users."${user.username}".xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
+  home-manager.users."${user.username}".xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux) {
     enable = true;
     userDirs = {
       enable = true;
@@ -18,13 +18,6 @@ in
 
     configFile."dorion/config.json" = lib.mkIf (gui.enable) {
       source = ../desktop/dorion.json;
-    };
-
-    configFile."nushell/prompt.nu" = lib.mkIf (config.shell.name == "nushell") {
-      source = ../shells/nushell/prompt.nu;
-    };
-    configFile."nushell/carapace.nu" = lib.mkIf (config.shell.name == "nushell") {
-      source = ../shells/nushell/carapace.nu;
     };
   };
 

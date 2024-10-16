@@ -9,11 +9,21 @@ in {
   ${nuPkg}/bin/nu -c "plugin use ${gstat}/bin/nu_plugin_gstat"
   '';
 
-  home-manager.users."${user.username}".programs.nushell = {
-    enable = (shell.name == "nushell");
-    configFile.source = ./config.nu;
-    envFile.source = ./env.nu;
-    shellAliases = shell.aliases;
-    package = nuPkg;
+  home-manager.users."${user.username}" = {
+    xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux) {
+        configFile."nushell/prompt.nu" = lib.mkIf (config.shell.name == "nushell") {
+            source = ./prompt.nu;
+        };
+        configFile."nushell/carapace.nu" = lib.mkIf (config.shell.name == "nushell") {
+            source = ./carapace.nu;
+        };
+    };
+    programs.nushell = {
+        enable = (shell.name == "nushell");
+        configFile.source = ./config.nu;
+        envFile.source = ./env.nu;
+        shellAliases = shell.aliases;
+        package = nuPkg;
+    };
   };
 }
