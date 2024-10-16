@@ -14,6 +14,9 @@ in {
         configFile."nushell/prompt.nu" = lib.mkIf (config.shell.name == "nushell") {
             source = ./prompt.nu;
         };
+        configFile."nushell/ggit.nu" = lib.mkIf (config.shell.name == "nushell") {
+            source = ./ggit.nu;
+        };
         configFile."nushell/carapace.nu" = lib.mkIf (config.shell.name == "nushell") {
             source = ./carapace.nu;
         };

@@ -53,3 +53,4 @@ $env.config = {
 }
 
 source ./carapace.nu
+source ./ggit.nu
