@@ -10,7 +10,38 @@ in
     };
     programs.firefox = {
       enable = (gui.enable && user.enableHM && user.browser == "firefox");
-      package = pkgs.firefox-devedition-bin;
+      package = pkgs.firefox-devedition-bin.overrideAttrs (prev: {
+        desktopItem = pkgs.makeDesktopItem ({
+          name = "firefox-developer-edition";
+          icon = "firefox-developer-edition";
+          exec = "${pkgs.firefox-devedition-bin}/bin/firefox-developer-edition --name firefox -P ${user.username} %U";
+          desktopName = "Firefox Developer Edition";
+          startupWMClass = "firefox-developer-edition";
+          startupNotify = true;
+          terminal = false;
+          genericName = "Web Browser";
+          categories = [ "Network" "WebBrowser" ];
+          mimeTypes = [
+            "text/html"
+            "text/xml"
+            "application/xhtml+xml"
+            "application/pdf"
+            "application/vnd.mozilla.xul+xml"
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
+          ];
+          actions = {
+            new-private-window = {
+              name = "New Private Window";
+              exec = "${pkgs.firefox-devedition-bin}/bin/firefox-developer-edition -P ${user.username} --private-window %U";
+            };
+            profile-manager-window = {
+              name = "Profile Manager";
+              exec = "${pkgs.firefox-devedition-bin}/bin/firefox-developer-edition -P ${user.username} --ProfileManager";
+            };
+          };
+        });
+      });
       policies = {
         BackgroundAppUpdate = false;
         DisableAppUpdate = true;
