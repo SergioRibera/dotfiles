@@ -85,10 +85,7 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    anyrun = {
-      url = "github:Kirottu/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    anyrun.url = "github:Kirottu/anyrun";
     wired = {
       url = "github:Toqozz/wired-notify";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -111,10 +108,7 @@
     #   # inputs.hyprland.follows = "hyprland";
     # };
     # My tool to take screen/code screenshots
-    sss = {
-      url = "github:SergioRibera/sss";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    sss.url = "github:SergioRibera/sss";
     # nixificate my neovim configs
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -141,6 +135,7 @@
       "https://cosmic.cachix.org/"
       # I have problems with that
       # "https://cache.privatevoid.net"
+      "https://sss.cachix.org"
       "https://anyrun.cachix.org"
     ];
     extra-trusted-public-keys = [
@@ -149,6 +144,7 @@
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
       # "cache.privatevoid.net:SErQ8bvNWANeAvtsOESUwVYr2VJynfuc9JRwlzTTkVg="
+      "sss.cachix.org-1:YI2JMG95LEu62PC7VMz75N7bypEdUz9Z/Il1hkGH4AA="
       "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
     ];
   };
