@@ -90,10 +90,7 @@
       url = "github:Toqozz/wired-notify";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    niri.url = "github:sodiboo/niri-flake";
     # nixos-cosmic = {
     #   url = "github:lilyinstarlight/nixos-cosmic";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -135,6 +132,7 @@
       "https://cosmic.cachix.org/"
       # I have problems with that
       # "https://cache.privatevoid.net"
+      "https://niri.cachix.org"
       "https://sss.cachix.org"
       "https://anyrun.cachix.org"
     ];
@@ -144,6 +142,7 @@
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
       # "cache.privatevoid.net:SErQ8bvNWANeAvtsOESUwVYr2VJynfuc9JRwlzTTkVg="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "sss.cachix.org-1:YI2JMG95LEu62PC7VMz75N7bypEdUz9Z/Il1hkGH4AA="
       "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
     ];
