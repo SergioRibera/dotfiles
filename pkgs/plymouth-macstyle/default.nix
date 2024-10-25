@@ -2,13 +2,13 @@
 pkgs.stdenv.mkDerivation
 {
   pname = "mac-style";
-  version = "0.1.0";
+  version = "856bf3b7d239f995e4e9dde8458b9823cf0e96e4";
 
   src = pkgs.fetchFromGitHub {
     owner = "SergioRibera";
     repo = "s4rchiso-plymouth-theme";
-    rev = "bc585b7f42af415fe40bece8192d9828039e6e20";
-    sha256 = "sha256-yOvZ4F5ERPfnSlI/Scf9UwzvoRwGMqZlrHkBIB3Dm/w=";
+    rev = "856bf3b7d239f995e4e9dde8458b9823cf0e96e4";
+    sha256 = "1n1lm8n1sry0lz3q1y1m5k0dn73hyq6zzg55rlf7clivkxy7i05m";
   };
 
   buildInputs = with pkgs; [ git ];

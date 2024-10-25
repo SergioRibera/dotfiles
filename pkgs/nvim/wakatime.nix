@@ -1,11 +1,11 @@
 { pkgs }: pkgs.vimUtils.buildVimPlugin {
   pname = "vim-wakatime";
-  version = "2024-04-11";
+  version = "11.2.0";
   src = pkgs.fetchFromGitHub {
     owner = "wakatime";
     repo = "vim-wakatime";
-    rev = "5d11a253dd1ecabd4612a885175216032d814300";
-    sha256 = "sha256-1w6M6hnDOu4ruAUnUcAbFViUzZDGslrdYXx5jVrspc8=";
+    rev = "11.2.0";
+    sha256 = "0v21r1yj6s28vhqym200n33qgdrjwxjrpzjzkax81cbmmp6a6fbc";
   };
   meta.homepage = "https://github.com/wakatime/vim-wakatime";
 }

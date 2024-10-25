@@ -1,11 +1,11 @@
 { pkgs }: pkgs.vimUtils.buildVimPlugin {
   pname = "codeshot.nvim";
-  version = "2023-12-26";
+  version = "7e418c2b6e8b7aaa75d41c5c91d96a837251a18d";
   src = pkgs.fetchFromGitHub {
     owner = "SergioRibera";
     repo = "codeshot.nvim";
-    rev = "82fabc554c2a61c152def9f20c643b330418deb6";
-    sha256 = "sha256-9VJEo3RfFp1IlKRBq/ai1VJhGiV0wuWmN8YQA6Y+O9Y=";
+    rev = "7e418c2b6e8b7aaa75d41c5c91d96a837251a18d";
+    sha256 = "1q4r2wy05hkbjvmfqmfxn7qqbzlvixj68ycvksll2rwbigmsgk64";
   };
   meta.homepage = "https://github.com/SergioRibera/codeshot.nvim";
 }

@@ -9,7 +9,7 @@ let
   src = pkgs.fetchFromGitHub {
     owner = "H3rmt";
     repo = "hyprswitch";
-    rev = "7a9f99612b45af0b0a0588b00949d1fe39aa41aa";
+    rev = "v2.1.4";
     sha256 = "1g965drx6r194mrij1gkripqxvbmbhkifzl6f3h6vbg1ixn28l63";
   };
   # meta = (builtins.fromTOML (builtins.readFile "${src}/Cargo.toml")).package;
@@ -17,7 +17,7 @@ in
 rustPlatform.buildRustPackage
 {
   name = "hyprswitch";
-  version = "1.2.2";
+  version = "v2.1.4";
   doCheck = false;
   doInstallCheck = false;
   cargoHash = "sha256-LiH7OqQL7te1GVF3qfYVRQpAhQmsVGtgwhKhZorQp2k=";
