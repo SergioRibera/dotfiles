@@ -34,7 +34,6 @@
           ./hosts/${name}/boot.nix
           ./hosts/common
           ./home
-          # { nixpkgs.overlays = [(import ./pkgs)]; }
           inputs.agenix.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
         ] ++ (import ./hosts/${name} { inherit inputs; });
@@ -51,7 +50,7 @@
       };
 
       # Programs that can be run by calling this flake
-      apps =  import ./apps { inherit inputs pkgs; };
+      apps = forEachSystem (system: (import ./apps { inherit system inputs; pkgs = pkgs.${system}; }));
 
       # For quickly applying home-manager settings with:
       # home-manager switch --flake .#s4rch

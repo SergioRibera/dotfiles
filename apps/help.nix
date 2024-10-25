@@ -21,6 +21,7 @@ in
       echo -e "\t  • ${BGPURPLE} rebuild ${NOC} ${ITALIC}Switch to this configuration.${NOC}"
       echo -e "\t  • ${BGPURPLE} neovim ${NOC} ${ITALIC}Run out the complete Neovim package.${NOC}"
       echo -e "\t  • ${BGPURPLE} neovim-basic ${NOC} ${ITALIC}Run out the basic Neovim package.${NOC}"
+      echo -e "\t  • ${BGPURPLE} update-pkgs ${NOC} ${ITALIC}Upgrades all custom package sources.${NOC}"
     ''
   );
 }
