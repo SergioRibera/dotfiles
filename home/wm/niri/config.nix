@@ -94,8 +94,10 @@ in {
         };
       };
       binds = with config.lib.niri.actions; let
-        # terminal = spawn "wezterm" "start";
-        terminal = spawn "foot";
+        terminal =
+          if config.terminal == "wezterm" then spawn "wezterm" "start"
+          else if config.terminal == "rio" then spawn "rio" "-e"
+          else spawn config.terminal;
         playerctl = cmd: {
           allow-when-locked = true;
           action.spawn = ["playerctl"] ++ cmd;
@@ -130,7 +132,7 @@ in {
 
           "Mod+Tab".action = spawn "anyrun";
           "Mod+E".action = spawn "cosmic-files";
-          "Mod+Return".action = terminal;
+          "Mod+Return".action = terminal config.shell.command;
           # TODO: replace harcoded path by dynamic path from config
           "Mod+B".action = spawn "nu" "/home/s4rch/.config/eww/scripts/extras.nu" "toggle" "sidebar";
           "Mod+P".action = spawn "nu" "/home/s4rch/.config/eww/scripts/extras.nu" "toggle" "power-screen";

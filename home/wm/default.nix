@@ -8,6 +8,14 @@ in {
           type = types.listOf types.str;
           default = config.shell.privSession;
         };
+        command = mkOption {
+          type = types.listOf types.str;
+          default = config.shell.command;
+        };
+      };
+      terminal = mkOption {
+        type = types.enum ["foot" "wezterm" "rio"];
+        default = config.terminal;
       };
     };
 

@@ -22,6 +22,7 @@ in
 
     shell = {
         name = "nushell";
+        command = ["nu"];
         privSession = ["nu" "--no-history"];
     };
 

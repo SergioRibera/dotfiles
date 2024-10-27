@@ -138,6 +138,10 @@ in
         type = types.enum ["fish" "nushell"];
         default = "fish";
       };
+      command = mkOption {
+        type = types.listOf types.str;
+        default = ["fish"];
+      };
       privSession = mkOption {
         type = types.listOf types.str;
         default = ["fish" "-P"];
