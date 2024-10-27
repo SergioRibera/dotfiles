@@ -9,7 +9,6 @@
         horizontal-letter-offset = 0;
         vertical-letter-offset = 0;
         pad = "0x2center";
-        notify = "${pkgs.libnotify}/bin/notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
         selection-target = "clipboard";
         # include = "$XDG_CONFIG_HOME/foot/theme.ini";
       };
@@ -17,6 +16,7 @@
         lines = 10000;
         multiplier = 3;
       };
+      desktop-notification.command = "${pkgs.libnotify}/bin/notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
       url = {
         launch = "${pkgs.xdg-utils}/bin/xdg-open \${url}";
         label-letters = "sadfjklewcmpgh";
