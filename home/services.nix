@@ -1,9 +1,8 @@
-{ inputs, pkgs, lib, config, ... }:
+{ inputs, pkgs, lib, config, mkTheme, ... }:
 let
   inherit (config) user gui;
 
-  libx = import ../lib { inherit pkgs; };
-  theme = libx.mkTheme gui.theme.colors;
+  theme = mkTheme gui.theme.colors;
 in
 {
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {

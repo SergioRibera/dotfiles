@@ -1,6 +1,5 @@
-{ pkgs, gui, ... }: let
-  libx = import ../../../lib { inherit pkgs; };
-  theme = (libx.mkTheme gui.theme.colors);
+{ pkgs, gui, mkTheme, ... }: let
+  theme = (mkTheme gui.theme.colors);
   keymapping = (import ./mapping.nix);
 in {
   enable = false;

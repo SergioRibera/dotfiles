@@ -21,9 +21,17 @@
             overlays = [ overlay ];
         }
       );
+      mkLib = system: import ./lib {
+        pkgs = pkgs.${system};
+        inherit (nixpkgs) lib;
+      };
       mkNixosCfg = system: name: inputs.nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = rec {
+          inherit inputs;
+          libx = mkLib system;
+          mkTheme = libx.mkTheme;
+        };
         modules = [
           {
             # Hardware

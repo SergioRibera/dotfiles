@@ -1,7 +1,6 @@
 { config, lib, mkTheme, ... }: let
   mkFont = name: { family = name; };
-  libx = import ../../../lib { inherit pkgs; };
-  theme = libx.mkTheme config.gui.theme.colors;
+  theme = mkTheme config.gui.theme.colors;
 in {
   home-manager.users.${config.user.username} = lib.mkIf (config.gui.enable && config.terminal == "rio") {
     xdg.configFile."rio/themes/default.toml".source = theme.rio;

@@ -1,11 +1,10 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, mkTheme, ... }:
 let
   inherit (config) user gui;
   inherit (user) username;
   inherit (pkgs.stdenv.buildPlatform) isLinux;
 
-  libx = import ../lib { inherit pkgs; };
-  theme = libx.mkTheme gui.theme.colors;
+  theme = mkTheme gui.theme.colors;
 
   darkTheme = {
     gtk-application-prefer-dark-theme = 1;
