@@ -129,6 +129,10 @@ in
         default = [ ];
       };
     };
+    terminal = mkOption {
+      type = types.enum ["foot" "wezterm" "rio"];
+      default = "rio";
+    };
     shell = {
       name = mkOption {
         type = types.enum ["fish" "nushell"];

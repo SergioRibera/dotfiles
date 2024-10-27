@@ -1,6 +1,6 @@
 { pkgs, config, ... }: {
   home-manager.users.${config.user.username}.programs.foot = {
-    enable = true;
+    enable = config.gui.enable && config.terminal == "foot";
     settings = {
       main = {
         font = "CaskaydiaCove Nerd Font:size=10.0:fontfeatures=calt:fontfeatures=dlig:fontfeatures=liga;FiraCode Nerd Font:size=10.0:fontfeatures=calt:fontfeatures=dlig:fontfeatures=liga;Noto Color Emoji:size=10.0:fontfeatures=calt:fontfeatures=dlig";
