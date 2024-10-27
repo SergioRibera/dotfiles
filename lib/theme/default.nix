@@ -1,5 +1,7 @@
 { pkgs, ... }:
 colors: let
+  toml = pkgs.formats.toml {};
+  toToml = data: toml.generate "theme.toml" data;
   replace = file: builtins.readFile (pkgs.substituteAll {
     src = file;
 
@@ -26,4 +28,5 @@ in {
   tmTheme = replace ./tmTheme.xml;
   swayosd = replace ./swayosd.css;
   helix = (import ./helix.nix colors);
+  rio = (import ./rio.nix colors toToml);
 }
