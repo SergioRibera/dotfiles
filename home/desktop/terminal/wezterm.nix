@@ -3,7 +3,7 @@
   privCmdLua = toLuaArr config.shell.privSession;
 in {
   home-manager.users.${config.user.username}.programs.wezterm = {
-    enable = config.gui.enable && config.terminal == "wezterm";
+    enable = config.gui.enable && config.terminal.name == "wezterm";
     colorSchemes = {
       custom = {
         background = "#232627";

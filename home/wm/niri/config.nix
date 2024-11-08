@@ -16,7 +16,7 @@ in {
       spawn-at-startup = [
         # (makeCommand "udiskie")
         (makeCommand "swww-daemon")
-        (makeCommand "$HOME/.local/bin/wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\"")
+        # (makeCommand "$HOME/.local/bin/wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\"")
         {
           command = [
             "dbus-update-activation-environment"
@@ -94,10 +94,7 @@ in {
         };
       };
       binds = with config.lib.niri.actions; let
-        terminal =
-          if config.terminal == "wezterm" then spawn "wezterm" "start"
-          else if config.terminal == "rio" then spawn "rio" "-e"
-          else spawn config.terminal;
+        terminal = spawn config.terminal.command;
         playerctl = cmd: {
           allow-when-locked = true;
           action.spawn = ["playerctl"] ++ cmd;

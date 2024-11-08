@@ -2,10 +2,10 @@
   mkFont = name: { family = name; };
   theme = mkTheme config.gui.theme.colors;
 in {
-  home-manager.users.${config.user.username} = lib.mkIf (config.gui.enable && config.terminal == "rio") {
+  home-manager.users.${config.user.username} = lib.mkIf (config.gui.enable && config.terminal.name == "rio") {
     xdg.configFile."rio/themes/default.toml".source = theme.rio;
     programs.rio = {
-      enable = config.gui.enable && config.terminal == "rio";
+      enable = config.gui.enable && config.terminal.name == "rio";
       settings = {
         cursor = {
           # Other available options are: 'block', 'underline', 'beam'

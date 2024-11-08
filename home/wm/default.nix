@@ -13,9 +13,15 @@ in {
           default = config.shell.command;
         };
       };
-      terminal = mkOption {
-        type = types.enum ["foot" "wezterm" "rio"];
-        default = config.terminal;
+      terminal = {
+        name = mkOption {
+          type = types.enum ["foot" "wezterm" "rio" "alacritty"];
+          default = config.terminal.name;
+        };
+        command = mkOption {
+          type = types.listOf types.str;
+          default = config.terminal.command;
+        };
       };
     };
 

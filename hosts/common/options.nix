@@ -129,9 +129,15 @@ in
         default = [ ];
       };
     };
-    terminal = mkOption {
-      type = types.enum ["foot" "wezterm" "rio"];
-      default = "rio";
+    terminal = {
+      name = mkOption {
+        type = types.enum ["foot" "wezterm" "rio" "alacritty"];
+        default = "rio";
+      };
+      command = mkOption {
+        type = types.listOf types.str;
+        default = ["rio" "-e"];
+      };
     };
     shell = {
       name = mkOption {
