@@ -20,6 +20,10 @@ in
         complete = true;
     };
 
+    terminal = {
+      name = "alacritty";
+      command = ["alacritty" "-e"];
+    };
     shell = {
         name = "nushell";
         command = ["nu"];

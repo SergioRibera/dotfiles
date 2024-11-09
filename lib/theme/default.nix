@@ -29,4 +29,5 @@ in {
   swayosd = replace ./swayosd.css;
   helix = (import ./helix.nix colors);
   rio = (import ./rio.nix colors toToml);
+  alacritty = (import ./alacritty.nix colors);
 }
