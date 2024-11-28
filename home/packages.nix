@@ -53,6 +53,7 @@ with pkgs; {
     cargo-release
     cargo-machete
   ] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
+    distrobox
     evsieve
     # Wayland
     grim
