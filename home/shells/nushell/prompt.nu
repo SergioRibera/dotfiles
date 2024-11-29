@@ -61,6 +61,7 @@ def prompt_status [indicator_ty: string] {
     let nonzero = $last_status != 0
     let superuser = (id -u) == 0
     let in_nix_shell = "IN_NIX_SHELL" in $env
+    let in_distrobox = "DISTROBOX_HOST_HOME" in $env
     let user_char_color = if $superuser {
       "red"
     } else if not $nu.history-enabled {
@@ -80,6 +81,8 @@ def prompt_status [indicator_ty: string] {
         "󰊪"
       } else if $in_nix_shell { # in nix shell
         ""
+      } else if $in_distrobox { # in distrobox
+        ""
       } else if $name == "Darwin" { # is running on mac
         ""
       } else { # else is linux
