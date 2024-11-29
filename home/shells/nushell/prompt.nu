@@ -23,7 +23,11 @@ def git_prompt [] {
     return $"󰘬 (ansi magenta)($branch)"
   }
 
-  let stat = gstat
+  let stat = try {
+    gstat
+  } catch {
+    return ''
+  }
 
   if $stat.repo_name == "no_repository" {
     return ''
