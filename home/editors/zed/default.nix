@@ -46,6 +46,7 @@ in {
         wakatime = true;
       };
       auto_update = false;
+      load_direnv = "direct";
       ui_font_size = 16;
       buffer_font_size = 14;
       format_on_save = "on";

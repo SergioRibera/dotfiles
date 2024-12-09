@@ -12,6 +12,11 @@ in {
       enable = true;
       flake = "/etc/nixos";
     };
+    direnv = lib.mkIf user.enableHM {
+      enable = true;
+      nix-direnv.enable = true;
+      loadInNixShell = true;
+    };
     ssh = {
       startAgent = true;
       extraConfig = ''
