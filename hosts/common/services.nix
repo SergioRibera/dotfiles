@@ -3,10 +3,11 @@
   systemd.services."autovt@tty1".enable = false;
 
   security.pam.services.login.enableGnomeKeyring = true;
-  # security.pam.services.greetd.enableGnomeKeyring = true;
   environment.systemPackages = with pkgs; [ catppuccin-sddm ];
 
   services = {
+    # Enables the daemon for lorri, a nix-shell replacement for project development
+    lorri.enable = true;
     udisks2.enable = true;
     upower = {
       enable = true;
