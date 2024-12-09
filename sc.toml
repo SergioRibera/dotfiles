@@ -15,6 +15,9 @@ name = "host"
 description = "Host layer config"
 
 [[scopes]]
+name = "services"
+
+[[scopes]]
 name = "pkgs"
 description = "NixOs packages or programs"
 
