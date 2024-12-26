@@ -35,21 +35,21 @@
   {
     "slug": "ublock-origin",
     "name": "uBlock Origin",
-    "version": "1.60.0",
+    "version": "1.61.2",
     "addonId": "uBlock0@raymondhill.net",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4359936/ublock_origin-1.60.0.xpi",
-    "sha256": "sha256:e2cda9b2a1b0a7f6e5ef0da9f87f28df52f8560587ba2e51a3003121cfb81600",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4391011/ublock_origin-1.61.2.xpi",
+    "sha256": "sha256:ee3a724a46ff32c17d1723077fecc6ede7fdab742154020b51fb6253ddcbba14",
     "homepage": "https://github.com/gorhill/uBlock#ublock-origin",
     "description": "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.",
-    "license": "GPL-3.0-or-later"
+    "license": "GPL-3.0-only"
   },
   {
     "slug": "refined-github-",
     "name": "Refined GitHub",
-    "version": "24.10.1",
+    "version": "24.12.20",
     "addonId": "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4362555/refined_github-24.10.1.xpi",
-    "sha256": "sha256:d922b9094365977860ec490d66fa96b004bb8446084930111514b2d8a6143c1d",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4407997/refined_github-24.12.20.xpi",
+    "sha256": "sha256:1c2b1ce845ad2e118ffb9adb341d02e792f995f1bbd2f04a61e5ed15bf18d23a",
     "homepage": "https://github.com/refined-github/refined-github",
     "description": "Simplifies the GitHub interface and adds many useful features.",
     "license": "MIT"
@@ -66,12 +66,23 @@
     "license": null
   },
   {
+    "slug": "auto-tab-discard",
+    "name": "Auto Tab Discard",
+    "version": "0.6.7",
+    "addonId": "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4045009/auto_tab_discard-0.6.7.xpi",
+    "sha256": "sha256:89e59b8603c444258c89a507d7126be52ad7a35e4f7b8cfbca039b746f70b5d5",
+    "homepage": "https://webextension.org/listing/tab-discard.html",
+    "description": "Increase browser speed and reduce memory load and when you have numerous open tabs.",
+    "license": "MPL-2.0"
+  },
+  {
     "slug": "rust-search-extension",
     "name": "Rust Search Extension",
-    "version": "1.13.0",
+    "version": "2.0.0",
     "addonId": "{04188724-64d3-497b-a4fd-7caffe6eab29}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4236369/rust_search_extension-1.13.0.xpi",
-    "sha256": "sha256:59ddefdab6cd7dbe5fb368fe6fac2eace052060bf9357dd39bc9c7ff3439be13",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4370710/rust_search_extension-2.0.0.xpi",
+    "sha256": "sha256:a5b1abb26f3997c5cd3e8a90273f1c88e1efeb1a4204ce6bbdc9260a9dbf5aee",
     "homepage": "https://rust.extension.sh",
     "description": "The ultimate search extension for Rust\n\nSearch std docs, crates, builtin attributes, official books, and error codes, etc in your address bar instantly.\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4af48e3229ba03b454fb9b352a7e5a4c038e1bcc6721bf744b781a5e96b9e798/https%3A//rust.extension.sh\" rel=\"nofollow\">https://rust.extension.sh</a>",
     "license": "MPL-2.0"
@@ -84,18 +95,18 @@
     "url": "https://addons.mozilla.org/firefox/downloads/file/4159211/adaptive_tab_bar_colour-2.1.4.xpi",
     "sha256": "sha256:401e064048826dd627f02043ee04081b7caed191161f3de7cc89c22b4a222ff8",
     "homepage": "https://addons.mozilla.org/en-US/firefox/addon/adaptive-tab-bar-colour/",
-    "description": "Changes the color of Firefox tab bar to match the website theme.",
+    "description": "Changes the color of Firefox theme to match the website’s appearance.",
     "license": "MIT"
   },
   {
     "slug": "bitwarden-password-manager",
     "name": "Bitwarden Password Manager",
-    "version": "2024.9.1",
+    "version": "2024.12.3",
     "addonId": "{446900e4-71c2-419f-a6a7-df9c091e268b}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4355865/bitwarden_password_manager-2024.9.1.xpi",
-    "sha256": "sha256:f484fbcd1e45e4a68f2eec8fb8c22fed5a77f1a00b515f38c167e36b4d6118bf",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4407804/bitwarden_password_manager-2024.12.3.xpi",
+    "sha256": "sha256:a48af549da66e2987a135b0cb918b1c90f8e80b868760cbaa07c8f6df4da9b07",
     "homepage": "https://bitwarden.com",
     "description": "At home, at work, or on the go, Bitwarden easily secures all your passwords, passkeys, and sensitive information.",
-    "license": "GPL-3.0-or-later"
+    "license": "GPL-3.0-only"
   }
 ]

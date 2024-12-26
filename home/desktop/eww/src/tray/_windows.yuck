@@ -1,0 +1,21 @@
+(defwidget tray []
+    (systray
+        :orientation "h"
+        :space-evenly "true"
+        :spacing "10"
+        )
+        ; (for entry in tray
+        ;   (button :onrightclick { entry.cmd + " &" }
+        ;           :onclick { entry.menu_cmd + " &" }
+        ;           :tooltip {entry.ToolTip}
+        ;     (image :image-height 20
+        ;            :path {entry.IconPath})))
+    )
+
+(defwindow tray
+    :wm-ignore true
+    :geometry (geometry :anchor "top r")
+    (box :orientation "h" :spacing 10 :space-evenly false
+        (tray)
+    )
+)

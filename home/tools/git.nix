@@ -20,6 +20,7 @@ in
       default = "current";
     };
   };
+  ignores = ["*result*" "node_modules"];
   delta = {
     enable = true;
     options = {

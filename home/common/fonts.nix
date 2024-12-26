@@ -6,7 +6,10 @@
       noto-fonts-color-emoji
       noto-fonts-cjk-sans
       noto-fonts-lgc-plus
-      (nerdfonts.override { fonts = [ "CascadiaCode" "FiraCode" "UbuntuMono" ]; })
+
+      nerd-fonts.caskaydia-mono
+      nerd-fonts.fira-code
+      nerd-fonts.ubuntu-mono
     ];
   };
 }

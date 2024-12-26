@@ -28,6 +28,7 @@ export def main [...slugs: string] {
       ublock-origin
       refined-github-
       fastforwardteam
+      auto-tab-discard
       rust-search-extension
       adaptive-tab-bar-colour
       bitwarden-password-manager
