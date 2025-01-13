@@ -27,6 +27,10 @@ with pkgs; {
     # Social
     telegram-desktop
 
+    # Clients
+    # psst (not works on niri :c)
+    spotube
+
     # Utils
     scrcpy
     xdg-utils
@@ -65,10 +69,8 @@ with pkgs; {
     xwaylandvideobridge
 
     # GUI
-    feh
     warp
     pavucontrol
-    screenkey
     # self overlay
     cosmic-files
 
