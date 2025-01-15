@@ -22,9 +22,12 @@ in
       enable = true;
       enableOnBoot = true;
     };
+    libvirtd.enable = gui.enable;
+    spiceUSBRedirection.enable = true;
   };
 
   users.defaultUserShell = pkgs."${config.shell.name}";
+  users.groups.libvirtd.members = [username];
   users.users."${username}" = {
     isNormalUser = user.isNormalUser;
     name = username;

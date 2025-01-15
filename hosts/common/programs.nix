@@ -7,6 +7,7 @@ in {
   programs = {
     fish.enable = shell.name == "fish";
     dconf.enable = (isLinux && gui.enable);
+    virt-manager.enable = (isLinux && gui.enable);
     xwayland.enable = (isLinux && gui.enable);
     nh = lib.mkIf user.enableHM {
       enable = true;

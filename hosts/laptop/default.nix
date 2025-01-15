@@ -36,6 +36,7 @@ in
         enableHM = true;
         browser = "firefox";
         groups = [ "wheel" "video" "audio" "docker" "networkmanager" "adbusers" "input" ];
+      groups = [ "wheel" "video" "audio" "docker" "libvirtd" "networkmanager" "adbusers" "input" ];
     };
   }
 ]
