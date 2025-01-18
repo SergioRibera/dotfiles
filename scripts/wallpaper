@@ -24,7 +24,32 @@ SCREENS=()
 PAUSE='0'
 
 if [ $XDG_SESSION_TYPE = 'wayland' ]; then
-    SCREENS=($(hyprctl monitors | grep "Monitor" | cut -d" " -f2))
+    case "$XDG_SESSION_DESKTOP" in
+        hyprland)
+            # Hyprland
+            SCREENS=($(hyprctl monitors | grep "Monitor" | cut -d" " -f2))
+            ;;
+        sway)
+            # Sway
+            SCREENS=($(swaymsg -t get_outputs | jq -r '.[] | select(.active) | .name'))
+            ;;
+        gnome)
+            # GNOME
+            echo "GNOME Wayland detected. Monitor detection not implemented."
+            SCREENS=()
+            ;;
+        kde)
+            # KDE
+            SCREENS=($(kscreen-doctor -o | grep "Output" | cut -d':' -f1))
+            ;;
+        niri)
+            SCREENS=($(niri msg outputs | grep -oP 'Output .* \(\K[^)]*'))
+            ;;
+        *)
+            echo "Wayland compositor '$XDG_SESSION_DESKTOP' not supported."
+            SCREENS=()
+            ;;
+    esac
 else
     SCREENS=($(xrandr |  grep -e 'connected' | sed -e 's/ primary//g' | cut -d" " -f1))
 fi
