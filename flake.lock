@@ -1118,11 +1118,11 @@
     "wallpapers": {
       "flake": false,
       "locked": {
-        "lastModified": 1717907407,
-        "narHash": "sha256-e5Jak8SZJQ2XNhu3jeQxaTgGxSaRCZHAW5hRv+nKSsc=",
+        "lastModified": 1736227645,
+        "narHash": "sha256-lSRjg7eyJIzxuFhzrBYXH2HizwhBe/RxiSAVChSEm+w=",
         "owner": "SergioRibera",
         "repo": "wallpapers",
-        "rev": "f8fd97b98c9634415e34f479addf1bb19525c7f7",
+        "rev": "1468223258ba12a95791c0fdbdd58df1cc1a9f1f",
         "type": "github"
       },
       "original": {
