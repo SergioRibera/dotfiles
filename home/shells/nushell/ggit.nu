@@ -43,7 +43,7 @@ def "ggit list" [] {
 
 def "ggit add" [root: path] {
     let config_path = $"($env.GGIT_CONFIG_DIR)/paths"
-    let paths = get_paths | append (fd -H -t d ".git$" $root | lines | each {|p| $p | path dirname})
+    let paths = get_paths | append (fd -H -t d ".git$" $root | lines | each {|p| $p | path dirname}) | uniq
 
     $paths | save -f $config_path
 }
