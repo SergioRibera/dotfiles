@@ -22,7 +22,7 @@ in {
         };
         spawn-at-startup = [
           (makeCommand "swww-daemon")
-          (makeCommand "$HOME/.local/bin/wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\"")
+          {command = [ "${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"];}
           {
             command = [
               "dbus-update-activation-environment"
