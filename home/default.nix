@@ -24,15 +24,30 @@ in
     };
     libvirtd.enable = gui.enable;
     spiceUSBRedirection.enable = true;
+    # virtualbox = {
+    #   guest = {
+    #     enable = true;
+    #     dragAndDrop = true;
+    #     clipboard = true;
+    #   };
+    #   host = {
+    #     enable = true;
+    #     # enableExtensionPack = true;
+    #     addNetworkInterface = true;
+    #   };
+    # };
   };
 
-  users.defaultUserShell = pkgs."${config.shell.name}";
-  users.groups.libvirtd.members = [username];
-  users.users."${username}" = {
-    isNormalUser = user.isNormalUser;
-    name = username;
-    home = user.homepath;
-    extraGroups = user.groups;
+  users = {
+    defaultUserShell = pkgs."${config.shell.name}";
+    groups.libvirtd.members = [username];
+    extraGroups.vboxusers.members = [username];
+    users."${username}" = {
+      isNormalUser = user.isNormalUser;
+      name = username;
+      home = user.homepath;
+      extraGroups = user.groups;
+    };
   };
 
   nixpkgs.overlays = [ inputs.fenix.overlays.default ];
@@ -40,7 +55,7 @@ in
   home-manager.useGlobalPkgs = user.enableHM;
   home-manager.useUserPackages = user.enableHM;
   home-manager.users = lib.mkIf user.enableHM {
-    "${username}" = { lib, pkgs, ... }: {
+    "${username}" = { lib, ... }: {
       programs.home-manager.enable = true;
       _module.args = { inherit inputs config; };
 
