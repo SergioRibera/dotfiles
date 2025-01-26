@@ -12,7 +12,7 @@ in {
           "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY"
           # "udiskie"
           "swww-daemon"
-          "wallpaper -t 8h --no-allow-video -d -b -i \"${inputs.wallpapers}\""
+          "wallpaper -t 8h --no-allow-video -d -b -i ${inputs.wallpapers}"
         ];
         env = [ "XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH" ];
 
