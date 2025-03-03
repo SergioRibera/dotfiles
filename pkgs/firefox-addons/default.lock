@@ -35,10 +35,10 @@
   {
     "slug": "ublock-origin",
     "name": "uBlock Origin",
-    "version": "1.61.2",
+    "version": "1.62.0",
     "addonId": "uBlock0@raymondhill.net",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4391011/ublock_origin-1.61.2.xpi",
-    "sha256": "sha256:ee3a724a46ff32c17d1723077fecc6ede7fdab742154020b51fb6253ddcbba14",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4412673/ublock_origin-1.62.0.xpi",
+    "sha256": "sha256:8a9e02aa838c302fb14e2b5bc88a6036d36358aadd6f95168a145af2018ef1a3",
     "homepage": "https://github.com/gorhill/uBlock#ublock-origin",
     "description": "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.",
     "license": "GPL-3.0-only"
@@ -46,10 +46,10 @@
   {
     "slug": "refined-github-",
     "name": "Refined GitHub",
-    "version": "24.12.20",
+    "version": "25.2.26",
     "addonId": "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4407997/refined_github-24.12.20.xpi",
-    "sha256": "sha256:1c2b1ce845ad2e118ffb9adb341d02e792f995f1bbd2f04a61e5ed15bf18d23a",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4444298/refined_github-25.2.26.xpi",
+    "sha256": "sha256:447c9191fdd0d62eb47b696a7932f3eed69b1d4f9db547910cda61b3b604b2d2",
     "homepage": "https://github.com/refined-github/refined-github",
     "description": "Simplifies the GitHub interface and adds many useful features.",
     "license": "MIT"
@@ -79,10 +79,10 @@
   {
     "slug": "rust-search-extension",
     "name": "Rust Search Extension",
-    "version": "2.0.0",
+    "version": "2.0.2",
     "addonId": "{04188724-64d3-497b-a4fd-7caffe6eab29}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4370710/rust_search_extension-2.0.0.xpi",
-    "sha256": "sha256:a5b1abb26f3997c5cd3e8a90273f1c88e1efeb1a4204ce6bbdc9260a9dbf5aee",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4435641/rust_search_extension-2.0.2.xpi",
+    "sha256": "sha256:10f521001a9fd9c7b8c5f8133daa74de01a5db33fb283b6b472b49c183e8418c",
     "homepage": "https://rust.extension.sh",
     "description": "The ultimate search extension for Rust\n\nSearch std docs, crates, builtin attributes, official books, and error codes, etc in your address bar instantly.\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4af48e3229ba03b454fb9b352a7e5a4c038e1bcc6721bf744b781a5e96b9e798/https%3A//rust.extension.sh\" rel=\"nofollow\">https://rust.extension.sh</a>",
     "license": "MPL-2.0"
@@ -90,10 +90,10 @@
   {
     "slug": "adaptive-tab-bar-colour",
     "name": "Adaptive Tab Bar Color",
-    "version": "2.1.4",
+    "version": "2.3",
     "addonId": "ATBC@EasonWong",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4159211/adaptive_tab_bar_colour-2.1.4.xpi",
-    "sha256": "sha256:401e064048826dd627f02043ee04081b7caed191161f3de7cc89c22b4a222ff8",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4427118/adaptive_tab_bar_colour-2.3.xpi",
+    "sha256": "sha256:e959de1da7ed66af7476ef8f696fadc070b3ebecc89e57ef5ac53f1d2e4fc4d7",
     "homepage": "https://addons.mozilla.org/en-US/firefox/addon/adaptive-tab-bar-colour/",
     "description": "Changes the color of Firefox theme to match the website’s appearance.",
     "license": "MIT"
@@ -101,10 +101,10 @@
   {
     "slug": "bitwarden-password-manager",
     "name": "Bitwarden Password Manager",
-    "version": "2024.12.3",
+    "version": "2025.2.0",
     "addonId": "{446900e4-71c2-419f-a6a7-df9c091e268b}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4407804/bitwarden_password_manager-2024.12.3.xpi",
-    "sha256": "sha256:a48af549da66e2987a135b0cb918b1c90f8e80b868760cbaa07c8f6df4da9b07",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4440363/bitwarden_password_manager-2025.2.0.xpi",
+    "sha256": "sha256:c4d7f355a2269620482f50edac7fce3c19f515190f24cdf80edc865f71d3a374",
     "homepage": "https://bitwarden.com",
     "description": "At home, at work, or on the go, Bitwarden easily secures all your passwords, passkeys, and sensitive information.",
     "license": "GPL-3.0-only"

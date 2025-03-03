@@ -8,26 +8,32 @@
   just,
   nix-update-script,
 }:
+
 rustPlatform.buildRustPackage rec {
   pname = "cosmic-files";
-  version = "ee7954e8d6f5cca93f0151aa920c95071ec1cae0";
+  version = "1.0.0-alpha.6-unstable-2025-02-24";
 
   src = fetchFromGitHub {
     owner = "pop-os";
     repo = "cosmic-files";
-    rev = "ee7954e8d6f5cca93f0151aa920c95071ec1cae0";
-    sha256 = "07nymr4apld66kb76793vzgx43akgwdh9515vpcfj9wjm6v6cqsi";
+    rev = "e7e608a3fed233d2741af10121d2cc541ec0d7df";
+    hash = "sha256-gwIc7FfwwdcQgPUHfvqC/W8f342EtqKaQsBJTNYFMHs=";
   };
 
-  cargoHash = "sha256-K10q+aWj8p5JYMbvO5QP71j0iOvxIBMMNfJXZ2HGrac=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-I5WRuEogMwa0dB6wxhWDxivqhCdUugvsPrwUvjjDnt8=";
 
-  nativeBuildInputs = [ libcosmicAppHook just ];
+  nativeBuildInputs = [
+    libcosmicAppHook
+    just
+  ];
   buildInputs = [ glib ];
 
-  doCheck = false;
   dontUseJustBuild = true;
   dontUseJustCheck = true;
-  useFetchCargoVendor = true;
+
+  # TODO: remove when upstream fixes checks again
+  doCheck = false;
 
   justFlags = [
     "--set"
@@ -43,13 +49,21 @@ rustPlatform.buildRustPackage rec {
 
   env.VERGEN_GIT_SHA = src.rev;
 
-  # TODO: remove next two phases if these packages ever stop requiring mutually exclusive features
+  # TODO: remove next two phases if these packages can ever be built at the same time
   buildPhase = ''
     baseCargoBuildFlags="$cargoBuildFlags"
     cargoBuildFlags="$baseCargoBuildFlags --package cosmic-files"
     runHook cargoBuildHook
     cargoBuildFlags="$baseCargoBuildFlags --package cosmic-files-applet"
     runHook cargoBuildHook
+  '';
+
+  checkPhase = ''
+    baseCargoTestFlags="$cargoTestFlags"
+    cargoTestFlags="$baseCargoTestFlags --package cosmic-files"
+    runHook cargoCheckHook
+    cargoTestFlags="$baseCargoTestFlags --package cosmic-files-applet"
+    runHook cargoCheckHook
   '';
 
   passthru.updateScript = nix-update-script {
@@ -59,11 +73,11 @@ rustPlatform.buildRustPackage rec {
     ];
   };
 
-  meta = with lib; {
+  meta = {
     homepage = "https://github.com/pop-os/cosmic-files";
     description = "File Manager for the COSMIC Desktop Environment";
-    license = licenses.gpl3Only;
-    platforms = platforms.linux;
+    license = lib.licenses.gpl3Only;
+    platforms = lib.platforms.linux;
     mainProgram = "cosmic-files";
   };
 }

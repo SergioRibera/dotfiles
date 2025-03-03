@@ -51,7 +51,7 @@ in
         isDefault = true;
         name = user.username;
         userChrome = builtins.readFile ./userChrome.css;
-        extensions = with pkgs.firefoxAddons; [
+        extensions.packages = with pkgs.firefoxAddons; [
           vimium-ff
           hyper-read
           malwarebytes

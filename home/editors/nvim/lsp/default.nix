@@ -45,7 +45,7 @@ in
     "ruff"
     "tailwindcss"
     "taplo"
-    "tsserver"
+    "ts_ls"
     # "volar"
   ]) // {
     # biome = {
@@ -55,7 +55,7 @@ in
     #   '';
     #   extraOptions.single_file_support = true;
     # };
-    rust-analyzer = {
+    rust_analyzer = {
       enable = true;
       installCargo = false;
       installRustc = false;

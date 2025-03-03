@@ -27,7 +27,7 @@ in
       enable = true;
       # gtkUsePortal = true;
       xdgOpenUsePortal = true;
-      # config.common.default = ["*"];
+      config.common.default = "*";
       extraPortals = with pkgs; [
         xdg-desktop-portal-gnome
         xdg-desktop-portal-gtk

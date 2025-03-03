@@ -67,7 +67,7 @@ with pkgs; {
     wl-clipboard
     hyprpicker
     swww
-    xwaylandvideobridge
+    kdePackages.xwaylandvideobridge
 
     # GUI
     warp
