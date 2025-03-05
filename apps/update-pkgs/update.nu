@@ -23,7 +23,7 @@ def download-cargo-lock [owner: string, repo: string, rev: string] {
 }
 
 def calculate-hash [owner: string, repo: string, rev: string] {
-    let hash = (nix-prefetch-url --unpack $"https://github.com/($owner)/($repo)/archive/($rev).tar.gz")
+    let hash = (nix-prefetch-url --type sha256 --unpack $"https://github.com/($owner)/($repo)/archive/($rev).tar.gz")
     $hash
 }
 
@@ -71,7 +71,7 @@ def update-nix-file [file: string] {
     mut updated_content = ($content
         | str replace --regex 'version = "[^"]+";' $"version = \"($new_rev)\";"
         | str replace --regex 'rev = "[^"]+";' $"rev = \"($new_rev)\";"
-        | str replace --regex 'sha256 = "sha256-[^"]+"' $"sha256 = \"($new_hash)\"")
+        | str replace --regex 'sha256 = "sha256-[^"]+"' $"sha256 = \"sha256-($new_hash)\"")
 
     # Manejar Cargo.lock si existe
     if ($content | str contains "cargoLock = {") {
@@ -84,7 +84,7 @@ def update-nix-file [file: string] {
         if ($cargo_lock | is-not-empty) {
             let cargo_lock_path = ($file | path dirname | path join "Cargo.lock")
             $cargo_lock | save -f $cargo_lock_path
-            let cargo_hash = (nix-hash --flat --base32 --type sha256 $cargo_lock_path)
+            let cargo_hash = (nix-hash --flat --sri --type sha256 $cargo_lock_path)
             $updated_content = ($updated_content | str replace --regex 'cargoHash = "[^"]+";' $"cargoHash = \"($cargo_hash)\";")
         }
     }
