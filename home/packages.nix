@@ -65,6 +65,7 @@ with pkgs; {
     slurp
     libnotify
     wl-clipboard
+    wl-mirror
     hyprpicker
     swww
     kdePackages.xwaylandvideobridge

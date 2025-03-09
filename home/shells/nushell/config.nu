@@ -36,6 +36,24 @@ export def gundo [count?: int] {
 
 export def batdiff [...files: path] { diff ...$files | bat --language=diff }
 
+export def get-output [reason: string] {
+  if not ("XDG_SESSION_DESKTOP" in $env) {
+    return []
+  }
+  let outputs = if $env.XDG_SESSION_DESKTOP == "sway" {
+    swaymsg -r -t get_outputs | from json | values | each {|el| { name: $el.name, display: $"($el.id) (ansi purple)($el.name)(ansi reset) - (ansi blue)($el.make)(ansi reset)" }}
+  } else {
+    niri msg --json outputs | from json | values | each {|el| { name: $el.name, display: $"(ansi purple)($el.name)(ansi reset) - (ansi blue)($el.make)(ansi reset)" }}
+  }
+  $outputs | input list -d display --fuzzy $"Select Output \(($reason)):" | get name
+}
+
+export def mirror-screen [] {
+  let outputMirror = get-output "Screen to Mirror";
+  let output = get-output "Where Put";
+  wl-mirror -- -c --fullscreen-output $"$($outputMirror)" $"$($output)"
+}
+
 def _direnv [] {
   let rc_file = $"(pwd)/.envrc" | path exists
   if (which direnv | is-empty) or not $rc_file {
