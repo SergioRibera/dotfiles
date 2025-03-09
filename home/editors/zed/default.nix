@@ -10,8 +10,9 @@ in {
         "astro" "biome" "html"
         "liquid" # TODO: lsp
         "nix" "nu" "vue"
-        "toml" "dockerfile" "wakatime"
-        "vitesse" "discord-presence"
+        "toml" "dockerfile" # "wakatime"
+        "vitesse" # "discord-presence"
+        "catppuccin-icons"
       ];
       extraPackages = with pkgs; [
         # LSP
@@ -43,6 +44,15 @@ in {
           mode = "system";
           dark = "Vitesse Dark Soft";
           light = "Vitesse Dark Soft";
+        };
+        indent_guides = {
+          enabled = true;
+          coloring = "indent_aware";
+        };
+        icon_theme = {
+          mode = "system";
+          light = "Catppuccin Frappé";
+          dark = "Catppuccin Frappé";
         };
         toolbar = {
           breadcrumbs = true;
