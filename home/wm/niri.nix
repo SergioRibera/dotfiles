@@ -62,10 +62,22 @@ in {
             scale = 1.0;
             position = {
               x = 1080;
-              y = 0;
+              y = 1202;
             };
           };
           "HDMI-A-1" = {
+            scale = 0.9;
+            mode = {
+              width = 1920;
+              height = 1080;
+              refresh = 60.0;
+            };
+            position = {
+              x = 1080;
+              y = 0;
+            };
+          };
+          "DVI-I-2" = {
             scale = 1.0;
             mode = {
               width = 1920;
@@ -74,9 +86,9 @@ in {
             };
             position = {
               x = 0;
-              y = -1080;
+              y = 0;
             };
-            transform.rotation = 270;
+            transform.rotation = 90;
           };
         };
         layout =  let
