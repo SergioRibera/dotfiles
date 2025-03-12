@@ -1,8 +1,11 @@
-{ inputs, config, lib, ... }: let
+{ inputs, config, lib, pkgs, ... }: let
   inherit (config) user terminal shell;
   command = terminal.command;
   makeCommand = command: {
     command = [command];
+  };
+  makeCommandArgs = command: {
+    command = command;
   };
 in {
   home-manager.users.${user.username} = lib.mkIf (user.enableHM) ({config, ...}: {
@@ -17,14 +20,16 @@ in {
         hotkey-overlay.skip-at-startup = true;
         screenshot-path = "~/Pictures/Screenshot/%Y-%m-%d %H-%M-%S.png";
         environment = {
+          DISPLAY = ":0";
           QT_QPA_PLATFORM = "wayland";
           QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
         };
         spawn-at-startup = [
           (makeCommand "swww-daemon")
-          {command = [ "${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"];}
-          {
-            command = [
+          (makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
+          (makeCommandArgs ["${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"])
+          (
+            makeCommandArgs [
               "dbus-update-activation-environment"
               "--systemd"
               "DISPLAY"
@@ -38,8 +43,9 @@ in {
               "XDG_DATA_DIRS"
               "FLAKE"
               "PATH"
-            ];
-          }
+              "WLR_DRM_DEVICES"
+            ]
+          )
         ];
         input = {
           keyboard.xkb = {

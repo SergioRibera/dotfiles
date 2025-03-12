@@ -73,6 +73,7 @@ with pkgs; {
     # GUI
     warp
     pavucontrol
+    anydesk
     # self overlay
     cosmic-files
 
