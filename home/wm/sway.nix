@@ -2,13 +2,16 @@
   inherit (config) user terminal shell gui;
   mod = "Mod4";
 in {
-  programs.sway = {
-    wrapperFeatures.gtk = true;
-    extraOptions = [ "--unsupported-gpu" ];
-  };
   home-manager.users.${user.username} = lib.mkIf user.enableHM {
     wayland.windowManager.sway = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
       enable = true;
+      extraOptions = ["--unsupported-gpu"];
+      wrapperFeatures.gtk = true;
+      systemd = {
+        enable = true;
+        variables = ["--all"];
+        xdgAutostart = true;
+      };
       config = {
         colors = let
           c = gui.theme.colors;
@@ -22,7 +25,6 @@ in {
             text = c.base0B;
           };
         };
-        # bars = [];
         menu = "anyrun";
         terminal = terminal.name;
         gaps.inner = 7;
@@ -60,16 +62,19 @@ in {
         };
         output = {
           "eDP-1" = {
-            pos = "1080 0";
+            scale = "1.0";
+            pos = "1080 1080";
           };
-          "DVI-I-1" = {
-            mode = "1920x1080";
-            pos = "0 1600";
+          "HDMI-A-1" = {
+            scale = "0.9";
+            pos = "1080 0";
+            resolution = "1920 1080";
           };
           "DVI-I-2" = {
-            mode = "1920x1080";
-            pos = "0 -1080";
-            transform = "270";
+            scale = "1.0";
+            pos = "0 0";
+            transform = "90";
+            resolution = "1920 1080";
           };
         };
         keybindings = {
@@ -100,6 +105,7 @@ in {
           })
           (builtins.genList (x: x + 1) 9)
         ));
+        # bars = [];
       };
     };
   };
