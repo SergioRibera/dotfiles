@@ -15,8 +15,14 @@
       ];
     };
     bluetooth = lib.mkIf config.bluetooth {
-        enable = true;
-        powerOnBoot = false;
+      enable = true;
+      powerOnBoot = false;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = true;
+        };
+      };
     };
   };
 }

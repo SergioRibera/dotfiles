@@ -5,6 +5,12 @@
   security.pam.services.login.enableGnomeKeyring = true;
   environment.systemPackages = with pkgs; [ catppuccin-sddm ];
 
+  systemd.user.services.mpris-proxy = lib.mkIf config.bluetooth {
+      description = "Mpris proxy";
+      after = [ "network.target" "sound.target" ];
+      wantedBy = [ "default.target" ];
+      serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
   services = {
     # Enables the daemon for lorri, a nix-shell replacement for project development
     lorri.enable = true;

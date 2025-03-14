@@ -12,8 +12,10 @@ def is_ssh_session [] {
 
 def custom_path [] {
   let curr = pwd | str replace -r "/home/\\w+" "~" | split row "/"
+  let start = if ($curr | length) > 1 { "/" } else { "" }
+  let curr = if ($curr | length) > 1 { $curr | skip } else { $curr }
 
-  return ($curr | reverse | enumerate | each {|p| if $p.index != 0 { str substring 0..1 item } else { $p }} | get item | reverse | str join '/')
+  return $"($start)($curr | reverse | enumerate | each {|p| if $p.index != 0 { str substring 0..1 item } else { $p }} | get item | reverse | str join '/')"
 }
 
 def git_prompt [] {
