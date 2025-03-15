@@ -80,7 +80,7 @@ $env.config = {
 
   hooks: {
       env_change: {
-          PWD: {|before, after| ($before != $after) and (_direnv)}
+          PWD: [ _direnv ]
       }
   }
 }
