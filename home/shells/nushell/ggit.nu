@@ -1,4 +1,8 @@
-$env.GGIT_CONFIG_DIR = $"($env.XDG_DATA_HOME)/ggit"
+$env.GGIT_CONFIG_DIR =  if "XDG_DATA_HOME" in $env {
+  $"($env.XDG_DATA_HOME)/ggit"
+} else {
+  $"/home/($env.USER)/.local/share/ggit"
+}
 
 def get_paths [] {
     let config_path = $"($env.GGIT_CONFIG_DIR)/paths"
