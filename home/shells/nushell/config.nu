@@ -51,7 +51,7 @@ export def get-output [reason: string] {
 export def mirror-screen [] {
   let outputMirror = get-output "Screen to Mirror";
   let output = get-output "Where Put";
-  wl-mirror -- -c --fullscreen-output $"$($outputMirror)" $"$($output)"
+  wl-mirror -c --fullscreen-output $output $outputMirror
 }
 
 def _direnv [] {
