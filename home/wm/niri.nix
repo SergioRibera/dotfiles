@@ -165,7 +165,8 @@ in {
             "Mod+Shift+T".action = toggle-debug-tint;
 
             "Mod+W".action = close-window;
-            "Mod+F".action = maximize-column;
+            "Mod+D".action = maximize-column;
+            "Mod+F".action = toggle-window-floating;
             "Mod+Shift+F".action = fullscreen-window;
 
             "Mod+Comma".action = consume-window-into-column;
