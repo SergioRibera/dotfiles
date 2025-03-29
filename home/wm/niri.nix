@@ -156,9 +156,9 @@ in {
             "Mod+E".action = spawn "cosmic-files";
             "Mod+Return".action = terminal shell.command;
             # TODO: replace harcoded path by dynamic path from config
-            "Mod+B".action = spawn "nu" "/home/s4rch/.config/eww/scripts/extras.nu" "toggle" "sidebar";
-            "Mod+P".action = spawn "nu" "/home/s4rch/.config/eww/scripts/extras.nu" "toggle" "power-screen";
-            "Mod+M".action = spawn "nu" "/home/s4rch/.config/eww/scripts/extras.nu" "toggle" "screenkey";
+            "Mod+B".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "sidebar";
+            "Mod+P".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "power-screen";
+            "Mod+M".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "screenkey";
             "Mod+Shift+Return".action = terminal shell.privSession;
             "Mod+C".action = spawn "hyprpicker" "-a" "-f" "hex";
 
