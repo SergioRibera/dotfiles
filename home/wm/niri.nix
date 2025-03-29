@@ -18,7 +18,7 @@ in {
       settings = {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
-        screenshot-path = "~/Pictures/Screenshot/%Y-%m-%d %H-%M-%S.png";
+        screenshot-path = "~/Pictures/Screenshot/%Y-%m-%d_%H%M%S.png";
         environment = {
           DISPLAY = ":0";
           QT_QPA_PLATFORM = "wayland";
@@ -148,7 +148,8 @@ in {
             "Caps_Lock" = swayosd 500 ["--caps-lock"];
             "Num_Lock" = swayosd 500 ["--num-lock"];
 
-            "Mod+S".action = screenshot-window;
+            "Mod+S".action = screenshot-window { write-to-disk = false; };
+            "Mod+Print".action = screenshot-window;
             "Mod+Shift+S".action = screenshot;
 
             "Mod+Tab".action = spawn "anyrun";
