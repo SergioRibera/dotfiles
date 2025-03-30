@@ -25,7 +25,7 @@
         pkgs = pkgs.${system};
         inherit (nixpkgs) lib;
       };
-      mkNixosCfg = system: name: inputs.nixpkgs.lib.nixosSystem {
+      mkNixosCfg = username: system: name: inputs.nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = rec {
           inherit inputs;
@@ -37,14 +37,14 @@
             # Hardware
             networking.hostName = name;
             nixpkgs.overlays = [ overlay ];
+            user.username = username;
           }
-          ./hosts/${name}/hardware-configuration.nix
-          ./hosts/${name}/boot.nix
-          ./hosts/common
           ./home
+          ./hosts/common
           inputs.agenix.nixosModules.default
+          inputs.sosd.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
-        ] ++ (import ./hosts/${name} { inherit inputs; });
+        ] ++ (import ./hosts/${name} { inherit system name nixpkgs inputs; });
       };
     in
     {
@@ -52,20 +52,15 @@
       overlays.default = overlay;
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#laptop
-      nixosConfigurations = {
-        laptop = mkNixosCfg "x86_64-linux" "laptop";
-        rpi = mkNixosCfg "aarch64-linux" "rpi";
+      nixosConfigurations = let
+        username = "s4rch";
+      in {
+        laptop = mkNixosCfg username "x86_64-linux" "laptop";
+        rpi = mkNixosCfg username "aarch64-linux" "rpi";
       };
 
       # Programs that can be run by calling this flake
       apps = forEachSystem (system: (import ./apps { inherit system inputs; pkgs = pkgs.${system}; }));
-
-      # For quickly applying home-manager settings with:
-      # home-manager switch --flake .#s4rch
-      # homeConfigurations = {
-      #   s4rch = nixosConfigurations.laptop.config.home-manager.users.s4rch.home;
-      #   s3rver = nixosConfigurations.rpi.config.home-manager.users.s3rver.home;
-      # };
 
       # devShells."${system}".default = pkgs.mkShell {
       #   buildInputs = with pkgs; [

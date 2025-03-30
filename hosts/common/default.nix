@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ inputs, config, lib, ... }:
 let
   inherit (config.user) username osVersion;
   makeSecret = name: {
@@ -18,15 +18,30 @@ in
     ./services.nix
   ];
 
-  environment.sessionVariables.NIXOS_OZONE_WL = lib.optionalString (config.gui.enable) "1";
+  environment.sessionVariables = lib.optionalAttrs (config.gui.enable){
+    NIXOS_OZONE_WL = "1";
+    WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1:/dev/dri/card2";
+  };
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings = {
-    warn-dirty = false;
-    auto-optimise-store = true;
-    builders-use-substitutes = true;
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" "@wheel" ];
+  nix = {
+    # pin the registry to avoid downloading and evaling a new nixpkgs version every time
+    # registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
+    # set the path for channels compat
+    # nixPath = lib.mapAttrsToList (key: _: "${key}=flake:${key}") config.nix.registry;
+
+    settings = {
+      warn-dirty = false;
+      auto-optimise-store = true;
+      builders-use-substitutes = true;
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" "@wheel" ];
+      # flake-registry = "/etc/nix/registry.json";
+
+      # for direnv GC roots
+      # keep-derivations = true;
+      # keep-outputs = true;
+    };
   };
 
   system.stateVersion = osVersion;
