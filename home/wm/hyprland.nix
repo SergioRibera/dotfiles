@@ -1,8 +1,17 @@
 { inputs, config, lib, pkgs, ... }: let
   inherit (config) user gui;
+  isLinux = pkgs.stdenv.buildPlatform.isLinux;
+  sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
+  sosdCmd = "nu ${user.homepath}/.local/bin/osd.nu";
 in {
   home-manager.users.${user.username} = lib.mkIf user.enableHM {
-    wayland.windowManager.hyprland = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
+
+    home.file.".local/bin/osd.nu" = lib.mkIf (isLinux && gui.enable && sosdEnabled) {
+      executable = true;
+      source = ../../scripts/osd.nu;
+    };
+
+    wayland.windowManager.hyprland = lib.mkIf (isLinux && gui.enable) {
       enable = true;
       xwayland.enable = true;
       settings = {
@@ -12,6 +21,7 @@ in {
           "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY"
           # "udiskie"
           "swww-daemon"
+          "sosd daemon"
           "wallpaper -t 8h --no-allow-video -d -b -i ${inputs.wallpapers}"
         ];
         env = [ "XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH" ];
@@ -132,17 +142,17 @@ in {
         # m -> mouse, see below
         # t -> transparent, cannot be shadowed by other binds.
         # i -> ignore mods, will ignore modifiers.
-        bindel = [
+        bindel = lib.lists.optionals sosdEnabled [
           #
           # Volume keybinds
           #
-          ",XF86AudioRaiseVolume,exec,swayosd-client --output-volume raise"
-          ",XF86AudioLowerVolume,exec,swayosd-client --output-volume lower"
+          ",XF86AudioRaiseVolume,exec,${sosdCmd} volume-up"
+          ",XF86AudioLowerVolume,exec,${sosdCmd} volume-down"
           #
           # Brightness keys
           #
-          ",XF86MonBrightnessUp,exec,swayosd-client --brightness raise"
-          ",XF86MonBrightnessDown,exec,swayosd-client --brightness lower"
+          ",XF86MonBrightnessUp,exec,${sosdCmd} brightness-up"
+          ",XF86MonBrightnessDown,exec,${sosdCmd} brightness-down"
         ];
 
         # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -161,10 +171,6 @@ in {
           "SUPER,W,killactive,"
           # TODO: replace MOD+Q by power menu
           # "SUPER,Q,exit,"
-          ",XF86AudioMute,exec,swayosd-client --output-volume mute-toggle"
-          ",XF86AudioMicMute,exec,swayosd-client --input-volume mute-toggle"
-          ",Caps_Lock,exec,sleep 1s && swayosd-client --caps-lock"
-          ",Num_Lock,exec,sleep 1s && swayosd-client --num-lock"
           #
           # Custom Exec Keybinds
           #
@@ -218,6 +224,11 @@ in {
           "SUPER_SHIFT,8,movetoworkspacesilent,8"
           "SUPER_SHIFT,9,movetoworkspacesilent,9"
           "SUPER_SHIFT,0,movetoworkspacesilent,10"
+        ] ++ lib.lists.optionals sosdEnabled [
+          ",XF86AudioMute,exec,${sosdCmd} audio-mute-toggle"
+          ",XF86AudioMicMute,exec,${sosdCmd} mic-mute-toggle"
+          ",Caps_Lock,exec,sleep 1s && ${sosdCmd} caps-lock"
+          ",Num_Lock,exec,sleep 1s && ${sosdCmd} num-lock"
         ];
       };
     };

@@ -58,8 +58,9 @@ with pkgs; {
     cargo-machete
   ] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
     distrobox
-    gnome-boxes
     evsieve
+    brightnessctl
+
     # Wayland
     grim
     slurp

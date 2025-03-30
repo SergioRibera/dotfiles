@@ -1,6 +1,7 @@
 { inputs, config, lib, pkgs, ... }: let
-  inherit (config) user terminal shell;
+  inherit (config) gui user terminal shell;
   command = terminal.command;
+  sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
   makeCommand = command: {
     command = [command];
   };
@@ -12,6 +13,11 @@ in {
     imports = [
       inputs.niri.homeModules.niri
     ];
+
+    home.file.".local/bin/osd.nu" = lib.mkIf (gui.enable && sosdEnabled) {
+      executable = true;
+      source = ../../scripts/osd.nu;
+    };
 
     programs.niri = {
       enable = true;
@@ -27,6 +33,7 @@ in {
         spawn-at-startup = [
           (makeCommand "swww-daemon")
           (makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
+          (makeCommandArgs ["sosd" "daemon"])
           (makeCommandArgs ["${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"])
           (
             makeCommandArgs [
@@ -124,29 +131,29 @@ in {
             action.spawn = ["playerctl"] ++ cmd;
           };
 
-          swayosd = ms: cmd: {
+          osd = ms: cmd: {
             allow-when-locked = true;
             cooldown-ms = ms;
-            action.spawn = ["swayosd-client"] ++ cmd;
+            action.spawn = ["nu" "${user.homepath}/.local/bin/osd.nu"] ++ cmd;
           };
         in
           {
-            "XF86AudioMute" = swayosd 500 ["--output-volume" "mute-toggle"];
-            "XF86AudioMicMute" = swayosd 500 ["--input-volume" "mute-toggle"];
+            "XF86AudioMute" = lib.mkIf sosdEnabled (osd 500 ["audio-mute-toggle"]);
+            "XF86AudioMicMute" = lib.mkIf sosdEnabled (osd 500 ["mic-mute-toggle"]);
 
             "XF86AudioPlay" = playerctl ["play-pause"];
             "XF86AudioStop" = playerctl ["pause"];
             "XF86AudioPrev" = playerctl ["previous"];
             "XF86AudioNext" = playerctl ["next"];
 
-            "XF86AudioRaiseVolume" = swayosd 0 ["--output-volume" "raise"];
-            "XF86AudioLowerVolume" = swayosd 0 ["--output-volume" "lower"];
+            "XF86AudioRaiseVolume" = lib.mkIf sosdEnabled (osd 0 ["volume-up"]);
+            "XF86AudioLowerVolume" = lib.mkIf sosdEnabled (osd 0 ["volume-down"]);
 
-            "XF86MonBrightnessUp" = swayosd 0 ["--brightness" "raise"];
-            "XF86MonBrightnessDown" = swayosd 0 ["--brightness" "lower"];
+            "XF86MonBrightnessUp" = lib.mkIf sosdEnabled (osd 0 ["brightness-up"]);
+            "XF86MonBrightnessDown" = lib.mkIf sosdEnabled (osd 0 ["brightness-down"]);
 
-            "Caps_Lock" = swayosd 500 ["--caps-lock"];
-            "Num_Lock" = swayosd 500 ["--num-lock"];
+            "Caps_Lock" = lib.mkIf sosdEnabled (osd 500 ["caps-lock"]);
+            "Num_Lock" = lib.mkIf sosdEnabled (osd 500 ["num-lock"]);
 
             "Mod+S".action = screenshot-window { write-to-disk = false; };
             "Mod+Print".action = screenshot-window;

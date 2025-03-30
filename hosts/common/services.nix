@@ -1,4 +1,6 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config, ... }: let
+  sosdEnabled = config.user.enableHM && config.home-manager.users.${config.user.username}.programs.sosd.enable;
+in {
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
@@ -11,6 +13,7 @@
       wantedBy = [ "default.target" ];
       serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
+
   services = {
     # Enables the daemon for lorri, a nix-shell replacement for project development
     lorri.enable = true;
@@ -21,9 +24,12 @@
       percentageCritical = 15;
     };
     ratbagd.enable = true;
-    dbus.packages = [ pkgs.gcr ];
     gnome.gnome-keyring.enable = true;
-    udev.packages = lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [ pkgs.swayosd ];
+    udev.packages = lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable && !sosdEnabled) [ pkgs.swayosd ];
+    dbus = {
+      enable = true;
+    };
+
 
     openssh = {
       enable = true;

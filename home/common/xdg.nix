@@ -1,6 +1,7 @@
 { pkgs, config, lib, ... }:
 let
   inherit (config) user gui;
+  sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
 in
 {
   home-manager.users."${user.username}".xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux) {
@@ -13,7 +14,7 @@ in
       createDirectories = true;
     };
     configFile."wired/wired.ron".text = lib.optionalString
-      (pkgs.stdenv.buildPlatform.isLinux && gui.enable)
+      (pkgs.stdenv.buildPlatform.isLinux && gui.enable && !sosdEnabled)
       (import ../desktop/wired.nix { colors = gui.theme.colors; });
 
     configFile."dorion/config.json" = lib.mkIf (gui.enable) {

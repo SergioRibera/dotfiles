@@ -10,6 +10,7 @@ in
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isLinux [
       inputs.nixvim.homeManagerModules.nixvim
       inputs.wired.homeManagerModules.default
+      inputs.sosd.nixosModules.home-manager
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isDarwin [
       inputs.nixvim.nixosDarwinModules.nixvim
     ];
@@ -35,6 +36,48 @@ in
       # enable and configure others
       git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });
       sss = lib.mkIf gui.enable (import ./tools/sss.nix { inherit config; });
+      sosd = {
+        enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM);
+        globals = {
+          animation_duration = 1.0;
+          show_duration = 5.0;
+          background = "#000";
+          foreground_color = "#fff";
+        };
+        battery = {
+          enabled = true;
+          refresh_time = 30.0;
+          level."15" = {
+            icon = "󰁺";
+            show_duration = 10.0;
+            background = "#ff6961";
+            foreground = "#fff";
+          };
+          level."30" = {
+            icon = "󰁼";
+            show_duration = 5.0;
+            background = "#000";
+            foreground = "#fff";
+          };
+        };
+        urgency = {
+          low = {
+            show_duration = 5.0;
+            background = "#000";
+            foreground_color = "#fff";
+          };
+          normal = {
+            show_duration = 5.0;
+            background = "#000";
+            foreground_color = "#fff";
+          };
+          critical = {
+            show_duration = 10.0;
+            background = "#ff6961";
+            foreground_color = "#fff";
+          };
+        };
+      };
 
       obs-studio = {
         enable = gui.enable;

@@ -42,7 +42,6 @@
           ./home
           ./hosts/common
           inputs.agenix.nixosModules.default
-          inputs.sosd.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
         ] ++ (import ./hosts/${name} { inherit system name nixpkgs inputs; });
       };
@@ -108,6 +107,9 @@
     # };
     # My tool to take screen/code screenshots
     sss.url = "github:SergioRibera/sss";
+    # Dev Mode
+    # sosd.url = "git+file:///home/s4rch/Projects/rust/soft_osd";
+    sosd.url = "github:SergioRibera/soft_osd";
     # nixificate my neovim configs
     nixvim = {
       url = "github:nix-community/nixvim";
