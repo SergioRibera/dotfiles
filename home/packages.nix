@@ -11,7 +11,7 @@ with pkgs; {
 
     # cloudflare
     cloudflared
-    nodePackages.wrangler
+    # nodePackages.wrangler
 
     # Docker
     docker-compose
@@ -82,6 +82,7 @@ with pkgs; {
     papirus-icon-theme
 
     # Discord
+    discord
     vesktop
     # Dorion Client: Rust + Tauri
     # https://github.com/SpikeHD/Dorion
