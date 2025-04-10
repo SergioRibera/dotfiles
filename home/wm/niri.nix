@@ -168,6 +168,7 @@ in {
             "Mod+M".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "screenkey";
             "Mod+Shift+Return".action = terminal shell.privSession;
             "Mod+C".action = spawn "hyprpicker" "-a" "-f" "hex";
+            "Mod+Period".action = spawn "simplemoji" "-t" "medium-light" "-soc" "wl-copy";
 
             "Mod+Shift+T".action = toggle-debug-tint;
 
@@ -177,7 +178,7 @@ in {
             "Mod+Shift+F".action = fullscreen-window;
 
             "Mod+Comma".action = consume-window-into-column;
-            "Mod+Period".action = expel-window-from-column;
+            "Mod+Semicolon".action = expel-window-from-column;
 
             "Mod+H".action = focus-column-or-monitor-left;
             "Mod+L".action = focus-column-or-monitor-right;

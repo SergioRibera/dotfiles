@@ -110,6 +110,7 @@
     # Dev Mode
     # sosd.url = "git+file:///home/s4rch/Projects/rust/soft_osd";
     sosd.url = "github:SergioRibera/soft_osd";
+    simplemoji.url = "github:SergioRibera/simplemoji";
     # nixificate my neovim configs
     nixvim = {
       url = "github:nix-community/nixvim";
