@@ -1,34 +1,26 @@
-{ inputs, ... }:
-let
-  username = "s3rver";
-in
-inputs.nixpkgs.lib.nixosSystem {
-  system = "x86_64-linux";
-  specialArgs = { inherit inputs; };
-  modules = [
-    ./hardware-configuration.nix
-    ./boot.nix
-    ../common
-    ../../home
-    inputs.home-manager.nixosModules.home-manager
-    {
-      # Hardware
-      networking.hostName = "nixos";
+{ nixpkgs, ... }:
+[
+  "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+  ./boot.nix
+  {
+    # Prioritize performance over efficiency
+    powerManagement.cpuFreqGovernor = "performance";
 
-      # Prioritize performance over efficiency
-      powerManagement.cpuFreqGovernor = "performance";
+    nvim = {
+      neovide = false;
+      complete = false;
+    };
 
-      nvim = {
-        neovide = false;
-        complete = false;
-      };
+    shell = {
+      name = "nushell";
+      command = ["nu"];
+      privSession = ["nu" "--no-history"];
+    };
 
-      user = {
-        inherit username;
-        isNormalUser = true;
-        enableHM = true;
-        groups = [ "wheel" "docker" "networkmanager" "input" ];
-      };
-    }
-  ];
-}
+    user = {
+      isNormalUser = true;
+      enableHM = true;
+      groups = [ "wheel" "docker" "networkmanager" ];
+    };
+  }
+]
