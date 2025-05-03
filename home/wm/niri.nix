@@ -221,10 +221,13 @@ in {
             clip-to-geometry = true;
             open-maximized = true;
           }
-          # {
-          #   matches = [{ app-id = "org.telegram.desktop"; }];
-          #   block-out-from = "screen-capture";
-          # }
+          {
+            matches = [
+              { app-id = "^org\.keepassxc\.KeePassXC$"; }
+              { app-id = "^org\.gnome\.World\.Secrets$"; }
+            ];
+            block-out-from = "screen-capture";
+          }
         ];
       };
     };

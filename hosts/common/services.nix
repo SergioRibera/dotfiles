@@ -4,6 +4,7 @@ in {
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
+  security.polkit.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   environment.systemPackages = with pkgs; [ catppuccin-sddm ];
 
@@ -28,6 +29,7 @@ in {
     udev.packages = lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable && !sosdEnabled) [ pkgs.swayosd ];
     dbus = {
       enable = true;
+      packages = [ pkgs.gcr ];
     };
 
 

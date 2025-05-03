@@ -28,7 +28,12 @@ in
     portal = {
       enable = true;
       xdgOpenUsePortal = true;
-      config.common.default = "*";
+      config = {
+        common = {
+          default = "*";
+          "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+        };
+      };
       extraPortals = with pkgs; [
         xdg-desktop-portal-gnome
         # xdg-desktop-portal-gtk
