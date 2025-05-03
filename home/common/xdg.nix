@@ -22,16 +22,16 @@ in
     };
   };
 
+  security.rtkit.enable = pkgs.stdenv.buildPlatform.isLinux && gui.enable;
   xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
     mime.enable = true;
     portal = {
       enable = true;
-      # gtkUsePortal = true;
       xdgOpenUsePortal = true;
       config.common.default = "*";
       extraPortals = with pkgs; [
         xdg-desktop-portal-gnome
-        xdg-desktop-portal-gtk
+        # xdg-desktop-portal-gtk
       ];
     };
   };
