@@ -4,18 +4,21 @@ let
 in
 {
   boot = {
-    consoleLogLevel = 3;
+    consoleLogLevel = 0;
     tmp.cleanOnBoot = true;
     kernelParams = lib.optionals gui.enable [
       "quiet"
       "splash"
-      "rd.systemd.show_status=false"
+      "rd.systemd.show_status=auto"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
       "boot.shell_on_fail"
     ];
 
-    initrd.supportedFilesystems = [ "ntfs" ];
+    initrd = {
+      verbose = false;
+      supportedFilesystems = [ "ntfs" ];
+    };
 
     loader = {
       timeout = 3;
@@ -25,6 +28,11 @@ in
         device = "nodev";
         efiSupport = true;
         theme = pkgs.catppuccin-grub;
+        extraConfig = ''
+          serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
+          terminal_input --append serial
+          terminal_output --append serial
+        '';
       };
     };
 
