@@ -14,14 +14,13 @@
 /* Sidebar */
 #newtab-button-container,
 .bottom-actions,
-.tools-and-extensions
-{
-    display: none !important;
+.tools-and-extensions {
+  display: none !important;
 }
 
 /* Sidebar Color */
 #sidebar-main {
-    background: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+  background: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
 }
 
 #vertical-tabs[visible] {
@@ -35,12 +34,16 @@
 * Tabs
 */
 #tabbrowser-tabs[orient="vertical"] {
-    max-height: 350px;
-    overflow: auto !important;
+  max-height: 350px;
+  overflow: auto !important;
 }
-#tabbrowser-arrowscrollbox[orient="vertical"] { max-height: 450px; }
-#tabbrowser-tabs[orient="vertical"]:has(> #tabbrowser-arrowscrollbox[overflowing="true"]) {
-    border: none !important;
+#tabbrowser-arrowscrollbox[orient="vertical"] {
+  max-height: 450px;
+}
+#tabbrowser-tabs[orient="vertical"]:has(
+    > #tabbrowser-arrowscrollbox[overflowing="true"]
+  ) {
+  border: none !important;
 }
 /* audio icons */
 .tab-icon-overlay {
@@ -63,10 +66,16 @@
   display: block !important;
 }
 .tab-icon-overlay
-  :is(:root[uidensity="compact"],
-  #tabbrowser-tabs[secondarytext-unsupported],
-  :root:not([uidensity="compact"]) #tabbrowser-tabs:not([secondarytext-unsupported]) .tabbrowser-tab:hover) .tab-icon-stack[indicator-replaces-favicon] > :not(&) {
-      opacity: 1 !important;
+  :is(
+    :root[uidensity="compact"],
+    #tabbrowser-tabs[secondarytext-unsupported],
+    :root:not([uidensity="compact"])
+      #tabbrowser-tabs:not([secondarytext-unsupported])
+      .tabbrowser-tab:hover
+  )
+  .tab-icon-stack[indicator-replaces-favicon]
+  > :not(&) {
+  opacity: 1 !important;
 }
 
 /*
@@ -95,11 +104,9 @@
     height: 100%;
     left: 30%;
 
-
     .urlbar-input-container .urlbar-input-box {
       text-align: center;
     }
-
   }
 }
 
@@ -112,4 +119,15 @@
 #tabbrowser-tabpanels {
   padding-right: 10px;
   padding-bottom: 10px;
+}
+
+/*
+* Remove Unnecesary Shadow
+*/
+#tabbrowser-tabbox {
+  @media (-moz-bool-pref: "sidebar.revamp") {
+    {
+      box-shadow: none !important;
+    }
+  }
 }
