@@ -59,7 +59,10 @@ in {
     };
 
     displayManager = {
-      sessionPackages = [ pkgs.niri ];
+      sessionPackages = [
+        pkgs.niri
+        pkgs.sway
+      ];
       sddm = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) {
         enable = true;
         theme = "catppuccin-mocha";
