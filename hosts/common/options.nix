@@ -10,6 +10,75 @@ let
 in
 {
   options = with lib; {
+    wm = {
+      actives = mkOption {
+        type = types.listOf (types.enum ["niri" "hyprland" "sway"]);
+        default = ["niri"];
+      };
+      screens = mkOption {
+        type = types.listOf (types.submodule {
+          options = {
+            name = mkOption {
+              type = types.str;
+              default = "eDP-1";
+              description = "Screen name";
+            };
+            position = mkOption {
+              type = (types.submodule {
+                options = {
+                  x = mkOption {
+                    type = types.int;
+                    default = 0;
+                    description = "Screen X position";
+                  };
+                  y = mkOption {
+                    type = types.int;
+                    default = 0;
+                    description = "Screen Y position";
+                  };
+                };
+              });
+              default = { x = 0; y = 0; };
+              description = "Screen resolution";
+            };
+            resolution = mkOption {
+              type = (types.submodule {
+                options = {
+                  x = mkOption {
+                    type = types.int;
+                    default = 1920;
+                    description = "Screen X resolution";
+                  };
+                  y = mkOption {
+                    type = types.int;
+                    default = 1080;
+                    description = "Screen Y resolution";
+                  };
+                };
+              });
+              default = { x = 1920; y = 1080; };
+              description = "Screen resolution";
+            };
+            rotation = mkOption {
+              type = types.enum ["normal" "left" "right" "inverted"];
+              default = "normal";
+              description = "Screen rotation";
+            };
+            scale = mkOption {
+              type = types.float;
+              default = 1.0;
+              description = "Screen Scale";
+            };
+            frequency = mkOption {
+              type = types.float;
+              default = 60.0;
+              description = "Screen frequency";
+            };
+          };
+        });
+        default = [{ name = "eDP-1"; }];
+      };
+    };
     gui = {
       enable = mkEnableOption {
         description = "Enable graphics.";

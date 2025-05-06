@@ -1,21 +1,23 @@
 { inputs, config, lib, pkgs, ... }: let
-  inherit (config) user gui;
+  inherit (config) user gui wm;
   isLinux = pkgs.stdenv.buildPlatform.isLinux;
   sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
   sosdCmd = "nu ${user.homepath}/.local/bin/osd.nu";
+  mkRotation = r: if r == "left" then 1 else if r == "right" then 3 else if r == "inverted" then 2 else 0;
 in {
   home-manager.users.${user.username} = lib.mkIf user.enableHM {
-
     home.file.".local/bin/osd.nu" = lib.mkIf (isLinux && gui.enable && sosdEnabled) {
       executable = true;
       source = ../../scripts/osd.nu;
     };
 
     wayland.windowManager.hyprland = lib.mkIf (isLinux && gui.enable) {
-      enable = true;
+      enable = builtins.elem "hyprland" wm.actives;
       xwayland.enable = true;
       settings = {
-        monitor = [ "eDP-1,1600x900@60,1080x1020,1" "HDMI-A-1,1920x1080@60,0x0,1,transform,3" ];
+        monitor = (builtins.map (o:
+          "${o.name},${o.resolution.x}x${o.resolution.y}@${o.frequency},${o.position.x}x${o.position.y},${o.scale},transform,${mkRotation o.rotation}"
+        ) wm.screens);
         workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
         exec-once = [
           "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY"

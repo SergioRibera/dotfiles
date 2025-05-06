@@ -1,10 +1,10 @@
 { inputs, config, lib, pkgs, ... }: let
-  inherit (config) user terminal shell gui;
+  inherit (config) user terminal shell gui wm;
   mod = "Mod4";
 in {
   home-manager.users.${user.username} = lib.mkIf user.enableHM {
     wayland.windowManager.sway = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
-      enable = true;
+      enable = builtins.elem "sway" wm.actives;
       extraOptions = ["--unsupported-gpu"];
       wrapperFeatures.gtk = true;
       systemd = {

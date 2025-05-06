@@ -1,5 +1,5 @@
 
-{ config, lib, mkTheme, ... }: let
+{ config, mkTheme, ... }: let
   theme = mkTheme config.gui.theme.colors;
 in {
   home-manager.users.${config.user.username}.programs.alacritty = {

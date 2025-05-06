@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, config, ... }: let
+{ hostName, pkgs, lib, config, ... }: let
   inherit (config.user) username;
 in
 with pkgs; {
@@ -6,8 +6,8 @@ with pkgs; {
     # Compresion
     ouch
 
-    # python
-    python3
+    # simple web server
+    dufs
 
     # cloudflare
     cloudflared
@@ -20,10 +20,11 @@ with pkgs; {
     gitui
     neofetch
     ntfs3g
+
     # self overlay
     simple-commits
     # inputs.cartero.packages.${pkgs.system}.default
-  ] ++ lib.optionals config.gui.enable [
+  ] ++ lib.optionals (config.gui.enable && hostName == "race4k") [
     # Social
     telegram-desktop
 
@@ -72,9 +73,9 @@ with pkgs; {
     kdePackages.xwaylandvideobridge
 
     # GUI
-    warp
     pavucontrol
     anydesk
+
     # self overlay
     cosmic-files
 
@@ -102,6 +103,5 @@ with pkgs; {
     #   ];
     # }))
   ]
-  ++ lib.optionals (config.user.browser == "chromium" && config.gui.enable) [ chromium ]
   ++ lib.optionals (config.nvim.neovide && config.gui.enable) [ neovide ];
 }

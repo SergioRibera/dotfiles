@@ -6,15 +6,7 @@
       enable = true;
       enable32Bit = true;
       # Vulkan
-      extraPackages = with pkgs; [
-        amdvlk
-        mesa.drivers
-        rocmPackages.clr.icd
-      ];
-      # For 32 bit applications
-      extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
-      ];
+      extraPackages = with pkgs; [ mesa.drivers ];
     };
     bluetooth = lib.mkIf config.bluetooth {
       enable = true;

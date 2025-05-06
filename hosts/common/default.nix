@@ -11,6 +11,7 @@ let
 in
 {
   imports = [
+    ./boot.nix
     ./hardware.nix
     ./options.nix
     ./packages.nix
@@ -20,10 +21,13 @@ in
 
   environment.sessionVariables = lib.optionalAttrs (config.gui.enable){
     NIXOS_OZONE_WL = "1";
-    WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1:/dev/dri/card2";
   };
 
   nixpkgs.config.allowUnfree = true;
+  documentation = {
+    nixos.enable =  false;
+    doc.enable = false;
+  };
   nix = {
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
     # registry = lib.mapAttrs (_: v: {flake = v;}) inputs;

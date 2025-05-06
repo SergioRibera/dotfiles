@@ -31,6 +31,7 @@
           inherit inputs;
           libx = mkLib system;
           mkTheme = libx.mkTheme;
+          hostName = name;
         };
         modules = [
           {
@@ -43,7 +44,7 @@
           ./hosts/common
           inputs.agenix.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
-        ] ++ (import ./hosts/${name} { inherit system name nixpkgs inputs; });
+        ] ++ [ ./hosts/${name} ];
       };
     in
     {
@@ -54,6 +55,7 @@
       nixosConfigurations = let
         username = "s4rch";
       in {
+        race4k = mkNixosCfg username "x86_64-linux" "race4k";
         laptop = mkNixosCfg username "x86_64-linux" "laptop";
         rpi = mkNixosCfg username "aarch64-linux" "rpi";
       };

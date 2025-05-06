@@ -64,17 +64,17 @@ in
         ];
         search = {
           force = true;
-          default = "DuckDuckGo";
-          privateDefault = "DuckDuckGo";
-          order = [ "DuckDuckGo" "Google" ];
+          default = "ddg";
+          privateDefault = "ddg";
+          order = [ "ddg" "google" ];
           engines = {
             "MyNixOs" = {
               urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = [ "nx" ];
             };
-            "Bing".metaData.hidden = true;
-            "Google".metaData.alias = "g"; # builtin engines only support specifying one additional alias
+            "bing".metaData.hidden = true;
+            "google".metaData.alias = "g"; # builtin engines only support specifying one additional alias
           };
         };
         settings = {

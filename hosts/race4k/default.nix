@@ -2,20 +2,18 @@
   imports = [
     ./hardware-configuration.nix
   ];
-
   # Prioritize performance over efficiency
   powerManagement.cpuFreqGovernor = "performance";
 
   git.enable = true;
   gui.enable = true;
-  gui.touchpad = true;
   sshKeys = true;
   audio = true;
   bluetooth = true;
 
   nvim = {
-    enable = true;
-    neovide = true;
+    enable = false;
+    neovide = false;
     complete = true;
   };
 
@@ -36,29 +34,17 @@
     groups = [ "wheel" "video" "audio" "docker" "libvirtd" "networkmanager" "adbusers" "input" ];
   };
 
-  wm.screens = [{
-    name = "eDP-1";
-    resolution = {
-      x = 1600;
-      y = 900;
-    };
-  }];
-
   services.xserver.videoDrivers = lib.optionals
     (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable)
-    [ "amdgpu" ];
+    [ "nvidia" ];
 
-  hardware = {
-    graphics = {
-      # Vulkan
-      extraPackages = with pkgs; [
-        amdvlk
-        rocmPackages.clr.icd
-      ];
-      # For 32 bit applications
-      extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
-      ];
-    };
+  hardware.nvidia = {
+    modesetting.enable = true;
+    nvidiaPersistenced = true;
+    forceFullCompositionPipeline = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    open = false;
   };
+
+  wm.screens = [];
 }

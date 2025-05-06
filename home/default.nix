@@ -1,4 +1,4 @@
-{ lib, config, inputs, pkgs, ... }:
+{ lib, config, inputs, pkgs, hostName, ... }:
 let
   inherit (config) user gui;
   inherit (user) username;
@@ -22,20 +22,8 @@ in
       enable = true;
       enableOnBoot = true;
     };
-    libvirtd.enable = gui.enable;
-    spiceUSBRedirection.enable = true;
-    # virtualbox = {
-    #   guest = {
-    #     enable = true;
-    #     dragAndDrop = true;
-    #     clipboard = true;
-    #   };
-    #   host = {
-    #     enable = true;
-    #     # enableExtensionPack = true;
-    #     addNetworkInterface = true;
-    #   };
-    # };
+    libvirtd.enable = gui.enable && hostName == "race4k";
+    spiceUSBRedirection.enable = gui.enable && hostName == "race4k";
   };
 
   users = {

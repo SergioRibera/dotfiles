@@ -1,5 +1,5 @@
 { inputs, config, lib, pkgs, ... }: let
-  inherit (config) gui user terminal shell;
+  inherit (config) gui user terminal shell wm;
   command = terminal.command;
   sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
   makeCommand = command: {
@@ -8,6 +8,7 @@
   makeCommandArgs = command: {
     command = command;
   };
+  mkRotation = rot: if rot == "left" then 90 else if rot == "right" then -90 else if rot == "inverted" then 180 else 0;
 in {
   home-manager.users.${user.username} = lib.mkIf (user.enableHM) ({config, ...}: {
     imports = [
@@ -20,7 +21,7 @@ in {
     };
 
     programs.niri = {
-      enable = true;
+      enable = gui.enable && (builtins.elem "niri" wm.actives);
       # package = inputs.niri-pkg.packages.${pkgs.system}.default;
       settings = {
         prefer-no-csd = true;
@@ -60,7 +61,7 @@ in {
             layout = "us";
             variant = "altgr-intl";
           };
-          touchpad = {
+          touchpad = lib.mkIf gui.touchpad {
             dwt = true;
             dwtp = true;
             natural-scroll = true;
@@ -71,40 +72,22 @@ in {
           focus-follows-mouse.enable = true;
           warp-mouse-to-focus = true;
         };
-        outputs = {
-          "eDP-1" = {
-            scale = 1.0;
-            position = {
-              x = 1080;
-              y = 1202;
-            };
-          };
-          "HDMI-A-1" = {
-            scale = 0.9;
-            mode = {
-              width = 1920;
-              height = 1080;
-              refresh = 60.0;
-            };
-            position = {
-              x = 1080;
-              y = 0;
-            };
-          };
-          "DVI-I-2" = {
-            scale = 1.0;
-            mode = {
-              width = 1920;
-              height = 1080;
-              refresh = 60.0;
-            };
-            position = {
-              x = 0;
-              y = 0;
-            };
-            transform.rotation = 90;
-          };
-        };
+        # outputs = builtins.listToAttrs (builtins.map (o: {
+        #   name = o.name;
+        #   value = {
+        #     scale = o.scale;
+        #     position = {
+        #       x = o.position.x;
+        #       y = o.position.y;
+        #     };
+        #     mode = {
+        #       width = o.resolution.x;
+        #       height = o.resolution.y;
+        #       refresh = o.frequency;
+        #     };
+        #     transform.rotation = mkRotation o.rotation;
+        #   };
+        # }) wm.screens);
         layout =  let
           dist_in = 7;
           dist_out = 5;
