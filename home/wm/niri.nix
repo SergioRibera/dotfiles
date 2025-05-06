@@ -21,6 +21,7 @@ in {
 
     programs.niri = {
       enable = true;
+      # package = inputs.niri-pkg.packages.${pkgs.system}.default;
       settings = {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
@@ -124,7 +125,7 @@ in {
             bottom = dist_out;
           };
         };
-        binds = with config.lib.niri.actions; let
+        binds = with config.lib.niri.actions; with inputs.niri.lib.kdl; let
           terminal = spawn command;
           playerctl = cmd: {
             allow-when-locked = true;
@@ -184,11 +185,15 @@ in {
             "Mod+L".action = focus-column-or-monitor-right;
             "Mod+J".action = focus-window-or-workspace-down;
             "Mod+K".action = focus-window-or-workspace-up;
+            # "Mod+J".action = magic-leaf "focus-window-or-workspace-or-monitor-down";
+            # "Mod+K".action = magic-leaf "focus-window-or-workspace-or-monitor-up";
 
             "Mod+Shift+H".action = move-column-left-or-to-monitor-left;
             "Mod+Shift+L".action = move-column-right-or-to-monitor-right;
             "Mod+Shift+J".action = move-window-down-or-to-workspace-down;
             "Mod+Shift+K".action = move-window-up-or-to-workspace-up;
+            # "Mod+Shift+J".action = magic-leaf "move-window-down-or-to-workspace-down-or-to-monitor-down";
+            # "Mod+Shift+K".action = magic-leaf "move-window-up-or-to-workspace-up-or-to-monitor-up";
 
             "Mod+WheelScrollDown" = {
               action = focus-workspace-down;
