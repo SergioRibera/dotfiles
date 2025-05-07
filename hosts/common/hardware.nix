@@ -6,7 +6,7 @@
       enable = true;
       enable32Bit = true;
       # Vulkan
-      extraPackages = with pkgs; [ mesa.drivers ];
+      extraPackages = with pkgs; [ mesa ];
     };
     bluetooth = lib.mkIf config.bluetooth {
       enable = true;
