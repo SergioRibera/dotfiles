@@ -8,7 +8,7 @@
   makeCommandArgs = command: {
     command = command;
   };
-  mkRotation = rot: if rot == "left" then 90 else if rot == "right" then -90 else if rot == "inverted" then 180 else 0;
+  mkRotation = rot: if rot == "left" then 270 else if rot == "right" then 90 else if rot == "inverted" then 180 else 0;
 in {
   home-manager.users.${user.username} = lib.mkIf (user.enableHM) ({config, ...}: {
     imports = [
@@ -72,22 +72,22 @@ in {
           focus-follows-mouse.enable = true;
           warp-mouse-to-focus = true;
         };
-        # outputs = builtins.listToAttrs (builtins.map (o: {
-        #   name = o.name;
-        #   value = {
-        #     scale = o.scale;
-        #     position = {
-        #       x = o.position.x;
-        #       y = o.position.y;
-        #     };
-        #     mode = {
-        #       width = o.resolution.x;
-        #       height = o.resolution.y;
-        #       refresh = o.frequency;
-        #     };
-        #     transform.rotation = mkRotation o.rotation;
-        #   };
-        # }) wm.screens);
+        outputs = builtins.listToAttrs (builtins.map (o: {
+          name = o.name;
+          value = {
+            scale = o.scale;
+            position = {
+              x = o.position.x;
+              y = o.position.y;
+            };
+            mode = {
+              width = o.resolution.x;
+              height = o.resolution.y;
+              refresh = o.frequency;
+            };
+            transform.rotation = mkRotation o.rotation;
+          };
+        }) wm.screens);
         layout =  let
           dist_in = 7;
           dist_out = 5;

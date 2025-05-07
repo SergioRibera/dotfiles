@@ -46,5 +46,22 @@
     open = false;
   };
 
-  wm.screens = [];
+  wm.screens = let
+    height = 1080;
+  in [
+    { name = "DP-4"; rotation = "right"; }
+    { name = "DP-3"; position.x = height; }
+    {
+      name = "DP-5";
+      position = {
+        x = height;
+        y = height;
+      };
+    }
+    {
+      name = "HDMI-A-2";
+      position.x = 3000;
+      rotation = "right";
+    }
+  ];
 }
