@@ -16,8 +16,6 @@ in {
   };
 
   services = {
-    # Enables the daemon for lorri, a nix-shell replacement for project development
-    lorri.enable = true;
     udisks2.enable = true;
     upower = {
       enable = true;

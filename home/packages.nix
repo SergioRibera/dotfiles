@@ -28,10 +28,6 @@ with pkgs; {
     # Social
     telegram-desktop
 
-    # Clients
-    # psst (not works on niri :c)
-    spotube
-
     # Utils
     scrcpy
     xdg-utils
@@ -84,7 +80,6 @@ with pkgs; {
 
     # Discord
     discord
-    vesktop
     # Dorion Client: Rust + Tauri
     # https://github.com/SpikeHD/Dorion
     # WebRTC Support explained here: https://github.com/tauri-apps/tauri/discussions/8426#discussioncomment-8268622
