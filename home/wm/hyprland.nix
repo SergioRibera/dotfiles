@@ -18,7 +18,9 @@ in {
         monitor = (builtins.map (o:
           "${o.name},${o.resolution.x}x${o.resolution.y}@${o.frequency},${o.position.x}x${o.position.y},${o.scale},transform,${mkRotation o.rotation}"
         ) wm.screens);
-        workspace = [ "eDP-1,10" "HDMI-A-1,10" ];
+        workspace = (builtins.map (o:
+          "${o.name},10"
+        ) wm.screens);
         exec-once = [
           "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY"
           # "udiskie"

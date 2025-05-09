@@ -1,6 +1,7 @@
 { inputs, config, lib, pkgs, ... }: let
   inherit (config) user terminal shell gui wm;
   mod = "Mod4";
+  mkRotation = rot: if rot == "left" then "270" else if rot == "right" then "90" else if rot == "inverted" then "180" else "0";
 in {
   home-manager.users.${user.username} = lib.mkIf user.enableHM {
     wayland.windowManager.sway = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
@@ -60,23 +61,15 @@ in {
           #   cursor = "left_ptr";
           # };
         };
-        output = {
-          "eDP-1" = {
-            scale = "1.0";
-            pos = "1080 1080";
+        output = builtins.listToAttrs (builtins.map (o: {
+          name = o.name;
+          value = {
+            scale = builtins.toString o.scale;
+            pos = "${builtins.toString o.position.x} ${builtins.toString o.position.y}";
+            resolution = "${builtins.toString o.resolution.x}x${builtins.toString o.resolution.y}@${builtins.toString o.frequency}Hz";
+            transform = mkRotation o.rotation;
           };
-          "HDMI-A-1" = {
-            scale = "0.9";
-            pos = "1080 0";
-            resolution = "1920 1080";
-          };
-          "DVI-I-2" = {
-            scale = "1.0";
-            pos = "0 0";
-            transform = "90";
-            resolution = "1920 1080";
-          };
-        };
+        }) wm.screens);
         keybindings = {
           "${mod}+Tab" = "exec anyrun";
           "${mod}+e" = "exec cosmic-files";
