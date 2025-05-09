@@ -172,6 +172,11 @@ in
       type = types.bool;
       default = false;
     };
+    games = mkOption {
+      description = "Enable Games for this host";
+      type = types.bool;
+      default = false;
+    };
     user = {
       enableHM = mkEnableOption "Enable home-manager this host";
       browser = mkOption {

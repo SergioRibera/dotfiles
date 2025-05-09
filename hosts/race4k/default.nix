@@ -5,6 +5,7 @@
   # Prioritize performance over efficiency
   powerManagement.cpuFreqGovernor = "performance";
 
+  games = true;
   git.enable = true;
   gui.enable = true;
   sshKeys = true;

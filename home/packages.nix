@@ -103,5 +103,8 @@ with pkgs; {
     #   ];
     # }))
   ]
-  ++ lib.optionals (config.nvim.neovide && config.gui.enable) [ neovide ];
+  ++ lib.optionals (config.nvim.neovide && config.gui.enable) [ neovide ]
+  ++ lib.optionals config.games [
+    prismlauncher # minecraft launcher
+  ];
 }
