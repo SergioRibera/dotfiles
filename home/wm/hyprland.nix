@@ -30,7 +30,7 @@ in {
 
         input = {
           kb_layout = "us";
-          kb_variant = "";
+          kb_variant = "altgr-intl";
           kb_model = "";
           kb_options = "";
           kb_rules = "";
