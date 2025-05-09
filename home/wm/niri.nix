@@ -37,24 +37,7 @@ in {
           (makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
           (makeCommandArgs ["sosd" "daemon"])
           (makeCommandArgs ["${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"])
-          (
-            makeCommandArgs [
-              "dbus-update-activation-environment"
-              "--systemd"
-              "DISPLAY"
-              "WAYLAND_DISPLAY"
-              "SWAYSOCK"
-              "XDG_CURRENT_DESKTOP"
-              "XDG_SESSION_TYPE"
-              "NIXOS_OZONE_WL"
-              "XCURSOR_THEME"
-              "XCURSOR_SIZE"
-              "XDG_DATA_DIRS"
-              "FLAKE"
-              "PATH"
-              "WLR_DRM_DEVICES"
-            ]
-          )
+          (makeCommandArgs [ "dbus-update-activation-environment" "--all" "--systemd" ])
         ];
         input = {
           keyboard.xkb = {

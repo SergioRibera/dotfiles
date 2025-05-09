@@ -22,8 +22,7 @@ in {
           "${o.name},10"
         ) wm.screens);
         exec-once = [
-          "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY"
-          # "udiskie"
+          "dbus-update-activation-environment --all --systemd"
           "swww-daemon"
           "sosd daemon"
           "wallpaper -t 8h --no-allow-video -d -b -i ${inputs.wallpapers}"
