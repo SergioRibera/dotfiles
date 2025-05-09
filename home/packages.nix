@@ -53,6 +53,8 @@ with pkgs; {
     cargo-dist
     cargo-release
     cargo-machete
+  ] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable && config.nvim.complete) [
+    quickemu
   ] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
     distrobox
     evsieve
