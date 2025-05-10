@@ -35,18 +35,24 @@
     groups = [ "wheel" "video" "audio" "docker" "libvirtd" "networkmanager" "adbusers" "input" ];
   };
 
-  services.xserver.videoDrivers = lib.optionals
-    (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable)
-    [ "nvidia" ];
-
+  services.xserver.videoDrivers = [ "nvidia" ];
+  boot.initrd.kernelModules = ["nvidia"];
+  # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11_beta ];
   hardware.nvidia = {
     modesetting.enable = true;
-    nvidiaPersistenced = true;
+    nvidiaPersistenced = false;
     forceFullCompositionPipeline = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    open = false;
+    # package = config.boot.kernelPackages.nvidiaPackages.beta;
+    open = true;
+    # powerManagement.enable = true;
+    #prime = {
+    #  sync.enable = true;
+    #  amdgpuBusId = "PCI:0@0:73:0";
+    #  nvidiaBusId = "PCI:0@0:01:0";
+    #};
   };
 
+  wm.actives = ["niri" "sway"];
   wm.screens = let
     height = 1080;
   in [
