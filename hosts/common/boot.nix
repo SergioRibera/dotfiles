@@ -23,17 +23,7 @@ in
     loader = {
       timeout = 3;
       efi.canTouchEfiVariables = true;
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-        theme = pkgs.catppuccin-grub;
-        extraConfig = ''
-          serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
-          terminal_input --append serial
-          terminal_output --append serial
-        '';
-      };
+      systemd-boot.enable = true;
     };
 
     plymouth = lib.mkIf gui.enable {
