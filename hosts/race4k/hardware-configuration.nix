@@ -14,23 +14,23 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/607e4656-c34c-4a77-b9c5-c59cdc2ecb90";
+    { device = "/dev/disk/by-uuid/83b8880f-bb15-48c3-9439-16c0314754b2";
       fsType = "xfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2268-9F75";
+    { device = "/dev/disk/by-uuid/590D-D00D";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   fileSystems."/nix/store" =
-    { device = "/dev/disk/by-uuid/f36c8062-c048-4dae-b287-3e0c976753d3";
+    { device = "/dev/disk/by-uuid/ba9a1511-14af-44bd-8505-868e4c6e20e6";
       fsType = "xfs";
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/968c5286-fdd0-4f7a-8cf3-942d85fc41fd";
+    { device = "/dev/disk/by-uuid/bdbd0187-98b6-4533-b3b9-b2ee84cf5e13";
       fsType = "xfs";
     };
 

@@ -36,6 +36,7 @@
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.displayManager.gdm.wayland = true;
   boot.initrd.kernelModules = ["nvidia"];
   # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11_beta ];
   hardware.nvidia = {
