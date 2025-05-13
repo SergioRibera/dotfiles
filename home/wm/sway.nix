@@ -1,7 +1,7 @@
 { inputs, config, lib, pkgs, ... }: let
   inherit (config) user terminal shell gui wm;
   mod = "Mod4";
-  mkRotation = rot: if rot == "left" then "270" else if rot == "right" then "90" else if rot == "inverted" then "180" else "0";
+  mkRotation = rot: if rot == "left" then "90" else if rot == "right" then "270" else if rot == "inverted" then "180" else "normal";
 in {
   home-manager.users.${user.username} = lib.mkIf user.enableHM {
     wayland.windowManager.sway = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
@@ -45,9 +45,10 @@ in {
         };
         modifier = mod;
         input = {
-          keyboard = {
-            xkb_layout = "us";
-            xkb_variant = "altgr-intl";
+          keyboard = with config.services.xserver; {
+            xkb_layout = xkb.layout;
+            xkb_variant = xkb.variant;
+            xkb_options = xkb.options;
           };
           # touchpad = lib.optional (gui.touchpad) {
           #   dwt = true;
@@ -85,6 +86,9 @@ in {
           "${mod}+j" = "focus down";
           "${mod}+k" = "focus up";
           "${mod}+l" = "focus right";
+
+          "${mod}+c" = "exec hyprpicker -a -f hex";
+          "${mod}+period" = "exec simplemoji -t medium-light -soc wl-copy";
 
           "${mod}+Shift+h" = "move left";
           "${mod}+Shift+j" = "move down";
