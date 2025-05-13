@@ -59,6 +59,7 @@ in
           ublock-origin
           refined-github-
           fastforwardteam
+          auto-tab-discard
           rust-search-extension
           adaptive-tab-bar-colour
           bitwarden-password-manager
@@ -146,23 +147,27 @@ in
           "sidebar.verticalTabs" = true;
           "browser.uiCustomization.state" = builtins.toJSON {
             placements = {
-              widget-overflow-fixed-list = [];
               nav-bar = [
                 "urlbar-container"
-                "unified-extensions-button"
                 "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
                 "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
                 "_2160556a-1fc4-453c-9dba-6707507bf5aa_-browser-action"
+                "unified-extensions-button"
               ];
               unified-extensions-area = [
                 "ublock0_raymondhill_net-browser-action"
                 "_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action"
                 "_04188724-64d3-497b-a4fd-7caffe6eab29_-browser-action"
                 "atbc_easonwong-browser-action"
+                "addon_fastforward_team-browser-action"
+                "_242af0bb-db11-4734-b7a0-61cb8a9b20fb_-browser-action"
+                "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
               ];
-              toolbar-menubar = ["menubar-items"];
-              TabsToolbar = ["tabbrowser-tabs" "alltabs-button"];
-              PersonalToolbar = ["import-button" "personal-bookmarks"];
+              vertical-tabs = ["tabbrowser-tabs"];
+              TabsToolbar = [];
+              toolbar-menubar = [];
+              PersonalToolbar = [];
+              widget-overflow-fixed-list = [];
             };
             seen = [
               "developer-button"
@@ -173,10 +178,15 @@ in
               "ublock0_raymondhill_net-browser-action"
               "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
               "atbc_easonwong-browser-action"
+              "save-to-pocket-button"
+              "profiler-button"
+              "addon_fastforward_team-browser-action"
+              "_242af0bb-db11-4734-b7a0-61cb8a9b20fb_-browser-action"
+              "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
             ];
             dirtyAreaCache = [ "nav-bar" "PersonalToolbar" "unified-extensions-area" "toolbar-menubar" "TabsToolbar"];
-            currentVersion = 17;
-            newElementCount = 4;
+            currentVersion = 22;
+            newElementCount = 9;
           };
 
           # Extensions

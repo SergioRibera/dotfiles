@@ -2,10 +2,10 @@
   {
     "slug": "vimium-ff",
     "name": "Vimium",
-    "version": "2.1.2",
+    "version": "2.2.1",
     "addonId": "{d7742d87-e61d-4b78-b8a1-b469842139fa}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4259790/vimium_ff-2.1.2.xpi",
-    "sha256": "sha256:3b9d43ee277ff374e3b1153f97dc20cb06e654116a833674c79b43b8887820e1",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4458679/vimium_ff-2.2.1.xpi",
+    "sha256": "sha256:9061c7515114a78dcddadbbfde9e77120975140337d1b28695e303ceedaf6182",
     "homepage": "https://github.com/philc/vimium",
     "description": "The Hacker's Browser. Vimium provides keyboard shortcuts for navigation and control in the spirit of Vim.",
     "license": "MIT"
@@ -24,10 +24,10 @@
   {
     "slug": "malwarebytes",
     "name": "Malwarebytes Browser Guard",
-    "version": "2.6.27",
+    "version": "3.0.18",
     "addonId": "{242af0bb-db11-4734-b7a0-61cb8a9b20fb}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4301528/malwarebytes-2.6.27.xpi",
-    "sha256": "sha256:08df30eaf90c879f35104841f5b6985d1ad657d5fcd3050b653e4f7d5a6910eb",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4480102/malwarebytes-3.0.18.xpi",
+    "sha256": "sha256:d061caead81c059aa7fe4fd6f2678d2c3956fe5c67374b3b1d78744a782130ab",
     "homepage": "https://www.malwarebytes.com",
     "description": "The fastest and safest web browsing experience. Secure your privacy by blocking trackers, blocking ads, and blocking malicious content.",
     "license": null
@@ -35,10 +35,10 @@
   {
     "slug": "ublock-origin",
     "name": "uBlock Origin",
-    "version": "1.62.0",
+    "version": "1.63.2",
     "addonId": "uBlock0@raymondhill.net",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4412673/ublock_origin-1.62.0.xpi",
-    "sha256": "sha256:8a9e02aa838c302fb14e2b5bc88a6036d36358aadd6f95168a145af2018ef1a3",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4458450/ublock_origin-1.63.2.xpi",
+    "sha256": "sha256:d93176cef4dc042e41ba500aa2a90e5d57b5be77449cbd522111585e3a0cd158",
     "homepage": "https://github.com/gorhill/uBlock#ublock-origin",
     "description": "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.",
     "license": "GPL-3.0-only"
@@ -46,10 +46,10 @@
   {
     "slug": "refined-github-",
     "name": "Refined GitHub",
-    "version": "25.2.26",
+    "version": "25.4.8",
     "addonId": "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4444298/refined_github-25.2.26.xpi",
-    "sha256": "sha256:447c9191fdd0d62eb47b696a7932f3eed69b1d4f9db547910cda61b3b604b2d2",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4470107/refined_github-25.4.8.xpi",
+    "sha256": "sha256:4e07f83622497c5ea1e2fb39f94d910233cdf467a562df4b37dc39adea6fba47",
     "homepage": "https://github.com/refined-github/refined-github",
     "description": "Simplifies the GitHub interface and adds many useful features.",
     "license": "MIT"
@@ -84,16 +84,16 @@
     "url": "https://addons.mozilla.org/firefox/downloads/file/4435641/rust_search_extension-2.0.2.xpi",
     "sha256": "sha256:10f521001a9fd9c7b8c5f8133daa74de01a5db33fb283b6b472b49c183e8418c",
     "homepage": "https://rust.extension.sh",
-    "description": "The ultimate search extension for Rust\n\nSearch std docs, crates, builtin attributes, official books, and error codes, etc in your address bar instantly.\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4af48e3229ba03b454fb9b352a7e5a4c038e1bcc6721bf744b781a5e96b9e798/https%3A//rust.extension.sh\" rel=\"nofollow\">https://rust.extension.sh</a>",
+    "description": "The ultimate search extension for Rust\n\nSearch std docs, crates, builtin attributes, official books, and error codes, etc in your address bar instantly.\nhttps://rust.extension.sh",
     "license": "MPL-2.0"
   },
   {
     "slug": "adaptive-tab-bar-colour",
     "name": "Adaptive Tab Bar Color",
-    "version": "2.3",
+    "version": "2.4",
     "addonId": "ATBC@EasonWong",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4427118/adaptive_tab_bar_colour-2.3.xpi",
-    "sha256": "sha256:e959de1da7ed66af7476ef8f696fadc070b3ebecc89e57ef5ac53f1d2e4fc4d7",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4465446/adaptive_tab_bar_colour-2.4.xpi",
+    "sha256": "sha256:4ec405a048118fc6daa6df0f022f7578578803361db97276881faa840543cf85",
     "homepage": "https://addons.mozilla.org/en-US/firefox/addon/adaptive-tab-bar-colour/",
     "description": "Changes the color of Firefox theme to match the website’s appearance.",
     "license": "MIT"
@@ -101,10 +101,10 @@
   {
     "slug": "bitwarden-password-manager",
     "name": "Bitwarden Password Manager",
-    "version": "2025.2.0",
+    "version": "2025.4.0",
     "addonId": "{446900e4-71c2-419f-a6a7-df9c091e268b}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4440363/bitwarden_password_manager-2025.2.0.xpi",
-    "sha256": "sha256:c4d7f355a2269620482f50edac7fce3c19f515190f24cdf80edc865f71d3a374",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4484791/bitwarden_password_manager-2025.4.0.xpi",
+    "sha256": "sha256:643cb6fd7b9d1b209f82ca552342390a45c3edc94645cb049e49d016ee28b63c",
     "homepage": "https://bitwarden.com",
     "description": "At home, at work, or on the go, Bitwarden easily secures all your passwords, passkeys, and sensitive information.",
     "license": "GPL-3.0-only"
