@@ -83,8 +83,12 @@ in
 
       obs-studio = {
         enable = gui.enable;
-        # plugins = with pkgs.obs-studio-plugins; [
-        # ];
+        plugins = with pkgs.obs-studio-plugins; [
+          wlrobs
+          advanced-scene-switcher
+          obs-backgroundremoval
+          obs-advanced-masks
+        ];
       };
 
       ssh.addKeysToAgent = "yes";
