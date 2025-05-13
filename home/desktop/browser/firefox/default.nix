@@ -11,6 +11,7 @@ in
     programs.firefox = {
       enable = (gui.enable && user.enableHM && user.browser == "firefox");
       package = pkgs.firefox-devedition-bin.overrideAttrs (prev: {
+        pipewireSupport = true;
         desktopItem = pkgs.makeDesktopItem {
           name = "firefox-developer-edition";
           icon = "firefox-developer-edition";
