@@ -11,10 +11,10 @@ in
     programs.firefox = {
       enable = (gui.enable && user.enableHM && user.browser == "firefox");
       package = pkgs.firefox-devedition-bin.overrideAttrs (prev: {
-        desktopItem = pkgs.makeDesktopItem ({
+        desktopItem = pkgs.makeDesktopItem {
           name = "firefox-developer-edition";
           icon = "firefox-developer-edition";
-          exec = "${pkgs.firefox-devedition-bin}/bin/firefox-developer-edition --name firefox -P ${user.username} %U";
+          exec = "${pkgs.firefox-devedition-bin}/bin/firefox-developer-edition --name firefox -P ${user.username} --new-tab %U";
           desktopName = "Firefox Developer Edition";
           startupWMClass = "firefox-developer-edition";
           startupNotify = true;
@@ -40,7 +40,7 @@ in
               exec = "${pkgs.firefox-devedition-bin}/bin/firefox-developer-edition -P ${user.username} --ProfileManager";
             };
           };
-        });
+        };
       });
       policies = {
         BackgroundAppUpdate = false;
