@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: {
+{ config, ... }: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -38,19 +38,19 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.displayManager.gdm.wayland = true;
   boot.initrd.kernelModules = ["nvidia"];
-  # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11_beta ];
+
+  # Ethernet
+  boot.extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
+
+  # boot = {
+  #   initrd.kernelModules = ["nvidia"];
+  #   kernelParams = ["nvidia-drm.modeset=1" "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"];
+  # };
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaPersistenced = false;
     forceFullCompositionPipeline = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.beta;
     open = true;
-    # powerManagement.enable = true;
-    #prime = {
-    #  sync.enable = true;
-    #  amdgpuBusId = "PCI:0@0:73:0";
-    #  nvidiaBusId = "PCI:0@0:01:0";
-    #};
   };
 
   wm.actives = ["niri" "sway"];
