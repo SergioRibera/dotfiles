@@ -33,25 +33,15 @@ in {
         };
       };
     };
-    biome = {
-      # settings = {
-      #   config_path = "/home/${config.user.username}/biome/config.json";
-      # };
-      binary = {
-        command = "${pkgs.biome}/bin/biome";
-        args = ["lsp"];
-      };
-    };
     nu = {
       command = "${pkgs.nushell}/bin/nu";
       args = ["--lsp"];
     };
-    # discord-presence = {
-    #   command = "${pkgs.discord-presence}/bin/discord-presence-lsp";
-    #   args = [];
-    # };
+    discord_presence = {
+      command = "${pkgs.discord-presence}/bin/discord-presence-lsp";
+      args = [];
+    };
   }
-    // (lsp_pkg "nixd")
     // (lsp_pkg "vue-language-server")
     // (lsp_pkg "typescript-language-server")
     // (lsp_pkg "astro-language-server" "astro-ls")

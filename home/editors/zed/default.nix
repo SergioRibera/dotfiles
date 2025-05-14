@@ -7,26 +7,21 @@ in {
     programs.zed-editor = {
       enable = true;
       extensions = [
-        "astro" "biome" "html"
+        "astro" "html"
         "liquid" # TODO: lsp
         "nix" "nu" "vue"
-        "toml" "dockerfile" # "wakatime"
-        "vitesse" # "discord-presence"
-        "catppuccin-icons"
+        "toml" "dockerfile"
+        "discord-presence" # "wakatime"
+        "vitesse" "catppuccin-icons"
       ];
       extraPackages = with pkgs; [
         # LSP
         nixd
-        biome
+        nil
         nodejs
-        # wakatime-ls
-        # wakatime-cli
+        wakatime-ls
+        wakatime-cli
         taplo-lsp
-        # discord-presence
-        vue-language-server
-        typescript-language-server
-        vscode-langservers-extracted
-        dockerfile-language-server-nodejs
       ];
       userKeymaps = (import ./keymaps.nix);
       userSettings = {

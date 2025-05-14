@@ -7,8 +7,8 @@ pkgs.rustPlatform.buildRustPackage {
   src = pkgs.fetchFromGitHub {
     owner = "xhyrom";
     repo = "zed-discord-presence";
-    rev = "v0.7.0";
-    sha256 = "0r7gpihv5bh4av8rn9rjyphkvqija67w50gng3baxq27mzryygvz";
+    rev = "v0.8.0";
+    sha256 = "sha256-6KpjJajibMY7pBR5XhZf2KPBkBMkdcYKutifNdF3Hko=";
   };
 
   cargoBuildFlags = "-p discord-presence-lsp";

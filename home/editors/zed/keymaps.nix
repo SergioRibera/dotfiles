@@ -1,11 +1,4 @@
 [
-  # Global
-  {
-    "context" = "Workspace";
-    "bindings" = {
-      "ctrl-b" = "workspace::ToggleBottomDock";
-    };
-  }
   # File panel (netrw)
   {
     "context" = "ProjectPanel && not_editing";
@@ -126,6 +119,7 @@
   {
     "context" = "Dock";
     "bindings" = {
+      "ctrl-b" = "workspace::ToggleBottomDock";
       "ctrl-w h" = ["workspace::ActivatePaneInDirection" "Left"];
       "ctrl-w l" = ["workspace::ActivatePaneInDirection" "Right"];
       "ctrl-w k" = ["workspace::ActivatePaneInDirection" "Up"];

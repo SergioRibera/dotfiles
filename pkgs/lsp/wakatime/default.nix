@@ -7,12 +7,12 @@ pkgs.rustPlatform.buildRustPackage {
   src = pkgs.fetchFromGitHub {
     owner = "wakatime";
     repo = "zed-wakatime";
-    rev = "v0.1.7";
-    sha256 = "1rdx80g3bkgcx09x6whrmgj3lc0a73da7m63r4wmgamg8naax0lr";
+    rev = "v0.1.9";
+    sha256 = "sha256-GSIu5yD9V4KAMvSR1Ke9N20gPZDL7Rls9XNonddkUDY=";
   };
 
   cargoBuildFlags = "-p wakatime-ls";
-  cargoHash = "sha256-IBbbe0rRP1Rj8xKuF2tJuFI9kTt3z1MO0hfTsHiGBYU=";
+  cargoHash = "sha256-WBk8zSRUqqYKiYK+c4CdkoLf1RcbwNIMYhUFRWerRPY=";
   cargoLock = { lockFile = ./Cargo.lock; };
 
   meta = {
