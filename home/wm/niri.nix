@@ -133,6 +133,7 @@ in {
             "Mod+B".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "sidebar";
             "Mod+P".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "power-screen";
             "Mod+M".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "screenkey";
+            "Mod+Y" = lib.mkIf sosdEnabled (osd 0 ["show-time"]);
             "Mod+Shift+Return".action = terminal shell.privSession;
             "Mod+C".action = spawn "hyprpicker" "-a" "-f" "hex";
             "Mod+Period".action = spawn "simplemoji" "-t" "medium-light" "-soc" "wl-copy";

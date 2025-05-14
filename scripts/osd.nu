@@ -130,6 +130,10 @@ export def "main num-lock" [] {
   }
 }
 
+export def "main show-time" [] {
+  sosd notification -m "󰃰" -t $"(date now | format date '%H:%M - %D')"
+}
+
 # Main function to handle different key binds
 def handle-key [key: string] {
     match $key {
@@ -159,6 +163,7 @@ export def main [key?: string] {
         print "- brightness-down"
         print "- caps-lock"
         print "- num-lock"
+        print "- show-time"
         print ""
         print "Or use 'handle-key' with one of: XF86AudioMute, XF86AudioMicMute, XF86AudioRaiseVolume, XF86AudioLowerVolume, XF86MonBrightnessUp, XF86MonBrightnessDown, Caps_Lock, Num_Lock"
     }
