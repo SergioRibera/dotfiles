@@ -19,7 +19,9 @@ in
     ./services.nix
   ];
 
-  environment.sessionVariables = lib.optionalAttrs (config.gui.enable){
+  environment.sessionVariables = {
+    NH_FLAKE = "/etc/nixos";
+  } // lib.optionalAttrs (config.gui.enable) {
     NIXOS_OZONE_WL = "1";
   };
 
