@@ -33,6 +33,8 @@ with pkgs; {
     xdg-utils
     wev
   ] ++ lib.optionals config.nvim.complete [
+    wrkflw
+
     # Js
     bun
     nodejs
