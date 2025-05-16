@@ -18,7 +18,7 @@ with pkgs; {
 
     # Utils
     gitui
-    neofetch
+    fastfetch
     ntfs3g
 
     # self overlay
