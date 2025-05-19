@@ -159,6 +159,10 @@ in
         default = true;
       };
     };
+    server-network = mkEnableOption {
+      description = "Enable bluetooth.";
+      default = false;
+    };
     bluetooth = mkEnableOption {
       description = "Enable bluetooth.";
       default = false;

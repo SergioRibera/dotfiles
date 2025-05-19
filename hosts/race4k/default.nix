@@ -6,6 +6,7 @@
   powerManagement.cpuFreqGovernor = "performance";
 
   games = true;
+  server-network = true;
   git.enable = true;
   gui.enable = true;
   sshKeys = true;

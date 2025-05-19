@@ -13,6 +13,7 @@ in
   imports = [
     ./boot.nix
     ./hardware.nix
+    ./networks.nix
     ./options.nix
     ./packages.nix
     ./programs.nix
