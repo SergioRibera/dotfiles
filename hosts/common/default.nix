@@ -62,6 +62,7 @@ in
   services.getty.autologinUser = username;
 
   age.secrets = (makeSecret "github")
+    // (makeSecret "cftun01")
     // (makeSecret "rustlanges")
     // (makeSecret "hosts");
 }

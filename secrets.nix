@@ -10,4 +10,5 @@ in
   "secrets/github.age".publicKeys = systems ++ users;
   "secrets/rustlanges.age".publicKeys = systems ++ users;
   "secrets/hosts.age".publicKeys = systems ++ users;
+  "secrets/cftun01.age".publicKeys = systems ++ users;
 }
