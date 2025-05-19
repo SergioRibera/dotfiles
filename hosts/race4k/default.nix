@@ -33,7 +33,7 @@
     isNormalUser = true;
     enableHM = true;
     browser = "firefox";
-    groups = [ "wheel" "video" "audio" "docker" "libvirtd" "networkmanager" "adbusers" "input" ];
+    groups = [ "wheel" "video" "audio" "docker" "libvirtd" "networkmanager" "adbusers" "input" "dialout" ];
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
