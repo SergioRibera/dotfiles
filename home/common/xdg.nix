@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }:
 let
-  inherit (config) user gui;
+  inherit (config) user gui wm;
   sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
 in
 {
@@ -28,14 +28,15 @@ in
     portal = {
       enable = true;
       xdgOpenUsePortal = true;
-      wlr.enable = true;
-      config = {
-        common = {
-          default = "*";
-          "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+      wlr = {
+        enable = builtins.elem "sway" wm.actives;
+        settings.screencast = {
+          chooser_type = "simple";
+          chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -ro";
         };
       };
       extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
         xdg-desktop-portal-gnome
         # xdg-desktop-portal-hyprland
         # kdePackages.xdg-desktop-portal-kde
