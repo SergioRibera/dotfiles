@@ -22,6 +22,7 @@ in {
 
     programs.niri = {
       enable = gui.enable && (builtins.elem "niri" wm.actives);
+      package = inputs.niri.packages.${pkgs.system}.niri-unstable;
       # package = inputs.niri-pkg.packages.${pkgs.system}.default;
       settings = {
         prefer-no-csd = true;
@@ -176,7 +177,7 @@ in {
               xStr = builtins.toString x;
             in {
               "Mod+${xStr}".action = focus-workspace x;
-              "Mod+Shift+${xStr}".action = move-column-to-workspace x;
+              "Mod+Shift+${xStr}".action = move-column-to-index x;
             })
             (builtins.genList (x: x + 1) 9)
           ));
