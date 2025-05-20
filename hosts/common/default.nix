@@ -1,4 +1,4 @@
-{ inputs, config, lib, ... }:
+{ config, lib, ... }:
 let
   inherit (config.user) username osVersion;
   makeSecret = name: {
@@ -24,6 +24,8 @@ in
     NH_FLAKE = "/etc/nixos";
   } // lib.optionalAttrs (config.gui.enable) {
     NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
   };
 
   nixpkgs.config.allowUnfree = true;

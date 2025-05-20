@@ -28,11 +28,7 @@ in {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
         screenshot-path = "~/Pictures/Screenshot/%Y-%m-%d_%H%M%S.png";
-        environment = {
-          DISPLAY = ":0";
-          QT_QPA_PLATFORM = "wayland";
-          QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-        };
+        environment = { DISPLAY = ":0"; };
         spawn-at-startup = [
           (makeCommand "swww-daemon")
           (makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
