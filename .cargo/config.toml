@@ -4,3 +4,7 @@ ptest = "pretty-test"
 
 [registries.crates-io]
 protocol = "sparse"
+
+[target.'cfg(target_os = "linux")']
+linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=@mold@/bin/mold"]

@@ -41,6 +41,7 @@ with pkgs; {
 
     # C/C++ Develoment
     gcc_multi
+    clang
 
     # Rust Develoment
     fenix.stable.toolchain

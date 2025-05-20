@@ -63,7 +63,10 @@ in
           };
           ".cargo/config.toml" = {
             executable = false;
-            source = ../.cargo/config.toml;
+            source = pkgs.substituteAll {
+              src = ../.cargo/config.toml;
+              mold = "${pkgs.mold}";
+            };
           };
           ".cargo/cargo-generate.toml" = {
             executable = false;
