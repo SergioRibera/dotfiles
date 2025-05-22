@@ -6,6 +6,7 @@ in {
     xdg.configFile."zed/tasks.json" = lib.mkIf config.gui.enable { source = ./tasks.jsonc; };
     programs.zed-editor = {
       enable = true;
+      installRemoteServer = true;
       extensions = [
         "astro" "html"
         "liquid" # TODO: lsp
