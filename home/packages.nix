@@ -40,7 +40,6 @@ with pkgs; {
     nodejs
 
     # C/C++ Develoment
-    gcc_multi
     clang
 
     # Rust Develoment
