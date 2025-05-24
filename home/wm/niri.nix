@@ -40,6 +40,11 @@ in {
           keyboard.xkb = {
             layout = "us";
             variant = "altgr-intl";
+          keyboard = {
+            xkb = with config.services.xserver; {
+              layout = xkb.layout;
+              variant = xkb.variant;
+            };
           };
           touchpad = lib.mkIf gui.touchpad {
             dwt = true;
