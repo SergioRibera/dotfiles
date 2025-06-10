@@ -203,6 +203,9 @@ in {
             block-out-from = "screen-capture";
           }
         ];
+        debug = {
+          wait-for-frame-completion-in-pipewire = [];
+        };
       };
     };
   });
