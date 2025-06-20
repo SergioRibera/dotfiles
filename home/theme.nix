@@ -23,7 +23,7 @@ in {
           name = "Orchis";
           package = pkgs.orchis-theme.overrideAttrs (oldAttrs: {
             border-radius = gui.theme.round;
-            tweaks = [ "solid" "compact" ];
+            tweaks = [ "dark" "solid" "compact" ];
           });
         };
         iconTheme = {
@@ -32,7 +32,10 @@ in {
         };
       };
 
-      dconf.settings."org/gnome/desktop/interface".color-scheme = lib.optionalString (isLinux && gui.enable) "prefer-dark";
+      dconf.settings."org/gnome/desktop/interface" = lib.mkIf (isLinux && gui.enable) {
+       	gtk-theme = "Adwaita-dark";
+       	color-scheme = "prefer-dark";
+      };
 
       xdg.configFile."dorion/themes/default.css".text = theme.discord;
 

@@ -24,6 +24,7 @@ in
     NH_FLAKE = "/etc/nixos";
   } // lib.optionalAttrs (config.gui.enable) {
     NIXOS_OZONE_WL = "1";
+    ADW_DISABLE_PORTAL = "1";
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
   };
