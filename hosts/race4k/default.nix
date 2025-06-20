@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -36,22 +36,42 @@
     groups = [ "wheel" "video" "audio" "docker" "libvirtd" "networkmanager" "adbusers" "input" "dialout" ];
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = pkgs.lib.optionals
+    (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable)
+    [ "nvidia" ];
   services.xserver.displayManager.gdm.wayland = true;
-  boot.initrd.kernelModules = ["nvidia"];
 
   # Ethernet
   boot.extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
 
-  # boot = {
-  #   initrd.kernelModules = ["nvidia"];
-  #   kernelParams = ["nvidia-drm.modeset=1" "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"];
-  # };
+  environment = {
+    systemPackages = [ pkgs.libva-utils ];
+    variables = {
+      NVD_BACKEND = "direct";
+      LIBVA_DRIVER_NAME = "nvidia";
+    };
+  };
+  boot = {
+    initrd.kernelModules = ["nvidia"];
+    kernelParams = ["rcutree.gp_init_delay=1"];
+  };
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaPersistenced = false;
+    powerManagement = {
+      enable = true;
+      finegrained = false;
+    };
     forceFullCompositionPipeline = true;
-    open = true;
+    open = false;
+    # package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+    #  version = "550.163.01";
+    #  sha256_64bit = "sha256-74FJ9bNFlUYBRen7+C08ku5Gc1uFYGeqlIh7l1yrmi4=";
+    #  sha256_aarch64 = "sha256-fYji1Y2vJc5t6dkqbh4AC/fuAswiIvlj2cXX4NmBunw=";
+    #  openSha256 = "";
+    #  settingsSha256 = "sha256-fYji1Y2vJc5t6dkqbh4AC/fuAswiIvlj2cXX4NmBunw=";
+    #  persistencedSha256 = "";
+    # };
   };
 
   wm.actives = ["niri" "sway"];
