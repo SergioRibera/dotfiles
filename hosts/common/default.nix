@@ -1,16 +1,10 @@
 { config, lib, ... }:
 let
   inherit (config.user) username osVersion;
-  makeSecret = name: {
-    "${name}" = {
-      file = ../../secrets/${name}.age;
-      owner = username;
-      group = "wheel";
-    };
-  };
 in
 {
   imports = [
+    ./secrets.nix
     ./boot.nix
     ./hardware.nix
     ./networks.nix
@@ -64,9 +58,4 @@ in
 
   environment.shellAliases = config.shell.aliases;
   services.getty.autologinUser = username;
-
-  age.secrets = (makeSecret "github")
-    // (makeSecret "cftun01")
-    // (makeSecret "rustlanges")
-    // (makeSecret "hosts");
 }
