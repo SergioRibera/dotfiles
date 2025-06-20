@@ -27,6 +27,7 @@ with pkgs; {
   ] ++ lib.optionals (config.gui.enable && hostName == "race4k") [
     # Social
     telegram-desktop
+    slack
 
     # Utils
     scrcpy
