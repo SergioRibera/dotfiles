@@ -1,5 +1,5 @@
 { inputs, config, lib, pkgs, ... }: let
-  inherit (config) gui user terminal shell wm;
+  inherit (config) gui user terminal shell wm services;
   command = terminal.command;
   sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
   makeCommand = command: {
@@ -37,11 +37,9 @@ in {
           (makeCommandArgs [ "dbus-update-activation-environment" "--all" "--systemd" ])
         ];
         input = {
-          keyboard.xkb = {
-            layout = "us";
-            variant = "altgr-intl";
           keyboard = {
-            xkb = with config.services.xserver; {
+            numlock = true;
+            xkb = with services.xserver; {
               layout = xkb.layout;
               variant = xkb.variant;
             };
@@ -131,7 +129,6 @@ in {
             "Mod+Tab".action = spawn "anyrun";
             "Mod+E".action = spawn "cosmic-files";
             "Mod+Return".action = terminal shell.command;
-            # TODO: replace harcoded path by dynamic path from config
             "Mod+B".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "sidebar";
             "Mod+P".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "power-screen";
             "Mod+M".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "screenkey";
@@ -182,6 +179,9 @@ in {
             })
             (builtins.genList (x: x + 1) 9)
           ));
+        layer-rules = [
+          { matches = [ {namespace = "^wallpaper$";}] ; place-within-backdrop = true; }
+        ];
         window-rules = [
           {
             geometry-corner-radius = let
