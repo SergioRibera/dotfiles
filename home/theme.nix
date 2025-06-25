@@ -20,11 +20,8 @@ in {
         gtk3.extraCss = theme.adwaitaGtk;
         gtk4.extraCss = theme.adwaitaGtk;
         theme = {
-          name = "Orchis";
-          package = pkgs.orchis-theme.overrideAttrs (oldAttrs: {
-            border-radius = gui.theme.round;
-            tweaks = [ "dark" "solid" "compact" ];
-          });
+          name = gui.theme.gtk;
+          package = pkgs.gnome-themes-extra;
         };
         iconTheme = {
           name = "Tela";
@@ -33,14 +30,14 @@ in {
       };
 
       dconf.settings."org/gnome/desktop/interface" = lib.mkIf (isLinux && gui.enable) {
-       	gtk-theme = "Adwaita-dark";
+       	gtk-theme = gui.theme.gtk;
        	color-scheme = "prefer-dark";
       };
 
       xdg.configFile."dorion/themes/default.css".text = theme.discord;
 
       home = {
-        sessionVariables.GTK_THEME = lib.optionalString (isLinux && gui.enable) "Orchis";
+        sessionVariables.GTK_THEME = lib.optionalString (isLinux && gui.enable) gui.theme.gtk;
         pointerCursor = lib.mkIf (isLinux && gui.enable) {
           gtk.enable = true;
           name = gui.cursor.name;
