@@ -16,9 +16,7 @@ $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
 $env.GITSTATUS_IGNORE_PATH = $"($env.HOME)/Contributions/nixpkgs"
 
 do --env {
-    let ssh_agent_file = (
-        $nu.temp-path | path join $"ssh-agent-($env.USER? | default $env.USER).nuon"
-    )
+    let ssh_agent_file = $"/tmp/ssh-agent-($env.USER? | default $env.USER).nuon"
 
     if ($ssh_agent_file | path exists) {
         let ssh_agent_env = open ($ssh_agent_file)
