@@ -53,7 +53,10 @@ in {
             tap-button-map = "left-right-middle";
           };
           focus-follows-mouse.enable = true;
-          warp-mouse-to-focus = true;
+          warp-mouse-to-focus = {
+            enable = true;
+            mode = "center-xy";
+          };
         };
         outputs = builtins.listToAttrs (builtins.map (o: {
           name = o.name;
@@ -68,6 +71,7 @@ in {
               height = o.resolution.y;
               refresh = o.frequency;
             };
+            backdrop-color = "#000";
             transform.rotation = mkRotation o.rotation;
           };
         }) wm.screens);
