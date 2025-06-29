@@ -35,11 +35,17 @@ in
           chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -ro";
         };
       };
+      config.common = {
+        "default" = [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.Access"=[ "gtk" ];
+        "org.freedesktop.impl.portal.Notification"=[ "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+      };
+
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
         xdg-desktop-portal-gnome
-        # xdg-desktop-portal-hyprland
-        # kdePackages.xdg-desktop-portal-kde
       ];
     };
   };
