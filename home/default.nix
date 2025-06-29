@@ -1,4 +1,4 @@
-{ lib, config, inputs, pkgs, hostName, ... }:
+{ lib, config, inputs, pkgs, hostName, replaceVal, ... }:
 let
   inherit (config) user gui;
   inherit (user) username;
@@ -63,8 +63,7 @@ in
           };
           ".cargo/config.toml" = {
             executable = false;
-            source = pkgs.substituteAll {
-              src = ../.cargo/config.toml;
+            text = replaceVal ../.cargo/config.toml {
               mold = "${pkgs.mold}";
             };
           };

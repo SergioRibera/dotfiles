@@ -1,10 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, replaceVal, ... }:
 colors: let
   toml = pkgs.formats.toml {};
   toToml = data: toml.generate "theme.toml" data;
-  replace = file: builtins.readFile (pkgs.substituteAll {
-    src = file;
-
+  replace = file: (replaceVal file {
     base00 = colors.base00;
     base01 = colors.base01;
     base02 = colors.base02;
