@@ -27,12 +27,11 @@
       };
       mkNixosCfg = username: system: name: inputs.nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = rec {
+        specialArgs = {
           inherit inputs;
           libx = mkLib system;
-          mkTheme = libx.mkTheme;
           hostName = name;
-        };
+        } // (mkLib system);
         modules = [
           {
             # Hardware
