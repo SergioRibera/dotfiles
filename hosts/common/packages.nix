@@ -11,6 +11,8 @@
     ripgrep
     bottom
 
+    nix-output-monitor
+
     # ssl
     openssl
   ];
