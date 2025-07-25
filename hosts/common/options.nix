@@ -94,7 +94,7 @@ in
         };
         gtk = mkOption {
           type = types.str;
-          default = "Adwaita One Dark";
+          default = "Adwaita-Dark";
           description = "GTK theme name";
         };
         colors = mkOption {

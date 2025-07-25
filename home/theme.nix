@@ -37,7 +37,6 @@ in {
       xdg.configFile."dorion/themes/default.css".text = theme.discord;
 
       home = {
-        sessionVariables.GTK_THEME = lib.optionalString (isLinux && gui.enable) gui.theme.gtk;
         pointerCursor = lib.mkIf (isLinux && gui.enable) {
           gtk.enable = true;
           name = gui.cursor.name;
@@ -47,4 +46,5 @@ in {
       };
     };
   };
+  environment.sessionVariables.GTK_THEME = lib.optionalString (isLinux && gui.enable) "Adwaita:dark";
 }
