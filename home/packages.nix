@@ -74,7 +74,7 @@ with pkgs; {
     kdePackages.xwaylandvideobridge
 
     # GUI
-    pavucontrol
+    pwvucontrol
     anydesk
 
     # self overlay
