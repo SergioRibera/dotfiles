@@ -5,6 +5,7 @@
   # Prioritize performance over efficiency
   powerManagement.cpuFreqGovernor = "performance";
 
+  ia.enable = true;
   games = true;
   server-network = true;
   git.enable = true;

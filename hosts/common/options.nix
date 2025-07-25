@@ -10,6 +10,16 @@ let
 in
 {
   options = with lib; {
+    ia = {
+      enable = mkEnableOption {
+        description = "Enable IA server.";
+        default = true;
+      };
+      service = mkEnableOption {
+        description = "Enable IA as service.";
+        default = true;
+      };
+    };
     wm = {
       actives = mkOption {
         type = types.listOf (types.enum ["niri" "hyprland" "sway"]);

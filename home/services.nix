@@ -19,4 +19,12 @@ in
       };
     };
   });
+
+  services = {
+    ollama = {
+      enable = config.ia.enable;
+      acceleration = "cuda";
+      loadModels = lib.optionals config.ia.service ["deepseek-r1:70b"];
+    };
+  };
 }
