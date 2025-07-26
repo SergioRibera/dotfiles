@@ -83,6 +83,19 @@ $env.config = {
           PWD: [ _direnv ]
       }
   }
+
+  keybindings: [
+    {
+      name: toggle_sudo
+      modifier: control
+      keycode: char_s
+      mode: [emacs vi_insert vi_normal]
+      event: {
+          send: executehostcommand
+          cmd: "let cmd = (commandline); commandline edit (if $cmd starts-with sudo { $cmd | str replace -r '^sudo ' '' } else { 'sudo ' ++ $cmd });"
+      }
+    }
+  ]
 }
 
 source ./carapace.nu
