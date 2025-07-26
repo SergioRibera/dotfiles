@@ -4,7 +4,6 @@ let
     inherit inputs pkgs;
     user = {
       username = "sergioribera";
-      shell = "fish";
     };
     cfg = {
       enable = true;
@@ -18,7 +17,10 @@ let
         colors = (import ../colorscheme/gruvbox-dark).dark;
       };
     };
-    shell.name = "nushell";
+    shell = {
+      name = "nushell";
+      command = ["nu"];
+    };
   }));
 
   script = pkgs.writeShellScriptBin "run-neovide" ''

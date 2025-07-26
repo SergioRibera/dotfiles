@@ -40,7 +40,10 @@ in {
   };
 
   extensions = {
+    live-grep-args.enable = true;
+    file-browser.enable = true;
     ui-select = {
+      enable = true;
       theme = "dropdown";
       layout_strategy = "center";
       layout_config = {
@@ -54,6 +57,7 @@ in {
       };
     };
     project = {
+      enable = true;
       base_dirs = [
         "/etc/nixos"
         "~/Projects/rustlanges"

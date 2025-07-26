@@ -5,7 +5,7 @@ let
   }) servers);
 in
 {
-  enable = true;
+  inlayHints = true;
   keymaps = {
     silent = true;
     diagnostic = {

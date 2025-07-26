@@ -1,4 +1,3 @@
-''
 local tabline = {}
 
 tabline.options = {
@@ -118,4 +117,3 @@ function _G.custom_tabline()
     s = s .. "%#TabLineFill#"
     return s
 end
-''

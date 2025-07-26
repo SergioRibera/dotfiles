@@ -8,28 +8,30 @@
 }:
 with pkgs.lib;
 let
-  tablineLua = import ./tabline.nix;
+  tablineLua = builtins.readFile ./tabline.nix;
   cmpUtilsLua = optionalString cfg.complete (builtins.readFile ./plugins/cmp.lua);
 in
 {
-  enableMan = false;
-  # defaultEditor = true;
   viAlias = true;
   vimAlias = true;
+  enableMan = false;
+  vimdiffAlias = true;
+  defaultEditor = true;
 
   # Packages
-  extraPackages = [ pkgs.ripgrep pkgs.fd ]
+  extraPackages = [ pkgs.fd ]
     ++ lists.optionals (gui.enable && cfg.neovide) [ pkgs.neovide ];
     # ++ lists.optionals cfg.complete [ pkgs.gdb ];
 
+  dependencies = { ripgrep.enable = true; };
+
   # Raw lua
-  extraConfigLuaPre = cmpUtilsLua
-    + tablineLua;
+  extraConfigLuaPre = cmpUtilsLua + tablineLua;
 
   # Neovim options
   opts = import ./opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
-  # Colorscheme
   highlightOverride = import ./colorscheme.nix { inherit (gui.theme) colors; };
+
   # Keymaps
   keymaps = import ./mapping.nix {
     lib = pkgs.lib;
@@ -86,12 +88,6 @@ in
     complete = cfg.complete;
   };
 
-  # Esential plugins
-  plugins = {
-    lsp = pkgs.lib.mkIf cfg.complete (import ./lsp);
-    lazy = {
-      enable = true;
-      plugins = import ./plugins { inherit inputs pkgs user cfg gui; };
-    };
-  };
+  # plugins = import ./plugins { inherit inputs pkgs user cfg gui; };
+  # lsp = pkgs.lib.mkIf cfg.complete (import ./lsp);
 }

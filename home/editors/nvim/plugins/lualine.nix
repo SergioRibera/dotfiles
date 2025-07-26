@@ -2,8 +2,10 @@
   options.component_separators.left = "";
   options.component_separators.right = "";
   options.section_separators = {
-    left = "";
-    right = "";
+    # left = "";
+    # right = "";
+    left = "";
+    right = "";
   };
 
   options.disabled_filetypes.statusline = [ "Term" ];
