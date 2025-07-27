@@ -33,6 +33,7 @@ with pkgs; {
     wev
   ] ++ lib.optionals config.nvim.complete [
     wrkflw
+    dive
 
     # Js
     bun
