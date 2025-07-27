@@ -19,11 +19,9 @@ with pkgs; {
     # Utils
     gitui
     fastfetch
-    ntfs3g
 
     # self overlay
     simple-commits
-    # inputs.cartero.packages.${pkgs.system}.default
   ] ++ lib.optionals (config.gui.enable && hostName == "race4k") [
     # Social
     telegram-desktop
