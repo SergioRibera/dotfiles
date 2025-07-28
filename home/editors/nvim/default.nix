@@ -84,5 +84,4 @@ in
 
   plugins = import ./plugins { inherit inputs pkgs user cfg gui; };
   extraPlugins = with inputs.self.packages.${pkgs.system}; [ nvim-codeshot ];
-  # lsp = pkgs.lib.mkIf cfg.complete (import ./lsp);
 }

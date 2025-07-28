@@ -16,6 +16,11 @@ let
     "RainbowViolet"
     "RainbowCyan"
   ];
+  makeServers = servers: builtins.listToAttrs (builtins.map(s: {
+    name = s;
+    value = { enable = true; };
+  }) servers);
+
   mkPlugins = plugins: builtins.listToAttrs (builtins.map(s: {
     name = s;
     value = { enable = true; };
@@ -56,10 +61,7 @@ in
         };
         sources.providers = {
           lsp.enable = cfg.complete;
-          path.enable = true;
           omni.enable = cfg.complete;
-  				# snippets.enable = cfg.complete;
-  				buffer.enable = true;
         };
         signature.enable = cfg.complete;
         completion.menu.draw.columns = [
@@ -107,7 +109,7 @@ in
         settings.event = "BufReadPost";
       };
       settings = {
-        indent.char = "▏";
+        indent.char = [ "▏" "|" ];
         indent.smart_indent_cap = true;
         # indent.highlight = ibl-hl;
         scope.highlight = ibl-hl;
@@ -136,11 +138,9 @@ in
     "cord" # cord.nvim
   ]) // (mkLazyPlugins [
     # Default start with LSP
-    { name = "lspconfig"; }
     { name = "colorizer"; }
     { name = "treesitter"; }
-    { name = "dap-ui"; }
-    { name = "dap-virtual-text"; }
+    # { name = "dap-virtual-text"; }
   ]) // {
     rainbow-delimiters = {
       enable = true;
@@ -169,6 +169,27 @@ in
       };
     };
 
+    dap-ui = {
+      enable = true;
+      lazyLoad.settings = {
+        before.__raw = ''
+          function()
+            require('lz.n').trigger_load('nvim-dap')
+          end
+        '';
+        keys = [
+          {
+            __unkeyed-1 = "<Leader>dt";
+            __unkeyed-2.__raw = ''
+              function()
+                require("dapui").toggle()
+              end
+            '';
+            desc = "Toggle Debugger UI";
+          }
+        ];
+      };
+    };
     dap = let
       _cfg = name: {
           name = "Default ${name}";
@@ -198,6 +219,107 @@ in
         rust = cfg;
         c = cfg;
         cpp = cfg;
+      };
+    };
+
+    lsp = {
+      enable = true;
+      inlayHints = true;
+      keymaps = {
+        silent = true;
+        diagnostic = {
+          # Floating Diagnostic
+          "<leader>e" = "open_float";
+        };
+        lspBuf = {
+          # Codeactions
+          "<leader>ga" = "code_action";
+          # Hover information
+          "<leader>K" = "hover";
+          # Rename
+          "<leader>rn" = "rename";
+          # Format File
+          "<C-f>" = "format";
+        };
+        extra = [
+          # Generate documentation
+          { key = "<leader>nf"; action = ":lua require('neogen').generate"; }
+          # Show implementations
+          { key = "<leader>gi"; action = ":lua require'telescope.builtin'.lsp_implementations"; }
+          # Telescope References
+          { key = "<leader>gr"; action = ":lua require('telescope.builtin').lsp_references"; }
+          # telescope definitions
+          { key = "<leader>gD"; action = ":lua require('telescope.builtin').lsp_definitions"; }
+        ];
+      };
+
+      luaConfig.pre = ''
+        -- Override handlers
+        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+          vim.lsp.diagnostic.on_publish_diagnostics, {
+            virtual_text = {
+              prefix = "●",
+            },
+            signs = true,
+            underline = true,
+            update_in_insert = true
+          }
+        )
+
+        -- Setup Sign Icons
+        for type, icon in pairs({
+          Error = " ",
+          Warn = " ",
+          Hint = " ",
+          Info = " "
+        }) do
+          local hl = "DiagnosticSign" .. type
+          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+        end
+      '';
+
+      servers = (makeServers [
+        "astro"
+        "bashls"
+        "cssls"
+        "dockerls"
+        "html"
+        "jsonls"
+        "nixd"
+        "nushell"
+        "slint_lsp"
+        "tailwindcss"
+        "taplo"
+        "ts_ls"
+        "volar"
+      ]) // {
+        rust_analyzer = {
+          enable = true;
+          installCargo = false;
+          installRustc = false;
+          installRustfmt = false;
+          settings = {
+            cachePriming.enable = false;
+            check.features = "all";
+            cargo = {
+              features = "all";
+              allTargets = false;
+              buildScripts.enable = true;
+            };
+            completion.snippets.custom = {
+              # TODO: implement custon snippets for Rust
+              # https://nix-community.github.io/nixvim/plugins/lsp/servers/rust-analyzer/settings/completion/snippets.html
+            };
+            diagnostics.experimental.enable = true;
+            imports = {
+              prefix = "self";
+              granularity.group = "module";
+            };
+            # cache = {
+            #     warmup = false,
+            # },
+        };
+        };
       };
     };
   })

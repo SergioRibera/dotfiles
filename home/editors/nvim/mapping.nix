@@ -29,7 +29,6 @@ in
   { key = "<Leader>pp"; action = "<cmd>lua require'telescope'.extensions.project.project()<CR>"; options = opts "Show regex content on all files on workspace"; }
 
   # Dap
-  { key = "<Leader>dt"; action = "<cmd>lua require('dapui').toggle()<CR>"; options = opts "Toggle dap-ui"; }
   { key = "<Leader>db"; action = "<cmd>DapToggleBreakpoint<CR>"; options = opts "Toggle debug breakpoint"; }
   { key = "<Leader>dc"; action = "<cmd>DapContinue<CR>"; options = opts "Continue debuggin"; }
   { key = "<Leader>dr"; action = "<cmd>lua require('dapui).open({reset = true})<CR>"; options = opts "Reset dap-ui"; }

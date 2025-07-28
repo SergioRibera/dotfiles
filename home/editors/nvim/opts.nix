@@ -36,6 +36,6 @@
 
   showtabline = 2;
   tabline = "%!v:lua.custom_tabline()";
-  list = true;
+  list = false;
   listchars = { lead = "⋅"; tab = "|⋅"; };
 }
