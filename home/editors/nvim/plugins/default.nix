@@ -193,8 +193,24 @@ in
     dap = let
       _cfg = name: {
           name = "Default ${name}";
-          type = "gdb";
+          type = "codelldb";
           request = name;
+          program.__raw = ''function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          end
+          '';
+          args.__raw = ''function ()
+            local argv = {}
+            arg = vim.fn.input(string.format("argv: "))
+            for a in string.gmatch(arg, "%S+") do
+              table.insert(argv, a)
+            end
+            return argv
+          end'';
+          cwd = "\${workspaceFolder}";
+          stopOnEntry = false;
+          MIMode = "gdb";
+          miDebuggerPath = "${pkgs.gdb}/bin/gdb";
         };
       cfg = [(_cfg "launch")];
     in {
@@ -210,8 +226,15 @@ in
       adapters = {
         # C, C++, Rust
         executables.gdb = {
-          command = "gdb";
+          command = "${pkgs.gdb}/bin/gdb";
           args = [ "-i" "dap" ];
+        };
+        servers.codelldb = {
+          port = "\${port}";
+          executable = {
+            command = "${pkgs.lldb}/bin/lldb-dap";
+            args = [ "--port" "\${port}" ];
+          };
         };
       };
 
