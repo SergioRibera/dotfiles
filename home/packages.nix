@@ -25,7 +25,11 @@ with pkgs; {
   ] ++ lib.optionals (config.gui.enable && hostName == "race4k") [
     # Social
     telegram-desktop
+
+    # Work
     slack
+    figma-linux
+    onlyoffice-bin
 
     # Utils
     scrcpy
