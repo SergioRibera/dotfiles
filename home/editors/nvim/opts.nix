@@ -1,6 +1,6 @@
 { lib, guiEnable }: {
   completeopt = "menu,menuone,noselect";
-  guifont = lib.optionalString guiEnable "FiraCode_Nerd_Font,CaskaydiaCove_Nerd_Font:h13";
+  guifont = lib.optionalString guiEnable "FiraCode Nerd Font,CaskaydiaMono Nerd Font:h13";
   number = true;
   # cul = true;
   signcolumn = "yes";
@@ -36,4 +36,6 @@
 
   showtabline = 2;
   tabline = "%!v:lua.custom_tabline()";
+  list = true;
+  listchars = { lead = "⋅"; tab = "|⋅"; };
 }

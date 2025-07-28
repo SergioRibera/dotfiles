@@ -8,25 +8,25 @@
 }:
 with pkgs.lib;
 let
-  tablineLua = builtins.readFile ./tabline.nix;
-  cmpUtilsLua = optionalString cfg.complete (builtins.readFile ./plugins/cmp.lua);
+  tablineLua = builtins.readFile ./tabline.lua;
+  pluginsModLua = optionalString cfg.complete (builtins.readFile ./plugins/mod.lua);
 in
 {
   viAlias = true;
   vimAlias = true;
   enableMan = false;
-  vimdiffAlias = true;
-  defaultEditor = true;
+  # vimdiffAlias = true;
+  # defaultEditor = true;
 
   # Packages
-  extraPackages = [ pkgs.fd ]
-    ++ lists.optionals (gui.enable && cfg.neovide) [ pkgs.neovide ];
-    # ++ lists.optionals cfg.complete [ pkgs.gdb ];
+  extraPackages = with pkgs; [ fd ]
+    ++ lists.optionals (gui.enable && cfg.neovide) [ nerd-fonts.caskaydia-mono nerd-fonts.fira-code neovide ]
+    ++ lists.optionals cfg.complete [ gdb ];
 
   dependencies = { ripgrep.enable = true; };
 
   # Raw lua
-  extraConfigLuaPre = cmpUtilsLua + tablineLua;
+  extraConfigLuaPre = pluginsModLua + tablineLua;
 
   # Neovim options
   opts = import ./opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
@@ -34,8 +34,8 @@ in
 
   # Keymaps
   keymaps = import ./mapping.nix {
+    inherit shell;
     lib = pkgs.lib;
-    shell = shell.name;
     complete = cfg.complete;
   };
 
@@ -64,12 +64,6 @@ in
       pattern = [ "*" ];
       command = "checktime";
     }
-    # Prevent correct works cmp with telescope
-    {
-      event = [ "FileType" ];
-      pattern = [ "TelescopePrompt" ];
-      command = "lua require('cmp').setup.buffer { enabled = false }";
-    }
   ] ++ pkgs.lib.lists.optionals cfg.complete [
     # Refresh LSP progress on lualine
     {
@@ -88,6 +82,7 @@ in
     complete = cfg.complete;
   };
 
-  # plugins = import ./plugins { inherit inputs pkgs user cfg gui; };
+  plugins = import ./plugins { inherit inputs pkgs user cfg gui; };
+  extraPlugins = with inputs.self.packages.${pkgs.system}; [ nvim-codeshot ];
   # lsp = pkgs.lib.mkIf cfg.complete (import ./lsp);
 }

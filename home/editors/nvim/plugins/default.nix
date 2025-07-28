@@ -20,193 +20,184 @@ let
     name = s;
     value = { enable = true; };
   }) plugins);
-  mkLazyPlugin = pkg: {
-    config ? true, optional ? false,
-    ft ? null, init ? null,
-    lazy ? true, event ? null,
-    cmd ? null, main ? null,
-    dependencies ? null, opts ? {}
-  }: {
-    inherit pkg ft opts lazy event main dependencies;
-  };
-  mkTreesitter = lang: ft: {
-    pkg = pkgs.vimPlugins.nvim-treesitter-parsers.${lang};
-    inherit ft;
-  };
+
+  mkLazyPlugins = plugins: builtins.listToAttrs (builtins.map(s: {
+    name = s.name;
+    value = {
+      enable = true;
+      lazyLoad = {
+        enable = true;
+        settings = if (builtins.hasAttr "settings" s) then s.settings else { event = "LspAttach"; };
+      };
+    };
+  }) plugins);
 in
-with pkgs.vimPlugins;
-with inputs.self.packages.${pkgs.system};
-
-(mkPlugins [
-  "web-devicons"
-  "mini-surround"
-  "which-key"
-]) // {
-  # Completion
-  blink-cmp = {
-    enable = true;
-    settings = {
-      kind_icons = {
-        Text = "󰉿";
-        Method = "󰆧";
-        Function = "󰊕";
-        Constructor = "";
-        Field = "󰜢";
-        Variable = "󰀫";
-        Class = "󰠱";
-        Interface = "";
-        Module = "";
-        Property = "󰜢";
-        Unit = "󰑭";
-        Value = "󰎠";
-        Enum = "";
-        Keyword = "󰌋";
-        Snippet = "";
-        Color = "󰏘";
-        File = "󰈙";
-        Reference = "󰈇";
-        Folder = "󰉋";
-        EnumMember = "";
-        Constant = "󰏿";
-        Struct = "󰙅";
-        Event = "";
-        Operator = "󰆕";
-        TypeParameter = "";
+  (mkPlugins [
+    "web-devicons"
+    "which-key"
+  ]) // (mkLazyPlugins [
+    { name = "mini-surround"; settings.event = "BufReadPost"; }
+  ]) // {
+    lz-n = {
+      enable = true;
+      autoLoad = true;
+    };
+    # Completion
+    blink-cmp = {
+      enable = true;
+      settings = {
+        keymap = {
+          "<C-space>" = [ "show" "show_documentation" "hide_documentation" ];
+          "<CR>" = [ "select_and_accept" "fallback" ];
+          "<Down>" = [ "select_next" "fallback" ];
+          "<S-Tab>" = [ "snippet_backward" "select_prev" "fallback" ];
+          "<Tab>" = [ "snippet_forward" "select_next" "fallback" ];
+          "<Up>" = [ "select_prev" "fallback" ];
+        };
+        sources.providers = {
+          lsp.enable = cfg.complete;
+          path.enable = true;
+          omni.enable = cfg.complete;
+  				# snippets.enable = cfg.complete;
+  				buffer.enable = true;
+        };
+        signature.enable = cfg.complete;
+        completion.menu.draw.columns = [
+          [ "kind_icon" ]
+          { "__unkeyed.1" = "label"; gap = 2; }
+          [ "label_description" ]
+        ];
+        appearance = {
+          use_nvim_cmp_as_default = true;
+          kind_icons = {
+            Text = "󰉿";
+            Method = "󰆧";
+            Function = "󰊕";
+            Constructor = "";
+            Field = "󰜢";
+            Variable = "󰀫";
+            Class = "󰠱";
+            Interface = "";
+            Module = "";
+            Property = "󰜢";
+            Unit = "󰑭";
+            Value = "󰎠";
+            Enum = "";
+            Keyword = "󰌋";
+            Snippet = "";
+            Color = "󰏘";
+            File = "󰈙";
+            Reference = "󰈇";
+            Folder = "󰉋";
+            EnumMember = "";
+            Constant = "󰏿";
+            Struct = "󰙅";
+            Event = "";
+            Operator = "󰆕";
+            TypeParameter = "";
+          };
+        };
       };
     };
-  };
-  # Editor
-  indent-blankline = {
-    enable = true;
-    settings = {
-      indent.char = "▏";
-      indent.smart_indent_cap = true;
-      # scope.char = [ "╭" "─" ];
-      # indent.highlight = ibl-hl;
-      # scope.highlight = ibl-hl;
-    };
-  };
-  lualine = {
-    enable = true;
-    settings = import ./lualine.nix { inherit cfg lib colors; };
-  };
-  telescope = { enable = true; } // (import ./telescope.nix { inherit cfg lib; });
-}
-// lib.optionalAttrs cfg.complete ((mkPlugins [
-  "wakatime"
-  "neogen"
-  "luasnip"
-  "lspconfig"
-  "colorizer"
-  "presence-nvim"
-]) // {
-  gitsigns = {
-    enable = true;
-    settings =  {
-      signs = {
-        add.text = "┃";
-        change.text = "┃";
-        delete.text = "▁";
-        topdelete.text = "▔";
-        changedelete.text = "┃";
-        untracked.text = "┆";
+    # Editor
+    indent-blankline = {
+      enable = true;
+      lazyLoad = {
+        enable = true;
+        settings.event = "BufReadPost";
       };
-      numhl = true;
-      attach_to_untracked = false;
-      current_line_blame = true;
-      update_debounce = 200;
-      diff_opts.algorithm = "minimal";
+      settings = {
+        indent.char = "▏";
+        indent.smart_indent_cap = true;
+        # indent.highlight = ibl-hl;
+        scope.highlight = ibl-hl;
+        # whitespace = {
+        #   highlight = [ "CursorColumn" "Whitespace" ];
+        #   remove_blankline_trail = false;
+        # };
+      };
     };
-  };
+    lualine = {
+      enable = true;
+      settings = import ./lualine.nix { inherit cfg lib colors; };
+    };
+    telescope = {
+      enable = true;
+      lazyLoad = {
+        enable = true;
+        settings.event = "BufReadPost";
+      };
+    } // (import ./telescope.nix { });
+  }
+  // lib.optionalAttrs cfg.complete ((mkPlugins [
+    "wakatime"
+    "neogen"
+    "friendly-snippets"
+    "cord" # cord.nvim
+  ]) // (mkLazyPlugins [
+    # Default start with LSP
+    { name = "lspconfig"; }
+    { name = "colorizer"; }
+    { name = "treesitter"; }
+    { name = "dap-ui"; }
+    { name = "dap-virtual-text"; }
+  ]) // {
+    rainbow-delimiters = {
+      enable = true;
+      highlight = ibl-hl;
+    };
+    gitsigns = {
+      enable = true;
+      lazyLoad = {
+        enable = true;
+        settings.event = "BufReadPost";
+      };
+      settings =  {
+        signs = {
+          add.text = "┃";
+          change.text = "┃";
+          delete.text = "▁";
+          topdelete.text = "▔";
+          changedelete.text = "┃";
+          untracked.text = "┆";
+        };
+        numhl = true;
+        attach_to_untracked = false;
+        current_line_blame = true;
+        update_debounce = 200;
+        diff_opts.algorithm = "minimal";
+      };
+    };
 
-  treesitter = {
-    enable = true;
-    grammarPackages = [
-      (mkTreesitter "c" ["c" "cuda"])
-      (mkTreesitter "go" ["go" "gomod" "gowork" "gotmpl"])
-      (mkTreesitter "sql" ["sql"])
-      (mkTreesitter "vue" ["vue"])
-      (mkTreesitter "nix" ["nix"])
-      (mkTreesitter "lua" ["lua"])
-      (mkTreesitter "cpp" ["cpp"])
-      (mkTreesitter "ini" ["ini"])
-      (mkTreesitter "ron" ["ron"])
-      (mkTreesitter "fish" ["fish"])
-      (mkTreesitter "css" ["css" "less"])
-      (mkTreesitter "tsx" ["javascript.jsx" "typescript" "typescriptreact" "typescript.tsx"])
-      (mkTreesitter "xml" ["xml"])
-      (mkTreesitter "scss" ["scss"])
-      (mkTreesitter "glsl" ["glsl" "vert" "tesc" "tese" "frag" "geom" "comp"])
-      (mkTreesitter "json" ["json"])
-      (mkTreesitter "bash" ["sh" "bash"])
-      (mkTreesitter "yaml" ["yaml" "yml"])
-      (mkTreesitter "rust" ["rust"])
-      (mkTreesitter "wgsl" ["wgsl"])
-      (mkTreesitter "llvm" ["llvm"])
-      (mkTreesitter "luau" ["luau"])
-      (mkTreesitter "hlsl" ["hlsl"])
-      (mkTreesitter "toml" ["toml"])
-      (mkTreesitter "diff" ["diff"])
-      (mkTreesitter "make" ["cmake" "make" "mak" "makefile"])
-      (mkTreesitter "http" ["http"])
-      (mkTreesitter "html" ["html" "templ"])
-      (mkTreesitter "mlir" ["mlir"])
-      (mkTreesitter "regex" ["regex"])
-      (mkTreesitter "astro" ["astro"])
-      (mkTreesitter "cmake" ["cmake"])
-      (mkTreesitter "query" ["query"])
-      (mkTreesitter "ocaml" ["ocaml" "menhir" "ocamlinterface" "ocamllex" "reason" "dune"])
-      (mkTreesitter "jsonc" ["jsonc"])
-      (mkTreesitter "liquid" ["liquid"])
-      (mkTreesitter "python" ["python"])
-      (mkTreesitter "c_sharp" ["cs"])
-      (mkTreesitter "haskell" ["haskell" "lhaskell"])
-      (mkTreesitter "markdown" ["markdown"])
-      (mkTreesitter "gitignore" ["gitignore"])
-      (mkTreesitter "wgsl_bevy" ["wgsl_bevy"])
-      (mkTreesitter "gitcommit" ["gitcommit"])
-      (mkTreesitter "javascript" ["javascript" "javascriptreact"])
-      (mkTreesitter "git_config" ["gitconfig"])
-      (mkTreesitter "ssh_config" ["sshconfig"])
-      (mkTreesitter "dockerfile" ["dockerfile"])
-    ];
-  };
-})
+    dap = let
+      _cfg = name: {
+          name = "Default ${name}";
+          type = "gdb";
+          request = name;
+        };
+      cfg = [(_cfg "launch")];
+    in {
+      enable = true;
+      lazyLoad = {
+        enable = true;
+        settings.event = "LspAttach";
+      };
+      signs.dapBreakpoint = {
+        text = "●";
+        texthl = "Debug";
+      };
+      adapters = {
+        # C, C++, Rust
+        executables.gdb = {
+          command = "gdb";
+          args = [ "-i" "dap" ];
+        };
+      };
 
-[
-  # completion
-  # (mkLazyPlugin nvim-cmp {
-  #   event = ["CmdlineEnter" "InsertEnter"];
-  #   opts.__raw = import ./cmp.nix { inherit cfg; lib = pkgs.lib; };
-  # })
-  # (mkLazyPlugin cmp-cmdline { event = ["CmdlineEnter"]; })
-  # (mkLazyPlugin cmp-buffer { event = ["InsertEnter"]; })
-  # (mkLazyPlugin cmp-path { event = ["InsertEnter" "CmdlineEnter"]; })
-] ++ lib.optionals cfg.complete [
-  (mkLazyPlugin nvim-codeshot {
-    cmd = ["SSSelected" "SSFocused"];
-    opts = {
-      copy = "%c | wl-copy";
-      fonts = "";
-      shadow_image = true;
-      use_current_theme = true;
-      background = "#AAAAFF";
-      author = "@SergioRibera";
-      author_color = "#000";
+      configurations = {
+        rust = cfg;
+        c = cfg;
+        cpp = cfg;
+      };
     };
   })
-
-  # (mkLazyPlugin cmp-nvim-lsp { event = "LspAttach"; })
-  # (mkLazyPlugin cmp-nvim-lsp-signature-help { event = "LspAttach"; })
-  # (mkLazyPlugin nvim-cmp-dotenv { event = ["BufEnter *.*"]; })
-
-  # Colors
-  ({ pkg = pkgs.vimPlugins.nvim-treesitter-parsers.comment; event = "BufReadPost"; })
-  (mkLazyPlugin rainbow-delimiters-nvim {
-    event = "BufReadPost";
-    main = "rainbow-delimiters.setup";
-    opts.highlight = ibl-hl;
-  })
-
-  # dap = import ../plugins/dap.nix;
-]

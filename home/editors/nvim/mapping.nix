@@ -38,5 +38,5 @@ in
   { mode = [ "v" ]; key = "<leader>ss"; action = ":SSSelected<Cr>"; options = opts "Take screenshot"; }
 
   # open shell
-  { key = "<C-b>"; action = "<Cmd> split term://${shell.command} | resize 10 <CR>"; options = opts "Open Terminal"; }
+  { key = "<C-b>"; action = "<Cmd> split term://${lib.strings.concatStringsSep " " shell.command} | resize 10 <CR>"; options = opts "Open Terminal"; }
 ]
