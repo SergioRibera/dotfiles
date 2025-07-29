@@ -54,7 +54,7 @@ in {
           width.__raw = ''function(_, max_columns, _)
             return math.min(max_columns, 80)
           end'';
-          height = ''function(_, _, max_lines)
+          height.__raw = ''function(_, _, max_lines)
             return math.min(max_lines, 15)
           end'';
         };
