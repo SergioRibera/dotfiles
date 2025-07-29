@@ -3,7 +3,7 @@
 #                 https://gist.github.com/dsample/79a97f38bf956f37a0f99ace9df367b9
 #                 https://waylonwalker.com/drawing-ascii-boxes
 #                 https://asciiflow.com
-{ inputs, pkgs, user, cfg, gui }:
+{ pkgs, cfg, gui, ... }:
 let
   lib = pkgs.lib;
   colors = gui.theme.colors;
@@ -101,6 +101,59 @@ in
         };
       };
     };
+    lualine = {
+      enable = true;
+      settings = import ./lualine.nix { inherit cfg lib colors; };
+    };
+    telescope = {
+      enable = true;
+      lazyLoad = {
+        enable = true;
+        settings.event = "BufReadPost";
+      };
+    } // (import ./telescope.nix { });
+    auto-session = {
+      enable = true;
+      settings = {
+        auto_create.__raw = ''function()
+          local cmd = "git rev-parse --is-inside-work-tree"
+          return vim.fn.system(cmd) == "true\n"
+        end'';
+        auto_restore_last_session.__raw = ''vim.loop.cwd() == vim.loop.os_homedir()'';
+        lazy_support = true;
+        bypass_save_filetypes = ["alpha" "netrw"];
+        ignore_filetypes_on_save = ["checkhealth"];
+        cwd_change_handling = true;
+        lsp_stop_on_restore = true;
+
+        session_lens = {
+          load_on_setup = true;
+          picker_opts = null;
+        };
+
+        post_cwd_changed_cmds = {
+          __unkeyed."1".__raw = ''function()
+            require("lualine").refresh()
+          end'';
+        };
+      };
+    };
+  }
+  // lib.optionalAttrs cfg.complete ((mkPlugins [
+    "wakatime"
+    "neogen"
+    "friendly-snippets"
+    "cord" # cord.nvim
+  ]) // (mkLazyPlugins [
+    # Default start with LSP
+    { name = "colorizer"; }
+    { name = "treesitter"; }
+    # { name = "dap-virtual-text"; }
+  ]) // {
+    rainbow-delimiters = {
+      enable = true;
+      highlight = ibl-hl;
+    };
     # Editor
     indent-blankline = {
       enable = true;
@@ -118,33 +171,6 @@ in
         #   remove_blankline_trail = false;
         # };
       };
-    };
-    lualine = {
-      enable = true;
-      settings = import ./lualine.nix { inherit cfg lib colors; };
-    };
-    telescope = {
-      enable = true;
-      lazyLoad = {
-        enable = true;
-        settings.event = "BufReadPost";
-      };
-    } // (import ./telescope.nix { });
-  }
-  // lib.optionalAttrs cfg.complete ((mkPlugins [
-    "wakatime"
-    "neogen"
-    "friendly-snippets"
-    "cord" # cord.nvim
-  ]) // (mkLazyPlugins [
-    # Default start with LSP
-    { name = "colorizer"; }
-    { name = "treesitter"; }
-    # { name = "dap-virtual-text"; }
-  ]) // {
-    rainbow-delimiters = {
-      enable = true;
-      highlight = ibl-hl;
     };
     gitsigns = {
       enable = true;
@@ -341,7 +367,7 @@ in
             # cache = {
             #     warmup = false,
             # },
-        };
+          };
         };
       };
     };
