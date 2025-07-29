@@ -15,8 +15,8 @@
   bluetooth = false;
 
   nvim = {
-    enable = false;
-    neovide = false;
+    enable = true;
+    neovide = true;
     complete = true;
   };
 
@@ -40,7 +40,7 @@
   services.xserver.videoDrivers = pkgs.lib.optionals
     (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable)
     [ "nvidia" ];
-  services.xserver.displayManager.gdm.wayland = true;
+  services.displayManager.gdm.wayland = true;
 
   # Ethernet
   boot.extraModulePackages = with config.boot.kernelPackages; [ r8125 ];

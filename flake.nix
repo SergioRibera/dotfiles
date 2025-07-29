@@ -73,12 +73,19 @@
     };
 
   inputs = {
-    fenix.url = "github:nix-community/fenix";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    crane.url = "github:ipetkov/crane";
     fu.url = "github:numtide/flake-utils";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    agenix.url = "github:ryantm/agenix";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -87,12 +94,14 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    anyrun.url = "github:Kirottu/anyrun";
     wired = {
       url = "github:Toqozz/wired-notify";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri.url = "github:sodiboo/niri-flake";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # niri-pkg.url = "git+file:///home/s4rch/Contributions/niri";
     # nixos-cosmic = {
     #   url = "github:lilyinstarlight/nixos-cosmic";
@@ -108,11 +117,23 @@
     #   # inputs.hyprland.follows = "hyprland";
     # };
     # My tool to take screen/code screenshots
-    sss.url = "github:SergioRibera/sss";
+    sss = {
+      url = "github:SergioRibera/sss";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.fenix.follows = "fenix";
+      inputs.flake-utils.follows = "fu";
+      inputs.crane.follows = "crane";
+    };
     # Dev Mode
     # sosd.url = "git+file:///home/s4rch/Projects/rust/soft_osd";
-    sosd.url = "github:SergioRibera/soft_osd";
-    simplemoji.url = "github:SergioRibera/simplemoji";
+    sosd = {
+      url = "github:SergioRibera/soft_osd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    simplemoji = {
+      url = "github:SergioRibera/simplemoji";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # nixificate my neovim configs
     nixvim = {
       url = "github:nix-community/nixvim";

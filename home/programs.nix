@@ -5,7 +5,6 @@ in
 {
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {
     imports = [
-      inputs.anyrun.homeManagerModules.default
       inputs.sss.nixosModules.home-manager
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isLinux [
       inputs.nixvim.homeManagerModules.nixvim
@@ -90,8 +89,6 @@ in
           obs-advanced-masks
         ];
       };
-
-      ssh.addKeysToAgent = "yes";
     };
   });
 }

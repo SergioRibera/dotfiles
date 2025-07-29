@@ -2,12 +2,12 @@
 
 pkgs.rustPlatform.buildRustPackage {
   pname = "xdg-desktop-portal-cosmic";
-  version = "e7c92a7316ad5c6e0ccfa08adaae118ee8f2738f";
+  version = "a9e8731f0f2b8b7f73d595bb9db22448a39d7529";
 
   src = pkgs.fetchFromGitHub {
     owner = "pop-os";
     repo = "xdg-desktop-portal-cosmic";
-    rev = "e7c92a7316ad5c6e0ccfa08adaae118ee8f2738f";
+    rev = "a9e8731f0f2b8b7f73d595bb9db22448a39d7529";
     sha256 = "1a2yilswgqbkg10jnivpnmwlxv5484zbws1pb98av2v5721iqlr2";
   };
 

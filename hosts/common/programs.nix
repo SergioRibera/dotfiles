@@ -20,7 +20,6 @@ in {
       loadInNixShell = true;
     };
     ssh = {
-      startAgent = true;
       extraConfig = ''
         AddKeysToAgent yes
         Host github.com

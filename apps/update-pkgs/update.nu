@@ -23,7 +23,7 @@ def download-cargo-lock [owner: string, repo: string, rev: string] {
 }
 
 def calculate-hash [owner: string, repo: string, rev: string] {
-    let hash = (nix-prefetch-url --type sha256 --unpack $"https://github.com/($owner)/($repo)/archive/($rev).tar.gz")
+    let hash = (nix-prefetch-url --type sha256 $"https://github.com/($owner)/($repo)/archive/($rev).tar.gz")
     $hash
 }
 

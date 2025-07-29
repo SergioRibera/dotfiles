@@ -1,14 +1,14 @@
 { pkgs }:
 pkgs.rustPlatform.buildRustPackage {
   pname = "wakatime-ls";
-  version = "v0.1.7";
+  version = "v0.1.9";
 
   doCheck = false;
   src = pkgs.fetchFromGitHub {
     owner = "wakatime";
     repo = "zed-wakatime";
     rev = "v0.1.9";
-    sha256 = "sha256-GSIu5yD9V4KAMvSR1Ke9N20gPZDL7Rls9XNonddkUDY=";
+    sha256 = "0djhckbrss3kymn1kvfbj0yj0v9ppnkx94gl6a084mzx43kjw8hr";
   };
 
   cargoBuildFlags = "-p wakatime-ls";

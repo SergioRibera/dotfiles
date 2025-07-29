@@ -9,12 +9,7 @@ in
   enable = true;
 
   config = {
-    plugins = with inputs.anyrun.packages.${pkgs.system}; [
-      applications
-      rink
-      randr
-      shell
-    ];
+    plugins = [ "applications" "rink" "randr" "shell" ];
 
     width.fraction = 0.3;
     hidePluginInfo = true;

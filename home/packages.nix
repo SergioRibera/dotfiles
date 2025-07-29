@@ -83,9 +83,6 @@ with pkgs; {
     # self overlay
     cosmic-files
 
-    # Icons
-    papirus-icon-theme
-
     # Discord
     discord
     # Dorion Client: Rust + Tauri
