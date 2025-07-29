@@ -12,12 +12,12 @@ in
       enable = (gui.enable && user.enableHM && user.browser == "firefox");
       package = pkgs.firefox-devedition.overrideAttrs (prev: {
         pipewireSupport = true;
-        desktopItem = pkgs.makeDesktopItem {
-          name = "firefox-developer-edition";
-          icon = "firefox-developer-edition";
-          exec = "${pkgs.firefox-devedition}/bin/firefox-developer-edition --name firefox -P ${user.username} --new-tab %U";
+        desktopItem = pkgs.makeDesktopItem rec {
+          name = "firefox-devedition";
+          icon = name;
+          exec = "${name} --name firefox -P ${user.username} %U";
           desktopName = "Firefox Developer Edition";
-          startupWMClass = "firefox-developer-edition";
+          startupWMClass = name;
           startupNotify = true;
           terminal = false;
           genericName = "Web Browser";
@@ -32,13 +32,17 @@ in
             "x-scheme-handler/https"
           ];
           actions = {
+            new-window = {
+              name = "New Window";
+              exec = "${name} -P ${user.username} --new-window %U";
+            };
             new-private-window = {
               name = "New Private Window";
-              exec = "${pkgs.firefox-devedition}/bin/firefox-developer-edition -P ${user.username} --private-window %U";
+              exec = "${name} -P ${user.username} --private-window %U";
             };
             profile-manager-window = {
               name = "Profile Manager";
-              exec = "${pkgs.firefox-devedition}/bin/firefox-developer-edition -P ${user.username} --ProfileManager";
+              exec = "${name} -P ${user.username} --ProfileManager";
             };
           };
         };
