@@ -98,6 +98,12 @@
       url = "github:Toqozz/wired-notify";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sherlock = {
+      url = "github:Skxxtz/sherlock";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.crane.follows = "crane";
+      inputs.flake-parts.follows = "flake-parts";
+    };
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";

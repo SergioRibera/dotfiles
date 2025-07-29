@@ -181,9 +181,8 @@ in {
           # "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
           "SUPER,E,exec,cosmic-files"
           # "SUPER,D,exec,trilium"
-          "SUPER,Tab,exec,anyrun"
+          "SUPER,Tab,exec,sherlock"
           # "SUPER,Tab,overview:toggle," # Hyprspace plugin
-          # "SUPER_SHIFT,Tab,exec,anyrun"
           # "SUPER,N,exec,${user.browser}"
           # "SUPER_SHIFT,N,exec,${user.browser} --private-window"
           "SUPER,S,exec,sss --area \"$(slurp -d)\" -o raw | wl-copy"

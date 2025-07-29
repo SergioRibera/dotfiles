@@ -130,7 +130,7 @@ in {
             "Mod+Print".action = screenshot-window;
             "Mod+Shift+S".action = screenshot;
 
-            "Mod+Tab".action = spawn "anyrun";
+            "Mod+Tab".action = spawn "sherlock";
             "Mod+E".action = spawn "cosmic-files";
             "Mod+Return".action = terminal shell.command;
             "Mod+B".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "sidebar";

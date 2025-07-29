@@ -26,7 +26,7 @@ in {
             text = c.base0B;
           };
         };
-        menu = "anyrun";
+        menu = "sherlock";
         terminal = terminal.name;
         gaps.inner = 7;
         floating.border = 1;
@@ -73,7 +73,7 @@ in {
           };
         }) wm.screens);
         keybindings = {
-          "${mod}+Tab" = "exec anyrun";
+          "${mod}+Tab" = "exec sherlock";
           "${mod}+e" = "exec cosmic-files";
           "${mod}+Return" = "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ shell.command));
           "${mod}+Shift+Return" = "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ shell.privSession));

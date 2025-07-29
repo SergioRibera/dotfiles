@@ -15,16 +15,13 @@ in
       inputs.nixvim.nixosDarwinModules.nixvim
     ];
 
-    home.packages = with pkgs; lib.mkIf (audio) [ playerctl ];
+    home.packages = with pkgs; lib.mkIf audio [ playerctl ];
 
     programs = {
       eww = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
         enable = true;
         configDir = ./desktop/eww;
       };
-      anyrun = lib.mkIf
-        (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM)
-        (import ./desktop/anyrun.nix { inherit pkgs inputs config; });
 
       bat = import ./tools/bat.nix { inherit pkgs config; };
 
