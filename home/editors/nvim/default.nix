@@ -15,8 +15,9 @@ in
   viAlias = true;
   vimAlias = true;
   enableMan = false;
-  # vimdiffAlias = true;
-  # defaultEditor = true;
+  package = pkgs.neovim-unwrapped.overrideAttrs (attrs: prev: {
+     postBuild = "rm -rf $out/share/applications";
+  });
 
   # Packages
   extraPackages = with pkgs; [ fd ]
