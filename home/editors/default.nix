@@ -6,9 +6,13 @@ in
   imports = [ ./zed ];
 
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {
-    programs = {
-      nixvim = { enable = config.nvim.enable; } // (import ./nvim { cfg = config.nvim; inherit inputs pkgs lib gui user shell; });
-      helix = (import ./helix { inherit pkgs gui lib mkTheme; });
-    };
+     programs = {
+       neovim = {
+         defaultEditor = config.nvim.enable;
+         vimdiffAlias = config.nvim.enable;
+       };
+       nixvim = { enable = config.nvim.enable; } // (import ./nvim { cfg = config.nvim; inherit inputs pkgs lib gui user shell; });
+       helix = (import ./helix { inherit pkgs gui lib mkTheme; });
+     };
   });
 }
