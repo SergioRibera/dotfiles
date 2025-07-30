@@ -244,6 +244,7 @@ in
         type = types.attrs;
         default = {
           cmake = "cargo make";
+          neovide = "neovide --fork";
           clippy = "cargo clippy -- -D warnings";
           pedantic = "cargo clippy -- -D clippy::pedantic";
           fmtc = "cargo fmt --all --check";
