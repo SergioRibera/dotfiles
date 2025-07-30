@@ -51,7 +51,8 @@ function _G.toggle_floating(cmd, opts)
   vim.api.nvim_buf_set_keymap(floating_buf, 'n', 'q', ':lua _G.close_floating()<CR>',
     {noremap = true, silent = true})
 
-  vim.fn.termopen(cmd, {
+  vim.fn.jobstart(cmd, {
+    term = true,
     cwd = vim.fn.getcwd(),
     on_exit = function(_, exit_code)
       if exit_code == 0 then
