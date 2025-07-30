@@ -26,7 +26,8 @@ in
   #
   # COMPLETE VERSION
   #
-  { key = "<Leader>pp"; action = "<cmd>lua require'telescope'.extensions.project.project()<CR>"; options = opts "Show regex content on all files on workspace"; }
+  { key = "<Leader>pp"; action = "<cmd>lua require'telescope'.extensions.project.project()<CR>"; options = opts "Open project search"; }
+  { key = "<Leader>gg"; action = "<cmd>lua toggle_floating('gitui')<CR>"; options = opts "Open gitui in floating window"; }
 
   # Dap
   { key = "<Leader>db"; action = "<cmd>DapToggleBreakpoint<CR>"; options = opts "Toggle debug breakpoint"; }
