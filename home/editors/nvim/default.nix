@@ -54,6 +54,11 @@ in
       pattern = [ "?*" ];
       command = "silent! mkview";
     }
+    {
+      event = [ "BufLeave" "FocusLost" "QuitPre" "VimSuspend" ];
+      pattern = [ "?*" ];
+      command = "silent! wa";
+    }
     # load last view with state of file
     {
       event = [ "BufWinEnter" ];
