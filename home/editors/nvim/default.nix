@@ -9,6 +9,7 @@
 with pkgs.lib;
 let
   tablineLua = builtins.readFile ./tabline.lua;
+  miscLua = builtins.readFile ./misc.lua;
   pluginsModLua = optionalString cfg.complete (builtins.readFile ./plugins/mod.lua);
 in
 {
@@ -27,7 +28,7 @@ in
   dependencies = { ripgrep.enable = true; };
 
   # Raw lua
-  extraConfigLuaPre = pluginsModLua + tablineLua;
+  extraConfigLuaPre = miscLua + pluginsModLua + tablineLua;
 
   # Neovim options
   opts = import ./opts.nix { lib = pkgs.lib; guiEnable = gui.enable; };
