@@ -60,10 +60,14 @@ in
           "<Up>" = [ "select_prev" "fallback" ];
         };
         sources.providers = {
-          lsp.enable = cfg.complete;
-          omni.enable = cfg.complete;
+          lsp.enabled = cfg.complete;
+          omni.enabled = cfg.complete;
+          path.enabled = true;
+          buffer.enabled = true;
+          cmdline.enabled = true;
+          snippets.enabled = true;
         };
-        signature.enable = cfg.complete;
+        signature.enabled = cfg.complete;
         completion.menu.draw.columns = [
           [ "kind_icon" ]
           { "__unkeyed.1" = "label"; gap = 2; }
@@ -292,13 +296,13 @@ in
         };
         extra = [
           # Generate documentation
-          { key = "<leader>nf"; action = ":lua require('neogen').generate"; }
+          { key = "<leader>nf"; action = "<cmd>Neogen<CR>"; }
           # Show implementations
-          { key = "<leader>gi"; action = ":lua require'telescope.builtin'.lsp_implementations"; }
+          { key = "<leader>gi"; action = "<cmd>Telescope lsp_implementations<CR>"; }
           # Telescope References
-          { key = "<leader>gr"; action = ":lua require('telescope.builtin').lsp_references"; }
+          { key = "<leader>gr"; action = "<cmd>Telescope lsp_references<CR>"; }
           # telescope definitions
-          { key = "<leader>gD"; action = ":lua require('telescope.builtin').lsp_definitions"; }
+          { key = "<leader>gD"; action = "<cmd>Telescope lsp_definitions<CR>"; }
         ];
       };
 
