@@ -15,18 +15,15 @@ in
   { key = "<leader>w"; action = ":w!<CR>"; options = opts "Write buffer"; }
   { key = "<leader>wq"; action = ":x<CR>"; options = opts "Write and close buffer"; }
 
-  # help keymaps
-  # register_map("n", "<Leader>hk", [[<Cmd>lua require('telescope.builtin').keymaps()<CR>]], opt, "telescope", "Show ")
-  # register_map("n", "<Leader>hk", [[<Cmd>lua show_my_keymaps()<CR>]], opt, "telescope", "Show all my commands to help you")
-
   # Telescope
-  { key = "<Leader>ff"; action = "<cmd>lua require('telescope.builtin').find_files()<CR>"; options = opts "Show and find files on workspace with preview"; }
-  { key = "<Leader>lg"; action = "<cmd>lua require('telescope.builtin').live_grep()<CR>"; options = opts "Show regex content on all files on workspace"; }
+  { key = "<Leader>hk"; action = "<cmd>Telescope keymaps<CR>"; options = opts "Show and find files on workspace with preview"; }
+  { key = "<Leader>ff"; action = "<cmd>Telescope find_files<CR>"; options = opts "Show and find files on workspace with preview"; }
+  { key = "<Leader>lg"; action = "<cmd>Telescope live_grep<CR>"; options = opts "Show regex content on all files on workspace"; }
 ] ++ lib.lists.optionals complete [
   #
   # COMPLETE VERSION
   #
-  { key = "<Leader>pp"; action = "<cmd>lua require'telescope'.extensions.project.project()<CR>"; options = opts "Open project search"; }
+  { key = "<Leader>pp"; action = "<cmd>Telescope project<CR>"; options = opts "Open project search"; }
   { key = "<Leader>gg"; action = "<cmd>lua toggle_floating('gitui')<CR>"; options = opts "Open gitui in floating window"; }
 
   # Dap

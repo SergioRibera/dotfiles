@@ -301,8 +301,10 @@ in
           { key = "<leader>gi"; action = "<cmd>Telescope lsp_implementations<CR>"; }
           # Telescope References
           { key = "<leader>gr"; action = "<cmd>Telescope lsp_references<CR>"; }
+          # telescope symbols
+          { key = "<leader>gs"; action = "<cmd>Telescope lsp_workspace_symbols<CR>"; }
           # telescope definitions
-          { key = "<leader>gD"; action = "<cmd>Telescope lsp_definitions<CR>"; }
+          { key = "<leader>gd"; action = "<cmd>Telescope lsp_definitions<CR>"; }
         ];
       };
 
