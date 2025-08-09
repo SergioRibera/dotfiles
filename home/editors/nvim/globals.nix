@@ -5,7 +5,7 @@
   autoread = true;
 
   neovide_cursor_antialiasing = complete; # Neovide cursor Antialiasing
-  neovide_cursor_vfx_mode = lib.optional complete "ripple";
+  neovide_cursor_vfx_mode = lib.optional complete "pixiedust";
   # Nvim Terminal
   terminal_color_0 = colors.base00;
   terminal_color_1 = colors.base08;
