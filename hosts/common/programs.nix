@@ -1,6 +1,6 @@
 { lib, config, pkgs, ... }:
 let
-  inherit (config) shell user gui age;
+  inherit (config) games shell user gui age;
   inherit (age) secrets;
   inherit (pkgs.stdenv.buildPlatform) isLinux;
 in {
@@ -29,5 +29,7 @@ in {
       '';
     };
     adb.enable = config.nvim.complete;
+    steam.enable = games;
+    gamemode.enable = games;
   };
 }
