@@ -10,7 +10,7 @@ with pkgs.stdenv.buildPlatform;
   security.pam.services.login.enableGnomeKeyring = true;
   environment.systemPackages = with pkgs; [ catppuccin-sddm ];
 
-  systemd.user.services.mpris-proxy = lib.mkIf config.bluetooth {
+  systemd.network.wait-online.enable = !config.gui.enable;
   systemd.user.services.mpris-proxy = lib.mkIf (isLinux && config.bluetooth) {
       description = "Mpris proxy";
       after = [ "network.target" "sound.target" ];
