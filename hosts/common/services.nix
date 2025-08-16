@@ -1,6 +1,8 @@
 { pkgs, lib, config, ... }: let
   sosdEnabled = config.user.enableHM && config.home-manager.users.${config.user.username}.programs.sosd.enable;
-in {
+in
+with pkgs.stdenv.buildPlatform;
+{
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
@@ -9,6 +11,7 @@ in {
   environment.systemPackages = with pkgs; [ catppuccin-sddm ];
 
   systemd.user.services.mpris-proxy = lib.mkIf config.bluetooth {
+  systemd.user.services.mpris-proxy = lib.mkIf (isLinux && config.bluetooth) {
       description = "Mpris proxy";
       after = [ "network.target" "sound.target" ];
       wantedBy = [ "default.target" ];
@@ -23,15 +26,15 @@ in {
       percentageCritical = 15;
     };
     ratbagd.enable = true;
-    gnome.gnome-keyring.enable = true;
-    udev.packages = lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable && !sosdEnabled) [ pkgs.swayosd ];
+    gnome.gnome-keyring.enable = (isLinux && config.gui.enable);
+    udev.packages = lib.optionals (isLinux && config.gui.enable && !sosdEnabled) [ pkgs.swayosd ];
     dbus = {
       enable = true;
       packages = [ pkgs.gcr ];
     };
 
-    qemuGuest.enable = (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable);
-    spice-vdagentd.enable = (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable);
+    qemuGuest.enable = (isLinux && config.gui.enable);
+    spice-vdagentd.enable = (isLinux && config.gui.enable);
 
     openssh = {
       enable = true;
@@ -86,7 +89,7 @@ in {
       };
     };
 
-    xserver = lib.mkIf pkgs.stdenv.buildPlatform.isLinux {
+    xserver = lib.mkIf isLinux {
       xkb.layout = "us";
       xkb.variant = "altgr-intl";
     };
