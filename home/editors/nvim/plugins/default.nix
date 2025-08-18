@@ -308,31 +308,6 @@ in
         ];
       };
 
-      luaConfig.pre = ''
-        -- Override handlers
-        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-          vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = {
-              prefix = "●",
-            },
-            signs = true,
-            underline = true,
-            update_in_insert = true
-          }
-        )
-
-        -- Setup Sign Icons
-        for type, icon in pairs({
-          Error = " ",
-          Warn = " ",
-          Hint = " ",
-          Info = " "
-        }) do
-          local hl = "DiagnosticSign" .. type
-          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-        end
-      '';
-
       servers = (makeServers [
         "astro"
         "bashls"

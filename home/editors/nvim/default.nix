@@ -89,6 +89,29 @@ in
     complete = cfg.complete;
   };
 
+  diagnostic.settings = {
+    virtual_text = {
+      prefix = "●";
+    };
+    underline = true;
+    update_in_insert = true;
+    signs = let
+      _signs = {
+        Error = " ";
+        Hint = " ";
+        Info = " ";
+        Warn = " ";
+      };
+      genKey = v: "__rawKey__vim.diagnostic.severity.${pkgs.lib.strings.toUpper v}";
+      gen = fv: set: builtins.listToAttrs (map ({ name, value }: { inherit value; name = (genKey name); }) (pkgs.lib.attrsToList set));
+      icons = gen (k: v: v) _signs;
+      hl = gen (k: _: "DiagnosticSign${k}") _signs;
+    in {
+      text = icons;
+      texthl = hl;
+    };
+  };
+
   plugins = import ./plugins { inherit inputs pkgs user cfg gui; };
   extraPlugins = with inputs.self.packages.${pkgs.system}; [ nvim-codeshot ];
 }
