@@ -47,21 +47,13 @@
             return
           end
           if b == 'l' or b == 'left' then
-            vim.cmd(":Trouble<CR>")
+            require("telescope.builtin").diagnostics()
           end
         end'';
       }
     ];
     lualine_x = { __empty = {}; };
-    lualine_y = lib.lists.optionals cfg.complete [
-      {
-        fmt.__raw = ''
-          function()
-              return require("lsp-progress").progress({ max_size = 80 })
-          end
-        '';
-      }
-    ];
+    lualine_y = lib.lists.optionals cfg.complete [ "lsp_status" ];
     lualine_z = [ "location" ];
   };
 
