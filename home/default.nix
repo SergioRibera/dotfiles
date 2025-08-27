@@ -17,10 +17,14 @@ in
     ./wm
   ];
 
-  virtualisation = {
+  virtualisation = let
+    hasNvidia = builtins.elem "nvidia" config.boot.initrd.kernelModules;
+  in {
     docker = {
       enable = true;
       enableOnBoot = true;
+      enableNvidia = hasNvidia;
+      daemon.settings.features.cdi = hasNvidia;
     };
     libvirtd.enable = gui.enable && hostName == "race4k";
     spiceUSBRedirection.enable = gui.enable && hostName == "race4k";
