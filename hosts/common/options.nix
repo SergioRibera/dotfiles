@@ -240,7 +240,16 @@ in
         type = types.listOf types.str;
         default = ["fish" "-P"];
       };
-      aliases = mkOption {
+      aliases = let
+        ssh-base = [
+          { name = "rs"; idx = 0; }
+          { name = "mc"; idx = 1; }
+        ];
+        ssh-aliases = builtins.listToAttrs (map ({ name, idx, path ? secrets.rustlanges.path }: {
+          name = "ssh-${name}";
+          value = ''ssh -i ${path} $"root@(open ${secrets.hosts.path} | lines | get ${builtins.toString idx})"'';
+        }) ssh-base);
+      in mkOption {
         type = types.attrs;
         default = {
           cmake = "cargo make";
@@ -273,9 +282,7 @@ in
           nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
           nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
           nixforceclean = "sudo nix-collect-garbage -d";
-
-          ssh-rs = ''ssh -i ${secrets.rustlanges.path} $"root@(open ${secrets.hosts.path} | lines | get 0)"'';
-        };
+        } // ssh-aliases;
       };
     };
   };
