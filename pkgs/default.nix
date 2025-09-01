@@ -1,5 +1,4 @@
 final: prev: rec {
-  mac-style = prev.callPackage ./plymouth-macstyle { };
   hyprswitch = prev.callPackage ./hyprswitch { };
   scenefx = prev.callPackage ./scenefx { };
 
