@@ -12,13 +12,15 @@
       ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-      overlay = import ./pkgs;
+      overlays = [
+        (import ./pkgs)
+        inputs.mac-style-plymouth.overlays.default
+      ];
       forEachSystem = nixpkgs.lib.genAttrs systems;
       pkgs = forEachSystem (system:
         import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            overlays = [ overlay ];
+          inherit system overlays;
+          config.allowUnfree = true;
         }
       );
       mkLib = system: import ./lib {
@@ -36,7 +38,7 @@
           {
             # Hardware
             networking.hostName = name;
-            nixpkgs.overlays = [ overlay ];
+            nixpkgs.overlays = overlays;
             user.username = username;
           }
           ./home
@@ -47,8 +49,8 @@
       };
     in
     {
+      overlays.default = import ./pkgs;
       packages = pkgs;
-      overlays.default = overlay;
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#laptop
       nixosConfigurations = let
@@ -122,6 +124,12 @@
     #   # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
     #   # inputs.hyprland.follows = "hyprland";
     # };
+    # My plymouth theme
+    mac-style-plymouth = {
+      url = "github:SergioRibera/s4rchiso-plymouth-theme";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "fu";
+    };
     # My tool to take screen/code screenshots
     sss = {
       url = "github:SergioRibera/sss";

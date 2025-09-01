@@ -30,7 +30,7 @@ in
     plymouth = lib.mkIf gui.enable {
       enable = true;
       theme = "mac-style";
-      themePackages = [ pkgs.mac-style ];
+      themePackages = [ pkgs.mac-style-plymouth ];
     };
   };
 }
