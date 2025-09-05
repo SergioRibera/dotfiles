@@ -29,7 +29,7 @@ in
       enable = true;
       xdgOpenUsePortal = true;
       wlr = {
-        enable = builtins.elem "sway" wm.actives;
+        enable = (builtins.elem "sway" wm.actives) || builtins.elem "mango" wm.actives;
         settings.screencast = {
           chooser_type = "simple";
           chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -ro";

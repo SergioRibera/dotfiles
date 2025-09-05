@@ -22,7 +22,7 @@ in
     };
     wm = {
       actives = mkOption {
-        type = types.listOf (types.enum ["niri" "hyprland" "sway"]);
+        type = types.listOf (types.enum ["niri" "hyprland" "mango" "sway"]);
         default = ["niri"];
       };
       screens = mkOption {

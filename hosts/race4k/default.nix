@@ -75,7 +75,7 @@
     };
   };
 
-  wm.actives = ["niri" "sway"];
+  wm.actives = ["niri" "sway" "mango"];
   wm.screens = let
     height = 1080;
   in [
