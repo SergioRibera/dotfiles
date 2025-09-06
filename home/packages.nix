@@ -84,7 +84,10 @@ with pkgs; {
     cosmic-files
 
     # Discord
-    discord
+    (discord.overrideAttrs (final: prev: {
+      withOpenASAR = true;
+      commandLineArgs = "--use-gl=desktop";
+    }))
     # Dorion Client: Rust + Tauri
     # https://github.com/SpikeHD/Dorion
     # WebRTC Support explained here: https://github.com/tauri-apps/tauri/discussions/8426#discussioncomment-8268622
