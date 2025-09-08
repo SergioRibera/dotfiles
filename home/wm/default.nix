@@ -1,5 +1,6 @@
 {
   imports = [
+    ./jay.nix
     ./hyprland.nix
     ./mangowc.nix
     ./niri.nix

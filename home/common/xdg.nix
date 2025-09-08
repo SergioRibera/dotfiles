@@ -1,6 +1,7 @@
 { pkgs, config, lib, ... }:
 let
   inherit (config) user gui wm;
+  isWmEnable = name: builtins.elem name wm.actives;
   sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
 in
 {
@@ -29,14 +30,16 @@ in
       enable = true;
       xdgOpenUsePortal = true;
       wlr = {
-        enable = (builtins.elem "sway" wm.actives) || builtins.elem "mango" wm.actives;
+        enable = isWmEnable "sway" || isWmEnable "mango";
         settings.screencast = {
           chooser_type = "simple";
           chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -ro";
         };
       };
       config.common = {
-        "default" = [ "gnome" "gtk" ];
+        "default" = lib.optionals (isWmEnable "mango") [ "hyprland" ]
+          ++ lib.optionals (isWmEnable "jay") [ "jay" ]
+          ++ [ "gnome" "gtk" ];
         "org.freedesktop.impl.portal.Access"=[ "gtk" ];
         "org.freedesktop.impl.portal.Notification"=[ "gtk" ];
         "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
@@ -46,6 +49,8 @@ in
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
         xdg-desktop-portal-gnome
+      ] ++ lib.optionals (isWmEnable "mango") [
+        xdg-desktop-portal-hyprland
       ];
     };
   };

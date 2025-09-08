@@ -1,5 +1,7 @@
 { inputs, pkgs, lib, config, ... }: let
   sosdEnabled = config.user.enableHM && config.home-manager.users.${config.user.username}.programs.sosd.enable;
+
+  isWmEnable = name: builtins.elem name config.wm.actives;
 in
 with pkgs.stdenv.buildPlatform;
 {
@@ -82,7 +84,8 @@ with pkgs.stdenv.buildPlatform;
 
     displayManager = {
       gdm.enable = config.gui.enable;
-      sessionPackages = builtins.map (o: pkgs."${o}") (builtins.filter (o: builtins.hasAttr o pkgs) config.wm.actives) ++ (lib.optionals (builtins.elem "mango" config.wm.actives) [config.programs.mango.package]);
+      sessionPackages = builtins.map (o: pkgs."${o}") (builtins.filter (o: builtins.hasAttr o pkgs && o != "jay") config.wm.actives)
+        ++ (lib.optionals (isWmEnable "mango") [config.programs.mango.package]);
       autoLogin = {
         enable = !config.gui.enable;
         user = config.user.username;
