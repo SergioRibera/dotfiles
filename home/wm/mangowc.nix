@@ -10,7 +10,8 @@ in {
   imports = [
     inputs.mango.nixosModules.mango
   ];
-  home-manager.users.${user.username} = lib.mkIf (user.enableHM) ({ ...}: {
+
+  home-manager.users.${user.username} = lib.mkIf (user.enableHM) ({ ... }: {
     imports = [
       inputs.mango.hmModules.mango
     ];

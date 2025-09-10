@@ -1,4 +1,3 @@
-
 { config, mkTheme, ... }: let
   theme = mkTheme config.gui.theme.colors;
 in {
