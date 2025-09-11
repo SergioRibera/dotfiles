@@ -13,7 +13,9 @@ $env.PROMPT_MULTILINE_INDICATOR = {|| prompt_status "ml" }
 
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
 
-$env.GITSTATUS_IGNORE_PATH = $"($env.HOME)/Contributions/nixpkgs"
+if "HOME" in $env {
+  $env.GITSTATUS_IGNORE_PATH = $"($env.HOME)/Contributions/nixpkgs"
+}
 
 do --env {
     let ssh_agent_file = $"/tmp/ssh-agent-($env.USER? | default $env.USER).nuon"

@@ -61,10 +61,9 @@ def prompt [] {
 def prompt_status [indicator_ty: string] {
     let last_status = $env.LAST_EXIT_CODE
     let nonzero = $last_status != 0
-    let superuser = (id -u) == 0
     let in_nix_shell = "IN_NIX_SHELL" in $env
     let in_distrobox = "DISTROBOX_HOST_HOME" in $env
-    let user_char_color = if $superuser {
+    let user_char_color = if (is-admin) {
       "red"
     } else if not $nu.history-enabled {
       "#D485AD"
@@ -75,7 +74,7 @@ def prompt_status [indicator_ty: string] {
     }
     let user_char = try {
       let name = (uname | get kernel-name)
-      if $superuser { # is root
+      if (is-admin) { # is root
         "☠"
       } else if (is_ssh_session) { # conected to ssh
         ""
@@ -87,6 +86,8 @@ def prompt_status [indicator_ty: string] {
         ""
       } else if $name == "Darwin" { # is running on mac
         ""
+      } else if ($name | str contains "Windows") { # is running on Windows
+        ""
       } else { # else is linux
         ""
       }
