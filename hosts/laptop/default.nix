@@ -4,7 +4,7 @@
   ];
 
   # Prioritize performance over efficiency
-  powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = "ondemand";
 
   git.enable = true;
   gui.enable = true;
