@@ -92,6 +92,7 @@ with pkgs; { home-manager.users."${username}" = {
     kdePackages.xwaylandvideobridge
 
     # GUI
+    easyeffects
     pwvucontrol
     anydesk
 
