@@ -22,7 +22,7 @@ in {
 
     programs.niri = {
       enable = gui.enable && (builtins.elem "niri" wm.actives);
-      package = inputs.niri.packages.${pkgs.system}.niri-unstable;
+      package = inputs.niri.packages.${pkgs.system}.niri-stable;
       # package = inputs.niri-pkg.packages.${pkgs.system}.default;
       settings = {
         prefer-no-csd = true;
@@ -207,9 +207,6 @@ in {
             block-out-from = "screen-capture";
           }
         ];
-        debug = {
-          wait-for-frame-completion-in-pipewire = [];
-        };
       };
     };
   });

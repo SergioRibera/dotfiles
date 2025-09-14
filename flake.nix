@@ -50,7 +50,15 @@
     in
     {
       overlays.default = import ./pkgs;
-      packages = pkgs;
+      # Just for Test
+      packages = forEachSystem (system: let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      in
+        (import ./pkgs) pkgs pkgs);
+      # packages = inputs.simplemoji.packages;
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#laptop
       nixosConfigurations = let
@@ -64,14 +72,19 @@
       # Programs that can be run by calling this flake
       apps = forEachSystem (system: (import ./apps { inherit system inputs; pkgs = pkgs.${system}; }));
 
-      # devShells."${system}".default = pkgs.mkShell {
-      #   buildInputs = with pkgs; [
-      #     # TODO: disko implementation
-      #     # disko.packages.${system}.default
-      #     git
-      #     nixos-generators
-      #   ];
-      # };
+      devShells = forEachSystem (system: let
+          pkgs = import nixpkgs { inherit system; };
+        in {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              inputs.quickshell.packages."${system}".default
+              # TODO: disko implementation
+              # disko.packages.${system}.default
+              # git
+              # nixos-generators
+            ];
+          };
+        });
     };
 
   inputs = {
@@ -100,16 +113,17 @@
       url = "github:Toqozz/wired-notify";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sherlock = {
-      url = "github:Skxxtz/sherlock";
+    mango = {
+      url = "github:DreamMaoMao/mango";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
       inputs.flake-parts.follows = "flake-parts";
     };
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
+    # wlrs-pkg.url = "git+file:///home/s4rch/Contributions/wlrs";
     # niri-pkg.url = "git+file:///home/s4rch/Contributions/niri";
     # nixos-cosmic = {
     #   url = "github:lilyinstarlight/nixos-cosmic";
@@ -138,6 +152,10 @@
       inputs.flake-utils.follows = "fu";
       inputs.crane.follows = "crane";
     };
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Dev Mode
     # sosd.url = "git+file:///home/s4rch/Projects/rust/soft_osd";
     sosd = {
@@ -147,6 +165,7 @@
     simplemoji = {
       url = "github:SergioRibera/simplemoji";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "fu";
     };
     # nixificate my neovim configs
     nixvim = {

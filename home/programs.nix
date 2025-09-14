@@ -7,7 +7,7 @@ in
     imports = [
       inputs.sss.nixosModules.home-manager
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isLinux [
-      inputs.nixvim.homeManagerModules.nixvim
+      inputs.nixvim.homeModules.nixvim
       inputs.wired.homeManagerModules.default
       inputs.sosd.nixosModules.home-manager
       inputs.simplemoji.nixosModules.home-manager

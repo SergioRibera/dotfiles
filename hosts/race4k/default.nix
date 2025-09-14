@@ -56,22 +56,25 @@
     initrd.kernelModules = ["nvidia"];
     kernelParams = ["rcutree.gp_init_delay=1"];
   };
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaPersistenced = false;
-    powerManagement = {
-      enable = true;
-      finegrained = false;
-    };
-    forceFullCompositionPipeline = true;
-    open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-     version = "575.64.05";
-     sha256_64bit = "sha256-hfK1D5EiYcGRegss9+H5dDr/0Aj9wPIJ9NVWP3dNUC0=";
-     sha256_aarch64 = "sha256-fYji1Y2vJc5t6dkqbh4AC/fuAswiIvlj2cXX4NmBunw=";
-     openSha256 = pkgs.lib.fakeSha256;
-     settingsSha256 = "sha256-o2zUnYFUQjHOcCrB0w/4L6xI1hVUXLAWgG2Y26BowBE=";
-     persistencedSha256 = "sha256-2g5z7Pu8u2EiAh5givP5Q1Y4zk4Cbb06W37rf768NFU=";
+  hardware = {
+    nvidia-container-toolkit.enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaPersistenced = false;
+      powerManagement = {
+        enable = true;
+        finegrained = false;
+      };
+      forceFullCompositionPipeline = true;
+      open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+       version = "575.64.05";
+       sha256_64bit = "sha256-hfK1D5EiYcGRegss9+H5dDr/0Aj9wPIJ9NVWP3dNUC0=";
+       sha256_aarch64 = "sha256-fYji1Y2vJc5t6dkqbh4AC/fuAswiIvlj2cXX4NmBunw=";
+       openSha256 = pkgs.lib.fakeSha256;
+       settingsSha256 = "sha256-o2zUnYFUQjHOcCrB0w/4L6xI1hVUXLAWgG2Y26BowBE=";
+       persistencedSha256 = "sha256-2g5z7Pu8u2EiAh5givP5Q1Y4zk4Cbb06W37rf768NFU=";
+      };
     };
   };
 

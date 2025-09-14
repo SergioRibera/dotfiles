@@ -23,7 +23,6 @@ in
     docker = {
       enable = true;
       enableOnBoot = true;
-      enableNvidia = hasNvidia;
       daemon.settings.features.cdi = hasNvidia;
     };
     libvirtd.enable = gui.enable && hostName == "race4k";

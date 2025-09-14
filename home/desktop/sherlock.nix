@@ -1,12 +1,8 @@
-{ config, inputs, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (config) terminal user gui;
 in {
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {
-    imports = [
-      inputs.sherlock.homeModules.default
-    ];
-
     programs.sherlock = {
       enable = pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM;
       settings = {
@@ -18,7 +14,6 @@ in {
             next = "tab";
           };
         };
-        style = null;
         ignore = ''
           Avahi*
         '';

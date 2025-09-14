@@ -3,8 +3,6 @@ final: prev: rec {
   scenefx = prev.callPackage ./scenefx { };
 
   # Nvim Extra Plugins
-  nvim-surround = prev.callPackage ./nvim/surround.nix { };
-  nvim-lsp-progress = prev.callPackage ./nvim/lsp-progress.nix { };
   nvim-wakatime = prev.callPackage ./nvim/wakatime.nix { };
 
   nvim-cmp-dotenv = prev.callPackage ./nvim/cmp-dotenv.nix { };
