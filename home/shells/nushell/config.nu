@@ -56,11 +56,14 @@ export def mirror-screen [] {
 
 def _direnv [] {
   let rc_file = $"(pwd)/.envrc" | path exists
-  if (which direnv | is-empty) or not $rc_file {
+  if (which direnv | is-empty) or not $rc_file or ("IN_NIX_SHELL" in $env) {
     return
   }
 
   direnv export json | from json | default {} | load-env
+  if 'ENV_CONVERSIONS' in $env and 'PATH' in $env.ENV_CONVERSIONS {
+    $env.PATH = do $env.ENV_CONVERSIONS.PATH.from_string $env.PATH
+  }
 }
 
 $env.config = {
@@ -80,7 +83,7 @@ $env.config = {
 
   hooks: {
       env_change: {
-          PWD: [ _direnv ]
+          pre_prompt: [ _direnv ]
       }
   }
 

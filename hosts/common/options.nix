@@ -276,8 +276,8 @@ in
           glg = "git lg";
           tree = "eza --tree --icons=always";
           nb = "nom build";
-          nixdev = "nom develop -c '${shellCmd}'";
-          nixdevpriv = "nom develop -c '${builtins.concatStringsSep " " config.shell.privSession}'";
+          nixdev = "nom develop -c ${shellCmd}";
+          nixdevpriv = "nom develop -c ${builtins.concatStringsSep " " config.shell.privSession}";
           nixclear = "nix-store --gc";
           nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
           nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
