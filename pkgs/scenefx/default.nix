@@ -1,8 +1,8 @@
-{ lib, stdenv, fetchFromGitHub, pkgs, fetchurl }:
+{ lib, stdenv, fetchFromGitHub, pkgs }:
 
 stdenv.mkDerivation rec {
   pname = "scenefx";
-  version = "2f9505ac96d97e32d6a243e87714b74ccdb70498";
+  version = "0466cac4be1333d0794b01f4726780be23535767";
 
   src = fetchFromGitHub {
     owner = "wlrfx";
@@ -12,15 +12,6 @@ stdenv.mkDerivation rec {
   };
 
   mesonFlags = [ "-Doptimization=2" ];
-
-  patches = [
-    (fetchurl {
-      name = "install-headers-at-include-render";
-      url =
-        "https://github.com/wlrfx/scenefx/commit/640e92102b9043fdd840004b85be5aa7e1fddfa9.patch";
-      sha256 = "sha256-q+OCZvpV6ppYfyT24y2WL9/iNEUNCTB230SI8HUt/0c=";
-    })
-  ];
 
   preConfigure = ''
     ls
@@ -32,49 +23,43 @@ stdenv.mkDerivation rec {
     ls
   '';
 
-  depsBuildBuild = with pkgs;
-    [
-      # wlroots depsBuildBuild
-      pkg-config
-    ];
+  depsBuildBuild = with pkgs; [ wlroots pkg-config ];
 
   nativeBuildInputs = with pkgs; [
-    wayland
-
-    # wlroots nativeBuildInputs
-    meson
-    ninja
     pkg-config
-    wayland-scanner
-    glslang
-  ];
-
-  buildInputs = with pkgs; [
-    scdoc
+    meson
     cmake
-
-    # wlroots buildInputs
-    libGL
-    libcap
-    libinput
-    libpng
-    libxkbcommon
-    mesa
-    pixman
+    ninja
+    scdoc
+    glslang
+    lcms2
+    udev
     seatd
-    vulkan-loader
-    wayland
-    wayland-protocols
-    xorg.libX11
+    hwdata
+    libinput
+    libliftoff
+    libdisplay-info
+    wayland-scanner
+
+    xwayland
     xorg.xcbutilerrors
     xorg.xcbutilimage
     xorg.xcbutilrenderutil
+  ];
+
+  buildInputs = with pkgs; [
+    libdrm
+    libxkbcommon
+    pixman
+    libGL # egl
+    mesa # gbm
+    wayland # wayland-server
+    wayland-protocols
+    libgbm
+    xorg.libxcb
     xorg.xcbutilwm
-    xwayland
-    ffmpeg
-    hwdata
-    libliftoff
-    libdisplay-info
+
+    vulkan-loader
   ];
 
   meta = with lib; {

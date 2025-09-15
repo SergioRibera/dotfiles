@@ -1,5 +1,7 @@
 final: prev: rec {
   hyprswitch = prev.callPackage ./hyprswitch { };
+
+  dwl = prev.callPackage ./dwl { inherit scenefx; };
   scenefx = prev.callPackage ./scenefx { };
 
   # Nvim Extra Plugins

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+ORIGIN_URL="https://codeberg.org/dwl/dwl"
+
+# "GIT_URL branch"
+repos=(
+    "https://codeberg.org/sevz/dwl.git numlock-capslock"
+    "https://codeberg.org/sevz/dwl.git autostart"
+    "https://codeberg.org/guidocella/dwl shiftview"
+    "https://codeberg.org/Palanix/dwl monfig"
+    "https://codeberg.org/wochap/dwl v0.6-a/regexrules"
+    "https://codeberg.org/wochap/dwl v0.6-b/cursortheme"
+    "https://codeberg.org/wochap/dwl v0.6-b/gestures"
+    "https://codeberg.org/wochap/dwl v0.8-a/scenefx-b"
+)
+
+mkdir patches
+
+for repo in "${repos[@]}"; do
+    REMOTE_URL=$(echo "$repo" | awk '{print $1}')
+    BRANCH=$(echo "$repo" | awk '{print $2}')
+    FIXED_BRANCH=$(echo "$BRANCH" | sed -r 's/\//_/g')
+    PATCH_FILE="../patches/${FIXED_BRANCH}.patch"
+    
+    echo "$REMOTE_URL. Branch: $BRANCH"
+
+    # Clone patch
+    git clone -b "$BRANCH" "$REMOTE_URL" dwl
+    cd dwl || exit 1
+
+    # Original remote
+    git remote add "origin_dwl" "$ORIGIN_URL"
+    git fetch "origin_dwl"
+
+    # Generate patch
+    git diff "origin_dwl/main" -- . ":!.git" ":!.github" ":!.gitea" ":!.gitignore" ":!LICENSE*" ":!config.def.h" ":!CHANGELOG.md" ":!README.md" ":!dwl.1" > "$PATCH_FILE"
+
+    # Clear temp workspace
+    cd - || exit 1
+    rm -fr dwl
+done
+
+echo "Success generated"
