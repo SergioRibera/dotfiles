@@ -162,11 +162,6 @@
       url = "github:SergioRibera/soft_osd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    simplemoji = {
-      url = "github:SergioRibera/simplemoji";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "fu";
-    };
     # nixificate my neovim configs
     nixvim = {
       url = "github:nix-community/nixvim";

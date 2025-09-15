@@ -14,6 +14,7 @@ final: prev: rec {
 
   # Utils
   simple-commits = prev.callPackage ./simple-commits { };
+  simplemoji = prev.callPackage ./simplemoji { };
 
   # Cosmic
   libcosmicAppHook = prev.callPackage ./cosmic/libcosmic-app-hook { };

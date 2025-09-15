@@ -95,6 +95,7 @@ with pkgs; { home-manager.users."${username}" = {
     easyeffects
     pwvucontrol
     anydesk
+    simplemoji
 
     # self overlay
     cosmic-files

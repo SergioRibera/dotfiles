@@ -10,7 +10,6 @@ in
       inputs.nixvim.homeModules.nixvim
       inputs.wired.homeManagerModules.default
       inputs.sosd.nixosModules.home-manager
-      inputs.simplemoji.nixosModules.home-manager
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isDarwin [
       inputs.nixvim.nixosDarwinModules.nixvim
     ];
@@ -33,7 +32,6 @@ in
       # enable and configure others
       git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });
       sss = lib.mkIf gui.enable (import ./tools/sss.nix { inherit config; });
-      simplemoji.enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable);
       sosd = {
         enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM);
         globals = {
