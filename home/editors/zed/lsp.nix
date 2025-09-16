@@ -1,4 +1,4 @@
-{ config, pkgs, lib }: let
+{ pkgs, lib, ... }: let
   lsp_internal = name: bin: let
     pkg = pkgs.${name};
   in {
@@ -37,17 +37,13 @@ in {
       command = "${pkgs.nushell}/bin/nu";
       args = ["--lsp"];
     };
-    discord_presence = {
-      command = "${pkgs.discord-presence}/bin/discord-presence-lsp";
-      args = [];
-    };
   }
     // (lsp_pkg "vue-language-server")
     // (lsp_pkg "typescript-language-server")
     // (lsp_pkg "astro-language-server" "astro-ls")
-    // (lsp_pkg "dockerfile-language-server-nodejs" "docker-langserver")
+    // (lsp_pkg "dockerfile-language-server" "docker-langserver")
     // (lsp_pkg "vscode-langservers-extracted" "vscode-json-language-server")
-    // (lsp_pkg "vscode-langservers-extracted" "vscode-css-language-server")
+    # // (lsp_pkg "vscode-langservers-extracted" "vscode-css-language-server")
     // (lsp_pkg "vscode-langservers-extracted" "vscode-html-language-server")
     // (lsp_pkg "vscode-langservers-extracted" "vscode-markdown-language-server")
     // (lsp_pkg "vscode-langservers-extracted" "vscode-eslint-language-server")

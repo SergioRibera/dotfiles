@@ -11,18 +11,27 @@ in {
         "astro" "html"
         "liquid" # TODO: lsp
         "nix" "nu" "vue"
-        "toml" "dockerfile"
-        "discord-presence" # "wakatime"
+        "wgsl_analyzer" "css-modules-kit"
+        "toml" "dockerfile" "slint"
+        "discord-presence" "wakatime"
         "vitesse" "catppuccin-icons"
       ];
       extraPackages = with pkgs; [
+        # Debugger
+        gdb
+
         # LSP
         nixd
-        nil
+        # nil
         nodejs
         wakatime-ls
         wakatime-cli
+        slint-lsp
         taplo-lsp
+        wgsl-analyzer
+        bash-language-server
+
+        discord-presence
       ];
       userKeymaps = (import ./keymaps.nix);
       userSettings = {
@@ -67,6 +76,11 @@ in {
           show_type_hints = false;
           show_parameter_hints = true;
           show_other_hints = true;
+        };
+        debugger = {
+          dock = "left";
+          save_breakpoints = true;
+          stepping_granularity = "line";
         };
       } // lsp;
     };
