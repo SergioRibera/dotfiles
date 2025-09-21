@@ -166,7 +166,7 @@ in
         settings.event = "BufReadPost";
       };
       settings = {
-        indent.char = [ "▏" "|" ];
+        indent.char = [ "▏" ];
         indent.smart_indent_cap = true;
         # indent.highlight = ibl-hl;
         scope.highlight = ibl-hl;
