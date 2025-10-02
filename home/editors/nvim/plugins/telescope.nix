@@ -2,6 +2,7 @@
   git_cwd = ''vim.fn.fnamemodify(vim.fn.finddir(".git", ".;"), ":h") or vim.fn.getcwd()'';
   vimgrep = [
       "rg"
+      "--vimgrep"
       "--color=never"
       "--no-heading"
       "--with-filename"
@@ -9,7 +10,8 @@
       "--column"
       "--smart-case"
       "--hidden"
-      "--glob" "!**/.git/*" "--glob" "!**/target/*" "--glob" "!**/node_modules/*"
+      "--no-binary"
+      "--no-require-git"
     ];
 in {
   settings = {
@@ -28,14 +30,9 @@ in {
     };
 
     pickers = {
-      live_grep = {
-        cwd.__raw = git_cwd;
-      };
+      live_grep.cwd.__raw = git_cwd;
       find_files = {
         cwd.__raw = git_cwd;
-        hidden = true;
-        no_ignore = false;
-        no_ignore_parent = false;
         find_command = vimgrep ++ [ "--files" ];
       };
     };
