@@ -53,6 +53,7 @@ with pkgs; { home-manager.users."${username}" = {
   ] ++ lib.optionals config.nvim.complete [
     wrkflw
     dive
+    just
 
     # Js
     bun
