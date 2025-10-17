@@ -27,12 +27,12 @@
 
 rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } (finalAttrs: {
   pname = "simplemoji";
-  version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "SergioRibera";
     repo = "simplemoji";
-    tag = "v${finalAttrs.version}";
+    # tag = "v${finalAttrs.version}";
+    tag = "25e89dc58e4bdeddfa38999383a271610ffa3c1e";
     hash = "sha256-UIbrDZjvhBteKC2oUWg5VDcCDghh65kPFJICkfX91Vc=";
   };
 
@@ -45,8 +45,8 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } (finalAttrs: {
           owner = "rust-skia";
           repo = "skia";
           # see rust-skia:skia-bindings/Cargo.toml#package.metadata skia
-          tag = "m137-0.85.0";
-          hash = "sha256-myw3Wc9EpLx/xkTEGN66D+fAQWMPZVKaGb1yP1Z+6Us=";
+          tag = "m138-0.86.2";
+          hash = "sha256-35dQPlvE5mvFv+bvdKG1r9tme8Ba5hnuepVbUp1J9S4=";
         };
         # The externals for skia are taken from skia/DEPS
         externals = linkFarm "skia-externals" (
