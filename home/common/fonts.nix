@@ -2,6 +2,11 @@
   fonts = lib.mkIf (config.gui.enable || pkgs.stdenv.buildPlatform.isDarwin) {
     fontDir.enable = true;
     packages = with pkgs; [
+      # Default fonts
+      dejavu_fonts
+      gyre-fonts
+      unifont
+
       noto-fonts
       noto-fonts-color-emoji
       noto-fonts-cjk-sans
