@@ -191,7 +191,7 @@ in {
           "SUPER_SHIFT,ALT_S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
 
           "SUPER,C,exec,hyprpicker -a -f hex"
-          "SUPER,Period,exec,simplemoji -t medium-light -soc 'wl-copy'"
+          "SUPER,Period,exec,simplemoji --show-recent --recent-type mixed -t medium-light -soc 'wl-copy'"
           #
           # Windows Navigations
           #

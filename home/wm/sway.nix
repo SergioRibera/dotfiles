@@ -88,7 +88,7 @@ in {
           "${mod}+l" = "focus right";
 
           "${mod}+c" = "exec hyprpicker -a -f hex";
-          "${mod}+period" = "exec simplemoji -t medium-light -soc wl-copy";
+          "${mod}+period" = "exec simplemoji --show-recent --recent-type mixed -t medium-light -soc wl-copy";
 
           "${mod}+Shift+h" = "move left";
           "${mod}+Shift+j" = "move down";

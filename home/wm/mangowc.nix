@@ -193,7 +193,7 @@ bind=SUPER,p,spawn,nu ${user.homepath}/.config/eww/scripts/extras.nu toggle powe
 bind=SUPER,m,spawn,nu ${user.homepath}/.config/eww/scripts/extras.nu toggle screenkey
 ${lib.optionalString sosdEnabled "bind=SUPER,y,spawn,nu ${user.homepath}/.local/bin/osd.nu show-time"}
 bind=SUPER,c,spawn,hyprpicker -a -f hex
-bind=SUPER,period,spawn,simplemoji -t medium-light -soc wl-copy
+bind=SUPER,period,spawn,simplemoji --show-recent --recent-type mixed -t medium-light -soc wl-copy
 
 bind=SUPER,w,killclient
 bind=SUPER,f,togglefloating

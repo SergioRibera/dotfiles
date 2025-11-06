@@ -65,7 +65,7 @@ in {
         "Super_L-m" = mkCmd ["nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "screenkey"];
         "Super_L-y" = lib.mkIf sosdEnabled (mkCmd ["nu" "${user.homepath}/.local/bin/osd.nu" "show-time"]);
         "Super_L-c" = mkCmd ["hyprpicker" "-a" "-f" "hex"];
-        "Super_L-period" = mkCmd ["simplemoji" "-t" "medium-light" "-soc" "wl-copy"];
+        "Super_L-period" = mkCmd ["simplemoji""--show-recent" "--recent-type" "mixed" "-t" "medium-light" "-soc" "wl-copy"];
 
         "Super_L-w" = mkCmd "close";
         "Super_L-semicolon" = mkCmd "toggle-split";

@@ -139,7 +139,7 @@ in {
             "Mod+Y" = lib.mkIf sosdEnabled (osd 0 ["show-time"]);
             "Mod+Shift+Return".action = terminal shell.privSession;
             "Mod+C".action = spawn "hyprpicker" "-a" "-f" "hex";
-            "Mod+Period".action = spawn "simplemoji" "-t" "medium-light" "-soc" "wl-copy";
+            "Mod+Period".action = spawn "simplemoji" "--show-recent" "--recent-type" "mixed" "-t" "medium-light" "-soc" "wl-copy";
 
             "Mod+Shift+T".action = toggle-debug-tint;
 
