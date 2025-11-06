@@ -126,9 +126,9 @@ in {
             "Caps_Lock" = lib.mkIf sosdEnabled (osd 500 ["caps-lock"]);
             "Num_Lock" = lib.mkIf sosdEnabled (osd 500 ["num-lock"]);
 
-            "Mod+S".action = screenshot-window { write-to-disk = false; };
-            "Mod+Print".action = screenshot-window;
-            "Mod+Shift+S".action = screenshot;
+            "Mod+S".action = magic-leaf "screenshot-window" { write-to-disk = false; };
+            "Mod+Print".action = magic-leaf "screenshot-window";
+            "Mod+Shift+S".action = magic-leaf "screenshot";
 
             "Mod+Tab".action = spawn "sherlock";
             "Mod+E".action = spawn "cosmic-files";

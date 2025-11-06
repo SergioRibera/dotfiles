@@ -44,7 +44,7 @@ with pkgs; { home-manager.users."${username}" = {
     # Work
     slack
     figma-linux
-    onlyoffice-bin
+    onlyoffice-desktopeditors
 
     # Utils
     scrcpy
@@ -90,7 +90,7 @@ with pkgs; { home-manager.users."${username}" = {
     wl-mirror
     hyprpicker
     swww
-    kdePackages.xwaylandvideobridge
+    swaynotificationcenter
 
     # GUI
     easyeffects

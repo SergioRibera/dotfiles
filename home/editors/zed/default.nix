@@ -27,7 +27,7 @@ in {
         wakatime-ls
         wakatime-cli
         slint-lsp
-        taplo-lsp
+        taplo
         wgsl-analyzer
         bash-language-server
 
@@ -82,6 +82,7 @@ in {
           save_breakpoints = true;
           stepping_granularity = "line";
         };
+        disable_ai = true;
       } // lsp;
     };
   };

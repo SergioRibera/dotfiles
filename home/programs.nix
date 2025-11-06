@@ -33,7 +33,7 @@ in
       git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });
       sss = lib.mkIf gui.enable (import ./tools/sss.nix { inherit config; });
       sosd = {
-        enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM);
+        enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM && false);
         globals = {
           animation_duration = 1.0;
           show_duration = 5.0;
