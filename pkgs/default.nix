@@ -18,10 +18,5 @@ final: prev: rec {
   simple-commits = prev.callPackage ./simple-commits { };
   simplemoji = prev.callPackage ./simplemoji { };
 
-  # Cosmic
-  libcosmicAppHook = prev.callPackage ./cosmic/libcosmic-app-hook { };
-  cosmic-files = prev.callPackage ./cosmic/files { inherit libcosmicAppHook; };
-  xdg-desktop-portal-cosmic = prev.callPackage ./cosmic/xdg-portal { inherit libcosmicAppHook; };
-
   firefoxAddons = prev.callPackage ./firefox-addons { };
 }
