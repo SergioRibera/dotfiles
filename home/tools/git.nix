@@ -43,7 +43,7 @@ in
       name = name;
       email = email;
     };
-    aliases = {
+    alias = {
       s = "status";
       b = "branch";
       p = "push";
