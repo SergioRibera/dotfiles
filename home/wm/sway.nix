@@ -32,7 +32,7 @@ in {
         floating.border = 1;
         focus.followMouse = true;
         startup = [
-          { always = true; command = "sosd daemon"; }
+          { always = true; command = "${pkgs.swaynotificationcenter}/bin/swaync"; }
           { always = true; command = "swww-daemon"; }
           {
             always = true;

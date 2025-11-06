@@ -1,4 +1,4 @@
-{ inputs, config, lib, ... }: let
+{ inputs, config, lib, pkgs, ... }: let
   inherit (config) gui user terminal shell wm services;
 
   floatToIntStr = v: lib.replaceStrings [".000000"] [""] (toString v);
@@ -21,7 +21,7 @@ in {
       autostart_sh = ''
         dbus-update-activation-environment --all
         swww-daemon &
-        sosd daemon &
+        "${pkgs.swaynotificationcenter}/bin/swaync" &
         ${user.homepath}/.local/bin/wallpaper -t 8h --no-allow-video -d -b -i ${inputs.wallpapers} &
       '';
       settings = ''

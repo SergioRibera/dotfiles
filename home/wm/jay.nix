@@ -16,7 +16,7 @@ in {
       source = tomlFormat.generate "config.toml" {
       on-graphics-initialized = [
         (mkCmd "swww-daemon")
-        (mkCmd "sosd daemon")
+        (mkCmd "${pkgs.swaynotificationcenter}/bin/swaync")
         (mkCmd [ "dbus-update-activation-environment" "--all" "--systemd" ])
         (mkCmd ["${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"])
       ];

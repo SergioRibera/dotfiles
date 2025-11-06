@@ -24,7 +24,7 @@ in {
         exec-once = [
           "dbus-update-activation-environment --all --systemd"
           "swww-daemon"
-          "sosd daemon"
+          "${pkgs.swaynotificationcenter}/bin/swaync"
           "wallpaper -t 8h --no-allow-video -d -b -i ${inputs.wallpapers}"
         ];
         env = [ "XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH" ];

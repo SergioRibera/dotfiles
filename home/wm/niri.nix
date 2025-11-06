@@ -32,7 +32,7 @@ in {
         spawn-at-startup = [
           (makeCommand "swww-daemon")
           (makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
-          (makeCommandArgs ["sosd" "daemon"])
+          (makeCommandArgs ["${pkgs.swaynotificationcenter}/bin/swaync"])
           (makeCommandArgs ["${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"])
           (makeCommandArgs [ "dbus-update-activation-environment" "--all" "--systemd" ])
         ];
