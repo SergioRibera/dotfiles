@@ -8,7 +8,6 @@ in
       inputs.sss.nixosModules.home-manager
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isLinux [
       inputs.nixvim.homeModules.nixvim
-      inputs.wired.homeManagerModules.default
       inputs.sosd.nixosModules.home-manager
     ] ++ lib.optionals pkgs.stdenv.buildPlatform.isDarwin [
       inputs.nixvim.nixosDarwinModules.nixvim

@@ -109,10 +109,6 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    wired = {
-      url = "github:Toqozz/wired-notify";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     mango = {
       url = "github:DreamMaoMao/mango";
       inputs.nixpkgs.follows = "nixpkgs";

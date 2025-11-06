@@ -14,10 +14,6 @@ in
       publicShare = null;
       createDirectories = true;
     };
-    configFile."wired/wired.ron".text = lib.optionalString
-      (pkgs.stdenv.buildPlatform.isLinux && gui.enable && !sosdEnabled)
-      (import ../desktop/wired.nix { colors = gui.theme.colors; });
-
     configFile."dorion/config.json" = lib.mkIf (gui.enable) {
       source = ../desktop/dorion.json;
     };
