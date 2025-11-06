@@ -63,7 +63,7 @@ with pkgs; { home-manager.users."${username}" = {
     clang
 
     # Rust Develoment
-    fenix.stable.toolchain
+    rust-bin.stable.latest.default
     leptosfmt
     trunk
 

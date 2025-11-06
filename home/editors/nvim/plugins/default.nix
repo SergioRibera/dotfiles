@@ -345,6 +345,7 @@ in
               prefix = "self";
               granularity.group = "module";
             };
+            inlayHints.enabled = false;
             # cache = {
             #     warmup = false,
             # },

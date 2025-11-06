@@ -14,6 +14,7 @@
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       overlays = [
         (import ./pkgs)
+        inputs.rust-overlay.overlays.default
         inputs.mac-style-plymouth.overlays.default
       ];
       forEachSystem = nixpkgs.lib.genAttrs systems;
@@ -95,6 +96,10 @@
     zen-browser.url = "github:MarceColl/zen-browser-flake";
     fenix = {
       url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
