@@ -90,6 +90,7 @@ with pkgs; { home-manager.users."${username}" = {
     wl-mirror
     hyprpicker
     swww
+    swaynotificationcenter
 
     # GUI
     easyeffects
