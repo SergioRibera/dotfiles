@@ -12,6 +12,7 @@
       "--hidden"
       "--no-binary"
       "--no-require-git"
+      "--glob" "!.git/*"
     ];
 in {
   settings = {
