@@ -142,6 +142,14 @@ in
         };
       };
     };
+    snacks = {
+      enable = true;
+      autoLoad = true;
+      settings = {
+        dim.enabled = true;
+        input.enabled = true;
+      };
+    };
   }
   // lib.optionalAttrs cfg.complete ((mkPlugins [
     "wakatime"
