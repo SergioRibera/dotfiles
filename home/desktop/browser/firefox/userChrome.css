@@ -19,6 +19,7 @@
 
 /* Sidebar Color */
 #sidebar-main {
+  min-width: 3vw;
   background: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
 }
 
