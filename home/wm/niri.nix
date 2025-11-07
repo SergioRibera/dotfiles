@@ -130,6 +130,7 @@ in {
             "Mod+Print".action = magic-leaf "screenshot-window";
             "Mod+Shift+S".action = magic-leaf "screenshot";
 
+            "Mod+Escape".action = toggle-overview;
             "Mod+Tab".action = spawn "sherlock";
             "Mod+E".action = spawn "cosmic-files";
             "Mod+Return".action = terminal shell.command;
