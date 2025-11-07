@@ -40,40 +40,6 @@ in {
 
   extensions = {
     live-grep-args.enable = true;
-    file-browser = {
-      enable = true;
-      settings.mappings.i = {
-        "<C-a>" = "require('telescope._extensions.file_browser.actions').create";
-        "<C-p>" = "require('telescope._extensions.file_browser.actions').create_from_prompt";
-        "<C-r>" = "require('telescope._extensions.file_browser.actions').rename";
-        "<C-m>" = "require('telescope._extensions.file_browser.actions').move";
-        "<C-y>" = "require('telescope._extensions.file_browser.actions').copy";
-        "<C-d>" = "require('telescope._extensions.file_browser.actions').remove";
-        "<C-o>" = "require('telescope._extensions.file_browser.actions').open";
-        "<C-g>" = "require('telescope._extensions.file_browser.actions').goto_parent_dir";
-        "<C-e>" = "require('telescope._extensions.file_browser.actions').goto_home_dir";
-        "<C-w>" = "require('telescope._extensions.file_browser.actions').goto_cwd";
-        "<C-t>" = "require('telescope._extensions.file_browser.actions').change_cwd";
-        "<C-s>" = "require('telescope._extensions.file_browser.actions').select_horizontal";
-        "<C-v>" = "require('telescope._extensions.file_browser.actions').select_vertical";
-        "<bs>" = "require('telescope._extensions.file_browser.actions').backspace";
-      };
-      settings.mappings.n = {
-        "a" = "require('telescope._extensions.file_browser.actions').create";
-        "r" = "require('telescope._extensions.file_browser.actions').rename";
-        "m" = "require('telescope._extensions.file_browser.actions').move";
-        "y" = "require('telescope._extensions.file_browser.actions').copy";
-        "d" = "require('telescope._extensions.file_browser.actions').remove";
-        "o" = "require('telescope._extensions.file_browser.actions').open";
-        "g" = "require('telescope._extensions.file_browser.actions').goto_parent_dir";
-        "e" = "require('telescope._extensions.file_browser.actions').goto_home_dir";
-        "w" = "require('telescope._extensions.file_browser.actions').goto_cwd";
-        "t" = "require('telescope._extensions.file_browser.actions').change_cwd";
-
-        "s" = "require('telescope._extensions.file_browser.actions').select_horizontal";
-        "v" = "require('telescope._extensions.file_browser.actions').select_vertical";
-      };
-    };
     ui-select = {
       enable = true;
       settings = {
