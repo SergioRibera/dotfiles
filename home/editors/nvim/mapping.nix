@@ -19,6 +19,12 @@ in
   { key = "<Leader>hk"; action = "<cmd>Telescope keymaps<CR>"; options = opts "Show and find files on workspace with preview"; }
   { key = "<Leader>ff"; action = "<cmd>Telescope find_files<CR>"; options = opts "Show and find files on workspace with preview"; }
   { key = "<Leader>lg"; action = "<cmd>Telescope live_grep<CR>"; options = opts "Show regex content on all files on workspace"; }
+  # File Operations (create, rename, move, copy, delete)
+  { key = "<leader>fc"; action = ":lua vim.ui.input({prompt='New file: '}, function(name) if name then vim.cmd('edit ' .. name) end end)<CR>"; options = opts "Create new file"; }
+  { key = "<leader>fd"; action = ":lua vim.ui.input({prompt='Delete file (y/n): ', default='n'}, function(confirm) if confirm == 'y' then os.remove(vim.fn.expand('%:p')) vim.cmd('bdelete!') print('File deleted') end end)<CR>"; options = opts "Delete current file"; }
+  { key = "<leader>fr"; action = ":lua vim.ui.input({prompt='Rename to: ', default=vim.fn.expand('%:t')}, function(name) if name then local old = vim.fn.expand('%:p') local new = vim.fn.expand('%:h') .. '/' .. name os.rename(old, new) vim.cmd('edit ' .. new) vim.cmd('bdelete! ' .. old) print('Renamed to ' .. name) end end)<CR>"; options = opts "Rename current file"; }
+  { key = "<leader>fm"; action = ":lua vim.ui.input({prompt='Move to: ', default=vim.fn.expand('%:p')}, function(path) if path then local old = vim.fn.expand('%:p') os.rename(old, path) vim.cmd('edit ' .. path) vim.cmd('bdelete! ' .. old) print('Moved to ' .. path) end end)<CR>"; options = opts "Move current file"; }
+  { key = "<leader>fy"; action = ":lua vim.ui.input({prompt='Copy to: '}, function(path) if path then local old = vim.fn.expand('%:p') vim.fn.system('cp ' .. vim.fn.shellescape(old) .. ' ' .. vim.fn.shellescape(path)) print('Copied to ' .. path) end end)<CR>"; options = opts "Copy current file"; }
 ] ++ lib.lists.optionals complete [
   #
   # COMPLETE VERSION

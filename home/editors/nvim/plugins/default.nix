@@ -329,7 +329,7 @@ in
         "tailwindcss"
         "taplo"
         "ts_ls"
-        "volar"
+        "vue_ls"
       ]) // {
         rust_analyzer = {
           enable = true;
