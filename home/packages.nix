@@ -56,7 +56,7 @@ with pkgs; { home-manager.users."${username}" = {
     just
 
     # Js
-    bun
+    pnpm
     nodejs
 
     # C/C++ Develoment
