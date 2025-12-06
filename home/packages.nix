@@ -129,5 +129,6 @@ with pkgs; { home-manager.users."${username}" = {
     prismlauncher # minecraft launcher
     mcpelauncher-ui-qt
     heroic
+    lutris
   ];
 };}
