@@ -82,7 +82,7 @@
   wm.screens = let
     height = 1080;
   in [
-    { name = "DP-4"; rotation = "right"; }
+    { name = "DP-4"; rotation = "left"; }
     { name = "DP-3"; position.x = height; }
     {
       name = "DP-5";
