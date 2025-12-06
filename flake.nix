@@ -125,7 +125,7 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     # wlrs-pkg.url = "git+file:///home/s4rch/Contributions/wlrs";
-    # niri-pkg.url = "git+file:///home/s4rch/Contributions/niri";
+    niri-pkg.url = "git+file:///home/s4rch/Public/contributions/niri";
     # nixos-cosmic = {
     #   url = "github:lilyinstarlight/nixos-cosmic";
     #   inputs.nixpkgs.follows = "nixpkgs";
