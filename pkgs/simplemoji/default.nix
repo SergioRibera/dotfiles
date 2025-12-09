@@ -28,16 +28,16 @@
 
 rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } (finalAttrs: {
   pname = "simplemoji";
-  version = "1.2.1";
+  version = "1.2.3";
 
   src = fetchFromGitHub {
     owner = "SergioRibera";
     repo = "simplemoji";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-f6KwfcYNLceRFFoR0NzrVl0fcXvhRb3HPNgRTfYWns8=";
+    hash = "sha256-+hiF+6A1n8r4zKBUs7T7SaYjPy7W+iUbIzUO6qIf4PI=";
   };
 
-  cargoHash = "sha256-MZ04Y5BaJYkDzcOQZrskH/ddq/wjhdZ0gMDmifL98Eg=";
+  cargoHash = "sha256-T2RWwZGWdrC3Hlsrfujcdv8erBScn1zWCMyhkSOb2EA=";
 
   env = {
     SKIA_SOURCE_DIR =
