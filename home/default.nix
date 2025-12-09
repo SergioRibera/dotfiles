@@ -14,6 +14,7 @@ in
     ./desktop
     ./editors
     ./shells
+    ./tools
     ./wm
   ];
 

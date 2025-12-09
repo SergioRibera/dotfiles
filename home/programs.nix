@@ -21,16 +21,10 @@ in
         configDir = ./desktop/eww;
       };
 
-      bat = import ./tools/bat.nix { inherit pkgs config; };
-
       carapace = lib.mkIf (shell.name == "nushell") {
         enable = true;
         enableNushellIntegration = true;
       };
-
-      # enable and configure others
-      git = lib.mkIf config.git.enable (import ./tools/git.nix { inherit config; });
-      sss = lib.mkIf gui.enable (import ./tools/sss.nix { inherit config; });
       sosd = {
         enable = (pkgs.stdenv.buildPlatform.isLinux && gui.enable && user.enableHM && false);
         globals = {
