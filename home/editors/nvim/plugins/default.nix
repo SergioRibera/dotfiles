@@ -164,7 +164,7 @@ in
   ]) // {
     rainbow-delimiters = {
       enable = true;
-      highlight = ibl-hl;
+      settings.highlight = ibl-hl;
     };
     # Editor
     indent-blankline = {
