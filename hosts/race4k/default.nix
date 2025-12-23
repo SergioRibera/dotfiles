@@ -44,6 +44,7 @@
 
   # Ethernet
   boot.extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
+  boot.blacklistedKernelModules = [ "r8169" ];
 
   environment = {
     systemPackages = [ pkgs.libva-utils ];
