@@ -385,21 +385,26 @@
     },
     "niri-pkg": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
-        "rust-overlay": "rust-overlay"
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ]
       },
       "locked": {
-        "lastModified": 1763191761,
-        "narHash": "sha256-yUQZhO94/PUK4bhgcqs2HzqvCq/1o3cDJEeZQjEQCw4=",
-        "ref": "refs/heads/cursor-magnify",
-        "rev": "572afe4549a83c17c040c56c9bfe94cf1b45d8e3",
-        "revCount": 2509,
-        "type": "git",
-        "url": "file:///home/s4rch/Public/contributions/niri"
+        "lastModified": 1764742200,
+        "narHash": "sha256-Lt0mptPIS3+l4GhdH304Bn+W9zuc9WtV87Yx0JtuR20=",
+        "owner": "SergioRibera",
+        "repo": "niri",
+        "rev": "b674035c9fe4dd8ef5a23140c9bd9b4e6091893f",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/s4rch/Public/contributions/niri"
+        "owner": "SergioRibera",
+        "ref": "cursor-magnify",
+        "repo": "niri",
+        "type": "github"
       }
     },
     "niri-stable": {
@@ -473,16 +478,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1757967192,
-        "narHash": "sha256-/aA9A/OBmnuOMgwfzdsXRusqzUpd8rQnQY8jtrHK+To=",
+        "lastModified": 1765186076,
+        "narHash": "sha256-hM20uyap1a0M9d344I692r+ik4gTMyj60cQWO+hAYP8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0d7c15863b251a7a50265e57c1dca1a7add2e291",
+        "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -503,22 +508,6 @@
       }
     },
     "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1765186076,
-        "narHash": "sha256-hM20uyap1a0M9d344I692r+ik4gTMyj60cQWO+hAYP8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
       "locked": {
         "lastModified": 1727348695,
         "narHash": "sha256-J+PeFKSDV+pHL7ukkfpVzCOO7mBSrrpJ3svwBFABbhI=",
@@ -614,10 +603,10 @@
         "niri": "niri",
         "niri-pkg": "niri-pkg",
         "nixos-generators": "nixos-generators",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
         "quickshell": "quickshell",
-        "rust-overlay": "rust-overlay_2",
+        "rust-overlay": "rust-overlay",
         "sosd": "sosd",
         "sss": "sss",
         "wallpapers": "wallpapers",
@@ -644,27 +633,6 @@
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
-          "niri-pkg",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1757989933,
-        "narHash": "sha256-9cpKYWWPCFhgwQTww8S94rTXgg8Q8ydFv9fXM6I8xQM=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "8249aa3442fb9b45e615a35f39eca2fe5510d7c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "rust-overlay_2": {
-      "inputs": {
-        "nixpkgs": [
           "nixpkgs"
         ]
       },
@@ -682,7 +650,7 @@
         "type": "github"
       }
     },
-    "rust-overlay_3": {
+    "rust-overlay_2": {
       "inputs": {
         "nixpkgs": [
           "sosd",
@@ -730,7 +698,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay_3"
+        "rust-overlay": "rust-overlay_2"
       },
       "locked": {
         "lastModified": 1757883908,
@@ -901,7 +869,7 @@
     },
     "zen-browser": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1727721329,
