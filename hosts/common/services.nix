@@ -49,7 +49,6 @@ with pkgs.stdenv.buildPlatform;
     pipewire = lib.mkIf config.audio {
       enable = true;
       alsa.enable = true;
-      pulse.enable = true;
       wireplumber.enable = true;
     };
 

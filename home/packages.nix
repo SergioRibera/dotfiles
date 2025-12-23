@@ -124,6 +124,8 @@ with pkgs; { home-manager.users."${username}" = {
     # }))
   ]
   ++ lib.optionals (config.nvim.neovide && config.gui.enable) [ neovide ]
+  ++ lib.optionals (config.bluetooth && config.gui.enable) [ overskride ]
+  ++ lib.optionals (config.bluetooth && !config.gui.enable) [ bluetui ]
   ++ lib.optionals config.games [
     prismlauncher # minecraft launcher
     mcpelauncher-ui-qt

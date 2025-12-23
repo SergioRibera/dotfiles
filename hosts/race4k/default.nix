@@ -12,7 +12,7 @@
   gui.enable = true;
   sshKeys = true;
   audio = true;
-  bluetooth = false;
+  bluetooth = true;
 
   nvim = {
     enable = true;
