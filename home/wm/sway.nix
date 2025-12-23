@@ -74,7 +74,7 @@ in {
         }) wm.screens);
         keybindings = {
           "${mod}+Tab" = "exec sherlock";
-          "${mod}+e" = "exec cosmic-files";
+          "${mod}+e" = "exec nautilus";
           "${mod}+Return" = "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ shell.command));
           "${mod}+Shift+Return" = "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ shell.privSession));
           "${mod}+n" = "exec firefox-developer-edition";

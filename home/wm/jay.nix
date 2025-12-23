@@ -57,7 +57,7 @@ in {
         "Super_L-shift-l" = "move-right";
 
         "Super_L-tab" = mkCmd "sherlock";
-        "Super_L-e" = mkCmd "cosmic-files";
+        "Super_L-e" = mkCmd "nautilus";
         "Super_L-return" = mkCmd (terminal.command ++ shell.command);
         "Super_L-shift-return" = mkCmd (terminal.command ++ shell.privSession);
         "Super_L-b" = mkCmd ["nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "sidebar"];

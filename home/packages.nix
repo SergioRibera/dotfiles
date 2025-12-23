@@ -98,8 +98,7 @@ with pkgs; { home-manager.users."${username}" = {
     anydesk
     simplemoji
 
-    # self overlay
-    cosmic-files
+    nautilus
 
     # Discord
     (discord.overrideAttrs (final: prev: {

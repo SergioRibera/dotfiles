@@ -185,7 +185,7 @@ ${join "\n" (builtins.map (o:
 # bind="SUPER+Shift,s,screenshot
 
 bind=SUPER,Tab,spawn,sherlock
-bind=SUPER,e,spawn,cosmic-files
+bind=SUPER,e,spawn,nautilus
 bind=SUPER,Return,spawn,${join " " terminal.command} ${join " " shell.command}
 bind=SUPER+SHIFT,Return,spawn,${join " " terminal.command} ${join " " shell.privSession}
 bind=SUPER,b,spawn,nu ${user.homepath}/.config/eww/scripts/extras.nu toggle sidebar

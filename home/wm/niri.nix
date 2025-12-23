@@ -22,9 +22,9 @@ in {
 
     programs.niri = {
       enable = gui.enable && (builtins.elem "niri" wm.actives);
-      package = inputs.niri.packages.${pkgs.system}.niri-stable;
-      # package = inputs.niri-pkg.packages.${pkgs.system}.default;
-      settings = {
+      # package = inputs.niri.packages.${pkgs.system}.niri-stable;
+      package = inputs.niri-pkg.packages.${pkgs.system}.default;
+      settings = with config.lib.niri.actions; with inputs.niri.lib.kdl; {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
         screenshot-path = "~/Pictures/Screenshot/%Y-%m-%d_%H%M%S.png";
@@ -36,6 +36,7 @@ in {
           (makeCommandArgs ["${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"])
           (makeCommandArgs [ "dbus-update-activation-environment" "--all" "--systemd" ])
         ];
+        # cursor = (plain "cursor" [ (leaf "shake" (flag "on")) ]);
         input = {
           keyboard = {
             numlock = true;
@@ -95,7 +96,7 @@ in {
             bottom = dist_out;
           };
         };
-        binds = with config.lib.niri.actions; with inputs.niri.lib.kdl; let
+        binds = let
           terminal = spawn command;
           playerctl = cmd: {
             allow-when-locked = true;
@@ -132,7 +133,7 @@ in {
 
             "Mod+Escape".action = toggle-overview;
             "Mod+Tab".action = spawn "sherlock";
-            "Mod+E".action = spawn "cosmic-files";
+            "Mod+E".action = spawn "nautilus";
             "Mod+Return".action = terminal shell.command;
             "Mod+B".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "sidebar";
             "Mod+P".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "power-screen";
