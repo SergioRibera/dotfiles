@@ -44,7 +44,7 @@
             networking.hostName = name;
             nixpkgs.overlays = overlays;
             user.username = username;
-            boot.binfmt.emulatedSystems = pkgs.lib.optionals (system != "aarch64-linux") [ "aarch64-linux" ];
+            boot.binfmt.emulatedSystems = pkgs.${system}.lib.optionals (system != "aarch64-linux") [ "aarch64-linux" ];
           }
           ./home
           ./hosts/common
