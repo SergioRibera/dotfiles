@@ -13,11 +13,11 @@ in
     ia = {
       enable = mkEnableOption {
         description = "Enable IA server.";
-        default = true;
+        default = false;
       };
       service = mkEnableOption {
         description = "Enable IA as service.";
-        default = true;
+        default = false;
       };
     };
     wm = {
@@ -162,11 +162,11 @@ in
       };
       neovide = mkEnableOption {
         description = "Enable nvim.";
-        default = true;
+        default = false;
       };
       complete = mkEnableOption {
         description = "Enable all configs for nvim.";
-        default = true;
+        default = false;
       };
     };
     server-network = mkEnableOption {

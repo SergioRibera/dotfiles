@@ -5,7 +5,10 @@
   # Prioritize performance over efficiency
   powerManagement.cpuFreqGovernor = "performance";
 
-  ia.enable = true;
+  ia = {
+    enable = true;
+    service = true;
+  };
   games = true;
   server-network = true;
   git.enable = true;
@@ -31,7 +34,6 @@
   };
 
   user = {
-    isNormalUser = true;
     enableHM = true;
     browser = "firefox";
     groups = [ "wheel" "video" "audio" "docker" "libvirtd" "networkmanager" "adbusers" "input" "dialout" ];

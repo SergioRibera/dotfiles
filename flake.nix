@@ -1,7 +1,7 @@
 {
   description = "SergioRibera NixOS System Configuration";
   outputs =
-    { nixpkgs, ... }@inputs:
+    { nixpkgs, nixos-generators, ... }@inputs:
     let
       # System types to support.
       systems = [
@@ -28,7 +28,10 @@
         pkgs = pkgs.${system};
         inherit (nixpkgs) lib;
       };
-      mkNixosCfg = username: system: name: inputs.nixpkgs.lib.nixosSystem {
+
+      baseSystem =  let
+        username = "s4rch";
+      in system: name: {
         inherit system;
         specialArgs = {
           inherit inputs;
@@ -41,6 +44,7 @@
             networking.hostName = name;
             nixpkgs.overlays = overlays;
             user.username = username;
+            boot.binfmt.emulatedSystems = pkgs.lib.optionals (system != "aarch64-linux") [ "aarch64-linux" ];
           }
           ./home
           ./hosts/common
@@ -48,6 +52,14 @@
           inputs.home-manager.nixosModules.home-manager
         ] ++ [ ./hosts/${name} ];
       };
+
+      mkNixosCfg = system: name: inputs.nixpkgs.lib.nixosSystem (baseSystem system name);
+
+      myHosts = [
+        {format = "iso"; system = "x86_64-linux"; name = "race4k";}
+        {format = "iso"; system = "x86_64-linux"; name = "laptop";}
+        {format = "sd"; system = "aarch64-linux"; name = "rpi";}
+      ];
     in
     {
       overlays.default = import ./pkgs;
@@ -57,18 +69,21 @@
           inherit system;
           config.allowUnfree = true;
         };
-      in
-        (import ./pkgs) pkgs pkgs);
+      in (builtins.listToAttrs (map (h:
+        {
+          name = h.name;
+          value = nixos-generators.nixosGenerate ({
+            format = h.format;
+          } // (baseSystem h.system h.name));
+        }) myHosts)
+      ) // (import ./pkgs) pkgs pkgs);
       # packages = inputs.simplemoji.packages;
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#laptop
-      nixosConfigurations = let
-        username = "s4rch";
-      in {
-        race4k = mkNixosCfg username "x86_64-linux" "race4k";
-        laptop = mkNixosCfg username "x86_64-linux" "laptop";
-        rpi = mkNixosCfg username "aarch64-linux" "rpi";
-      };
+      nixosConfigurations = builtins.listToAttrs (map (h: {
+          name = h.name;
+          value = mkNixosCfg h.system h.name;
+        }) myHosts);
 
       # Programs that can be run by calling this flake
       apps = forEachSystem (system: (import ./apps { inherit system inputs; pkgs = pkgs.${system}; }));

@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, config, ... }: {
   environment.systemPackages = with pkgs; [
     inputs.agenix.packages.${pkgs.system}.default
     # Utils
@@ -15,5 +15,25 @@
 
     # ssl
     openssl
+
+    # Compresion
+    ouch
+
+    # Utils
+    gitui
+    fastfetch
+  ] ++ pkgs.lib.optionals (config.isServer || config.nvim.complete) [
+    wrkflw
+    dive
+
+    # simple web server
+    dufs
+
+    # cloudflare
+    cloudflared
+    # nodePackages.wrangler
+
+    # Docker
+    docker-compose
   ];
 }

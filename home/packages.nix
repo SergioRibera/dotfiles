@@ -18,23 +18,6 @@ with pkgs; { home-manager.users."${username}" = {
   };
 
   home.packages = [
-    # Compresion
-    ouch
-
-    # simple web server
-    dufs
-
-    # cloudflare
-    cloudflared
-    # nodePackages.wrangler
-
-    # Docker
-    docker-compose
-
-    # Utils
-    gitui
-    fastfetch
-
     # self overlay
     simple-commits
   ] ++ lib.optionals (config.gui.enable && hostName == "race4k") [
@@ -51,8 +34,6 @@ with pkgs; { home-manager.users."${username}" = {
     xdg-utils
     wev
   ] ++ lib.optionals config.nvim.complete [
-    wrkflw
-    dive
     just
 
     # Js
