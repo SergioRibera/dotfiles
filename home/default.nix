@@ -49,6 +49,7 @@ in
       name = username;
       home = user.homepath;
       extraGroups = user.groups;
+      shell = pkgs."${config.shell.name}";
     };
   };
 
