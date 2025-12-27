@@ -2,6 +2,12 @@
   # Show quick helper as default
   default = help;
   help = import ./help.nix { inherit pkgs; };
+  fmt = {
+    type = "app";
+    program = "${pkgs.writeShellScript "fmt-all" ''
+      find . -name '*.nix' -type f -exec ${pkgs.nixfmt-rfc-style}/bin/nixfmt {} \;
+    ''}";
+  };
 
   # Build
   rebuild = import ./rebuild.nix { inherit pkgs; };
