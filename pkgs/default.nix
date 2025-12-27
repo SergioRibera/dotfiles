@@ -1,8 +1,5 @@
-final: prev: rec {
+final: prev: {
   hyprswitch = prev.callPackage ./hyprswitch { };
-
-  dwl = prev.callPackage ./dwl { inherit scenefx; };
-  scenefx = prev.callPackage ./scenefx { };
 
   # Nvim Extra Plugins
   nvim-wakatime = prev.callPackage ./nvim/wakatime.nix { };
