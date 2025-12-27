@@ -1,20 +1,35 @@
-{ config, pkgs, lib, ... }: let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
   lsp-raw = import ./lsp.nix { inherit config pkgs lib; };
-  lsp = (lib.removeAttrs lsp-raw ["__functor"]);
-in {
+  lsp = (lib.removeAttrs lsp-raw [ "__functor" ]);
+in
+{
   home-manager.users."${config.user.username}" = lib.mkIf config.gui.enable {
     xdg.configFile."zed/tasks.json" = lib.mkIf config.gui.enable { source = ./tasks.jsonc; };
     programs.zed-editor = {
       enable = true;
       installRemoteServer = true;
       extensions = [
-        "astro" "html"
+        "astro"
+        "html"
         "liquid" # TODO: lsp
-        "nix" "nu" "vue"
-        "wgsl_analyzer" "css-modules-kit"
-        "toml" "dockerfile" "slint"
-        "discord-presence" "wakatime"
-        "vitesse" "catppuccin-icons"
+        "nix"
+        "nu"
+        "vue"
+        "wgsl_analyzer"
+        "css-modules-kit"
+        "toml"
+        "dockerfile"
+        "slint"
+        "discord-presence"
+        "wakatime"
+        "vitesse"
+        "catppuccin-icons"
       ];
       extraPackages = with pkgs; [
         # Debugger
@@ -83,7 +98,8 @@ in {
           stepping_granularity = "line";
         };
         disable_ai = true;
-      } // lsp;
+      }
+      // lsp;
     };
   };
 }

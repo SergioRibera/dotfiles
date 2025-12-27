@@ -13,7 +13,9 @@ pkgs.rustPlatform.buildRustPackage {
 
   cargoBuildFlags = "-p wakatime-ls";
   cargoHash = "sha256-WBk8zSRUqqYKiYK+c4CdkoLf1RcbwNIMYhUFRWerRPY=";
-  cargoLock = { lockFile = ./Cargo.lock; };
+  cargoLock = {
+    lockFile = ./Cargo.lock;
+  };
 
   meta = {
     homepage = "https://github.com/wakatime/zed-wakatime";

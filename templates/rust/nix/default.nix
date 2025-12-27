@@ -1,12 +1,11 @@
 let
-  inherit
-    (builtins)
+  inherit (builtins)
     currentSystem
     fromJSON
     readFile
     ;
-  getFlake = name:
-    with (fromJSON (readFile ../flake.lock)).nodes.${name}.locked; {
+  getFlake =
+    name: with (fromJSON (readFile ../flake.lock)).nodes.${name}.locked; {
       inherit rev;
       outPath = fetchTarball {
         url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
@@ -14,14 +13,15 @@ let
       };
     };
 in
-{ system ? currentSystem
-, pkgs ? import (getFlake "nixpkgs") { localSystem = { inherit system; }; }
-, lib ? pkgs.lib
-, crane
-, cranix
-, fenix
-, stdenv ? pkgs.stdenv
-, ...
+{
+  system ? currentSystem,
+  pkgs ? import (getFlake "nixpkgs") { localSystem = { inherit system; }; },
+  lib ? pkgs.lib,
+  crane,
+  cranix,
+  fenix,
+  stdenv ? pkgs.stdenv,
+  ...
 }:
 let
   # fenix: rustup replacement for reproducible builds
@@ -56,15 +56,18 @@ let
 
   # Base args, need for build all crate artifacts and caching this for late builds
   deps = {
-    nativeBuildInputs =
-      [ pkgs.pkg-config pkgs.autoPatchelfHook ]
-      ++ lib.optionals stdenv.buildPlatform.isDarwin [
-        pkgs.libiconv
-      ]
-      ++ lib.optionals stdenv.buildPlatform.isLinux [
-        pkgs.libxkbcommon.dev
-      ];
-    runtimeDependencies = with pkgs;
+    nativeBuildInputs = [
+      pkgs.pkg-config
+      pkgs.autoPatchelfHook
+    ]
+    ++ lib.optionals stdenv.buildPlatform.isDarwin [
+      pkgs.libiconv
+    ]
+    ++ lib.optionals stdenv.buildPlatform.isLinux [
+      pkgs.libxkbcommon.dev
+    ];
+    runtimeDependencies =
+      with pkgs;
       lib.optionals stdenv.isLinux [
         wayland
         libxkbcommon
@@ -73,7 +76,8 @@ let
   };
 
   # Lambda for build packages with cached artifacts
-  commonArgs = {}:
+  commonArgs =
+    { }:
     deps
     // {
       src = lib.cleanSourceWith {
@@ -103,7 +107,8 @@ in
   };
   # `nix develop`
   devShells.default = cranixLib.devShell {
-    packages = with pkgs;
+    packages =
+      with pkgs;
       [
         toolchain
         pkg-config

@@ -1,4 +1,10 @@
-{ colors, username, complete, lib }: {
+{
+  colors,
+  username,
+  complete,
+  lib,
+}:
+{
   loaded_custom_tabline = 1;
   mapleader = " ";
   instant_username = username;

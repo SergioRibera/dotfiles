@@ -1,4 +1,10 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   fonts = lib.mkIf (config.gui.enable || pkgs.stdenv.buildPlatform.isDarwin) {
     fontDir.enable = true;
     packages = with pkgs; [

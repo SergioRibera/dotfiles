@@ -1,298 +1,925 @@
 # Content modified from base16 neovim plugin
 # https://github.com/RRethy/base16-nvim/blob/eec6882101dd189117f79c5d18d389d20cfc0415/lua/base16-colorscheme.lua
 
-{ colors }: {
-  Normal = { fg = colors.base05; bg = colors.base00; };
-  Bold = { bold = true; };
-  Debug = { fg = colors.base08; };
-  Directory = { fg = colors.base0D; };
-  Error = { fg = colors.base08; bg = colors.base00; };
-  ErrorMsg = { fg = colors.base08; bg = colors.base00; };
-  Exception = { fg = colors.base08; };
-  FoldColumn = { fg = colors.base0C; bg = colors.base00; };
-  Folded = { fg = colors.base03; bg = colors.base01; };
-  IncSearch = { fg = colors.base01; bg = colors.base09; }; # gui = "none"; };
+{ colors }:
+{
+  Normal = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  Bold = {
+    bold = true;
+  };
+  Debug = {
+    fg = colors.base08;
+  };
+  Directory = {
+    fg = colors.base0D;
+  };
+  Error = {
+    fg = colors.base08;
+    bg = colors.base00;
+  };
+  ErrorMsg = {
+    fg = colors.base08;
+    bg = colors.base00;
+  };
+  Exception = {
+    fg = colors.base08;
+  };
+  FoldColumn = {
+    fg = colors.base0C;
+    bg = colors.base00;
+  };
+  Folded = {
+    fg = colors.base03;
+    bg = colors.base01;
+  };
+  IncSearch = {
+    fg = colors.base01;
+    bg = colors.base09;
+  }; # gui = "none"; };
   Italic = { }; # gui = "none"; };
-  Macro = { fg = colors.base08; };
-  MatchParen = { bg = colors.base03; };
-  ModeMsg = { fg = colors.base0B; };
-  MoreMsg = { fg = colors.base0B; };
-  Question = { fg = colors.base0D; };
-  Search = { fg = colors.base01; bg = colors.base0A; };
-  Substitute = { fg = colors.base01; bg = colors.base0A; }; # gui = "none"; };
-  SpecialKey = { fg = colors.base03; };
-  TooLong = { fg = colors.base08; };
-  Underlined = { fg = colors.base08; };
-  Visual = { bg = colors.base02; };
-  VisualNOS = { fg = colors.base08; };
-  WarningMsg = { fg = colors.base08; };
-  WildMenu = { fg = colors.base08; bg = colors.base0A; };
-  Title = { fg = colors.base0D; }; # gui = "none"; };
-  Conceal = { fg = colors.base0D; bg = colors.base00; };
-  Cursor = { fg = colors.base00; bg = colors.base05; };
-  NonText = { fg = colors.base03; };
-  LineNr = { fg = colors.base04; bg = colors.base00; };
-  SignColumn = { fg = colors.base04; bg = colors.base00; };
-  StatusLine = { fg = colors.base05; bg = colors.base02; }; # gui = "none"; };
-  StatusLineNC = { fg = colors.base04; bg = colors.base01; }; # gui = "none"; };
-  WinBar = { fg = colors.base05; }; # gui = "none"; };
-  WinBarNC = { fg = colors.base04; }; # gui = "none"; };
-  VertSplit = { fg = colors.base05; bg = colors.base00; }; # gui = "none"; };
-  ColorColumn = { bg = colors.base01; }; # gui = "none"; };
-  CursorColumn = { bg = colors.base01; }; # gui = "none"; };
-  CursorLine = { bg = colors.base01; }; # gui = "none"; };
-  CursorLineNr = { fg = colors.base04; bg = colors.base01; };
-  QuickFixLine = { bg = colors.base01; }; # gui = "none"; };
-  PMenu = { fg = colors.base05; bg = colors.base01; }; # gui = "none"; };
-  PMenuSel = { fg = colors.base01; bg = colors.base05; };
-  TabLine = { fg = colors.base03; bg = colors.base02; }; # gui = "none"; };
-  TabLineFill = { fg = colors.base03; bg = colors.base00; }; # gui = "none"; };
-  TabLineSel = { fg = colors.base0B; bg = colors.base01; }; # gui = "none"; };
-  TabLineSep = { bg = colors.base02; fg = colors.base02; };
-  TabLineSepSel = { bg = colors.base02; fg = colors.base01; };
-  TabLineSepNextSel = { bg = colors.base01; fg = colors.base02; };
-  TabLineSepEnd = { bg = colors.base00; fg = colors.base02; };
-  TabLineSepEndSel = { bg = colors.base00; fg = colors.base01; };
+  Macro = {
+    fg = colors.base08;
+  };
+  MatchParen = {
+    bg = colors.base03;
+  };
+  ModeMsg = {
+    fg = colors.base0B;
+  };
+  MoreMsg = {
+    fg = colors.base0B;
+  };
+  Question = {
+    fg = colors.base0D;
+  };
+  Search = {
+    fg = colors.base01;
+    bg = colors.base0A;
+  };
+  Substitute = {
+    fg = colors.base01;
+    bg = colors.base0A;
+  }; # gui = "none"; };
+  SpecialKey = {
+    fg = colors.base03;
+  };
+  TooLong = {
+    fg = colors.base08;
+  };
+  Underlined = {
+    fg = colors.base08;
+  };
+  Visual = {
+    bg = colors.base02;
+  };
+  VisualNOS = {
+    fg = colors.base08;
+  };
+  WarningMsg = {
+    fg = colors.base08;
+  };
+  WildMenu = {
+    fg = colors.base08;
+    bg = colors.base0A;
+  };
+  Title = {
+    fg = colors.base0D;
+  }; # gui = "none"; };
+  Conceal = {
+    fg = colors.base0D;
+    bg = colors.base00;
+  };
+  Cursor = {
+    fg = colors.base00;
+    bg = colors.base05;
+  };
+  NonText = {
+    fg = colors.base03;
+  };
+  LineNr = {
+    fg = colors.base04;
+    bg = colors.base00;
+  };
+  SignColumn = {
+    fg = colors.base04;
+    bg = colors.base00;
+  };
+  StatusLine = {
+    fg = colors.base05;
+    bg = colors.base02;
+  }; # gui = "none"; };
+  StatusLineNC = {
+    fg = colors.base04;
+    bg = colors.base01;
+  }; # gui = "none"; };
+  WinBar = {
+    fg = colors.base05;
+  }; # gui = "none"; };
+  WinBarNC = {
+    fg = colors.base04;
+  }; # gui = "none"; };
+  VertSplit = {
+    fg = colors.base05;
+    bg = colors.base00;
+  }; # gui = "none"; };
+  ColorColumn = {
+    bg = colors.base01;
+  }; # gui = "none"; };
+  CursorColumn = {
+    bg = colors.base01;
+  }; # gui = "none"; };
+  CursorLine = {
+    bg = colors.base01;
+  }; # gui = "none"; };
+  CursorLineNr = {
+    fg = colors.base04;
+    bg = colors.base01;
+  };
+  QuickFixLine = {
+    bg = colors.base01;
+  }; # gui = "none"; };
+  PMenu = {
+    fg = colors.base05;
+    bg = colors.base01;
+  }; # gui = "none"; };
+  PMenuSel = {
+    fg = colors.base01;
+    bg = colors.base05;
+  };
+  TabLine = {
+    fg = colors.base03;
+    bg = colors.base02;
+  }; # gui = "none"; };
+  TabLineFill = {
+    fg = colors.base03;
+    bg = colors.base00;
+  }; # gui = "none"; };
+  TabLineSel = {
+    fg = colors.base0B;
+    bg = colors.base01;
+  }; # gui = "none"; };
+  TabLineSep = {
+    bg = colors.base02;
+    fg = colors.base02;
+  };
+  TabLineSepSel = {
+    bg = colors.base02;
+    fg = colors.base01;
+  };
+  TabLineSepNextSel = {
+    bg = colors.base01;
+    fg = colors.base02;
+  };
+  TabLineSepEnd = {
+    bg = colors.base00;
+    fg = colors.base02;
+  };
+  TabLineSepEndSel = {
+    bg = colors.base00;
+    fg = colors.base01;
+  };
 
   # Standard syntax highlighting;
-  Boolean = { fg = colors.base09; };
-  Character = { fg = colors.base08; };
-  Comment = { fg = colors.base03; };
-  Conditional = { fg = colors.base0E; };
-  Constant = { fg = colors.base09; };
-  Define = { fg = colors.base0E; }; # gui = "none"; };
-  Delimiter = { fg = colors.base0F; };
-  Float = { fg = colors.base09; };
-  Function = { fg = colors.base0D; };
-  Identifier = { fg = colors.base08; }; # gui = "none"; };
-  Include = { fg = colors.base0D; };
-  Keyword = { fg = colors.base0E; };
-  Label = { fg = colors.base0A; };
-  Number = { fg = colors.base09; };
-  Operator = { fg = colors.base0E; }; # gui = "none"; };
-  PreProc = { fg = colors.base0A; };
-  Repeat = { fg = colors.base0A; };
-  Special = { fg = colors.base0C; };
-  SpecialChar = { fg = colors.base0F; };
-  Statement = { fg = colors.base08; };
-  StorageClass = { fg = colors.base0A; };
-  String = { fg = colors.base0B; };
-  Structure = { fg = colors.base0E; };
-  Tag = { fg = colors.base0A; };
-  Todo = { fg = colors.base0A; bg = colors.base01; };
-  Type = { fg = colors.base0A; }; # gui = "none"; };
-  Typedef = { fg = colors.base0A; };
+  Boolean = {
+    fg = colors.base09;
+  };
+  Character = {
+    fg = colors.base08;
+  };
+  Comment = {
+    fg = colors.base03;
+  };
+  Conditional = {
+    fg = colors.base0E;
+  };
+  Constant = {
+    fg = colors.base09;
+  };
+  Define = {
+    fg = colors.base0E;
+  }; # gui = "none"; };
+  Delimiter = {
+    fg = colors.base0F;
+  };
+  Float = {
+    fg = colors.base09;
+  };
+  Function = {
+    fg = colors.base0D;
+  };
+  Identifier = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  Include = {
+    fg = colors.base0D;
+  };
+  Keyword = {
+    fg = colors.base0E;
+  };
+  Label = {
+    fg = colors.base0A;
+  };
+  Number = {
+    fg = colors.base09;
+  };
+  Operator = {
+    fg = colors.base0E;
+  }; # gui = "none"; };
+  PreProc = {
+    fg = colors.base0A;
+  };
+  Repeat = {
+    fg = colors.base0A;
+  };
+  Special = {
+    fg = colors.base0C;
+  };
+  SpecialChar = {
+    fg = colors.base0F;
+  };
+  Statement = {
+    fg = colors.base08;
+  };
+  StorageClass = {
+    fg = colors.base0A;
+  };
+  String = {
+    fg = colors.base0B;
+  };
+  Structure = {
+    fg = colors.base0E;
+  };
+  Tag = {
+    fg = colors.base0A;
+  };
+  Todo = {
+    fg = colors.base0A;
+    bg = colors.base01;
+  };
+  Type = {
+    fg = colors.base0A;
+  }; # gui = "none"; };
+  Typedef = {
+    fg = colors.base0A;
+  };
 
   # Diff highlighting;
-  DiffAdd = { fg = colors.base0B; bg = colors.base00; };
-  DiffChange = { fg = colors.base03; bg = colors.base00; };
-  DiffDelete = { fg = colors.base08; bg = colors.base00; };
-  DiffText = { fg = colors.base0D; bg = colors.base00; };
-  DiffAdded = { fg = colors.base0B; bg = colors.base00; };
-  DiffFile = { fg = colors.base08; bg = colors.base00; };
-  DiffNewFile = { fg = colors.base0B; bg = colors.base00; };
-  DiffLine = { fg = colors.base0D; bg = colors.base00; };
-  DiffRemoved = { fg = colors.base08; bg = colors.base00; };
+  DiffAdd = {
+    fg = colors.base0B;
+    bg = colors.base00;
+  };
+  DiffChange = {
+    fg = colors.base03;
+    bg = colors.base00;
+  };
+  DiffDelete = {
+    fg = colors.base08;
+    bg = colors.base00;
+  };
+  DiffText = {
+    fg = colors.base0D;
+    bg = colors.base00;
+  };
+  DiffAdded = {
+    fg = colors.base0B;
+    bg = colors.base00;
+  };
+  DiffFile = {
+    fg = colors.base08;
+    bg = colors.base00;
+  };
+  DiffNewFile = {
+    fg = colors.base0B;
+    bg = colors.base00;
+  };
+  DiffLine = {
+    fg = colors.base0D;
+    bg = colors.base00;
+  };
+  DiffRemoved = {
+    fg = colors.base08;
+    bg = colors.base00;
+  };
 
   # Git highlighting;
-  gitcommitOverflow = { fg = colors.base08; };
-  gitcommitSummary = { fg = colors.base0B; };
-  gitcommitComment = { fg = colors.base03; };
-  gitcommitUntracked = { fg = colors.base03; };
-  gitcommitDiscarded = { fg = colors.base03; };
-  gitcommitSelected = { fg = colors.base03; };
-  gitcommitHeader = { fg = colors.base0E; };
-  gitcommitSelectedType = { fg = colors.base0D; };
-  gitcommitUnmergedType = { fg = colors.base0D; };
-  gitcommitDiscardedType = { fg = colors.base0D; };
-  gitcommitBranch = { fg = colors.base09; bold = true; };
-  gitcommitUntrackedFile = { fg = colors.base0A; };
-  gitcommitUnmergedFile = { fg = colors.base08; bold = true; };
-  gitcommitDiscardedFile = { fg = colors.base08; bold = true; };
-  gitcommitSelectedFile = { fg = colors.base0B; bold = true; };
+  gitcommitOverflow = {
+    fg = colors.base08;
+  };
+  gitcommitSummary = {
+    fg = colors.base0B;
+  };
+  gitcommitComment = {
+    fg = colors.base03;
+  };
+  gitcommitUntracked = {
+    fg = colors.base03;
+  };
+  gitcommitDiscarded = {
+    fg = colors.base03;
+  };
+  gitcommitSelected = {
+    fg = colors.base03;
+  };
+  gitcommitHeader = {
+    fg = colors.base0E;
+  };
+  gitcommitSelectedType = {
+    fg = colors.base0D;
+  };
+  gitcommitUnmergedType = {
+    fg = colors.base0D;
+  };
+  gitcommitDiscardedType = {
+    fg = colors.base0D;
+  };
+  gitcommitBranch = {
+    fg = colors.base09;
+    bold = true;
+  };
+  gitcommitUntrackedFile = {
+    fg = colors.base0A;
+  };
+  gitcommitUnmergedFile = {
+    fg = colors.base08;
+    bold = true;
+  };
+  gitcommitDiscardedFile = {
+    fg = colors.base08;
+    bold = true;
+  };
+  gitcommitSelectedFile = {
+    fg = colors.base0B;
+    bold = true;
+  };
 
   # GitSigns highlighting
-  GitSignsAdd = { fg = colors.base0B; bg = colors.base00; };
-  GitSignsChange = { fg = colors.base0D; bg = colors.base00; };
-  GitSignsDelete = { fg = colors.base08; bg = colors.base00; };
-  GitSignsChangeDelete = { fg = colors.base0E; bg = colors.base00; };
-  GitSignsAddNr = { link = "GitSignsAdd"; };
-  GitSignsChangeNr = { link = "GitSignsChange"; };
-  GitSignsDeleteNr = { link = "GitSignsDelete"; };
-  GitSignsChangeDeleteNr = { link = "GitSignsChangeDelete"; };
+  GitSignsAdd = {
+    fg = colors.base0B;
+    bg = colors.base00;
+  };
+  GitSignsChange = {
+    fg = colors.base0D;
+    bg = colors.base00;
+  };
+  GitSignsDelete = {
+    fg = colors.base08;
+    bg = colors.base00;
+  };
+  GitSignsChangeDelete = {
+    fg = colors.base0E;
+    bg = colors.base00;
+  };
+  GitSignsAddNr = {
+    link = "GitSignsAdd";
+  };
+  GitSignsChangeNr = {
+    link = "GitSignsChange";
+  };
+  GitSignsDeleteNr = {
+    link = "GitSignsDelete";
+  };
+  GitSignsChangeDeleteNr = {
+    link = "GitSignsChangeDelete";
+  };
 
   # Spelling highlighting
-  SpellBad = { undercurl = true; sp = colors.base08; };
-  SpellLocal = { undercurl = true; sp = colors.base0C; };
-  SpellCap = { undercurl = true; sp = colors.base0D; };
-  SpellRare = { undercurl = true; sp = colors.base0E; };
+  SpellBad = {
+    undercurl = true;
+    sp = colors.base08;
+  };
+  SpellLocal = {
+    undercurl = true;
+    sp = colors.base0C;
+  };
+  SpellCap = {
+    undercurl = true;
+    sp = colors.base0D;
+  };
+  SpellRare = {
+    undercurl = true;
+    sp = colors.base0E;
+  };
 
-  DiagnosticError = { fg = colors.base08; }; # gui = "none"; };
-  DiagnosticWarn = { fg = colors.base0E; }; # gui = "none"; };
-  DiagnosticInfo = { fg = colors.base0D; }; # gui = "none"; };
-  DiagnosticHint = { fg = colors.base0C; }; # gui = "none"; };
-  DiagnosticUnderlineError = { undercurl = true; sp = colors.base08; };
-  DiagnosticUnderlineWarning = { undercurl = true; sp = colors.base0E; };
-  DiagnosticUnderlineWarn = { undercurl = true; sp = colors.base0E; };
-  DiagnosticUnderlineInformation = { undercurl = true; sp = colors.base0F; };
-  DiagnosticUnderlineHint = { undercurl = true; sp = colors.base0C; };
+  DiagnosticError = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  DiagnosticWarn = {
+    fg = colors.base0E;
+  }; # gui = "none"; };
+  DiagnosticInfo = {
+    fg = colors.base0D;
+  }; # gui = "none"; };
+  DiagnosticHint = {
+    fg = colors.base0C;
+  }; # gui = "none"; };
+  DiagnosticUnderlineError = {
+    undercurl = true;
+    sp = colors.base08;
+  };
+  DiagnosticUnderlineWarning = {
+    undercurl = true;
+    sp = colors.base0E;
+  };
+  DiagnosticUnderlineWarn = {
+    undercurl = true;
+    sp = colors.base0E;
+  };
+  DiagnosticUnderlineInformation = {
+    undercurl = true;
+    sp = colors.base0F;
+  };
+  DiagnosticUnderlineHint = {
+    undercurl = true;
+    sp = colors.base0C;
+  };
 
-  LspReferenceText = { underline = true; sp = colors.base04; };
-  LspReferenceRead = { underline = true; sp = colors.base04; };
-  LspReferenceWrite = { underline = true; sp = colors.base04; };
-  LspDiagnosticsDefaultError = { link = "DiagnosticError"; };
-  LspDiagnosticsDefaultWarning = { link = "DiagnosticWarn"; };
-  LspDiagnosticsDefaultInformation = { link = "DiagnosticInfo"; };
-  LspDiagnosticsDefaultHint = { link = "DiagnosticHint"; };
-  LspDiagnosticsUnderlineError = { link = "DiagnosticUnderlineError"; };
-  LspDiagnosticsUnderlineWarning = { link = "DiagnosticUnderlineWarning"; };
-  LspDiagnosticsUnderlineInformation = { link = "DiagnosticUnderlineInformation"; };
-  LspDiagnosticsUnderlineHint = { link = "DiagnosticUnderlineHint"; };
+  LspReferenceText = {
+    underline = true;
+    sp = colors.base04;
+  };
+  LspReferenceRead = {
+    underline = true;
+    sp = colors.base04;
+  };
+  LspReferenceWrite = {
+    underline = true;
+    sp = colors.base04;
+  };
+  LspDiagnosticsDefaultError = {
+    link = "DiagnosticError";
+  };
+  LspDiagnosticsDefaultWarning = {
+    link = "DiagnosticWarn";
+  };
+  LspDiagnosticsDefaultInformation = {
+    link = "DiagnosticInfo";
+  };
+  LspDiagnosticsDefaultHint = {
+    link = "DiagnosticHint";
+  };
+  LspDiagnosticsUnderlineError = {
+    link = "DiagnosticUnderlineError";
+  };
+  LspDiagnosticsUnderlineWarning = {
+    link = "DiagnosticUnderlineWarning";
+  };
+  LspDiagnosticsUnderlineInformation = {
+    link = "DiagnosticUnderlineInformation";
+  };
+  LspDiagnosticsUnderlineHint = {
+    link = "DiagnosticUnderlineHint";
+  };
 
-  TSAnnotation = { fg = colors.base0F; }; # gui = "none"; };
-  TSAttribute = { fg = colors.base0A; }; # gui = "none"; };
-  TSBoolean = { fg = colors.base09; }; # gui = "none"; };
-  TSCharacter = { fg = colors.base08; }; # gui = "none"; };
-  TSComment = { fg = colors.base03; italic = true; };
-  TSConstructor = { fg = colors.base0D; }; # gui = "none"; };
-  TSConditional = { fg = colors.base0E; }; # gui = "none"; };
-  TSConstant = { fg = colors.base09; }; # gui = "none"; };
-  TSConstBuiltin = { fg = colors.base09; italic = true; };
-  TSConstMacro = { fg = colors.base08; }; # gui = "none"; };
-  TSError = { fg = colors.base08; }; # gui = "none"; };
-  TSException = { fg = colors.base08; }; # gui = "none"; };
-  TSField = { fg = colors.base05; }; # gui = "none"; };
-  TSFloat = { fg = colors.base09; }; # gui = "none"; };
-  TSFunction = { fg = colors.base0D; }; # gui = "none"; };
-  TSFuncBuiltin = { fg = colors.base0D; italic = true; };
-  TSFuncMacro = { fg = colors.base08; }; # gui = "none"; };
-  TSInclude = { fg = colors.base0D; }; # gui = "none"; };
-  TSKeyword = { fg = colors.base0E; }; # gui = "none"; };
-  TSKeywordFunction = { fg = colors.base0E; }; # gui = "none"; };
-  TSKeywordOperator = { fg = colors.base0E; }; # gui = "none"; };
-  TSLabel = { fg = colors.base0A; }; # gui = "none"; };
-  TSMethod = { fg = colors.base0D; }; # gui = "none"; };
-  TSNamespace = { fg = colors.base08; }; # gui = "none"; };
-  TSNone = { fg = colors.base05; }; # gui = "none"; };
-  TSNumber = { fg = colors.base09; }; # gui = "none"; };
-  TSOperator = { fg = colors.base05; }; # gui = "none"; };
-  TSParameter = { fg = colors.base05; }; # gui = "none"; };
-  TSParameterReference = { fg = colors.base05; }; # gui = "none"; };
-  TSProperty = { fg = colors.base05; }; # gui = "none"; };
-  TSPunctDelimiter = { fg = colors.base0F; }; # gui = "none"; };
-  TSPunctBracket = { fg = colors.base05; }; # gui = "none"; };
-  TSPunctSpecial = { fg = colors.base0F; }; # gui = "none"; };
-  TSRepeat = { fg = colors.base0E; }; # gui = "none"; };
-  TSString = { fg = colors.base0B; }; # gui = "none"; };
-  TSStringRegex = { fg = colors.base0C; }; # gui = "none"; };
-  TSStringEscape = { fg = colors.base0C; }; # gui = "none"; };
-  TSSymbol = { fg = colors.base0B; }; # gui = "none"; };
-  TSTag = { fg = colors.base08; }; # gui = "none"; };
-  TSTagDelimiter = { fg = colors.base0F; }; # gui = "none"; };
-  TSText = { fg = colors.base05; }; # gui = "none"; };
-  TSStrong = { bold = true; };
-  TSEmphasis = { fg = colors.base09; italic = true; };
-  TSUnderline = { fg = colors.base00; underline = true; };
-  TSStrike = { fg = colors.base00; strikethrough = true; };
-  TSTitle = { fg = colors.base0D; }; # gui = "none"; };
-  TSLiteral = { fg = colors.base09; }; # gui = "none"; };
-  TSURI = { fg = colors.base09; underline = true; };
-  TSType = { fg = colors.base0A; }; # gui = "none"; };
-  TSTypeBuiltin = { fg = colors.base0A; italic = true; };
-  TSVariable = { fg = colors.base08; }; # gui = "none"; };
-  TSVariableBuiltin = { fg = colors.base08; italic = true; };
+  TSAnnotation = {
+    fg = colors.base0F;
+  }; # gui = "none"; };
+  TSAttribute = {
+    fg = colors.base0A;
+  }; # gui = "none"; };
+  TSBoolean = {
+    fg = colors.base09;
+  }; # gui = "none"; };
+  TSCharacter = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  TSComment = {
+    fg = colors.base03;
+    italic = true;
+  };
+  TSConstructor = {
+    fg = colors.base0D;
+  }; # gui = "none"; };
+  TSConditional = {
+    fg = colors.base0E;
+  }; # gui = "none"; };
+  TSConstant = {
+    fg = colors.base09;
+  }; # gui = "none"; };
+  TSConstBuiltin = {
+    fg = colors.base09;
+    italic = true;
+  };
+  TSConstMacro = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  TSError = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  TSException = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  TSField = {
+    fg = colors.base05;
+  }; # gui = "none"; };
+  TSFloat = {
+    fg = colors.base09;
+  }; # gui = "none"; };
+  TSFunction = {
+    fg = colors.base0D;
+  }; # gui = "none"; };
+  TSFuncBuiltin = {
+    fg = colors.base0D;
+    italic = true;
+  };
+  TSFuncMacro = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  TSInclude = {
+    fg = colors.base0D;
+  }; # gui = "none"; };
+  TSKeyword = {
+    fg = colors.base0E;
+  }; # gui = "none"; };
+  TSKeywordFunction = {
+    fg = colors.base0E;
+  }; # gui = "none"; };
+  TSKeywordOperator = {
+    fg = colors.base0E;
+  }; # gui = "none"; };
+  TSLabel = {
+    fg = colors.base0A;
+  }; # gui = "none"; };
+  TSMethod = {
+    fg = colors.base0D;
+  }; # gui = "none"; };
+  TSNamespace = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  TSNone = {
+    fg = colors.base05;
+  }; # gui = "none"; };
+  TSNumber = {
+    fg = colors.base09;
+  }; # gui = "none"; };
+  TSOperator = {
+    fg = colors.base05;
+  }; # gui = "none"; };
+  TSParameter = {
+    fg = colors.base05;
+  }; # gui = "none"; };
+  TSParameterReference = {
+    fg = colors.base05;
+  }; # gui = "none"; };
+  TSProperty = {
+    fg = colors.base05;
+  }; # gui = "none"; };
+  TSPunctDelimiter = {
+    fg = colors.base0F;
+  }; # gui = "none"; };
+  TSPunctBracket = {
+    fg = colors.base05;
+  }; # gui = "none"; };
+  TSPunctSpecial = {
+    fg = colors.base0F;
+  }; # gui = "none"; };
+  TSRepeat = {
+    fg = colors.base0E;
+  }; # gui = "none"; };
+  TSString = {
+    fg = colors.base0B;
+  }; # gui = "none"; };
+  TSStringRegex = {
+    fg = colors.base0C;
+  }; # gui = "none"; };
+  TSStringEscape = {
+    fg = colors.base0C;
+  }; # gui = "none"; };
+  TSSymbol = {
+    fg = colors.base0B;
+  }; # gui = "none"; };
+  TSTag = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  TSTagDelimiter = {
+    fg = colors.base0F;
+  }; # gui = "none"; };
+  TSText = {
+    fg = colors.base05;
+  }; # gui = "none"; };
+  TSStrong = {
+    bold = true;
+  };
+  TSEmphasis = {
+    fg = colors.base09;
+    italic = true;
+  };
+  TSUnderline = {
+    fg = colors.base00;
+    underline = true;
+  };
+  TSStrike = {
+    fg = colors.base00;
+    strikethrough = true;
+  };
+  TSTitle = {
+    fg = colors.base0D;
+  }; # gui = "none"; };
+  TSLiteral = {
+    fg = colors.base09;
+  }; # gui = "none"; };
+  TSURI = {
+    fg = colors.base09;
+    underline = true;
+  };
+  TSType = {
+    fg = colors.base0A;
+  }; # gui = "none"; };
+  TSTypeBuiltin = {
+    fg = colors.base0A;
+    italic = true;
+  };
+  TSVariable = {
+    fg = colors.base08;
+  }; # gui = "none"; };
+  TSVariableBuiltin = {
+    fg = colors.base08;
+    italic = true;
+  };
 
-  TSDefinition = { underline = true; sp = colors.base04; };
-  TSDefinitionUsage = { underline = true; sp = colors.base04; };
-  TSCurrentScope = { bold = true; };
+  TSDefinition = {
+    underline = true;
+    sp = colors.base04;
+  };
+  TSDefinitionUsage = {
+    underline = true;
+    sp = colors.base04;
+  };
+  TSCurrentScope = {
+    bold = true;
+  };
 
-  LspInlayHint = { fg = colors.base03; italic = true; };
+  LspInlayHint = {
+    fg = colors.base03;
+    italic = true;
+  };
 
   # TS Rainbow
-  rainbowcol1 = { fg = colors.base06; };
-  rainbowcol2 = { fg = colors.base09; };
-  rainbowcol3 = { fg = colors.base0A; };
-  rainbowcol4 = { fg = colors.base07; };
-  rainbowcol5 = { fg = colors.base0C; };
-  rainbowcol6 = { fg = colors.base0D; };
-  rainbowcol7 = { fg = colors.base0E; };
+  rainbowcol1 = {
+    fg = colors.base06;
+  };
+  rainbowcol2 = {
+    fg = colors.base09;
+  };
+  rainbowcol3 = {
+    fg = colors.base0A;
+  };
+  rainbowcol4 = {
+    fg = colors.base07;
+  };
+  rainbowcol5 = {
+    fg = colors.base0C;
+  };
+  rainbowcol6 = {
+    fg = colors.base0D;
+  };
+  rainbowcol7 = {
+    fg = colors.base0E;
+  };
 
-  NvimInternalError = { fg = colors.base00; bg = colors.base08; }; # gui = "none"; };
+  NvimInternalError = {
+    fg = colors.base00;
+    bg = colors.base08;
+  }; # gui = "none"; };
 
-  NormalFloat = { fg = colors.base05; bg = colors.base00; };
-  FloatBorder = { fg = colors.base05; bg = colors.base00; };
-  NormalNC = { fg = colors.base05; bg = colors.base00; };
-  TermCursor = { fg = colors.base00; bg = colors.base05; }; # gui = "none"; };
-  TermCursorNC = { fg = colors.base00; bg = colors.base05; };
+  NormalFloat = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  FloatBorder = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  NormalNC = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  TermCursor = {
+    fg = colors.base00;
+    bg = colors.base05;
+  }; # gui = "none"; };
+  TermCursorNC = {
+    fg = colors.base00;
+    bg = colors.base05;
+  };
 
-  User1 = { fg = colors.base08; bg = colors.base02; }; # gui = "none"; };
-  User2 = { fg = colors.base0E; bg = colors.base02; }; # gui = "none"; };
-  User3 = { fg = colors.base05; bg = colors.base02; }; # gui = "none"; };
-  User4 = { fg = colors.base0C; bg = colors.base02; }; # gui = "none"; };
-  User5 = { fg = colors.base05; bg = colors.base02; }; # gui = "none"; };
-  User6 = { fg = colors.base05; bg = colors.base01; }; # gui = "none"; };
-  User7 = { fg = colors.base05; bg = colors.base02; }; # gui = "none"; };
-  User8 = { fg = colors.base00; bg = colors.base02; }; # gui = "none"; };
-  User9 = { fg = colors.base00; bg = colors.base02; }; # gui = "none"; };
+  User1 = {
+    fg = colors.base08;
+    bg = colors.base02;
+  }; # gui = "none"; };
+  User2 = {
+    fg = colors.base0E;
+    bg = colors.base02;
+  }; # gui = "none"; };
+  User3 = {
+    fg = colors.base05;
+    bg = colors.base02;
+  }; # gui = "none"; };
+  User4 = {
+    fg = colors.base0C;
+    bg = colors.base02;
+  }; # gui = "none"; };
+  User5 = {
+    fg = colors.base05;
+    bg = colors.base02;
+  }; # gui = "none"; };
+  User6 = {
+    fg = colors.base05;
+    bg = colors.base01;
+  }; # gui = "none"; };
+  User7 = {
+    fg = colors.base05;
+    bg = colors.base02;
+  }; # gui = "none"; };
+  User8 = {
+    fg = colors.base00;
+    bg = colors.base02;
+  }; # gui = "none"; };
+  User9 = {
+    fg = colors.base00;
+    bg = colors.base02;
+  }; # gui = "none"; };
 
-  TreesitterContext = { bg = colors.base01; italic = true; };
+  TreesitterContext = {
+    bg = colors.base01;
+    italic = true;
+  };
 
   # Telescope without borders
-  TelescopeBorder = { fg = colors.base05; bg = colors.base00; };
-  TelescopePromptBorder = { fg = colors.base05; bg = colors.base00; };
-  TelescopePromptNormal = { fg = colors.base05; bg = colors.base00; };
-  TelescopePromptPrefix = { fg = colors.base05; bg = colors.base00; };
-  TelescopeNormal = { bg = colors.base00; };
-  TelescopePreviewTitle = { fg = colors.base01; bg = colors.base0B; };
-  TelescopePromptTitle = { fg = colors.base01; bg = colors.base08; };
-  TelescopeResultsTitle = { fg = colors.base05; bg = colors.base00; };
-  TelescopeSelection = { bg = colors.base01; };
-  TelescopePreviewLine = { bg = colors.base01; }; # gui = "none"; };
+  TelescopeBorder = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  TelescopePromptBorder = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  TelescopePromptNormal = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  TelescopePromptPrefix = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  TelescopeNormal = {
+    bg = colors.base00;
+  };
+  TelescopePreviewTitle = {
+    fg = colors.base01;
+    bg = colors.base0B;
+  };
+  TelescopePromptTitle = {
+    fg = colors.base01;
+    bg = colors.base08;
+  };
+  TelescopeResultsTitle = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  TelescopeSelection = {
+    bg = colors.base01;
+  };
+  TelescopePreviewLine = {
+    bg = colors.base01;
+  }; # gui = "none"; };
 
   # Indent Blankline
-  IndentBlanklineChar = { fg = colors.base02; nocombine = true; };
-  IndentBlanklineContextChar = { fg = colors.base04; nocombine = true; };
-  IblIndent = { fg = colors.base02; nocombine = true; };
-  IblWhitespace = { link = "Whitespace"; };
-  IblScope = { fg = colors.base04; nocombine = true; };
-  RainbowRed = { fg = colors.base08; };
-  RainbowYellow = { fg = colors.base0A; };
-  RainbowBlue = { fg = colors.base0D; };
-  RainbowOrange = { fg = colors.base09; };
-  RainbowGreen = { fg = colors.base0B; };
-  RainbowViolet = { fg = colors.base0E; };
-  RainbowCyan = { fg = colors.base0C; };
+  IndentBlanklineChar = {
+    fg = colors.base02;
+    nocombine = true;
+  };
+  IndentBlanklineContextChar = {
+    fg = colors.base04;
+    nocombine = true;
+  };
+  IblIndent = {
+    fg = colors.base02;
+    nocombine = true;
+  };
+  IblWhitespace = {
+    link = "Whitespace";
+  };
+  IblScope = {
+    fg = colors.base04;
+    nocombine = true;
+  };
+  RainbowRed = {
+    fg = colors.base08;
+  };
+  RainbowYellow = {
+    fg = colors.base0A;
+  };
+  RainbowBlue = {
+    fg = colors.base0D;
+  };
+  RainbowOrange = {
+    fg = colors.base09;
+  };
+  RainbowGreen = {
+    fg = colors.base0B;
+  };
+  RainbowViolet = {
+    fg = colors.base0E;
+  };
+  RainbowCyan = {
+    fg = colors.base0C;
+  };
 
   # cmp
-  CmpDocumentationBorder = { fg = colors.base05; bg = colors.base00; };
-  CmpDocumentation = { fg = colors.base05; bg = colors.base00; };
-  CmpItemAbbr = { fg = colors.base05; bg = colors.base01; };
-  CmpItemAbbrDeprecated = { fg = colors.base03; strikethrough = true; };
-  CmpItemAbbrMatch = { fg = colors.base0D; };
-  CmpItemAbbrMatchFuzzy = { fg = colors.base0D; };
-  CmpItemKindDefault = { fg = colors.base05; };
-  CmpItemMenu = { fg = colors.base04; };
-  CmpItemKindKeyword = { fg = colors.base0E; };
-  CmpItemKindVariable = { fg = colors.base08; };
-  CmpItemKindConstant = { fg = colors.base09; };
-  CmpItemKindReference = { fg = colors.base08; };
-  CmpItemKindValue = { fg = colors.base09; };
-  CmpItemKindFunction = { fg = colors.base0D; };
-  CmpItemKindMethod = { fg = colors.base0D; };
-  CmpItemKindConstructor = { fg = colors.base0D; };
-  CmpItemKindClass = { fg = colors.base0A; };
-  CmpItemKindInterface = { fg = colors.base0A; };
-  CmpItemKindStruct = { fg = colors.base0A; };
-  CmpItemKindEvent = { fg = colors.base0A; };
-  CmpItemKindEnum = { fg = colors.base0A; };
-  CmpItemKindUnit = { fg = colors.base0A; };
-  CmpItemKindModule = { fg = colors.base05; };
-  CmpItemKindProperty = { fg = colors.base08; };
-  CmpItemKindField = { fg = colors.base08; };
-  CmpItemKindTypeParameter = { fg = colors.base0A; };
-  CmpItemKindEnumMember = { fg = colors.base0A; };
-  CmpItemKindOperator = { fg = colors.base05; };
-  CmpItemKindSnippet = { fg = colors.base04; };
+  CmpDocumentationBorder = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  CmpDocumentation = {
+    fg = colors.base05;
+    bg = colors.base00;
+  };
+  CmpItemAbbr = {
+    fg = colors.base05;
+    bg = colors.base01;
+  };
+  CmpItemAbbrDeprecated = {
+    fg = colors.base03;
+    strikethrough = true;
+  };
+  CmpItemAbbrMatch = {
+    fg = colors.base0D;
+  };
+  CmpItemAbbrMatchFuzzy = {
+    fg = colors.base0D;
+  };
+  CmpItemKindDefault = {
+    fg = colors.base05;
+  };
+  CmpItemMenu = {
+    fg = colors.base04;
+  };
+  CmpItemKindKeyword = {
+    fg = colors.base0E;
+  };
+  CmpItemKindVariable = {
+    fg = colors.base08;
+  };
+  CmpItemKindConstant = {
+    fg = colors.base09;
+  };
+  CmpItemKindReference = {
+    fg = colors.base08;
+  };
+  CmpItemKindValue = {
+    fg = colors.base09;
+  };
+  CmpItemKindFunction = {
+    fg = colors.base0D;
+  };
+  CmpItemKindMethod = {
+    fg = colors.base0D;
+  };
+  CmpItemKindConstructor = {
+    fg = colors.base0D;
+  };
+  CmpItemKindClass = {
+    fg = colors.base0A;
+  };
+  CmpItemKindInterface = {
+    fg = colors.base0A;
+  };
+  CmpItemKindStruct = {
+    fg = colors.base0A;
+  };
+  CmpItemKindEvent = {
+    fg = colors.base0A;
+  };
+  CmpItemKindEnum = {
+    fg = colors.base0A;
+  };
+  CmpItemKindUnit = {
+    fg = colors.base0A;
+  };
+  CmpItemKindModule = {
+    fg = colors.base05;
+  };
+  CmpItemKindProperty = {
+    fg = colors.base08;
+  };
+  CmpItemKindField = {
+    fg = colors.base08;
+  };
+  CmpItemKindTypeParameter = {
+    fg = colors.base0A;
+  };
+  CmpItemKindEnumMember = {
+    fg = colors.base0A;
+  };
+  CmpItemKindOperator = {
+    fg = colors.base05;
+  };
+  CmpItemKindSnippet = {
+    fg = colors.base04;
+  };
 
   # LSP Semantic;
   # "@class" = "TSType";
@@ -322,46 +949,133 @@
   # ["@lsp.type.decorator"] = "@function";
 
   # DapUI
-  DapUINormal = { link = "Normal"; };
-  DapUIVariable = { link = "Normal"; };
-  DapUIScope = { fg = colors.base0D; };
-  DapUIType = { fg = colors.base0E; };
-  DapUIValue = { link = "Normal"; };
-  DapUIModifiedValue = { bold = true; fg = colors.base0D; };
-  DapUIDecoration = { fg = colors.base0D; };
-  DapUIThread = { fg = colors.base0B; };
-  DapUIStoppedThread = { fg = colors.base0D; };
-  DapUIFrameName = { link = "Normal"; };
-  DapUISource = { fg = colors.base0E; };
-  DapUILineNumber = { fg = colors.base0D; };
-  DapUIFloatNormal = { link = "NormalFloat"; };
-  DapUIFloatBorder = { fg = colors.base0D; };
-  DapUIWatchesEmpty = { fg = colors.base08; };
-  DapUIWatchesValue = { fg = colors.base0B; };
-  DapUIWatchesError = { fg = colors.base08; };
-  DapUIBreakpointsPath = { fg = colors.base0D; };
-  DapUIBreakpointsInfo = { fg = colors.base0B; };
-  DapUIBreakpointsCurrentLine = { bold = true; fg = colors.base0B; };
-  DapUIBreakpointsLine = { link = "DapUILineNumber"; };
-  DapUIBreakpointsDisabledLine = { fg = colors.base02; };
-  DapUICurrentFrameName = { link = "DapUIBreakpointsCurrentLine"; };
-  DapUIStepOver = { fg = colors.base0D; };
-  DapUIStepInto = { fg = colors.base0D; };
-  DapUIStepBack = { fg = colors.base0D; };
-  DapUIStepOut = { fg = colors.base0D; };
-  DapUIStop = { fg = colors.base08; };
-  DapUIPlayPause = { fg = colors.base0B; };
-  DapUIRestart = { fg = colors.base0B; };
-  DapUIUnavailable = { fg = colors.base02; };
-  DapUIWinSelect = { bold = true; fg = colors.base0D; };
-  DapUIEndofBuffer = { link = "EndOfBuffer"; };
-  DapUINormalNC = { link = "Normal"; };
-  DapUIPlayPauseNC = { fg = colors.base0B; };
-  DapUIRestartNC = { fg = colors.base0B; };
-  DapUIStopNC = { fg = colors.base08; };
-  DapUIUnavailableNC = { fg = colors.base02; };
-  DapUIStepOverNC = { fg = colors.base0D; };
-  DapUIStepIntoNC = { fg = colors.base0D; };
-  DapUIStepBackNC = { fg = colors.base0D; };
-  DapUIStepOutNC = { fg = colors.base0D; };
+  DapUINormal = {
+    link = "Normal";
+  };
+  DapUIVariable = {
+    link = "Normal";
+  };
+  DapUIScope = {
+    fg = colors.base0D;
+  };
+  DapUIType = {
+    fg = colors.base0E;
+  };
+  DapUIValue = {
+    link = "Normal";
+  };
+  DapUIModifiedValue = {
+    bold = true;
+    fg = colors.base0D;
+  };
+  DapUIDecoration = {
+    fg = colors.base0D;
+  };
+  DapUIThread = {
+    fg = colors.base0B;
+  };
+  DapUIStoppedThread = {
+    fg = colors.base0D;
+  };
+  DapUIFrameName = {
+    link = "Normal";
+  };
+  DapUISource = {
+    fg = colors.base0E;
+  };
+  DapUILineNumber = {
+    fg = colors.base0D;
+  };
+  DapUIFloatNormal = {
+    link = "NormalFloat";
+  };
+  DapUIFloatBorder = {
+    fg = colors.base0D;
+  };
+  DapUIWatchesEmpty = {
+    fg = colors.base08;
+  };
+  DapUIWatchesValue = {
+    fg = colors.base0B;
+  };
+  DapUIWatchesError = {
+    fg = colors.base08;
+  };
+  DapUIBreakpointsPath = {
+    fg = colors.base0D;
+  };
+  DapUIBreakpointsInfo = {
+    fg = colors.base0B;
+  };
+  DapUIBreakpointsCurrentLine = {
+    bold = true;
+    fg = colors.base0B;
+  };
+  DapUIBreakpointsLine = {
+    link = "DapUILineNumber";
+  };
+  DapUIBreakpointsDisabledLine = {
+    fg = colors.base02;
+  };
+  DapUICurrentFrameName = {
+    link = "DapUIBreakpointsCurrentLine";
+  };
+  DapUIStepOver = {
+    fg = colors.base0D;
+  };
+  DapUIStepInto = {
+    fg = colors.base0D;
+  };
+  DapUIStepBack = {
+    fg = colors.base0D;
+  };
+  DapUIStepOut = {
+    fg = colors.base0D;
+  };
+  DapUIStop = {
+    fg = colors.base08;
+  };
+  DapUIPlayPause = {
+    fg = colors.base0B;
+  };
+  DapUIRestart = {
+    fg = colors.base0B;
+  };
+  DapUIUnavailable = {
+    fg = colors.base02;
+  };
+  DapUIWinSelect = {
+    bold = true;
+    fg = colors.base0D;
+  };
+  DapUIEndofBuffer = {
+    link = "EndOfBuffer";
+  };
+  DapUINormalNC = {
+    link = "Normal";
+  };
+  DapUIPlayPauseNC = {
+    fg = colors.base0B;
+  };
+  DapUIRestartNC = {
+    fg = colors.base0B;
+  };
+  DapUIStopNC = {
+    fg = colors.base08;
+  };
+  DapUIUnavailableNC = {
+    fg = colors.base02;
+  };
+  DapUIStepOverNC = {
+    fg = colors.base0D;
+  };
+  DapUIStepIntoNC = {
+    fg = colors.base0D;
+  };
+  DapUIStepBackNC = {
+    fg = colors.base0D;
+  };
+  DapUIStepOutNC = {
+    fg = colors.base0D;
+  };
 }

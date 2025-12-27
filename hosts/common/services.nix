@@ -1,4 +1,10 @@
-{ pkgs, lib, config, ... }: let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+let
   isWmEnable = name: builtins.elem name config.wm.actives;
 in
 with pkgs.stdenv.buildPlatform;
@@ -12,10 +18,13 @@ with pkgs.stdenv.buildPlatform;
 
   systemd.network.wait-online.enable = !config.gui.enable;
   systemd.user.services.mpris-proxy = lib.mkIf (isLinux && config.bluetooth) {
-      description = "Mpris proxy";
-      after = [ "network.target" "sound.target" ];
-      wantedBy = [ "default.target" ];
-      serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+    description = "Mpris proxy";
+    after = [
+      "network.target"
+      "sound.target"
+    ];
+    wantedBy = [ "default.target" ];
+    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
 
   services = {
@@ -51,8 +60,11 @@ with pkgs.stdenv.buildPlatform;
 
     displayManager = {
       gdm.enable = config.gui.enable;
-      sessionPackages = builtins.map (o: pkgs."${o}") (builtins.filter (o: builtins.hasAttr o pkgs && o != "jay") config.wm.actives)
-        ++ (lib.optionals (isWmEnable "mango") [config.programs.mango.package]);
+      sessionPackages =
+        builtins.map (o: pkgs."${o}") (
+          builtins.filter (o: builtins.hasAttr o pkgs && o != "jay") config.wm.actives
+        )
+        ++ (lib.optionals (isWmEnable "mango") [ config.programs.mango.package ]);
       autoLogin = {
         enable = !config.gui.enable;
         user = config.user.username;

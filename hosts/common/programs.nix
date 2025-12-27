@@ -1,9 +1,21 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
-  inherit (config) games shell user gui age;
+  inherit (config)
+    games
+    shell
+    user
+    gui
+    age
+    ;
   inherit (age) secrets;
   inherit (pkgs.stdenv.buildPlatform) isLinux;
-in {
+in
+{
   programs = {
     fish.enable = shell.name == "fish";
     dconf.enable = (isLinux && gui.enable);

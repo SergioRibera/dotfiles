@@ -8,8 +8,10 @@ let
       group = "wheel";
     };
   };
-in {
-  age.secrets = (makeSecret "github")
+in
+{
+  age.secrets =
+    (makeSecret "github")
     // (makeSecret "cftun01")
     // (makeSecret "rustlanges")
     // (makeSecret "hosts");

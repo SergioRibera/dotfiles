@@ -1,15 +1,24 @@
-{ crane
-, cranix
-, fenix
-,
-}: { config
-   , lib
-   , pkgs
-   , ...
-   }:
-with lib; let
+{
+  crane,
+  cranix,
+  fenix,
+}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+let
   app = import ./. {
-    inherit crane cranix fenix pkgs lib;
+    inherit
+      crane
+      cranix
+      fenix
+      pkgs
+      lib
+      ;
     system = pkgs.system;
   };
   cfgApp = config.programs.app;

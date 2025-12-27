@@ -1,7 +1,14 @@
-{ pkgs, gui, mkTheme, ... }: let
+{
+  pkgs,
+  gui,
+  mkTheme,
+  ...
+}:
+let
   theme = (mkTheme gui.theme.colors);
   keymapping = (import ./mapping.nix);
-in {
+in
+{
   enable = false;
   themes.base16 = theme.helix;
   languages = (import ./languages.nix { inherit pkgs; });
@@ -28,12 +35,21 @@ in {
         display-messages = true;
         display-inlay-hints = false;
       };
-      gutters = ["diff" "diagnostics" "line-numbers"];
+      gutters = [
+        "diff"
+        "diagnostics"
+        "line-numbers"
+      ];
       statusline = {
         separator = "";
-        left = ["mode" "version-control"  "file-base-name" "diagnostics"];
-        center = [];
-        right = ["position"];
+        left = [
+          "mode"
+          "version-control"
+          "file-base-name"
+          "diagnostics"
+        ];
+        center = [ ];
+        right = [ "position" ];
         mode = {
           normal = "NORMAL";
           insert = "INSERT";
@@ -42,5 +58,6 @@ in {
       };
       auto-pairs = true;
     };
-  } // keymapping;
+  }
+  // keymapping;
 }

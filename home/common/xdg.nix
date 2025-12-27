@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   inherit (config) user gui wm;
   isWmEnable = name: builtins.elem name wm.actives;
@@ -32,21 +37,28 @@ in
         };
       };
       config.common = {
-        "default" = lib.optionals (isWmEnable "mango") [ "hyprland" ]
+        "default" =
+          lib.optionals (isWmEnable "mango") [ "hyprland" ]
           ++ lib.optionals (isWmEnable "jay") [ "jay" ]
-          ++ [ "gnome" "gtk" ];
-        "org.freedesktop.impl.portal.Access"=[ "gtk" ];
-        "org.freedesktop.impl.portal.Notification"=[ "gtk" ];
+          ++ [
+            "gnome"
+            "gtk"
+          ];
+        "org.freedesktop.impl.portal.Access" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
         "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
         "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };
 
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-gnome
-      ] ++ lib.optionals (isWmEnable "mango") [
-        xdg-desktop-portal-hyprland
-      ];
+      extraPortals =
+        with pkgs;
+        [
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-gnome
+        ]
+        ++ lib.optionals (isWmEnable "mango") [
+          xdg-desktop-portal-hyprland
+        ];
     };
   };
 }

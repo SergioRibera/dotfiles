@@ -1,4 +1,5 @@
-{ pkgs }: pkgs.vimUtils.buildVimPlugin {
+{ pkgs }:
+pkgs.vimUtils.buildVimPlugin {
   pname = "cmp-dotenv.nvim";
   version = "4dd53aab60982f1f75848aec5e6214986263325e";
   src = pkgs.fetchFromGitHub {

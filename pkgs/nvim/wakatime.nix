@@ -1,4 +1,5 @@
-{ pkgs }: pkgs.vimUtils.buildVimPlugin {
+{ pkgs }:
+pkgs.vimUtils.buildVimPlugin {
   pname = "vim-wakatime";
   version = "11.3.0";
   src = pkgs.fetchFromGitHub {

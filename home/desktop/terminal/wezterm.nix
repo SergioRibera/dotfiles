@@ -1,7 +1,9 @@
-{ config, lib, ... }: let
+{ config, lib, ... }:
+let
   toLuaArr = arr: "{ " + (lib.strings.concatMapStringsSep ", " (i: "'${i}'") arr) + " }";
   privCmdLua = toLuaArr config.shell.privSession;
-in {
+in
+{
   home-manager.users.${config.user.username}.programs.wezterm = {
     enable = config.gui.enable && config.terminal.name == "wezterm";
     colorSchemes = {

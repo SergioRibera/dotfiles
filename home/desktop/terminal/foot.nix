@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
   home-manager.users.${config.user.username}.programs.foot = {
     enable = config.gui.enable && config.terminal.name == "foot";
     settings = {
@@ -22,8 +23,7 @@
         label-letters = "sadfjklewcmpgh";
         osc8-underline = "url-mode";
         protocols = "http, https, ftp, ftps, file, mailto, ipfs";
-        uri-characters = ''
-          abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+="'()[]'';
+        uri-characters = ''abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+="'()[]'';
       };
       cursor = {
         style = "beam";

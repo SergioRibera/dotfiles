@@ -1,11 +1,11 @@
 { pkgs, ... }:
 let
-  NOC = "\\033[0m";             # Text Reset
-  ITALIC = "\\e[3m";            # Italic text
-  BOLDBLACK="\\033[1;30m";      # Black
-  BBLUE = "\\033[1;34m";        # Blue
-  BGLIGHTBLUT = "\\e[104m";     # LightBlue
-  BGPURPLE = "\\033[45m";       # Purple
+  NOC = "\\033[0m"; # Text Reset
+  ITALIC = "\\e[3m"; # Italic text
+  BOLDBLACK = "\\033[1;30m"; # Black
+  BBLUE = "\\033[1;34m"; # Blue
+  BGLIGHTBLUT = "\\e[104m"; # LightBlue
+  BGPURPLE = "\\033[45m"; # Purple
 in
 {
   type = "app";

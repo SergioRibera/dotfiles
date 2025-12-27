@@ -13,7 +13,9 @@ pkgs.rustPlatform.buildRustPackage {
 
   cargoBuildFlags = "-p discord-presence-lsp";
   cargoHash = "sha256-haT7fLRWlqBM/NybWn/VaMoMuU0M9dUoesioPX/sOrw=";
-  cargoLock = { lockFile = ./Cargo.lock; };
+  cargoLock = {
+    lockFile = ./Cargo.lock;
+  };
 
   meta = {
     homepage = "https://github.com/xhyrom/zed-discord-presence";

@@ -21,7 +21,10 @@ in
           startupNotify = true;
           terminal = false;
           genericName = "Web Browser";
-          categories = [ "Network" "WebBrowser" ];
+          categories = [
+            "Network"
+            "WebBrowser"
+          ];
           mimeTypes = [
             "text/html"
             "text/xml"
@@ -72,10 +75,13 @@ in
           force = true;
           default = "ddg";
           privateDefault = "ddg";
-          order = [ "ddg" "google" ];
+          order = [
+            "ddg"
+            "google"
+          ];
           engines = {
             "MyNixOs" = {
-              urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
+              urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = [ "nx" ];
             };
@@ -167,11 +173,11 @@ in
                 "_242af0bb-db11-4734-b7a0-61cb8a9b20fb_-browser-action"
                 "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
               ];
-              vertical-tabs = ["tabbrowser-tabs"];
-              TabsToolbar = [];
-              toolbar-menubar = [];
-              PersonalToolbar = [];
-              widget-overflow-fixed-list = [];
+              vertical-tabs = [ "tabbrowser-tabs" ];
+              TabsToolbar = [ ];
+              toolbar-menubar = [ ];
+              PersonalToolbar = [ ];
+              widget-overflow-fixed-list = [ ];
             };
             seen = [
               "developer-button"
@@ -188,7 +194,13 @@ in
               "_242af0bb-db11-4734-b7a0-61cb8a9b20fb_-browser-action"
               "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
             ];
-            dirtyAreaCache = [ "nav-bar" "PersonalToolbar" "unified-extensions-area" "toolbar-menubar" "TabsToolbar"];
+            dirtyAreaCache = [
+              "nav-bar"
+              "PersonalToolbar"
+              "unified-extensions-area"
+              "toolbar-menubar"
+              "TabsToolbar"
+            ];
             currentVersion = 22;
             newElementCount = 9;
           };
@@ -197,14 +209,16 @@ in
           "extensions.allowPrivateBrowsingByDefault" = true;
           # Configuraciones específicas para extensiones
           "extensions.webextensions.ExtensionStorageIDB.migrated.addon@darkreader.org" = true;
-          "extensions.webextensions.ExtensionStorageIDB.migrated.{446900e4-71c2-419f-a6a7-df9c091e268b}" = true;
+          "extensions.webextensions.ExtensionStorageIDB.migrated.{446900e4-71c2-419f-a6a7-df9c091e268b}" =
+            true;
           "extensions.webextensions.ExtensionStorageIDB.migrated.bitwarden@bitwarden.com" = true;
           "extensions.webextensions.ExtensionStorageIDB.migrated.hyper-read@example.com" = true;
-          "extensions.webextensions.ExtensionStorageIDB.migrated.{1dcc6ffb-4395-4c0d-aef7-e89bcdeb4a15}" = true;
-          "extensions.webextensions.ExtensionStorageIDB.migrated.{bee66b20-2874-45e8-9446-ba20faa31a65}" = true;
+          "extensions.webextensions.ExtensionStorageIDB.migrated.{1dcc6ffb-4395-4c0d-aef7-e89bcdeb4a15}" =
+            true;
+          "extensions.webextensions.ExtensionStorageIDB.migrated.{bee66b20-2874-45e8-9446-ba20faa31a65}" =
+            true;
           "extensions.webextensions.ExtensionStorageIDB.migrated.uBlock0@raymondhill.net" = true;
           "extensions.webextensions.ExtensionStorageIDB.migrated.vimium-c@gdh1995.cn" = true;
-
 
           # Disable telemetry
           "datareporting.healthreport.uploadEnabled" = false;

@@ -12,7 +12,9 @@ pkgs.rustPlatform.buildRustPackage rec {
   };
 
   cargoHash = "0wv5gp9g1dbhr0vjlmzp6l2fgh50ss4hvfb303h71hi4km729q79";
-  cargoLock = { lockFile = ./Cargo.lock; };
+  cargoLock = {
+    lockFile = ./Cargo.lock;
+  };
 
   meta = {
     homepage = "https://github.com/romancitodev/simple-commits";

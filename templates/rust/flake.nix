@@ -8,15 +8,17 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    ...
-  } @ inputs:
-  # Iterate over Arm, x86 for MacOs 🍎 and Linux 🐧
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      ...
+    }@inputs:
+    # Iterate over Arm, x86 for MacOs 🍎 and Linux 🐧
     flake-utils.lib.eachSystem (flake-utils.lib.defaultSystems) (
-      system: let
+      system:
+      let
         appBundle = import ./nix {
           inherit system;
           pkgs = nixpkgs.legacyPackages.${system};
@@ -24,7 +26,8 @@
           cranix = inputs.cranix.lib;
           fenix = inputs.fenix.packages;
         };
-      in {
+      in
+      {
         inherit (appBundle) apps packages devShells;
       }
     )

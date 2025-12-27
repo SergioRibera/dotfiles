@@ -1,4 +1,5 @@
-colors: toToml: toToml {
+colors: toToml:
+toToml {
   colors = {
     background = colors.base00;
     foreground = colors.base05;

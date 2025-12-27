@@ -1,20 +1,23 @@
-{ }: let
+{ }:
+let
   git_cwd = ''vim.fn.fnamemodify(vim.fn.finddir(".git", ".;"), ":h") or vim.fn.getcwd()'';
   vimgrep = [
-      "rg"
-      "--vimgrep"
-      "--color=never"
-      "--no-heading"
-      "--with-filename"
-      "--line-number"
-      "--column"
-      "--smart-case"
-      "--hidden"
-      "--no-binary"
-      "--no-require-git"
-      "--glob" "!.git/*"
-    ];
-in {
+    "rg"
+    "--vimgrep"
+    "--color=never"
+    "--no-heading"
+    "--with-filename"
+    "--line-number"
+    "--column"
+    "--smart-case"
+    "--hidden"
+    "--no-binary"
+    "--no-require-git"
+    "--glob"
+    "!.git/*"
+  ];
+in
+{
   settings = {
     defaults = {
       prompt_prefix = "❯ ";
@@ -26,7 +29,9 @@ in {
         horizontal.mirror = false;
         vertical.mirror = false;
       };
-      set_env = { COLORTERM = "truecolor"; }; # default = nil
+      set_env = {
+        COLORTERM = "truecolor";
+      }; # default = nil
       vimgrep_arguments = vimgrep;
     };
 
@@ -48,12 +53,14 @@ in {
         layout_strategy = "center";
         layout_config = {
           preview_cutoff = 1;
-          width.__raw = ''function(_, max_columns, _)
-            return math.min(max_columns, 80)
-          end'';
-          height.__raw = ''function(_, _, max_lines)
-            return math.min(max_lines, 15)
-          end'';
+          width.__raw = ''
+            function(_, max_columns, _)
+                        return math.min(max_columns, 80)
+                      end'';
+          height.__raw = ''
+            function(_, _, max_lines)
+                        return math.min(max_lines, 15)
+                      end'';
         };
       };
     };
@@ -66,13 +73,20 @@ in {
           "~/Public/rust"
           "~/Public/contributions"
           "~/Public/work"
-          { __unkeyed = "~/Public/tutorials"; max_depth = 2; }
+          {
+            __unkeyed = "~/Public/tutorials";
+            max_depth = 2;
+          }
         ];
         theme = "dropdown";
-        search_by = [ "title" "path" ];
-        on_project_selected.__raw = ''function(prompt_bufnr)
-          require("telescope._extensions.project.actions").change_working_directory(prompt_bufnr, false)
-        end'';
+        search_by = [
+          "title"
+          "path"
+        ];
+        on_project_selected.__raw = ''
+          function(prompt_bufnr)
+                    require("telescope._extensions.project.actions").change_working_directory(prompt_bufnr, false)
+                  end'';
       };
     };
   };

@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   home-manager.users."${config.user.username}".programs.fish = {
     enable = (config.shell.name == "fish");
     interactiveShellInit = builtins.readFile ./config.fish;

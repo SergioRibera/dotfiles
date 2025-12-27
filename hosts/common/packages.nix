@@ -1,39 +1,48 @@
-{ pkgs, inputs, config, ... }: {
-  environment.systemPackages = with pkgs; [
-    inputs.agenix.packages.${pkgs.system}.default
-    # Utils
-    fd
-    bat
-    eza
-    curl
-    wget
-    jq
-    ripgrep
-    bottom
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
+{
+  environment.systemPackages =
+    with pkgs;
+    [
+      inputs.agenix.packages.${pkgs.system}.default
+      # Utils
+      fd
+      bat
+      eza
+      curl
+      wget
+      jq
+      ripgrep
+      bottom
 
-    nix-output-monitor
+      nix-output-monitor
 
-    # ssl
-    openssl
+      # ssl
+      openssl
 
-    # Compresion
-    ouch
+      # Compresion
+      ouch
 
-    # Utils
-    gitui
-    fastfetch
-  ] ++ pkgs.lib.optionals (config.nvim.complete) [
-    wrkflw
-    dive
+      # Utils
+      gitui
+      fastfetch
+    ]
+    ++ pkgs.lib.optionals (config.nvim.complete) [
+      wrkflw
+      dive
 
-    # simple web server
-    dufs
+      # simple web server
+      dufs
 
-    # cloudflare
-    cloudflared
-    # nodePackages.wrangler
+      # cloudflare
+      cloudflared
+      # nodePackages.wrangler
 
-    # Docker
-    docker-compose
-  ];
+      # Docker
+      docker-compose
+    ];
 }

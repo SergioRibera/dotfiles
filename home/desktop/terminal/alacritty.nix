@@ -1,6 +1,8 @@
-{ config, mkTheme, ... }: let
+{ config, mkTheme, ... }:
+let
   theme = mkTheme config.gui.theme.colors;
-in {
+in
+{
   home-manager.users.${config.user.username}.programs.alacritty = {
     enable = (config.gui.enable && config.terminal.name == "alacritty");
     settings = {

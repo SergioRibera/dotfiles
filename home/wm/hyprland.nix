@@ -1,25 +1,52 @@
-{ config, lib, pkgs, ... }: let
-  inherit (config) user gui shell wm;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  inherit (config)
+    user
+    gui
+    shell
+    wm
+    ;
   isLinux = pkgs.stdenv.buildPlatform.isLinux;
-  osd = cmd: plus: value: "dms ipc call ${cmd} ${if plus then "increment" else "decrement"} ${value}";
+  osd =
+    cmd: plus: value:
+    "dms ipc call ${cmd} ${if plus then "increment" else "decrement"} ${value}";
   dms-ipc = cmd: action: "dms ipc call ${cmd} ${if action == null then "toggle" else action}";
-  mkRotation = r: if r == "left" then 1 else if r == "right" then 3 else if r == "inverted" then 2 else 0;
-in {
+  mkRotation =
+    r:
+    if r == "left" then
+      1
+    else if r == "right" then
+      3
+    else if r == "inverted" then
+      2
+    else
+      0;
+in
+{
   home-manager.users.${user.username} = lib.mkIf user.enableHM {
     wayland.windowManager.hyprland = lib.mkIf (isLinux && gui.enable) {
       enable = builtins.elem "hyprland" wm.actives;
       xwayland.enable = true;
       settings = {
-        monitor = (builtins.map (o:
-          "${o.name},${o.resolution.x}x${o.resolution.y}@${o.frequency},${o.position.x}x${o.position.y},${o.scale},transform,${mkRotation o.rotation}"
-        ) wm.screens);
-        workspace = (builtins.map (o:
-          "${o.name},10"
-        ) wm.screens);
+        monitor = (
+          builtins.map (
+            o:
+            "${o.name},${o.resolution.x}x${o.resolution.y}@${o.frequency},${o.position.x}x${o.position.y},${o.scale},transform,${mkRotation o.rotation}"
+          ) wm.screens
+        );
+        workspace = (builtins.map (o: "${o.name},10") wm.screens);
         exec-once = [
           "dbus-update-activation-environment --all --systemd"
         ];
-        env = [ "XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH" ];
+        env = [
+          "XCURSOR_SIZE,24"
+          "PATH,$HOME/.local/bin:$PATH"
+        ];
 
         input = {
           kb_layout = "us";

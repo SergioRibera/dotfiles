@@ -1,30 +1,49 @@
-{ pkgs, ... }: {
-  language = let
-    biome = lang: {
-      command = "biome";
-      args = ["format" lang];
-    };
-    deno = lang: {
-      command = "${pkgs.deno}/bin/deno";
-      args = ["fmt" "-" "--ext" lang];
-    };
-  in
+{ pkgs, ... }:
+{
+  language =
+    let
+      biome = lang: {
+        command = "biome";
+        args = [
+          "format"
+          lang
+        ];
+      };
+      deno = lang: {
+        command = "${pkgs.deno}/bin/deno";
+        args = [
+          "fmt"
+          "-"
+          "--ext"
+          lang
+        ];
+      };
+    in
     [
       {
         name = "astro";
         auto-format = true;
         formatter = {
           command = "${pkgs.nodePackages.prettier}/bin/prettier";
-          args = ["--parser" "astro"];
+          args = [
+            "--parser"
+            "astro"
+          ];
         };
-        language-servers = ["astro-lsp" "emmet-lsp"];
+        language-servers = [
+          "astro-lsp"
+          "emmet-lsp"
+        ];
       }
       {
         name = "bash";
         auto-format = true;
         formatter = {
           command = "${pkgs.shfmt}/bin/shfmt";
-          args = ["-i" "2"];
+          args = [
+            "-i"
+            "2"
+          ];
         };
       }
       {
@@ -32,12 +51,16 @@
         auto-format = true;
         formatter = {
           command = "biome";
-          args = ["format" "--stdin-file-path" "a.js"];
+          args = [
+            "format"
+            "--stdin-file-path"
+            "a.js"
+          ];
         };
         language-servers = [
           {
             name = "typescript-language-server";
-            except-features = ["format"];
+            except-features = [ "format" ];
           }
           "biome-lsp"
         ];
@@ -48,7 +71,7 @@
         language-servers = [
           {
             name = "typescript-language-server";
-            except-features = ["format"];
+            except-features = [ "format" ];
           }
           "biome-lsp"
         ];
@@ -58,12 +81,16 @@
         auto-format = true;
         formatter = {
           command = "biome";
-          args = ["format" "--stdin-file-path" "a.jsx"];
+          args = [
+            "format"
+            "--stdin-file-path"
+            "a.jsx"
+          ];
         };
         language-servers = [
           {
             name = "typescript-language-server";
-            except-features = ["format"];
+            except-features = [ "format" ];
           }
           "biome-lsp"
         ];
@@ -78,12 +105,16 @@
         auto-format = true;
         formatter = {
           command = "biome";
-          args = ["format" "--stdin-file-path" "a.ts"];
+          args = [
+            "format"
+            "--stdin-file-path"
+            "a.ts"
+          ];
         };
         language-servers = [
           {
             name = "typescript-language-server";
-            except-features = ["format"];
+            except-features = [ "format" ];
           }
           "biome-lsp"
         ];
@@ -93,19 +124,27 @@
         auto-format = true;
         formatter = {
           command = "biome";
-          args = ["format" "--stdin-file-path" "a.tsx"];
+          args = [
+            "format"
+            "--stdin-file-path"
+            "a.tsx"
+          ];
         };
         language-servers = [
           {
             name = "typescript-language-server";
-            except-features = ["format"];
+            except-features = [ "format" ];
           }
           "biome-lsp"
         ];
       }
       {
         name = "vue";
-        roots = ["package.json" "vue.config.js" "vue.config.ts"];
+        roots = [
+          "package.json"
+          "vue.config.js"
+          "vue.config.ts"
+        ];
         # # auto-format = true;
         # formatter = {
         #   command = "biome";
@@ -114,7 +153,7 @@
         language-servers = [
           {
             name = "volar";
-            except-features = ["format"];
+            except-features = [ "format" ];
           }
           "biome-lsp"
         ];
@@ -124,19 +163,19 @@
   language-server = {
     astro-lsp = {
       command = "astro-ls";
-      args = ["--stdio"];
-      file-types = ["astro"];
+      args = [ "--stdio" ];
+      file-types = [ "astro" ];
       config.typescript.tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib/";
     };
 
     biome-lsp = {
       command = "biome";
-      args = ["lsp-proxy"];
+      args = [ "lsp-proxy" ];
     };
 
     deno-lsp = {
       command = "${pkgs.deno}/bin/deno";
-      args = ["lsp"];
+      args = [ "lsp" ];
       environment.NO_COLOR = "1";
       config.deno = {
         enable = true;
@@ -144,7 +183,9 @@
         unstable = true;
         suggest = {
           completeFunctionCalls = false;
-          imports = {hosts."https://deno.land" = true;};
+          imports = {
+            hosts."https://deno.land" = true;
+          };
         };
         inlayHints = {
           enumMemberValues.enabled = true;
@@ -159,7 +200,7 @@
 
     emmet-lsp = {
       command = "${pkgs.emmet-ls}/bin/emmet-ls";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
 
     # nil = {
@@ -169,18 +210,18 @@
 
     unocss-lsp = {
       command = "unocss-language-server";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
     };
 
     volar = {
       command = "vue-language-server";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
       config.typescript.tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib/";
     };
 
     vscode-css-language-server = {
       command = "${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
-      args = ["--stdio"];
+      args = [ "--stdio" ];
       config = {
         provideFormatter = true;
         css.validate.enable = true;

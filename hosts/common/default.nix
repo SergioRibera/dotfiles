@@ -18,7 +18,8 @@ in
     NH_FLAKE = "/etc/nixos";
     EDITOR = "nvim";
     EDITOR_READONLY = "nvim -R";
-  } // lib.optionalAttrs (config.gui.enable) {
+  }
+  // lib.optionalAttrs (config.gui.enable) {
     NIXOS_OZONE_WL = "1";
     ADW_DISABLE_PORTAL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
@@ -29,7 +30,7 @@ in
 
   nixpkgs.config.allowUnfree = true;
   documentation = {
-    nixos.enable =  false;
+    nixos.enable = false;
     doc.enable = false;
   };
   nix = {
@@ -42,8 +43,14 @@ in
       warn-dirty = false;
       auto-optimise-store = true;
       builders-use-substitutes = true;
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "@wheel" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
       # flake-registry = "/etc/nix/registry.json";
 
       # for direnv GC roots

@@ -1,4 +1,5 @@
-{ pkgs }: pkgs.vimUtils.buildVimPlugin {
+{ pkgs }:
+pkgs.vimUtils.buildVimPlugin {
   pname = "codeshot.nvim";
   version = "7c6347a4ea97e82f6dc508e6249150181d7b86be";
   src = pkgs.fetchFromGitHub {

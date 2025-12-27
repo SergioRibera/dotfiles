@@ -1,9 +1,9 @@
-{ pkgs ? import <nixpkgs> { }
-, lib
-, pkg-config
-, rustPlatform
-, makeWrapper
-,
+{
+  pkgs ? import <nixpkgs> { },
+  lib,
+  pkg-config,
+  rustPlatform,
+  makeWrapper,
 }:
 let
   src = pkgs.fetchFromGitHub {
@@ -14,8 +14,7 @@ let
   };
   # meta = (builtins.fromTOML (builtins.readFile "${src}/Cargo.toml")).package;
 in
-rustPlatform.buildRustPackage
-{
+rustPlatform.buildRustPackage {
   name = "hyprswitch";
   version = "v4.6.3";
   doCheck = false;

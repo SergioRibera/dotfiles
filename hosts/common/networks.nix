@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   services.cloudflared = {
     enable = config.server-network;
     tunnels = {

@@ -16,7 +16,8 @@ let
 
     ${builtins.readFile ./update.nu}
   '';
-in {
+in
+{
   type = "app";
   program = "${script}/bin/update-pkgs";
 }

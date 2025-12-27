@@ -13,14 +13,21 @@
 
     shell = {
       name = "nushell";
-      command = ["nu"];
-      privSession = ["nu" "--no-history"];
+      command = [ "nu" ];
+      privSession = [
+        "nu"
+        "--no-history"
+      ];
     };
 
     user = {
       isNormalUser = true;
       enableHM = true;
-      groups = [ "wheel" "docker" "networkmanager" ];
+      groups = [
+        "wheel"
+        "docker"
+        "networkmanager"
+      ];
     };
   }
 ]

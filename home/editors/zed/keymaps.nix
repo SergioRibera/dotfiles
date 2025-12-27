@@ -21,7 +21,7 @@
       "shift-s" = [
         "vim::PushOperator"
         {
-          "AddSurrounds" = {};
+          "AddSurrounds" = { };
         }
       ];
     };
@@ -32,7 +32,10 @@
     "bindings" = {
       "ctrl-n" = "workspace::NewTerminal";
       "ctrl-l" = "terminal::Clear";
-      "ctrl-s" = ["terminal::SendKeystroke" "ctrl-s"];
+      "ctrl-s" = [
+        "terminal::SendKeystroke"
+        "ctrl-s"
+      ];
     };
   }
   # Visual or normal mode
@@ -66,7 +69,10 @@
       "space p p" = "projects::OpenRecent";
       # Close active panel
       "space q" = "pane::CloseActiveItem";
-      "space f f" = ["file_finder::Toggle" { "separate_history" = true; }];
+      "space f f" = [
+        "file_finder::Toggle"
+        { "separate_history" = true; }
+      ];
       # Move between panes
       # "ctrl-h" = ["workspace::ActivatePaneInDirection", "Left"];
       # "ctrl-l" = ["workspace::ActivatePaneInDirection", "Right"];
@@ -96,7 +102,10 @@
       "s v" = "pane::SplitRight";
       "s s" = "pane::SplitDown";
       # Open lazygit
-      "space g g" = ["task::Spawn" { "task_name" = "GitUI"; }];
+      "space g g" = [
+        "task::Spawn"
+        { "task_name" = "GitUI"; }
+      ];
     };
   }
   # Empty pane, set of keybindings that are available when there is no active editor
@@ -120,10 +129,22 @@
     "context" = "Dock";
     "bindings" = {
       "ctrl-b" = "workspace::ToggleBottomDock";
-      "ctrl-w h" = ["workspace::ActivatePaneInDirection" "Left"];
-      "ctrl-w l" = ["workspace::ActivatePaneInDirection" "Right"];
-      "ctrl-w k" = ["workspace::ActivatePaneInDirection" "Up"];
-      "ctrl-w j" = ["workspace::ActivatePaneInDirection" "Down"];
+      "ctrl-w h" = [
+        "workspace::ActivatePaneInDirection"
+        "Left"
+      ];
+      "ctrl-w l" = [
+        "workspace::ActivatePaneInDirection"
+        "Right"
+      ];
+      "ctrl-w k" = [
+        "workspace::ActivatePaneInDirection"
+        "Up"
+      ];
+      "ctrl-w j" = [
+        "workspace::ActivatePaneInDirection"
+        "Down"
+      ];
     };
   }
 ]

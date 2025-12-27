@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   inherit (config) user gui age;
@@ -22,71 +23,96 @@ in
     };
     wm = {
       actives = mkOption {
-        type = types.listOf (types.enum ["niri" "jay" "hyprland" "mango" "sway"]);
-        default = ["niri"];
+        type = types.listOf (
+          types.enum [
+            "niri"
+            "jay"
+            "hyprland"
+            "mango"
+            "sway"
+          ]
+        );
+        default = [ "niri" ];
       };
       screens = mkOption {
-        type = types.listOf (types.submodule {
-          options = {
-            name = mkOption {
-              type = types.str;
-              default = "eDP-1";
-              description = "Screen name";
-            };
-            position = mkOption {
-              type = (types.submodule {
-                options = {
-                  x = mkOption {
-                    type = types.int;
-                    default = 0;
-                    description = "Screen X position";
-                  };
-                  y = mkOption {
-                    type = types.int;
-                    default = 0;
-                    description = "Screen Y position";
-                  };
+        type = types.listOf (
+          types.submodule {
+            options = {
+              name = mkOption {
+                type = types.str;
+                default = "eDP-1";
+                description = "Screen name";
+              };
+              position = mkOption {
+                type = (
+                  types.submodule {
+                    options = {
+                      x = mkOption {
+                        type = types.int;
+                        default = 0;
+                        description = "Screen X position";
+                      };
+                      y = mkOption {
+                        type = types.int;
+                        default = 0;
+                        description = "Screen Y position";
+                      };
+                    };
+                  }
+                );
+                default = {
+                  x = 0;
+                  y = 0;
                 };
-              });
-              default = { x = 0; y = 0; };
-              description = "Screen resolution";
-            };
-            resolution = mkOption {
-              type = (types.submodule {
-                options = {
-                  x = mkOption {
-                    type = types.int;
-                    default = 1920;
-                    description = "Screen X resolution";
-                  };
-                  y = mkOption {
-                    type = types.int;
-                    default = 1080;
-                    description = "Screen Y resolution";
-                  };
+                description = "Screen resolution";
+              };
+              resolution = mkOption {
+                type = (
+                  types.submodule {
+                    options = {
+                      x = mkOption {
+                        type = types.int;
+                        default = 1920;
+                        description = "Screen X resolution";
+                      };
+                      y = mkOption {
+                        type = types.int;
+                        default = 1080;
+                        description = "Screen Y resolution";
+                      };
+                    };
+                  }
+                );
+                default = {
+                  x = 1920;
+                  y = 1080;
                 };
-              });
-              default = { x = 1920; y = 1080; };
-              description = "Screen resolution";
+                description = "Screen resolution";
+              };
+              rotation = mkOption {
+                type = types.enum [
+                  "normal"
+                  "left"
+                  "right"
+                  "inverted"
+                ];
+                default = "normal";
+                description = "Screen rotation";
+              };
+              scale = mkOption {
+                type = types.float;
+                default = 1.0;
+                description = "Screen Scale";
+              };
+              frequency = mkOption {
+                type = types.float;
+                default = 60.0;
+                description = "Screen frequency";
+              };
             };
-            rotation = mkOption {
-              type = types.enum ["normal" "left" "right" "inverted"];
-              default = "normal";
-              description = "Screen rotation";
-            };
-            scale = mkOption {
-              type = types.float;
-              default = 1.0;
-              description = "Screen Scale";
-            };
-            frequency = mkOption {
-              type = types.float;
-              default = 60.0;
-              description = "Screen frequency";
-            };
-          };
-        });
-        default = [{ name = "eDP-1"; }];
+          }
+        );
+        default = [ { name = "eDP-1"; } ];
       };
     };
     gui = {
@@ -194,7 +220,12 @@ in
     user = {
       enableHM = mkEnableOption "Enable home-manager this host";
       browser = mkOption {
-        type = types.enum [ "firefox" "chromium" "zen" "none"];
+        type = types.enum [
+          "firefox"
+          "chromium"
+          "zen"
+          "none"
+        ];
         default = "none";
       };
       osVersion = mkOption {
@@ -219,71 +250,103 @@ in
     };
     terminal = {
       name = mkOption {
-        type = types.enum ["foot" "wezterm" "rio" "alacritty"];
+        type = types.enum [
+          "foot"
+          "wezterm"
+          "rio"
+          "alacritty"
+        ];
         default = "rio";
       };
       command = mkOption {
         type = types.listOf types.str;
-        default = ["rio" "-e"];
+        default = [
+          "rio"
+          "-e"
+        ];
       };
     };
     shell = {
       name = mkOption {
-        type = types.enum ["fish" "nushell"];
+        type = types.enum [
+          "fish"
+          "nushell"
+        ];
         default = "fish";
       };
       command = mkOption {
         type = types.listOf types.str;
-        default = ["fish"];
+        default = [ "fish" ];
       };
       privSession = mkOption {
         type = types.listOf types.str;
-        default = ["fish" "-P"];
-      };
-      aliases = let
-        ssh-base = [
-          { name = "rs"; idx = 0; }
-          { name = "mc"; idx = 1; }
+        default = [
+          "fish"
+          "-P"
         ];
-        ssh-aliases = builtins.listToAttrs (map ({ name, idx, path ? secrets.rustlanges.path }: {
-          name = "ssh-${name}";
-          value = ''ssh -i ${path} $"root@(open ${secrets.hosts.path} | lines | get ${builtins.toString idx})"'';
-        }) ssh-base);
-      in mkOption {
-        type = types.attrs;
-        default = {
-          cmake = "cargo make";
-          neovide = "neovide --fork";
-          clippy = "cargo clippy -- -D warnings";
-          pedantic = "cargo clippy -- -D clippy::pedantic";
-          fmtc = "cargo fmt --all --check";
-          fmtf = "cargo fmt --all";
-          ll = "eza -lh --icons --group-directories-first";
-          la = "eza -a --icons --group-directories-first";
-          lla = "eza -lah --icons";
-          llag = "eza -lah --git --icons";
-          ls = "eza -Gx --icons --group-directories-first";
-          lsr = "eza -Tlxa --icons --group-directories-first";
-          lsd = "eza -GDx --icons --color always";
-          cat = "bat";
-          catn = "bat --plain";
-          catnp = "bat --plain --paging=never";
-          gs = "git s";
-          gb = "git switch";
-          gbl = "git branch";
-          gp = "git p";
-          gbc = "git switch -c";
-          glg = "git lg";
-          tree = "eza --tree --icons=always";
-          nb = "nom build";
-          nixdev = "nom develop -c ${shellCmd}";
-          nixdevpriv = "nom develop -c ${builtins.concatStringsSep " " config.shell.privSession}";
-          nixclear = "nix-store --gc";
-          nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
-          nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
-          nixforceclean = "sudo nix-collect-garbage -d";
-        } // ssh-aliases;
       };
+      aliases =
+        let
+          ssh-base = [
+            {
+              name = "rs";
+              idx = 0;
+            }
+            {
+              name = "mc";
+              idx = 1;
+            }
+          ];
+          ssh-aliases = builtins.listToAttrs (
+            map (
+              {
+                name,
+                idx,
+                path ? secrets.rustlanges.path,
+              }:
+              {
+                name = "ssh-${name}";
+                value = ''ssh -i ${path} $"root@(open ${secrets.hosts.path} | lines | get ${builtins.toString idx})"'';
+              }
+            ) ssh-base
+          );
+        in
+        mkOption {
+          type = types.attrs;
+          default = {
+            cmake = "cargo make";
+            neovide = "neovide --fork";
+            clippy = "cargo clippy -- -D warnings";
+            pedantic = "cargo clippy -- -D clippy::pedantic";
+            fmtc = "cargo fmt --all --check";
+            fmtf = "cargo fmt --all";
+            ll = "eza -lh --icons --group-directories-first";
+            la = "eza -a --icons --group-directories-first";
+            lla = "eza -lah --icons";
+            llag = "eza -lah --git --icons";
+            ls = "eza -Gx --icons --group-directories-first";
+            lsr = "eza -Tlxa --icons --group-directories-first";
+            lsd = "eza -GDx --icons --color always";
+            cat = "bat";
+            catn = "bat --plain";
+            catnp = "bat --plain --paging=never";
+            gs = "git s";
+            gb = "git switch";
+            gbl = "git branch";
+            gp = "git p";
+            gbc = "git switch -c";
+            glg = "git lg";
+            tree = "eza --tree --icons=always";
+            nb = "nom build";
+            nixdev = "nom develop -c ${shellCmd}";
+            nixdevpriv = "nom develop -c ${builtins.concatStringsSep " " config.shell.privSession}";
+            nixclear = "nix-store --gc";
+            nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
+            nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
+            nixforceclean = "sudo nix-collect-garbage -d";
+          }
+          // ssh-aliases;
+        };
     };
   };
 }

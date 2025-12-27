@@ -18,79 +18,137 @@
         inputs.mac-style-plymouth.overlays.default
       ];
       forEachSystem = nixpkgs.lib.genAttrs systems;
-      pkgs = forEachSystem (system:
+      pkgs = forEachSystem (
+        system:
         import nixpkgs {
           inherit system overlays;
           config.allowUnfree = true;
         }
       );
-      mkLib = system: import ./lib {
-        pkgs = pkgs.${system};
-        inherit (nixpkgs) lib;
-      };
+      mkLib =
+        system:
+        import ./lib {
+          pkgs = pkgs.${system};
+          inherit (nixpkgs) lib;
+        };
 
-      baseSystem =  let
-        username = "s4rch";
-      in system: name: {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          libx = mkLib system;
-          hostName = name;
-        } // (mkLib system);
-        modules = [
-          {
-            # Hardware
-            networking.hostName = name;
-            nixpkgs.overlays = overlays;
-            user.username = username;
-            boot.binfmt.emulatedSystems = pkgs.${system}.lib.optionals (system != "aarch64-linux") [ "aarch64-linux" ];
+      baseSystem =
+        let
+          username = "s4rch";
+        in
+        system: name: {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            libx = mkLib system;
+            hostName = name;
           }
-          ./home
-          ./hosts/common
-          inputs.agenix.nixosModules.default
-          inputs.home-manager.nixosModules.home-manager
-        ] ++ [ ./hosts/${name} ];
-      };
+          // (mkLib system);
+          modules = [
+            {
+              # Hardware
+              networking.hostName = name;
+              nixpkgs.overlays = overlays;
+              user.username = username;
+              boot.binfmt.emulatedSystems = pkgs.${system}.lib.optionals (system != "aarch64-linux") [
+                "aarch64-linux"
+              ];
+            }
+            ./home
+            ./hosts/common
+            inputs.agenix.nixosModules.default
+            inputs.home-manager.nixosModules.home-manager
+          ]
+          ++ [ ./hosts/${name} ];
+        };
 
       mkNixosCfg = system: name: inputs.nixpkgs.lib.nixosSystem (baseSystem system name);
 
       myHosts = [
-        {format = "iso"; system = "x86_64-linux"; name = "race4k";}
-        {format = "iso"; system = "x86_64-linux"; name = "laptop";}
-        {format = "sd"; system = "aarch64-linux"; name = "rpi";}
+        {
+          format = "iso";
+          system = "x86_64-linux";
+          name = "race4k";
+        }
+        {
+          format = "iso";
+          system = "x86_64-linux";
+          name = "laptop";
+        }
+        {
+          format = "sd";
+          system = "aarch64-linux";
+          name = "rpi";
+        }
       ];
     in
     {
       overlays.default = import ./pkgs;
       # Just for Test
-      packages = forEachSystem (system: let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      in (builtins.listToAttrs (map (h:
-        {
-          name = h.name;
-          value = nixos-generators.nixosGenerate ({
-            format = h.format;
-          } // (baseSystem h.system h.name));
-        }) myHosts)
-      ) // (import ./pkgs) pkgs pkgs);
+      packages = forEachSystem (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        in
+        (builtins.listToAttrs (
+          map (h: {
+            name = h.name;
+            value = nixos-generators.nixosGenerate (
+              {
+                format = h.format;
+              }
+              // (baseSystem h.system h.name)
+            );
+          }) myHosts
+        ))
+        // (import ./pkgs) pkgs pkgs
+      );
       # packages = inputs.simplemoji.packages;
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#laptop
-      nixosConfigurations = builtins.listToAttrs (map (h: {
+      nixosConfigurations = builtins.listToAttrs (
+        map (h: {
           name = h.name;
           value = mkNixosCfg h.system h.name;
-        }) myHosts);
+        }) myHosts
+      );
 
       # Programs that can be run by calling this flake
-      apps = forEachSystem (system: (import ./apps { inherit system inputs; pkgs = pkgs.${system}; }));
+      apps = forEachSystem (
+        system:
+        (import ./apps {
+          inherit system inputs;
+          pkgs = pkgs.${system};
+        })
+      );
 
-      devShells = forEachSystem (system: let
+      formatter = forEachSystem (
+        system:
+        pkgs.${system}.treefmt.withConfig {
+          runtimeInputs = [ pkgs.${system}.nixfmt-rfc-style ];
+
+          settings = {
+            # Log level for files treefmt won't format
+            on-unmatched = "info";
+
+            # Configure nixfmt for .nix files
+            formatter.nixfmt = {
+              command = "nixfmt";
+              includes = [ "*.nix" ];
+            };
+          };
+        }
+      );
+
+      devShells = forEachSystem (
+        system:
+        let
           pkgs = import nixpkgs { inherit system; };
-        in {
+        in
+        {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
               inputs.quickshell.packages."${system}".default
@@ -100,7 +158,8 @@
               # nixos-generators
             ];
           };
-        });
+        }
+      );
     };
 
   inputs = {

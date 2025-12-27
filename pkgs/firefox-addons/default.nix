@@ -1,6 +1,19 @@
-{ lib, stdenv, fetchurl }:
+{
+  lib,
+  stdenv,
+  fetchurl,
+}:
 let
-  buildFirefoxXpiAddon = { pname, version, addonId, url, sha256, meta, ... }:
+  buildFirefoxXpiAddon =
+    {
+      pname,
+      version,
+      addonId,
+      url,
+      sha256,
+      meta,
+      ...
+    }:
     stdenv.mkDerivation {
       name = "${pname}-${version}";
       inherit version;
@@ -23,10 +36,17 @@ let
 
   getJson = builtins.fromJSON (builtins.readFile ./default.lock);
 
-  jsonAsAttrs = builtins.listToAttrs (map (addon: { name = addon.slug; value = addon; }) getJson);
+  jsonAsAttrs = builtins.listToAttrs (
+    map (addon: {
+      name = addon.slug;
+      value = addon;
+    }) getJson
+  );
 
-  addons = lib.makeExtensible (self:
-    lib.mapAttrs (name: addon:
+  addons = lib.makeExtensible (
+    self:
+    lib.mapAttrs (
+      name: addon:
       buildFirefoxXpiAddon {
         pname = name;
         inherit (addon) version addonId url;
@@ -40,4 +60,4 @@ let
     ) jsonAsAttrs
   );
 in
-  addons
+addons

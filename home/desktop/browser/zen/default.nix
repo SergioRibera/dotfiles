@@ -1,33 +1,41 @@
 #
 # This browser have some issues with replication settings
 #
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   inherit (config) gui user;
-  mkPrefs = attrs:
+  mkPrefs =
+    attrs:
     let
-      toPrefsValue = value:
-      if builtins.isBool value then
+      toPrefsValue =
+        value:
+        if builtins.isBool value then
           if value then "true" else "false"
-      else if builtins.isInt value then
+        else if builtins.isInt value then
           toString value
-      else if builtins.isString value then
+        else if builtins.isString value then
           ''"${value}"''
-      else
+        else
           throw "Type value not supported: ${builtins.typeOf value}";
 
-      prefsLines = lib.mapAttrsToList (name: value:
-      ''user_pref("${name}", ${toPrefsValue value});''
+      prefsLines = lib.mapAttrsToList (
+        name: value: ''user_pref("${name}", ${toPrefsValue value});''
       ) attrs;
     in
-      lib.concatStringsSep "\n" prefsLines;
+    lib.concatStringsSep "\n" prefsLines;
 in
 {
   home-manager.users."${user.username}" = {
     home = lib.mkIf (gui.enable && user.enableHM && user.browser == "zen") {
       packages = [ inputs.zen-browser.packages.${pkgs.system}.specific ];
       file.".zen/default/chrome/userChrome.css".source = ./userChrome.css;
-      file.".zen/profiles.ini".text = lib.generators.toINI {} {
+      file.".zen/profiles.ini".text = lib.generators.toINI { } {
         General = {
           StartWithLastProfile = 1;
           Version = 2;
@@ -42,8 +50,9 @@ in
         };
       };
       file.".zen/default/extensions" = {
-          source = let
-          env = pkgs.buildEnv {
+        source =
+          let
+            env = pkgs.buildEnv {
               name = "zen-extensions";
               paths = with pkgs.firefoxAddons; [
                 vimium-ff
@@ -53,36 +62,44 @@ in
                 rust-search-extension
                 bitwarden-password-manager
               ];
-          };
-          in "${env}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}";
-          recursive = true;
-          force = true;
+            };
+          in
+          "${env}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}";
+        recursive = true;
+        force = true;
       };
       file.".zen/default/search.json.mozlz4" = {
         force = true;
-        source = let
-          settings = {
-            version = 6;
-            force = true;
-            default = "DuckDuckGo";
-            order = [ "DuckDuckGo" "Google" ];
-            engines = {
-              "MyNixOs" = {
-                urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
-                icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                definedAliases = [ "nx" ];
+        source =
+          let
+            settings = {
+              version = 6;
+              force = true;
+              default = "DuckDuckGo";
+              order = [
+                "DuckDuckGo"
+                "Google"
+              ];
+              engines = {
+                "MyNixOs" = {
+                  urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
+                  icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = [ "nx" ];
+                };
+                "Bing".metaData.hidden = true;
+                "Google".metaData.alias = "g"; # builtin engines only support specifying one additional alias
               };
-              "Bing".metaData.hidden = true;
-              "Google".metaData.alias = "g"; # builtin engines only support specifying one additional alias
-            };
 
-          };
-        in pkgs.runCommand "search.json.mozlz4" {
-          nativeBuildInputs = with pkgs; [ mozlz4a ];
-          json = builtins.toJSON settings;
-        } ''
-          mozlz4a <(echo "$json") "$out"
-        '';
+            };
+          in
+          pkgs.runCommand "search.json.mozlz4"
+            {
+              nativeBuildInputs = with pkgs; [ mozlz4a ];
+              json = builtins.toJSON settings;
+            }
+            ''
+              mozlz4a <(echo "$json") "$out"
+            '';
       };
       file.".zen/default/user.js".text = mkPrefs {
         # Disable auto update
@@ -136,7 +153,8 @@ in
         # Zen
         "zen.welcomeScreen.seen" = true;
         "zen.view.sidebar-expanded.show-button" = false;
-        "zen.keyboard.shortcuts" = "{\"zenSplitViewGrid\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"G\"},\"zenSplitViewVertical\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"V\"},\"zenSplitViewHorizontal\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"H\"},\"zenSplitViewClose\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"U\"},\"zenChangeWorkspace\":{\"ctrl\":true,\"alt\":false,\"shift\":true,\"meta\":false,\"key\":\"E\"},\"zenToggleCompactMode\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"C\"},\"zenToggleCompactModeSidebar\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"S\"},\"zenToggleCompactModeToolbar\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"T\"},\"zenToggleWebPanels\":{\"ctrl\":true,\"alt\":false,\"shift\":true,\"meta\":false,\"key\":\"P\"},\"openScreenCapture\":{\"ctrl\":true,\"alt\":false,\"shift\":false,\"meta\":false,\"key\":\"s\"},\"openNewPrivateWindow\":{\"ctrl\":true,\"alt\":false,\"shift\":true,\"meta\":false,\"key\":\"N\"}}";
+        "zen.keyboard.shortcuts" =
+          "{\"zenSplitViewGrid\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"G\"},\"zenSplitViewVertical\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"V\"},\"zenSplitViewHorizontal\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"H\"},\"zenSplitViewClose\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"U\"},\"zenChangeWorkspace\":{\"ctrl\":true,\"alt\":false,\"shift\":true,\"meta\":false,\"key\":\"E\"},\"zenToggleCompactMode\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"C\"},\"zenToggleCompactModeSidebar\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"S\"},\"zenToggleCompactModeToolbar\":{\"ctrl\":true,\"alt\":true,\"shift\":false,\"meta\":false,\"key\":\"T\"},\"zenToggleWebPanels\":{\"ctrl\":true,\"alt\":false,\"shift\":true,\"meta\":false,\"key\":\"P\"},\"openScreenCapture\":{\"ctrl\":true,\"alt\":false,\"shift\":false,\"meta\":false,\"key\":\"s\"},\"openNewPrivateWindow\":{\"ctrl\":true,\"alt\":false,\"shift\":true,\"meta\":false,\"key\":\"N\"}}";
 
       };
     };

@@ -1,4 +1,9 @@
-{ cfg, colors, lib }: {
+{
+  cfg,
+  colors,
+  lib,
+}:
+{
   options.component_separators.left = "";
   options.component_separators.right = "";
   options.section_separators = {
@@ -32,27 +37,38 @@
       {
         __unkeyed = "filename";
         file_status = true;
-        symbols = { modified = "•"; readonly = ""; };
+        symbols = {
+          modified = "•";
+          readonly = "";
+        };
       }
-    ] ++ lib.lists.optionals cfg.complete [
+    ]
+    ++ lib.lists.optionals cfg.complete [
       {
         __unkeyed = "diagnostics";
         sources = [ "nvim_diagnostic" ];
-        symbols = { error = " "; warn = " "; info = " "; };
+        symbols = {
+          error = " ";
+          warn = " ";
+          info = " ";
+        };
         color_error = colors.base08;
         color_warn = colors.base0E;
         color_info = colors.base05;
-        on_click.__raw = ''function(n, b)
-          if n ~= 1 then
-            return
-          end
-          if b == 'l' or b == 'left' then
-            require("telescope.builtin").diagnostics()
-          end
-        end'';
+        on_click.__raw = ''
+          function(n, b)
+                    if n ~= 1 then
+                      return
+                    end
+                    if b == 'l' or b == 'left' then
+                      require("telescope.builtin").diagnostics()
+                    end
+                  end'';
       }
     ];
-    lualine_x = { __empty = {}; };
+    lualine_x = {
+      __empty = { };
+    };
     lualine_y = lib.lists.optionals cfg.complete [ "lsp_status" ];
     lualine_z = [ "location" ];
   };
