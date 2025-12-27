@@ -8,7 +8,8 @@ rec {
     program = builtins.toString (
       pkgs.writeShellScript "show-wallpaper-path" ''
         echo -e "${inputs.wallpapers}"
-      '');
+      ''
+    );
   };
 
   # Build
