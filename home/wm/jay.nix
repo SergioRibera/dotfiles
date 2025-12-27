@@ -1,10 +1,14 @@
-{ pkgs, inputs, config, lib, ... }: let
-  inherit (config) gui user terminal shell wm services;
+{ pkgs, config, lib, ... }: let
+  inherit (config) gui user terminal shell wm;
+
+  # osd = cmd: plus: value: "dms ipc call ${cmd} ${if plus then "increment" else "decrement"} ${value}";
+  dms-ipc = cmd: action: {
+    type = "exec";
+    exec = "dms ipc call ${cmd} ${if action == null then "toggle" else action}";
+  };
 
   enableJay = gui.enable && (builtins.elem "jay" wm.actives);
   tomlFormat = pkgs.formats.toml {};
-
-  sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
 
   mkRotation = r: if r == "left" then "rotate-270" else if r == "right" then "rotate-90" else if r == "inverted" then "flip" else "none";
 
@@ -15,10 +19,7 @@ in {
     xdg.configFile."jay/config.toml" = lib.mkIf enableJay ({
       source = tomlFormat.generate "config.toml" {
       on-graphics-initialized = [
-        (mkCmd "swww-daemon")
-        (mkCmd "${pkgs.swaynotificationcenter}/bin/swaync")
         (mkCmd [ "dbus-update-activation-environment" "--all" "--systemd" ])
-        (mkCmd ["${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"])
       ];
 
       outputs = builtins.listToAttrs (builtins.map (o: {
@@ -56,15 +57,18 @@ in {
         "Super_L-shift-k" = "move-up";
         "Super_L-shift-l" = "move-right";
 
-        "Super_L-tab" = mkCmd "sherlock";
+        # DMS
+        # "Super_L-tab" = dms-ipc "spotlight" null;
+        # "Super_L-p" = dms-ipc "powermenu" null;
+        # "Super_L-v" = dms-ipc "clipboard" null;
+        # "Super_L-n" = dms-ipc "notepad" null;
+        "Super_L-c" = mkCmd "dms color pick -a";
+        # "Super_L-i" = dms-ipc "settings" "focusOrToggle" null;
+        # "Super_L-alt-l" = dms-ipc "lock" "lock" null;
+
         "Super_L-e" = mkCmd "nautilus";
         "Super_L-return" = mkCmd (terminal.command ++ shell.command);
         "Super_L-shift-return" = mkCmd (terminal.command ++ shell.privSession);
-        "Super_L-b" = mkCmd ["nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "sidebar"];
-        "Super_L-p" = mkCmd ["nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "power-screen"];
-        "Super_L-m" = mkCmd ["nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "screenkey"];
-        "Super_L-y" = lib.mkIf sosdEnabled (mkCmd ["nu" "${user.homepath}/.local/bin/osd.nu" "show-time"]);
-        "Super_L-c" = mkCmd ["hyprpicker" "-a" "-f" "hex"];
         "Super_L-period" = mkCmd ["simplemoji""--show-recent" "--recent-type" "mixed" "-t" "medium-light" "-soc" "wl-copy"];
 
         "Super_L-w" = mkCmd "close";

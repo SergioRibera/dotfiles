@@ -60,18 +60,10 @@ with pkgs; { home-manager.users."${username}" = {
     quickemu
   ] ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
     distrobox
-    evsieve
-    brightnessctl
 
     # Wayland
-    grim
-    slurp
-    libnotify
     wl-clipboard
     wl-mirror
-    hyprpicker
-    swww
-    swaynotificationcenter
 
     # GUI
     easyeffects

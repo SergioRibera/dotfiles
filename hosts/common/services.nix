@@ -1,6 +1,4 @@
-{ inputs, pkgs, lib, config, ... }: let
-  sosdEnabled = config.user.enableHM && config.home-manager.users.${config.user.username}.programs.sosd.enable;
-
+{ pkgs, lib, config, ... }: let
   isWmEnable = name: builtins.elem name config.wm.actives;
 in
 with pkgs.stdenv.buildPlatform;
@@ -29,7 +27,6 @@ with pkgs.stdenv.buildPlatform;
     };
     ratbagd.enable = true;
     gnome.gnome-keyring.enable = (isLinux && config.gui.enable);
-    udev.packages = lib.optionals (isLinux && config.gui.enable && !sosdEnabled) [ pkgs.swayosd ];
     dbus = {
       enable = true;
       packages = [ pkgs.gcr ];

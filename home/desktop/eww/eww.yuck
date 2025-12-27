@@ -1,9 +1,0 @@
-(include "./src/_variables.yuck")
-(include "./src/_modules.yuck")
-
-(include "./src/powerscreen/_widgets.yuck")
-(include "./src/powerscreen/_windows.yuck")
-
-(include "./src/sidebar/_widgets.yuck")
-(include "./src/sidebar/_windows.yuck")
-(include "./src/screenkey/_windows.yuck")

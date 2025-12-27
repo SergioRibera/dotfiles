@@ -1,16 +1,11 @@
-{ inputs, config, lib, pkgs, ... }: let
-  inherit (config) user gui wm;
+{ config, lib, pkgs, ... }: let
+  inherit (config) user gui shell wm;
   isLinux = pkgs.stdenv.buildPlatform.isLinux;
-  sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
-  sosdCmd = "nu ${user.homepath}/.local/bin/osd.nu";
+  osd = cmd: plus: value: "dms ipc call ${cmd} ${if plus then "increment" else "decrement"} ${value}";
+  dms-ipc = cmd: action: "dms ipc call ${cmd} ${if action == null then "toggle" else action}";
   mkRotation = r: if r == "left" then 1 else if r == "right" then 3 else if r == "inverted" then 2 else 0;
 in {
   home-manager.users.${user.username} = lib.mkIf user.enableHM {
-    home.file.".local/bin/osd.nu" = lib.mkIf (isLinux && gui.enable && sosdEnabled) {
-      executable = true;
-      source = ../../scripts/osd.nu;
-    };
-
     wayland.windowManager.hyprland = lib.mkIf (isLinux && gui.enable) {
       enable = builtins.elem "hyprland" wm.actives;
       xwayland.enable = true;
@@ -23,9 +18,6 @@ in {
         ) wm.screens);
         exec-once = [
           "dbus-update-activation-environment --all --systemd"
-          "swww-daemon"
-          "${pkgs.swaynotificationcenter}/bin/swaync"
-          "wallpaper -t 8h --no-allow-video -d -b -i ${inputs.wallpapers}"
         ];
         env = [ "XCURSOR_SIZE,24" "PATH,$HOME/.local/bin:$PATH" ];
 
@@ -145,17 +137,17 @@ in {
         # m -> mouse, see below
         # t -> transparent, cannot be shadowed by other binds.
         # i -> ignore mods, will ignore modifiers.
-        bindel = lib.lists.optionals sosdEnabled [
+        bindel = [
           #
           # Volume keybinds
           #
-          ",XF86AudioRaiseVolume,exec,${sosdCmd} volume-up"
-          ",XF86AudioLowerVolume,exec,${sosdCmd} volume-down"
+          ",XF86AudioRaiseVolume,exec,${osd "audio" true}"
+          ",XF86AudioLowerVolume,exec,${osd "audio" false}"
           #
           # Brightness keys
           #
-          ",XF86MonBrightnessUp,exec,${sosdCmd} brightness-up"
-          ",XF86MonBrightnessDown,exec,${sosdCmd} brightness-down"
+          ",XF86MonBrightnessUp,exec,${osd "brightness" true}"
+          ",XF86MonBrightnessDown,exec,${osd "brightness" false}"
         ];
 
         # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -172,25 +164,29 @@ in {
           "SUPER_SHIFT,F,fullscreen,"
           "SUPER,T,pseudo,"
           "SUPER,W,killactive,"
-          # TODO: replace MOD+Q by power menu
-          # "SUPER,Q,exit,"
+          #
+          # DMS
+          #
+          "SUPER,Tab,exec,${dms-ipc "spotlight"}"
+          "SUPER,P,exec,${dms-ipc "powermenu"}"
+          "SUPER,V,exec,${dms-ipc "clipboard"}"
+          "SUPER,N,exec,${dms-ipc "notepad"}"
+          "SUPER,C,exec,dms color pick -a"
+          "SUPER,I,exec,${dms-ipc "settings" "focusOrToggle"}"
+          "SUPER_ALT,L,exec,${dms-ipc "lock" "lock"}"
           #
           # Custom Exec Keybinds
           #
-          "SUPER,Return,exec,wezterm start"
-          # "SUPER_SHIFT,Return,exec,st -A 0.75 -x 5 -s 'gruv-dark' -f 'FiraCode Nerd Font Mono' -z 17.0 -e fish"
+          "SUPER,Return,exec,${shell.command}"
+          "SUPER_SHIFT,Return,exec,${shell.privSession}"
+
           "SUPER,E,exec,nautilus"
-          # "SUPER,D,exec,trilium"
-          "SUPER,Tab,exec,sherlock"
-          # "SUPER,Tab,overview:toggle," # Hyprspace plugin
-          # "SUPER,N,exec,${user.browser}"
-          # "SUPER_SHIFT,N,exec,${user.browser} --private-window"
           "SUPER,S,exec,sss --area \"$(slurp -d)\" -o raw | wl-copy"
           "SUPER_SHIFT,S,exec,sss --area \"$(slurp -d)\" -o \"$HOME/Pictures/Screenshot/$(date '+%Y-%m-%d-%H%M%S')_sss.png\""
           "SUPER,ALT_S,exec,hyprshot --clipboard-only -m region"
           "SUPER_SHIFT,ALT_S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
 
-          "SUPER,C,exec,hyprpicker -a -f hex"
+          "SUPER,C,exec,dms color pick -a"
           "SUPER,Period,exec,simplemoji --show-recent --recent-type mixed -t medium-light -soc 'wl-copy'"
           #
           # Windows Navigations
@@ -227,11 +223,9 @@ in {
           "SUPER_SHIFT,8,movetoworkspacesilent,8"
           "SUPER_SHIFT,9,movetoworkspacesilent,9"
           "SUPER_SHIFT,0,movetoworkspacesilent,10"
-        ] ++ lib.lists.optionals sosdEnabled [
-          ",XF86AudioMute,exec,${sosdCmd} audio-mute-toggle"
-          ",XF86AudioMicMute,exec,${sosdCmd} mic-mute-toggle"
-          ",Caps_Lock,exec,sleep 1s && ${sosdCmd} caps-lock"
-          ",Num_Lock,exec,sleep 1s && ${sosdCmd} num-lock"
+
+          ",XF86AudioMute,exec,${osd "audio" "mute"}"
+          ",XF86AudioMicMute,exec,${osd "audio" "micmute"}"
         ];
       };
     };

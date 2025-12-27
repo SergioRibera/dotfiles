@@ -1,7 +1,5 @@
 { inputs, config, lib, pkgs, ... }: let
   inherit (config) gui user terminal shell wm services;
-  command = terminal.command;
-  sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
   makeCommand = command: {
     command = [command];
   };
@@ -15,11 +13,6 @@ in {
       inputs.niri.homeModules.niri
     ];
 
-    home.file.".local/bin/osd.nu" = lib.mkIf (gui.enable && sosdEnabled) {
-      executable = true;
-      source = ../../scripts/osd.nu;
-    };
-
     programs.niri = {
       enable = gui.enable && (builtins.elem "niri" wm.actives);
       # package = inputs.niri.packages.${pkgs.system}.niri-stable;
@@ -30,10 +23,8 @@ in {
         screenshot-path = "~/Pictures/Screenshot/%Y-%m-%d_%H%M%S.png";
         environment = { DISPLAY = ":0"; };
         spawn-at-startup = [
-          (makeCommand "swww-daemon")
+          (makeCommandArgs [ "dms" "run" ])
           (makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
-          (makeCommandArgs ["${pkgs.swaynotificationcenter}/bin/swaync"])
-          (makeCommandArgs ["${user.homepath}/.local/bin/wallpaper" "-t" "8h" "--no-allow-video" "-d" "-b" "-i" "${inputs.wallpapers}"])
           (makeCommandArgs [ "dbus-update-activation-environment" "--all" "--systemd" ])
         ];
         # cursor = (plain "cursor" [ (leaf "shake" (flag "on")) ]);
@@ -80,6 +71,7 @@ in {
           dist_in = 7;
           dist_out = 5;
         in {
+          background-color = "transparent";
           focus-ring.enable = false;
           preset-column-widths = [
             {proportion = 1.0 / 3.0;}
@@ -97,51 +89,59 @@ in {
           };
         };
         binds = let
-          terminal = spawn command;
           playerctl = cmd: {
             allow-when-locked = true;
-            action.spawn = ["playerctl"] ++ cmd;
+            action.spawn = ["playerctl" cmd];
           };
 
-          osd = ms: cmd: {
+          osd = ms: cmd: plus: value: {
             allow-when-locked = true;
             cooldown-ms = ms;
-            action.spawn = ["nu" "${user.homepath}/.local/bin/osd.nu"] ++ cmd;
+            action.spawn = ["dms" "ipc" "call" cmd (if plus then "increment" else "decrement") value];
+          };
+
+          dms-ipc = cmd: value: {
+            action.spawn = ["dms" "ipc" "call" cmd (if value == null then "toggle" else value)];
+          };
+
+          dms-niri = cmd: {
+            action.spawn = ["dms" "ipc" "call" "niri" cmd];
           };
         in
           {
-            "XF86AudioMute" = lib.mkIf sosdEnabled (osd 500 ["audio-mute-toggle"]);
-            "XF86AudioMicMute" = lib.mkIf sosdEnabled (osd 500 ["mic-mute-toggle"]);
+            "XF86AudioMute" = dms-ipc "audio" "mute";
+            "XF86AudioMicMute" = dms-ipc "audio" "micmute";
 
-            "XF86AudioPlay" = playerctl ["play-pause"];
-            "XF86AudioStop" = playerctl ["pause"];
-            "XF86AudioPrev" = playerctl ["previous"];
-            "XF86AudioNext" = playerctl ["next"];
+            "XF86AudioPlay" = playerctl "play-pause";
+            "XF86AudioStop" = playerctl "pause";
+            "XF86AudioPrev" = playerctl "previous";
+            "XF86AudioNext" = playerctl "next";
 
-            "XF86AudioRaiseVolume" = lib.mkIf sosdEnabled (osd 0 ["volume-up"]);
-            "XF86AudioLowerVolume" = lib.mkIf sosdEnabled (osd 0 ["volume-down"]);
+            "XF86AudioRaiseVolume" = osd 0 "audio" true "5";
+            "XF86AudioLowerVolume" = osd 0 "audio" false "5";
 
-            "XF86MonBrightnessUp" = lib.mkIf sosdEnabled (osd 0 ["brightness-up"]);
-            "XF86MonBrightnessDown" = lib.mkIf sosdEnabled (osd 0 ["brightness-down"]);
+            "XF86MonBrightnessUp" = osd 0 "brightness" true "5";
+            "XF86MonBrightnessDown" = osd 0 "brightness" false "5";
 
-            "Caps_Lock" = lib.mkIf sosdEnabled (osd 500 ["caps-lock"]);
-            "Num_Lock" = lib.mkIf sosdEnabled (osd 500 ["num-lock"]);
-
-            "Mod+S".action = magic-leaf "screenshot-window" { write-to-disk = false; };
-            "Mod+Print".action = magic-leaf "screenshot-window";
-            "Mod+Shift+S".action = magic-leaf "screenshot";
+            "Mod+S" = dms-niri "screenshotWindow";
+            "Mod+Print" = dms-niri "screenshotWindow";
+            "Mod+Shift+S" = dms-niri "screenshot";
 
             "Mod+Escape".action = toggle-overview;
-            "Mod+Tab".action = spawn "sherlock";
-            "Mod+E".action = spawn "nautilus";
-            "Mod+Return".action = terminal shell.command;
-            "Mod+B".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "sidebar";
-            "Mod+P".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "power-screen";
-            "Mod+M".action = spawn "nu" "${user.homepath}/.config/eww/scripts/extras.nu" "toggle" "screenkey";
-            "Mod+Y" = lib.mkIf sosdEnabled (osd 0 ["show-time"]);
-            "Mod+Shift+Return".action = terminal shell.privSession;
-            "Mod+C".action = spawn "hyprpicker" "-a" "-f" "hex";
-            "Mod+Period".action = spawn "simplemoji" "--show-recent" "--recent-type" "mixed" "-t" "medium-light" "-soc" "wl-copy";
+            "Mod+E".action.spawn = "nautilus";
+            "Mod+Return".action.spawn = terminal.command ++ shell.command;
+            "Mod+Shift+Return".action.spawn = terminal.command ++ shell.privSession;
+
+            "Mod+Tab" = dms-ipc "spotlight" null;
+            "Mod+P" = dms-ipc "powermenu" null;
+            "Mod+V" = dms-ipc "clipboard" null;
+            "Mod+N" = dms-ipc "notepad" null;
+            "Mod+C".action.spawn = ["dms" "color" "pick" "-a"];
+            "Mod+I" = dms-ipc "settings" "focusOrToggle";
+            "Mod+Alt+L" = dms-ipc "lock" "lock";
+
+            # "Mod+M".action = ["dms" "ipc" "call" "screenkey" "toggle"];
+            "Mod+Period".action.spawn = ["simplemoji" "--show-recent" "--recent-type" "mixed" "-t" "medium-light" "-soc" "wl-copy"];
 
             "Mod+Shift+T".action = toggle-debug-tint;
 
@@ -180,13 +180,14 @@ in {
             map (x: let
               xStr = builtins.toString x;
             in {
-              "Mod+${xStr}".action = focus-workspace x;
-              "Mod+Shift+${xStr}".action = move-column-to-index x;
+              "Mod+${xStr}".action.focus-workspace = x;
+              "Mod+Shift+${xStr}".action.move-column-to-index = x;
             })
             (builtins.genList (x: x + 1) 9)
           ));
         layer-rules = [
-          { matches = [ {namespace = "^wallpaper$";}] ; place-within-backdrop = true; }
+          { matches = [ {namespace = "^quickshell$";}] ; place-within-backdrop = true; }
+          { matches = [ {namespace = "dms:blurwallpaper";}] ; place-within-backdrop = true; }
         ];
         window-rules = [
           {
@@ -207,6 +208,18 @@ in {
               { app-id = "^org\.gnome\.World\.Secrets$"; }
             ];
             block-out-from = "screen-capture";
+          }
+          {
+            matches = [ { app-id = "org.quickshell$"; } ];
+            open-floating = true;
+          }
+
+          {
+            matches = [
+              { app-id = "^org.gnome."; }
+              { app-id = "Alacritty"; }
+            ];
+            draw-border-with-background = false;
           }
         ];
       };

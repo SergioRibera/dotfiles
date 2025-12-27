@@ -2,6 +2,6 @@
   imports = [
     ./terminal
     ./browser
-    ./sherlock.nix
+    ./shell
   ];
 }

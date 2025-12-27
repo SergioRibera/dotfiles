@@ -1,10 +1,8 @@
-{ lib, config, pkgs, mkTheme, ... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (config) user gui;
   inherit (user) username;
   inherit (pkgs.stdenv.buildPlatform) isLinux;
-
-  theme = mkTheme gui.theme.colors;
 
   darkTheme = {
     gtk-application-prefer-dark-theme = 1;
@@ -17,12 +15,6 @@ in {
         enable = true;
         gtk3.extraConfig = lib.mkIf (gui.theme.dark) darkTheme;
         gtk4.extraConfig = lib.mkIf (gui.theme.dark) darkTheme;
-        gtk3.extraCss = theme.adwaitaGtk;
-        gtk4.extraCss = theme.adwaitaGtk;
-        theme = {
-          name = gui.theme.gtk;
-          package = pkgs.gnome-themes-extra;
-        };
         iconTheme = {
           name = "Tela";
           package = pkgs.tela-icon-theme;
@@ -33,8 +25,6 @@ in {
        	gtk-theme = gui.theme.gtk;
        	color-scheme = "prefer-dark";
       };
-
-      xdg.configFile."dorion/themes/default.css".text = theme.discord;
 
       home = {
         pointerCursor = lib.mkIf (isLinux && gui.enable) {

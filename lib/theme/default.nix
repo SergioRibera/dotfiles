@@ -24,7 +24,6 @@ in {
   adwaitaGtk = replace ./adwaitaGtk.css;
   discord = replace ./discord.css;
   tmTheme = replace ./tmTheme.xml;
-  swayosd = replace ./swayosd.css;
   helix = (import ./helix.nix colors);
   rio = (import ./rio.nix colors toToml);
   alacritty = (import ./alacritty.nix colors);

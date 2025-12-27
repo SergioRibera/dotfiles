@@ -173,16 +173,11 @@
       inputs.flake-utils.follows = "fu";
       inputs.crane.follows = "crane";
     };
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Dev Mode
-    # sosd.url = "git+file:///home/s4rch/Projects/rust/soft_osd";
-    sosd = {
-      url = "github:SergioRibera/soft_osd";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # nixificate my neovim configs
     nixvim = {
       url = "github:nix-community/nixvim";

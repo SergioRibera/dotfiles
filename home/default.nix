@@ -59,10 +59,6 @@ in
             executable = true;
             source = ../scripts/wallpaper;
           };
-          ".local/bin/hyprshot" = lib.mkIf gui.enable {
-            executable = true;
-            source = ../scripts/hyprshot;
-          };
           ".cargo/config.toml" = {
             executable = false;
             text = replaceVal ../.cargo/config.toml {

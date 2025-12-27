@@ -22,7 +22,7 @@
     # Utils
     gitui
     fastfetch
-  ] ++ pkgs.lib.optionals (config.isServer || config.nvim.complete) [
+  ] ++ pkgs.lib.optionals (config.nvim.complete) [
     wrkflw
     dive
 

@@ -1,8 +1,0 @@
-(defwidget power-screen []
-	(box :orientation "h" :space-evenly "true"
-		(box :class "power-screen" :orientation "h" :space-evenly "false" :halign "center" :valign "center"
-			(button :class "shutdown-btn" :onclick "poweroff" :tooltip "Shutdown" "⏻")
-			(button :class "reboot-btn" :onclick "reboot" :tooltip "Reboot" "⏼")
-		)
-	)
-)

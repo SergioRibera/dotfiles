@@ -1,18 +1,11 @@
-{ pkgs, lib, config, mkTheme, ... }:
+{ pkgs, lib, config, ... }:
 let
-  inherit (config) user gui;
-
-  theme = mkTheme gui.theme.colors;
-  sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
+  inherit (config) user;
 in
 {
   home-manager.users.${user.username} = lib.mkIf user.enableHM ({ ... }: {
     services = {
       udiskie.enable = true;
-      swayosd = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable && !sosdEnabled) {
-        enable = true;
-        stylePath = pkgs.writeText "swayosd.css" (theme.swayosd);
-      };
     };
   });
 

@@ -1,6 +1,8 @@
-{ inputs, config, lib, pkgs, ... }: let
+{ config, lib, pkgs, ... }: let
   inherit (config) user terminal shell gui wm;
   mod = "Mod4";
+  # osd = cmd: plus: value: "dms ipc call ${cmd} ${if plus then "increment" else "decrement"} ${value}";
+  dms-ipc = cmd: action: "dms ipc call ${cmd} ${if action == null then "toggle" else action}";
   mkRotation = rot: if rot == "left" then "90" else if rot == "right" then "270" else if rot == "inverted" then "180" else "normal";
 in {
   home-manager.users.${user.username} = lib.mkIf user.enableHM {
@@ -26,19 +28,12 @@ in {
             text = c.base0B;
           };
         };
-        menu = "sherlock";
+        menu = dms-ipc "spotlight";
         terminal = terminal.name;
         gaps.inner = 7;
         floating.border = 1;
         focus.followMouse = true;
-        startup = [
-          { always = true; command = "${pkgs.swaynotificationcenter}/bin/swaync"; }
-          { always = true; command = "swww-daemon"; }
-          {
-            always = true;
-            command = "${user.homepath}/.local/bin/wallpaper -t 8h --no-allow-video -d -b -i ${inputs.wallpapers}";
-          }
-        ];
+        startup = [ ];
         window = {
           border = 0;
           titlebar = false;
@@ -73,11 +68,18 @@ in {
           };
         }) wm.screens);
         keybindings = {
-          "${mod}+Tab" = "exec sherlock";
+          # DMS
+          "${mod}+Tab" = "exec ${dms-ipc "spotlight"}";
+          "${mod}+P" = "exec ${dms-ipc "powermenu"}";
+          "${mod}+V" = "exec ${dms-ipc "clipboard"}";
+          "${mod}+N" = "exec ${dms-ipc "notepad"}";
+          "${mod}+C" = "exec dms color pick -a";
+          "${mod}+I" = "exec ${dms-ipc "settings" "focusOrToggle"}";
+          "${mod}+L" = "exec ${dms-ipc "lock" "lock"}";
+
           "${mod}+e" = "exec nautilus";
           "${mod}+Return" = "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ shell.command));
           "${mod}+Shift+Return" = "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ shell.privSession));
-          "${mod}+n" = "exec firefox-developer-edition";
 
           "${mod}+w" = "kill";
           "${mod}+f" = "floating toggle";
@@ -87,7 +89,6 @@ in {
           "${mod}+k" = "focus up";
           "${mod}+l" = "focus right";
 
-          "${mod}+c" = "exec hyprpicker -a -f hex";
           "${mod}+period" = "exec simplemoji --show-recent --recent-type mixed -t medium-light -soc wl-copy";
 
           "${mod}+Shift+h" = "move left";

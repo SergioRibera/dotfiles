@@ -2,7 +2,6 @@
 let
   inherit (config) user gui wm;
   isWmEnable = name: builtins.elem name wm.actives;
-  sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
 in
 {
   home-manager.users."${user.username}".xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux) {

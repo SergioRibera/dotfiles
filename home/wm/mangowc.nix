@@ -1,8 +1,9 @@
-{ inputs, config, lib, pkgs, ... }: let
+{ inputs, config, lib, ... }: let
   inherit (config) gui user terminal shell wm services;
 
   floatToIntStr = v: lib.replaceStrings [".000000"] [""] (toString v);
-  sosdEnabled = config.home-manager.users.${user.username}.programs.sosd.enable;
+  # osd = cmd: plus: value: "dms ipc call ${cmd} ${if plus then "increment" else "decrement"} ${value}";
+  dms-ipc = cmd: action: "dms ipc call ${cmd} ${if action == null then "toggle" else action}";
 
   join = builtins.concatStringsSep;
   mkRotation = r: if r == "left" then 3 else if r == "right" then 1 else if r == "inverted" then 2 else 0;
@@ -20,9 +21,6 @@ in {
       enable = gui.enable && (builtins.elem "mango" wm.actives);
       autostart_sh = ''
         dbus-update-activation-environment --all
-        swww-daemon &
-        "${pkgs.swaynotificationcenter}/bin/swaync" &
-        ${user.homepath}/.local/bin/wallpaper -t 8h --no-allow-video -d -b -i ${inputs.wallpapers} &
       '';
       settings = ''
 # Window effect
@@ -184,15 +182,18 @@ ${join "\n" (builtins.map (o:
 # bind="SUPER+Print,screenshot-window
 # bind="SUPER+Shift,s,screenshot
 
-bind=SUPER,Tab,spawn,sherlock
+# DMS
+bind=SUPER,Tab,spawn,${dms-ipc "spotlight"}
+bind=SUPER,p,spawn,${dms-ipc "powermenu"}
+bind=SUPER,v,spawn,${dms-ipc "clipboard"}
+bind=SUPER,n,spawn,${dms-ipc "notepad"}
+bind=SUPER,c,spawn,dms color pick -a
+bind=SUPER,i,spawn,${dms-ipc "settings" "focusOrToggle"}
+bind=SUPER,l,spawn,${dms-ipc "lock" "lock"}
+
 bind=SUPER,e,spawn,nautilus
 bind=SUPER,Return,spawn,${join " " terminal.command} ${join " " shell.command}
 bind=SUPER+SHIFT,Return,spawn,${join " " terminal.command} ${join " " shell.privSession}
-bind=SUPER,b,spawn,nu ${user.homepath}/.config/eww/scripts/extras.nu toggle sidebar
-bind=SUPER,p,spawn,nu ${user.homepath}/.config/eww/scripts/extras.nu toggle power-screen
-bind=SUPER,m,spawn,nu ${user.homepath}/.config/eww/scripts/extras.nu toggle screenkey
-${lib.optionalString sosdEnabled "bind=SUPER,y,spawn,nu ${user.homepath}/.local/bin/osd.nu show-time"}
-bind=SUPER,c,spawn,hyprpicker -a -f hex
 bind=SUPER,period,spawn,simplemoji --show-recent --recent-type mixed -t medium-light -soc wl-copy
 
 bind=SUPER,w,killclient
