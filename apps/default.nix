@@ -5,7 +5,7 @@
   fmt = {
     type = "app";
     program = "${pkgs.writeShellScript "fmt-all" ''
-      find . -name '*.nix' -type f -exec ${pkgs.nixfmt-rfc-style}/bin/nixfmt {} \;
+      find . -name '*.nix$' -type f -exec ${pkgs.nixfmt-rfc-style}/bin/nixfmt {} \;
     ''}";
   };
 
