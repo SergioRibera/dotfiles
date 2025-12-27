@@ -12,6 +12,11 @@ in
 {
   systemd.user.services.niri-flake-polkit.enable = gui.enable && niriEnabled;
 
+  environment.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "gtk3";
+    QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
+  };
+
   home-manager.users.${user.username} = lib.mkIf (user.enableHM) (
     { ... }:
     {

@@ -58,6 +58,11 @@ in
                 "dms"
                 "run"
               ])
+              (makeCommandArgs [
+                "bash"
+                "-c"
+                "${pkgs.wl-clipboard-rs}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store &"
+              ])
               (makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
               (makeCommandArgs [
                 "dbus-update-activation-environment"
