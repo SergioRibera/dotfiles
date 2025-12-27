@@ -53,6 +53,11 @@ in
     };
   };
 
+  environment.shells = with pkgs; [
+    bashInteractive
+    pkgs."${config.shell.name}"
+  ];
+
   home-manager.useGlobalPkgs = user.enableHM;
   home-manager.useUserPackages = user.enableHM;
   home-manager.users = lib.mkIf user.enableHM {
