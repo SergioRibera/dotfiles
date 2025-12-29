@@ -72,6 +72,7 @@ in
               ])
             ];
             # cursor = (plain "cursor" [ (leaf "shake" (flag "on")) ]);
+            overview.workspace-shadow.enable = false;
             input = {
               keyboard = {
                 numlock = true;
