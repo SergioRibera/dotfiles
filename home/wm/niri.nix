@@ -220,7 +220,7 @@ in
                   "-a"
                 ];
                 "Mod+I" = dms-ipc "settings" "focusOrToggle";
-                "Mod+Alt+L" = dms-ipc "lock" "lock";
+                "Mod+Mod5+L" = dms-ipc "lock" "lock";
 
                 # "Mod+M".action = ["dms" "ipc" "call" "screenkey" "toggle"];
                 "Mod+Period".action.spawn = [
