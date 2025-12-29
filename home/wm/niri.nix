@@ -143,7 +143,10 @@ in
                 playerctl = cmd: {
                   allow-when-locked = true;
                   action.spawn = [
-                    "playerctl"
+                    "dms"
+                    "ipc"
+                    "call"
+                    "mpris"
                     cmd
                   ];
                 };
@@ -185,7 +188,7 @@ in
                 "XF86AudioMute" = dms-ipc "audio" "mute";
                 "XF86AudioMicMute" = dms-ipc "audio" "micmute";
 
-                "XF86AudioPlay" = playerctl "play-pause";
+                "XF86AudioPlay" = playerctl "playPause";
                 "XF86AudioStop" = playerctl "pause";
                 "XF86AudioPrev" = playerctl "previous";
                 "XF86AudioNext" = playerctl "next";

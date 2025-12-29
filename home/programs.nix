@@ -10,7 +10,6 @@ let
     shell
     user
     gui
-    audio
     ;
 in
 {
@@ -26,8 +25,6 @@ in
       ++ lib.optionals pkgs.stdenv.buildPlatform.isDarwin [
         inputs.nixvim.nixosDarwinModules.nixvim
       ];
-
-      home.packages = with pkgs; lib.mkIf audio [ playerctl ];
 
       programs = {
         carapace = lib.mkIf (shell.name == "nushell") {
