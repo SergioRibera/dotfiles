@@ -10,7 +10,7 @@ let
   niriEnabled = (builtins.elem "niri" wm.actives);
 in
 {
-  systemd.user.services.niri-flake-polkit.enable = gui.enable && niriEnabled;
+  systemd.user.services.niri-flake-polkit.enable = !(gui.enable && niriEnabled);
 
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "gtk3";
