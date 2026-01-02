@@ -13,6 +13,10 @@ in
     {
       services = {
         udiskie.enable = true;
+        trayscale = {
+          enable = config.gui.enable && config.games;
+          hideWindow = true;
+        };
       };
     }
   );

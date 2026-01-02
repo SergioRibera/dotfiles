@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   services.cloudflared = {
     enable = config.server-network;
@@ -15,4 +15,9 @@
     "umac-128-etm@openssh.com"
     "hmac-sha2-256"
   ];
+  services.tailscale = {
+    enable = config.games;
+    extraDaemonFlags = ["--no-logs-no-support"];
+  };
+  networking.firewall.checkReversePath = lib.optionalString config.games "loose";
 }
