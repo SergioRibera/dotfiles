@@ -35,6 +35,7 @@
     ++ pkgs.lib.optionals (config.nvim.complete) [
       wrkflw
       dive
+      wormhole-rs
 
       # simple web server
       dufs
