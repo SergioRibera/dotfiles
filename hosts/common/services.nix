@@ -47,6 +47,10 @@ with pkgs.stdenv.buildPlatform;
       percentageCritical = 15;
     };
     ratbagd.enable = true;
+    journald.extraConfig = ''
+      SystemMaxUse=500M
+      RuntimeMaxUse=10M
+    '';
     gnome.gnome-keyring.enable = (isLinux && config.gui.enable);
     dbus = {
       enable = true;
