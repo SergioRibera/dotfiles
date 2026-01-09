@@ -14,6 +14,7 @@ in
     ./hardware.nix
     ./networks.nix
     ./options.nix
+    ./performance.nix
     ./packages.nix
     ./programs.nix
     ./services.nix
