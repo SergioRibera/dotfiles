@@ -28,6 +28,11 @@ with pkgs.stdenv.buildPlatform;
   };
 
   services = {
+    acpid.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+    };
     udisks2.enable = true;
     upower = {
       enable = true;
