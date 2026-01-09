@@ -1,5 +1,26 @@
 { config, lib, ... }:
 {
+  networking = {
+    useDHCP = lib.mkForce false;
+    networkmanager = {
+      enable = true;
+      unmanaged = [ "lo" "docker0" "virbr0" ];
+      wifi = {
+        backend = "iwd";
+        powersave = false;
+      };
+    };
+    wireless.iwd = {
+      enable = true;
+      settings = {
+        General.AddressRandomization = "once";
+        General.AddressRandomizationRange = "full";
+      };
+    };
+    # mdns
+    firewall.allowedUDPPorts = [ 5353 ];
+  };
+
   services.cloudflared = {
     enable = config.server-network;
     tunnels = {

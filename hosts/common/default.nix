@@ -73,12 +73,6 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   console.useXkbConfig = true;
 
-  networking = {
-    networkmanager.enable = true;
-    # mdns
-    firewall.allowedUDPPorts = [ 5353 ];
-  };
-
   environment.shellAliases = config.shell.aliases;
   services.getty.autologinUser = username;
 }
