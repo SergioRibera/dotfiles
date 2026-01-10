@@ -43,11 +43,19 @@
   fileSystems."/nix/store" = {
     device = "/dev/disk/by-uuid/ba9a1511-14af-44bd-8505-868e4c6e20e6";
     fsType = "xfs";
+    options = [
+      "noatime"
+      "logbsize=256k"
+    ];
   };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/bdbd0187-98b6-4533-b3b9-b2ee84cf5e13";
     fsType = "xfs";
+    options = [
+      "noatime"
+      "logbsize=256k"
+    ];
   };
 
   swapDevices = [ ];
