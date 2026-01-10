@@ -47,6 +47,7 @@ with pkgs.stdenv.buildPlatform;
       percentageCritical = 15;
     };
     ratbagd.enable = true;
+    fstrim.enable = true;
     journald.extraConfig = ''
       SystemMaxUse=500M
       RuntimeMaxUse=10M
