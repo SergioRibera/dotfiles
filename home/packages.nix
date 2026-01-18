@@ -130,6 +130,8 @@ with pkgs;
       mcpelauncher-ui-qt
       heroic
       lutris
+      gamescope
+      mangohud
     ];
   };
 }
