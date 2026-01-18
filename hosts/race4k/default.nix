@@ -100,7 +100,6 @@
 
   wm.actives = [
     "niri"
-    "jay"
   ];
   wm.screens =
     let

@@ -38,8 +38,7 @@ in
       };
       config.common = {
         "default" =
-          lib.optionals (isWmEnable "mango") [ "hyprland" ]
-          ++ lib.optionals (isWmEnable "jay") [ "jay" ]
+          lib.optionals (isWmEnable "jay") [ "jay" ]
           ++ [
             "gnome"
             "gtk"
@@ -55,9 +54,6 @@ in
         [
           xdg-desktop-portal-gtk
           xdg-desktop-portal-gnome
-        ]
-        ++ lib.optionals (isWmEnable "mango") [
-          xdg-desktop-portal-hyprland
         ];
     };
   };
