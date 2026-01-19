@@ -1,6 +1,7 @@
 {
   hostName,
   pkgs,
+  inputs,
   lib,
   config,
   ...
@@ -57,6 +58,7 @@ with pkgs;
     ]
     ++ lib.optionals config.nvim.complete [
       just
+      android-tools
 
       # Js
       pnpm

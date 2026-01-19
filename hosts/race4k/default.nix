@@ -74,7 +74,10 @@
   };
   boot = {
     initrd.kernelModules = [ "nvidia" ];
-    kernelParams = [ "rcutree.gp_init_delay=1" "mt7925e.disable_aspm=1" ];
+    kernelParams = [
+      "rcutree.gp_init_delay=1"
+      "mt7925e.disable_aspm=1"
+    ];
   };
   hardware = {
     nvidia-container-toolkit.enable = true;

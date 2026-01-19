@@ -4,7 +4,11 @@
     useDHCP = lib.mkForce false;
     networkmanager = {
       enable = true;
-      unmanaged = [ "lo" "docker0" "virbr0" ];
+      unmanaged = [
+        "lo"
+        "docker0"
+        "virbr0"
+      ];
       wifi = {
         backend = "iwd";
         powersave = false;
@@ -38,7 +42,7 @@
   ];
   services.tailscale = {
     enable = config.games;
-    extraDaemonFlags = ["--no-logs-no-support"];
+    extraDaemonFlags = [ "--no-logs-no-support" ];
   };
   networking.firewall.checkReversePath = lib.optionalString config.games "loose";
 }

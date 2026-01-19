@@ -21,29 +21,26 @@ in
     { ... }:
     {
       imports = [
-        inputs.dms.homeModules.dankMaterialShell.default
+        inputs.dms.homeModules.dank-material-shell
       ]
       ++ lib.optionals niriEnabled [
-        inputs.dms.homeModules.dankMaterialShell.niri
+        inputs.dms.homeModules.niri
       ];
 
-      programs.dankMaterialShell = {
+      programs.dank-material-shell = {
         enable = gui.enable;
 
         enableSystemMonitoring = false;
-        enableClipboard = true;
         enableVPN = true;
         enableDynamicTheming = true;
         enableAudioWavelength = true;
         enableCalendarEvents = true;
 
-        default.settings = {
+        niri.includes.enable = false;
+
+        settings = {
           theme = "dark";
           dynamicTheming = true;
-          # Add any other settings here
-        };
-        default.session = {
-          # Session state defaults
         };
         plugins = {
           DockerManager = {

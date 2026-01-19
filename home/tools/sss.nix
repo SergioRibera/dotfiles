@@ -7,9 +7,9 @@ in
     { ... }:
     {
       programs.sss = {
-        enable = true;
+        enable = false;
         code = {
-          enable = true;
+          enable = false;
           line-numbers = true;
           theme = config.gui.theme.name;
         };

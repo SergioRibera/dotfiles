@@ -42,7 +42,6 @@ in
             IdentityFile ~/.ssh/gitlab
       '';
     };
-    adb.enable = config.nvim.complete;
     steam.enable = games;
     gamemode.enable = games;
   };

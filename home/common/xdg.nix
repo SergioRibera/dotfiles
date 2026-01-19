@@ -37,24 +37,20 @@ in
         };
       };
       config.common = {
-        "default" =
-          lib.optionals (isWmEnable "jay") [ "jay" ]
-          ++ [
-            "gnome"
-            "gtk"
-          ];
+        "default" = lib.optionals (isWmEnable "jay") [ "jay" ] ++ [
+          "gnome"
+          "gtk"
+        ];
         "org.freedesktop.impl.portal.Access" = [ "gtk" ];
         "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
         "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
         "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };
 
-      extraPortals =
-        with pkgs;
-        [
-          xdg-desktop-portal-gtk
-          xdg-desktop-portal-gnome
-        ];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-gnome
+      ];
     };
   };
 }
