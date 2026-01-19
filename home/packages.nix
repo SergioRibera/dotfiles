@@ -134,6 +134,7 @@ with pkgs;
       lutris
       gamescope
       mangohud
+      inputs.hytale-launcher.packages.${pkgs.system}.hytale-launcher
     ];
   };
 }

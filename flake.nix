@@ -218,6 +218,10 @@
     #   # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
     #   # inputs.hyprland.follows = "hyprland";
     # };
+    hytale-launcher = {
+      url = "github:swagtop/hytale-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # My plymouth theme
     mac-style-plymouth = {
       url = "github:SergioRibera/s4rchiso-plymouth-theme";
