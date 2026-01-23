@@ -26,13 +26,6 @@ with pkgs.stdenv.buildPlatform;
     wantedBy = [ "default.target" ];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
-  systemd.coredump = {
-    enable = false;
-    extraConfig = ''
-      Storage=none
-      ProcessSizeMax=0
-    '';
-  };
 
   services = {
     acpid.enable = true;
