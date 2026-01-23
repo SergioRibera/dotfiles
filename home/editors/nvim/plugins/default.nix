@@ -24,7 +24,7 @@ let
   makeServers =
     servers:
     builtins.listToAttrs (
-      builtins.map (s: {
+      map (s: {
         name = s;
         value = {
           enable = true;
@@ -35,7 +35,7 @@ let
   mkPlugins =
     plugins:
     builtins.listToAttrs (
-      builtins.map (s: {
+      map (s: {
         name = s;
         value = {
           enable = true;
@@ -46,7 +46,7 @@ let
   mkLazyPlugins =
     plugins:
     builtins.listToAttrs (
-      builtins.map (s: {
+      map (s: {
         name = s.name;
         value = {
           enable = true;
@@ -172,10 +172,10 @@ in
     settings = {
       auto_create.__raw = ''
         function()
-                  local cmd = "git rev-parse --is-inside-work-tree"
-                  return vim.fn.system(cmd) == "true\n"
-                end'';
-      auto_restore_last_session.__raw = ''vim.loop.cwd() == vim.loop.os_homedir()'';
+          local cmd = "git rev-parse --is-inside-work-tree"
+          return vim.fn.system(cmd) == "true\n"
+        end'';
+      auto_restore_last_session.__raw = "vim.loop.cwd() == vim.loop.os_homedir()";
       lazy_support = true;
       bypass_save_filetypes = [
         "alpha"
@@ -193,8 +193,8 @@ in
       post_cwd_changed_cmds = {
         __unkeyed."1".__raw = ''
           function()
-                      require("lualine").refresh()
-                    end'';
+            require("lualine").refresh()
+          end'';
       };
     };
   };
@@ -217,7 +217,6 @@ in
   // (mkLazyPlugins [
     # Default start with LSP
     { name = "colorizer"; }
-    { name = "treesitter"; }
     # { name = "dap-virtual-text"; }
   ])
   // {
@@ -349,6 +348,29 @@ in
           rust = cfg;
           c = cfg;
           cpp = cfg;
+        };
+      };
+    treesitter =
+      let
+        treesitter-nu-grammar = pkgs.tree-sitter.buildGrammar {
+          language = "nu";
+          version = "0.0.0+rev=4c14962";
+          src = pkgs.fetchFromGitHub {
+            owner = "nushell";
+            repo = "tree-sitter-nu";
+            rev = "4c149627cc592560f77ead1c384e27ec85926407";
+            hash = "sha256-h02kb3VxSK/fxQENtj2yaRmAQ5I8rt5s5R8VrWOQWeo=";
+          };
+          meta.homepage = "https://github.com/nushell/tree-sitter-nu";
+        };
+      in
+      {
+        enable = true;
+        grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars ++ [ treesitter-nu-grammar ];
+        languageRegister.nu = "nu";
+        lazyLoad = {
+          enable = true;
+          settings.event = "LspAttach";
         };
       };
 
