@@ -4,6 +4,11 @@
     useDHCP = lib.mkForce false;
     networkmanager = {
       enable = true;
+      dns = "none";
+      insertNameservers = [
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
       unmanaged = [
         "lo"
         "docker0"

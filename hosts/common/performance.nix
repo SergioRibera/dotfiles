@@ -31,5 +31,12 @@
     "vm.swappiness" = 100;
     # ZRAM is in memory, no need to readahead
     "vm.page-cluster" = 0;
+    # Network
+    "net.ipv4.tcp_mtu_probing" = 1;
+    "net.ipv4.tcp_fastopen" = 3; # fast recurrent connections
+    "net.ipv4.tcp_fin_timeout" = 10;
+    "net.core.default_qdisc" = "cake";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+    "net.ipv4.tcp_slow_start_after_idle" = 0;
   };
 }

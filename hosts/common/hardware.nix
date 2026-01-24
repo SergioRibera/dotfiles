@@ -5,7 +5,10 @@
   ...
 }:
 {
-  boot.kernelModules = [ "v4l2loopback" ];
+  boot.kernelModules = [
+    "v4l2loopback"
+    "tcp_bbr"
+  ];
   boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
   hardware = {
     graphics = lib.mkIf config.gui.enable {
