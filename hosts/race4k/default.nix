@@ -68,7 +68,7 @@
   environment = {
     systemPackages = [ pkgs.libva-utils ];
     variables = {
-      NVD_BACKEND = "direct";
+      # NVD_BACKEND = "direct";
       LIBVA_DRIVER_NAME = "nvidia";
     };
   };
@@ -77,6 +77,7 @@
     kernelParams = [
       "rcutree.gp_init_delay=1"
       "mt7925e.disable_aspm=1"
+      "nvidia_drm.fbdev=1"
     ];
   };
   hardware = {
@@ -88,7 +89,7 @@
         enable = true;
         finegrained = false;
       };
-      forceFullCompositionPipeline = true;
+      forceFullCompositionPipeline = false;
       open = false;
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
         version = "575.64.05";
