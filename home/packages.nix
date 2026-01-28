@@ -52,7 +52,6 @@ with pkgs;
       onlyoffice-desktopeditors
 
       # Utils
-      scrcpy
       xdg-utils
       wev
     ]
@@ -85,6 +84,7 @@ with pkgs;
       quickemu
     ]
     ++ lib.optionals (pkgs.stdenv.buildPlatform.isLinux && config.gui.enable) [
+      scrcpy
       distrobox
 
       # Wayland
@@ -96,6 +96,7 @@ with pkgs;
       pwvucontrol
       anydesk
       simplemoji
+      gnome-disk-utility
 
       nautilus
 
