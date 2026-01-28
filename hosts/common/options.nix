@@ -306,7 +306,7 @@ in
               }:
               {
                 name = "ssh-${name}";
-                value = ''ssh -i ${path} $"root@(open ${secrets.hosts.path} | lines | get ${builtins.toString idx})"'';
+                value = ''ssh -i ${path} $"root@(open ${secrets.hosts.path} | lines | get ${toString idx})"'';
               }
             ) ssh-base
           );
