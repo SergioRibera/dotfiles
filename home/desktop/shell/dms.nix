@@ -18,7 +18,7 @@ in
   };
 
   home-manager.users.${user.username} = lib.mkIf (user.enableHM) (
-    { ... }:
+    { config, lib, ... }:
     {
       imports = [
         inputs.dms.homeModules.dank-material-shell
@@ -26,6 +26,11 @@ in
       ++ lib.optionals niriEnabled [
         inputs.dms.homeModules.niri
       ];
+
+      home.activation.copyDmsSettings = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        $DRY_RUN_CMD mkdir -p ${config.home.homeDirectory}/.config/DankMaterialShell
+        $DRY_RUN_CMD cp -f ${./settings.json} ${config.home.homeDirectory}/.config/DankMaterialShell/settings.json
+      '';
 
       programs.dank-material-shell = {
         enable = gui.enable;
@@ -38,10 +43,6 @@ in
 
         niri.includes.enable = false;
 
-        settings = {
-          theme = "dark";
-          dynamicTheming = true;
-        };
         plugins = {
           DockerManager = {
             src = pkgs.fetchFromGitHub {
