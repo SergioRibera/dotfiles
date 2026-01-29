@@ -28,8 +28,14 @@ in
       ];
 
       home.activation.copyDmsSettings = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        $DRY_RUN_CMD mkdir -p ${config.home.homeDirectory}/.config/DankMaterialShell
-        $DRY_RUN_CMD cp -f ${./settings.json} ${config.home.homeDirectory}/.config/DankMaterialShell/settings.json
+        SOURCE=${./settings.json}
+        TARGET_FOLDER=${config.home.homeDirectory}/.config/DankMaterialShell
+        TARGET=$TARGET_FOLDER/settings.json
+
+        $DRY_RUN_CMD mkdir -p $TARGET_FOLDER
+        if [ ! -f "$TARGET" ] || ! cmp -s "$SOURCE" "$TARGET"; then
+          $DRY_RUN_CMD cp -f "$SOURCE" "$TARGET"
+        fi
       '';
 
       programs.dank-material-shell = {
