@@ -27,7 +27,7 @@ in
         inputs.dms.homeModules.niri
       ];
 
-      home.activation.copyDmsSettings = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      home.activation.copyDmsSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         SOURCE=${./settings.json}
         TARGET_FOLDER=${config.home.homeDirectory}/.config/DankMaterialShell
         TARGET=$TARGET_FOLDER/settings.json
