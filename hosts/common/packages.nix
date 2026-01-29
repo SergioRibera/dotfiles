@@ -30,7 +30,6 @@
       # Utils
       gitui
       fastfetch
-      kdePackages.ksshaskpass
     ]
     ++ pkgs.lib.optionals (config.nvim.complete) [
       wrkflw

@@ -33,9 +33,6 @@ in
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     EDITOR = "neovide --fork";
-    SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-    SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-    SSH_ASKPASS_REQUIRE = "prefer";
   };
 
   nixpkgs.config.allowUnfree = true;

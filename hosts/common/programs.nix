@@ -32,8 +32,6 @@ in
       loadInNixShell = true;
     };
     ssh = {
-      enableAskPassword = true;
-      askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
       extraConfig = ''
         AddKeysToAgent yes
         Host github.com
