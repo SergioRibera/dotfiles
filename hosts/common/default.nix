@@ -18,6 +18,7 @@ in
     ./performance.nix
     ./packages.nix
     ./programs.nix
+    ./security.nix
     ./services.nix
   ];
 

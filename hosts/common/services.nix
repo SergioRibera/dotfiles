@@ -12,8 +12,6 @@ with pkgs.stdenv.buildPlatform;
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  security.polkit.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
   environment.systemPackages = with pkgs; [ catppuccin-sddm ];
 
   systemd.network.wait-online.enable = !config.gui.enable;

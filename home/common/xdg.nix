@@ -23,7 +23,6 @@ in
     };
   };
 
-  security.rtkit.enable = pkgs.stdenv.buildPlatform.isLinux && gui.enable;
   xdg = lib.mkIf (pkgs.stdenv.buildPlatform.isLinux && gui.enable) {
     mime.enable = true;
     portal = {
