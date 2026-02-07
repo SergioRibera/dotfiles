@@ -5,6 +5,7 @@
   ...
 }:
 {
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [
     "v4l2loopback"
     "tcp_bbr"
