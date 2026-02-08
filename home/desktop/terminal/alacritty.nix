@@ -1,13 +1,9 @@
-{ config, mkTheme, ... }:
-let
-  theme = mkTheme config.gui.theme.colors;
-in
+{ config, ... }:
 {
   home-manager.users.${config.user.username}.programs.alacritty = {
     enable = (config.gui.enable && config.terminal.name == "alacritty");
     settings = {
       font.size = 12;
-      colors = theme.alacritty;
       window = {
         dynamic_padding = true;
         padding = {
@@ -25,6 +21,7 @@ in
           blinking = "On";
         };
       };
+      general.import = [ "dank-theme.toml" ];
     };
   };
 }
