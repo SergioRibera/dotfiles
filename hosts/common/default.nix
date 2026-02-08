@@ -26,7 +26,7 @@ in
     NH_FLAKE = "/etc/nixos";
     EDITOR = "nvim";
     EDITOR_READONLY = "nvim -R";
-    SUDO_PROMPT = "  Password for %u: ";
+    # SUDO_PROMPT = "  ";
   }
   // lib.optionalAttrs (config.gui.enable) {
     NIXOS_OZONE_WL = "1";
@@ -35,7 +35,7 @@ in
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     EDITOR = "neovide --fork";
-    SUDO_PROMPT = " \033[5m\033[0m Password for %u: ";
+    # SUDO_PROMPT = " \033[5m \033[0mPassword for %u: ";
   };
 
   nixpkgs.config.allowUnfree = true;
