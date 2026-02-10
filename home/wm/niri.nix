@@ -213,6 +213,13 @@ in
                 "Mod+P" = dms-ipc "powermenu" null;
                 "Mod+V" = dms-ipc "clipboard" null;
                 "Mod+N" = dms-ipc "notepad" null;
+                "Mod+Shift+C".action.spawn = [
+                  "dms"
+                  "color"
+                  "pick"
+                  "-a"
+                  "--rgb"
+                ];
                 "Mod+C".action.spawn = [
                   "dms"
                   "color"
