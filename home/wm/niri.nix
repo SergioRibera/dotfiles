@@ -42,7 +42,26 @@ in
       programs.niri = {
         enable = gui.enable && (builtins.elem "niri" wm.actives);
         # package = inputs.niri.packages.${pkgs.system}.niri-stable;
-        package = inputs.niri-pkg.packages.${pkgs.system}.default;
+        package = inputs.niri-pkg.packages.${pkgs.system}.default.overrideAttrs (prev: {
+          doCheck = false;
+        });
+        config = lib.mkForce (
+          with inputs.niri.lib.kdl;
+          let
+            settingsNix = import "${inputs.niri}/settings.nix" {
+              inherit (inputs.niri.lib) kdl;
+              inherit lib;
+              inputs = inputs.niri.inputs;
+              docs = inputs.niri.lib.internal.docs-markdown;
+              binds = _: [];
+              settings = null;
+            };
+            extraNodes = [
+              (node "include" [ "extra.kdl" { optional = true; } ] [])
+            ];
+          in
+            serialize.nodes (settingsNix.render config.programs.niri.settings ++ extraNodes)
+        );
         settings =
           with config.lib.niri.actions;
           with inputs.niri.lib.kdl;
