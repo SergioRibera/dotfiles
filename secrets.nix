@@ -11,6 +11,8 @@ let
 in
 {
   "secrets/github.age".publicKeys = systems ++ users;
+  "secrets/git_sign.age".publicKeys = systems ++ users;
+  "secrets/git_sign_pub.age".publicKeys = systems ++ users;
   "secrets/rustlanges.age".publicKeys = systems ++ users;
   "secrets/hosts.age".publicKeys = systems ++ users;
   "secrets/cftun01.age".publicKeys = systems ++ users;

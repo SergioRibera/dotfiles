@@ -12,6 +12,8 @@ in
 {
   age.secrets =
     (makeSecret "github")
+    // (makeSecret "git_sign")
+    // (makeSecret "git_sign_pub")
     // (makeSecret "cftun01")
     // (makeSecret "rustlanges")
     // (makeSecret "hosts");

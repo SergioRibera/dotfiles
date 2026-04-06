@@ -1,12 +1,16 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
-  inherit (config) user;
+  inherit (config) user age;
+  inherit (age) secrets;
   inherit (config.git) name email;
 in
 {
   home-manager.users.${user.username} = lib.mkIf user.enableHM (
-    { ... }:
+    { lib, ... }:
     {
+      home.activation.addSshKey = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        ${pkgs.openssh}/bin/ssh-add ${secrets.git_sign.path} || true
+      '';
       programs = {
         delta = {
           enable = true;
@@ -36,6 +40,7 @@ in
           settings = {
             user = {
               inherit name email;
+              signingkey = secrets.git_sign_pub.path;
             };
             alias = {
               s = "status";
@@ -46,6 +51,7 @@ in
             gpg.format = "ssh";
             init.defaultBranch = "main";
             credential.helper = "store";
+            commit.gpgsign = true;
             push = {
               autoSetupRemote = true;
               default = "current";
