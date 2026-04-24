@@ -130,8 +130,18 @@ in
         };
         gtk = mkOption {
           type = types.str;
-          default = "Adwaita-Dark";
+          default = "adw-gtk3";
           description = "GTK theme name";
+        };
+        gtk-theme-env = mkOption {
+          type = types.str;
+          default = "adw-gtk3";
+          description = "GTK theme name";
+        };
+        gtk-pkg = mkOption {
+          type = types.package;
+          default = pkgs.adw-gtk3;
+          description = "GTK theme package";
         };
         colors = mkOption {
           type = types.attrs;

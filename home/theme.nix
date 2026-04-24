@@ -12,17 +12,37 @@ let
   darkTheme = {
     gtk-application-prefer-dark-theme = 1;
   };
+  extraCss = v: ''
+@import url("file://${user.homepath}/.config/gtk-${v}.0/dank-colors.css");
+
+window {
+    background-color: alpha(@window_bg_color, 0.7);
+}
+window.nautilus-window .sidebar-pane {
+    background-color: transparent;
+}
+window.nautilus-window .content-pane {
+    background-color: @view_bg_color;
+}
+  '';
+  gtkThemeConfig = v: {
+    extraConfig = lib.mkIf (gui.theme.dark) darkTheme;
+    extraCss = extraCss v;
+  };
 in
 {
   home-manager.users = lib.mkIf user.enableHM {
     "${username}" =
       { lib, pkgs, ... }:
       {
-
         gtk = lib.mkIf (isLinux && gui.enable) {
           enable = true;
-          gtk3.extraConfig = lib.mkIf (gui.theme.dark) darkTheme;
-          gtk4.extraConfig = lib.mkIf (gui.theme.dark) darkTheme;
+          theme = {
+            name = gui.theme.gtk;
+            package = gui.theme.gtk-pkg;
+          };
+          gtk3 = gtkThemeConfig "3";
+          gtk4 = gtkThemeConfig "4";
           iconTheme = {
             name = "Tela";
             package = pkgs.tela-icon-theme;
@@ -44,5 +64,5 @@ in
         };
       };
   };
-  environment.sessionVariables.GTK_THEME = lib.optionalString (isLinux && gui.enable) "Adwaita:dark";
+  environment.sessionVariables.GTK_THEME = lib.optionalString (isLinux && gui.enable) gui.theme.gtk-theme-env;
 }
