@@ -30,6 +30,10 @@ with pkgs.stdenv.buildPlatform;
     avahi = {
       enable = true;
       nssmdns4 = true;
+      publish = {
+        enable = true;
+        addresses = true;
+      };
     };
     udisks2.enable = true;
     upower = {
@@ -69,7 +73,7 @@ with pkgs.stdenv.buildPlatform;
     displayManager = {
       gdm.enable = config.gui.enable;
       sessionPackages =
-        builtins.map (o: pkgs."${o}") (
+        map (o: pkgs."${o}") (
           builtins.filter (o: builtins.hasAttr o pkgs && o != "jay") config.wm.actives
         )
         ++ (lib.optionals (isWmEnable "mango") [ config.programs.mango.package ]);
