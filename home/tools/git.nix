@@ -5,12 +5,44 @@ let
   inherit (config.git) name email;
 in
 {
-  home-manager.users.${user.username} = lib.mkIf user.enableHM (
-    { lib, ... }:
-    {
-      home.activation.addSshKey = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        ${pkgs.openssh}/bin/ssh-add ${secrets.git_sign.path} || true
+  systemd.user.services.ssh-add-git-sign = {
+    enable = true;
+    description = "Add git signing SSH key to agent";
+    after = [ "default.target" ];
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "ssh-add-git-sign" ''
+        if [ "$USER" != "${user.username}" ]; then
+          exit 0
+        fi
+        NUON_FILE="/tmp/ssh-agent-$USER.nuon"
+
+        if [ -f "$NUON_FILE" ]; then
+          SSH_AUTH_SOCK=$(grep -oP 'SSH_AUTH_SOCK:\s*"\K[^"]+' "$NUON_FILE")
+          SSH_AGENT_PID=$(grep -oP 'SSH_AGENT_PID:\s*"\K[^"]+' "$NUON_FILE")
+          if ! kill -0 "$SSH_AGENT_PID" 2>/dev/null; then
+            rm "$NUON_FILE"
+          else
+            export SSH_AUTH_SOCK SSH_AGENT_PID
+          fi
+        fi
+
+        if [ ! -f "$NUON_FILE" ]; then
+          eval $(${pkgs.openssh}/bin/ssh-agent -s)
+          printf '{ SSH_AUTH_SOCK: "%s", SSH_AGENT_PID: "%s" }\n' \
+            "$SSH_AUTH_SOCK" "$SSH_AGENT_PID" > "$NUON_FILE"
+        fi
+
+        exec ${pkgs.openssh}/bin/ssh-add ${secrets.git_sign.path}
       '';
+      RemainAfterExit = true;
+    };
+  };
+
+  home-manager.users.${user.username} = lib.mkIf user.enableHM (
+    { ... }:
+    {
       programs = {
         delta = {
           enable = true;
