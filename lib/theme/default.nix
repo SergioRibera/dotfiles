@@ -25,7 +25,7 @@ let
     });
 in
 {
-  adwaitaGtk = replace ./adwaitaGtk.css;
+  gtk = builtins.readFile ./gtk.css;
   discord = replace ./discord.css;
   tmTheme = replace ./tmTheme.xml;
   helix = (import ./helix.nix colors);

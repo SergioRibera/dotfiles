@@ -1,0 +1,81 @@
+/* Global focus */
+window,
+.background,
+/* Gnome Tweaks */
+.tweak-titlebar-left,
+/* Ghostty */
+window.ssd.window .top-bar {
+    background-color: alpha(@window_bg_color, 0.8);
+}
+
+/* Global backdrop */
+window:backdrop,
+.background:backdrop,
+/* Gnome Tweaks */
+.tweak-titlebar-left:backdrop,
+/* Ghostty */
+window.ssd.window .top-bar:backdrop {
+    background-color: alpha(@window_bg_color, 0.65);
+}
+
+/* Sidebars */
+.sidebar-pane, .sidebar-pane:backdrop,
+.sidebar, .sidebar:backdrop,
+.navigation-sidebar, .navigation-sidebar:backdrop,
+overlay-split-view > .sidebar-pane,
+overlay-split-view > .sidebar-pane:backdrop,
+/* EWW bar */
+window.background.vertical_bar,
+/* Overview genérico */
+widget.background.overview,
+/* Nautilus File Chooser */
+#NautilusFileChooser overlay-split-view.view,
+/* Builder */
+.org-gnome-Builder.workspace paneldockchild.start,
+/* Geary */
+.geary-main-layout > leaflet > leaflet > box:first-child,
+.geary-main-layout > leaflet > leaflet > box:first-child > headerbar,
+/* Speedtest */
+.horizontal > gauge.dl.horizontal > overlay > .background,
+.horizontal > gauge.up.horizontal > overlay > .background,
+/* Rhythmbox */
+window box toolbar,
+window box:nth-child(2) paned:nth-child(3) box:first-child paned grid .sidebar-toolbar,
+window box:nth-child(2) paned:nth-child(3) box:first-child paned grid .sidebar-toolbar button,
+/* Disks */
+window > deck > box > leaflet > box:nth-child(1) > scrolledwindow treeview.view,
+window > deck > box > leaflet > box:nth-child(1) > headerbar.titlebar.windowhandle,
+/* Blackbox */
+#blackbox-main-window,
+/* Ghostty */
+window.ssd.window,
+window.ssd.window .top-bar windowhandle,
+/* GNOME Text Editor */
+window > dialog-host > widget > widget > multi-layout-view > fullscreenbox > toolbarview > revealer,
+window > dialog-host > widget > widget > multi-layout-view > fullscreenbox > toolbarview > overlay-split-view widget.content-pane,
+window > dialog-host > widget > widget > multi-layout-view > fullscreenbox > toolbarview > overlay-split-view textview.editor.view > border,
+window > dialog-host > widget > widget > multi-layout-view > fullscreenbox > toolbarview > overlay-split-view textview.editor.view > border > gutter {
+    background-color: transparent;
+}
+
+/* Global */
+.content-pane,
+/* Builder */
+.org-gnome-Builder paneldockchild.center,
+/* Gnome Tweaks */
+window > leaflet > box:last-child > scrolledwindow > viewport.frame,
+/* Rhythmbox */
+window box:nth-child(2) paned:nth-child(3) paned:nth-child(3) box:nth-child(2),
+/* Disks */
+window > deck > box > leaflet > box:nth-child(3) > stack > statuspage > scrolledwindow > viewport.frame,
+window > deck > box > leaflet > box:nth-child(3) > stack > scrolledwindow > viewport.frame {
+    background-color: @window_bg_color;
+}
+
+/* Border and shadow */
+window > deck > box > leaflet > box:nth-child(1) > headerbar.titlebar.windowhandle,
+window.ssd.window .top-bar,
+window > dialog-host > widget > widget > multi-layout-view > fullscreenbox > toolbarview > revealer {
+    border-bottom: none;
+    box-shadow: none;
+}

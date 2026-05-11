@@ -12,18 +12,10 @@ let
   darkTheme = {
     gtk-application-prefer-dark-theme = 1;
   };
+  gtkExtraFile = ../lib/theme/gtk.css;
   extraCss = v: ''
 @import url("file://${user.homepath}/.config/gtk-${v}.0/dank-colors.css");
-
-window {
-    background-color: alpha(@window_bg_color, 0.7);
-}
-window.nautilus-window .sidebar-pane {
-    background-color: transparent;
-}
-window.nautilus-window .content-pane {
-    background-color: @view_bg_color;
-}
+@import url("file://${gtkExtraFile}");
   '';
   gtkThemeConfig = v: {
     extraConfig = lib.mkIf (gui.theme.dark) darkTheme;
