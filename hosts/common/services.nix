@@ -50,6 +50,7 @@ with pkgs.stdenv.buildPlatform;
     gnome.gnome-keyring.enable = (isLinux && config.gui.enable);
     dbus = {
       enable = true;
+      implementation = "dbus";
       packages = [ pkgs.gcr ];
     };
 

@@ -81,7 +81,7 @@
     ];
   };
   hardware = {
-    nvidia-container-toolkit.enable = true;
+    nvidia-container-toolkit.enable = false;
     nvidia = {
       modesetting.enable = true;
       nvidiaPersistenced = false;
