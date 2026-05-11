@@ -201,7 +201,7 @@
     # wlrs-pkg.url = "git+file:///home/s4rch/Contributions/wlrs";
     # niri-pkg.url = "git+file:///home/s4rch/Public/contributions/niri";
     niri-pkg = {
-      url = "github:SergioRibera/niri/cursor-magnify";
+      url = "github:SergioRibera/niri/own-niri-features";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };

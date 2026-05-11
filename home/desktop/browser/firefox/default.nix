@@ -10,6 +10,7 @@ in
     };
     programs.firefox = {
       enable = (gui.enable && user.enableHM && user.browser == "firefox");
+      configPath = ".mozilla/firefox";
       package = pkgs.firefox-devedition.overrideAttrs (prev: {
         pipewireSupport = true;
         desktopItem = pkgs.makeDesktopItem rec {

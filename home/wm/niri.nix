@@ -77,12 +77,6 @@ in
                 "dms"
                 "run"
               ])
-              (makeCommandArgs [
-                "${pkgs.wl-clipboard-rs}/bin/wl-paste"
-                "--watch"
-                "${pkgs.cliphist}/bin/cliphist"
-                "store"
-              ])
               (makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
               (makeCommandArgs [
                 "dbus-update-activation-environment"
@@ -115,7 +109,7 @@ in
               };
             };
             outputs = builtins.listToAttrs (
-              builtins.map (o: {
+              map (o: {
                 name = o.name;
                 value = {
                   scale = o.scale;
@@ -297,7 +291,7 @@ in
                 map (
                   x:
                   let
-                    xStr = builtins.toString x;
+                    xStr = toString x;
                   in
                   {
                     "Mod+${xStr}".action.focus-workspace = x;
