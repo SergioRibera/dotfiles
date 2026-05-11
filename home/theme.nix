@@ -20,6 +20,10 @@ let
   gtkThemeConfig = v: {
     extraConfig = lib.mkIf (gui.theme.dark) darkTheme;
     extraCss = extraCss v;
+    theme = {
+      name = gui.theme.gtk;
+      package = gui.theme.gtk-pkg;
+    };
   };
 in
 {
@@ -29,10 +33,6 @@ in
       {
         gtk = lib.mkIf (isLinux && gui.enable) {
           enable = true;
-          theme = {
-            name = gui.theme.gtk;
-            package = gui.theme.gtk-pkg;
-          };
           gtk3 = gtkThemeConfig "3";
           gtk4 = gtkThemeConfig "4";
           iconTheme = {

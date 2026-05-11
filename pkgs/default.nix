@@ -16,4 +16,9 @@ final: prev: {
   simplemoji = prev.callPackage ./simplemoji { };
 
   firefoxAddons = prev.callPackage ./firefox-addons { };
+
+  # Real overlay
+  openldap = prev.openldap.overrideAttrs (old: {
+    doCheck = !prev.stdenv.hostPlatform.isi686;
+  });
 }

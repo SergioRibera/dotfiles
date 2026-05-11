@@ -38,7 +38,7 @@ in
             advanced-scene-switcher
             obs-backgroundremoval
             obs-advanced-masks
-            distroav
+            # distroav
           ];
         };
       };

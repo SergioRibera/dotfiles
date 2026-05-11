@@ -240,7 +240,7 @@ in
       };
       osVersion = mkOption {
         type = types.str;
-        default = "24.11";
+        default = "26.05";
       };
       username = mkOption {
         type = types.str;

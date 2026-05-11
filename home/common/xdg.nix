@@ -17,6 +17,7 @@ in
       desktop = null;
       publicShare = null;
       createDirectories = true;
+      setSessionVariables = true;
     };
     configFile."dorion/config.json" = lib.mkIf (gui.enable) {
       source = ../desktop/dorion.json;

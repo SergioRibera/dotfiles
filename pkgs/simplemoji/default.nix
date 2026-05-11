@@ -16,10 +16,14 @@
   removeReferencesTo,
   cctools,
   fontconfig,
-  xorg,
   stdenv,
   libglvnd,
+  libx11,
   libxcb,
+  libxcursor,
+  libxext,
+  libxrandr,
+  libxi,
   libxkbcommon,
   enableWayland ? stdenv.hostPlatform.isLinux,
   versionCheckHook,
@@ -81,7 +85,7 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } (finalAttrs: {
   buildInputs = [
     libxcb
     fontconfig
-    xorg.libX11
+    libx11
     rustPlatform.bindgenHook
   ];
 
@@ -91,10 +95,10 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } (finalAttrs: {
         [
           libglvnd
           libxkbcommon
-          xorg.libXcursor
-          xorg.libXext
-          xorg.libXrandr
-          xorg.libXi
+          libxcursor
+          libxext
+          libxrandr
+          libxi
         ]
         ++ lib.optionals enableWayland [ wayland ]
       );
