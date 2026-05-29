@@ -32,6 +32,7 @@
       fastfetch
     ]
     ++ pkgs.lib.optionals (config.nvim.complete) [
+      claude-code
       wrkflw
       dive
       wormhole-rs

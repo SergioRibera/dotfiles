@@ -303,8 +303,9 @@ in
               idx = 0;
             }
             {
-              name = "mc";
+              name = "v";
               idx = 1;
+              path = secrets.github.path;
             }
           ];
           ssh-aliases = builtins.listToAttrs (
