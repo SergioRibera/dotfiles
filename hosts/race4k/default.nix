@@ -63,10 +63,17 @@
 
   # Ethernet
   boot.extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
-  boot.blacklistedKernelModules = [ "r8169" ];
+  boot.blacklistedKernelModules = [
+    "r8169"
+    "amdgpu"
+    "radeon"
+  ];
 
   environment = {
-    systemPackages = [ pkgs.libva-utils ];
+    systemPackages = with pkgs; [
+      libva-utils
+      vulkan-tools
+    ];
     variables = {
       # NVD_BACKEND = "direct";
       LIBVA_DRIVER_NAME = "nvidia";
@@ -77,7 +84,9 @@
     kernelParams = [
       "rcutree.gp_init_delay=1"
       "mt7925e.disable_aspm=1"
+      "nvidia_drm.modeset=1"
       "nvidia_drm.fbdev=1"
+      "module_blacklist=amdgpu,radeon"
     ];
   };
   hardware = {
@@ -90,16 +99,26 @@
         finegrained = false;
       };
       forceFullCompositionPipeline = false;
-      open = false;
-      # package = config.boot.kernelPackages.nvidiaPackages.stable;
-      # package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-      #   version = "575.64.05";
-      #   sha256_64bit = "sha256-hfK1D5EiYcGRegss9+H5dDr/0Aj9wPIJ9NVWP3dNUC0=";
-      #   sha256_aarch64 = "sha256-fYji1Y2vJc5t6dkqbh4AC/fuAswiIvlj2cXX4NmBunw=";
-      #   openSha256 = pkgs.lib.fakeSha256;
-      #   settingsSha256 = "sha256-o2zUnYFUQjHOcCrB0w/4L6xI1hVUXLAWgG2Y26BowBE=";
-      #   persistencedSha256 = "sha256-2g5z7Pu8u2EiAh5givP5Q1Y4zk4Cbb06W37rf768NFU=";
-      # };
+      # Open kernel modules. RTX 3060 = Ampere (GA106), fully
+      # supported by `nvidia-open` since 555.x. The open path has the
+      # saner DRM/KMS implementation and is what NVIDIA is going to
+      # maintain going forward — no reason to stay on the closed
+      # `nvidia.ko` for a consumer Ampere card.
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+    };
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        nvidia-vaapi-driver
+        libva
+        vulkan-loader
+        vulkan-validation-layers
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        libva
+      ];
     };
   };
 
@@ -112,22 +131,22 @@
     in
     [
       {
-        name = "DP-4";
+        name = "DP-2";
         rotation = "left";
       }
       {
-        name = "DP-3";
+        name = "DP-1";
         position.x = height;
       }
       {
-        name = "DP-5";
+        name = "DP-3";
         position = {
           x = height;
           y = height;
         };
       }
       {
-        name = "HDMI-A-2";
+        name = "HDMI-A-1";
         position.x = 3000;
         rotation = "right";
       }

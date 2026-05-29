@@ -482,13 +482,17 @@
           "name": "HDMI-A-2"
         },
         {
+          "name": "DP-2",
           "model": "P27FBA-RAGL",
-          "modelIndex": 0,
-          "name": "DP-4"
+          "modelIndex": 0
         },
         {
-          "model": "Unknown",
-          "name": "DP-3"
+          "name": "DP-1",
+          "model": "Unknown"
+        },
+        {
+          "name": "HDMI-A-1",
+          "model": "27 Monitor"
         }
       ],
       "showOnLastDisplay": true,
