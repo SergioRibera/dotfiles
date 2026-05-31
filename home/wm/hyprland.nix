@@ -9,6 +9,7 @@ let
     user
     gui
     shell
+    terminal
     wm
     ;
   isLinux = pkgs.stdenv.buildPlatform.isLinux;
@@ -204,8 +205,8 @@ in
           #
           # Custom Exec Keybinds
           #
-          "SUPER,Return,exec,${shell.command}"
-          "SUPER_SHIFT,Return,exec,${shell.privSession}"
+          "SUPER,Return,exec,${lib.concatStringsSep " " (terminal.command ++ terminal.shell)}"
+          "SUPER_SHIFT,Return,exec,${lib.concatStringsSep " " (terminal.command ++ terminal.privShell)}"
 
           "SUPER,E,exec,nautilus"
           "SUPER,S,exec,sss --area \"$(slurp -d)\" -o raw | wl-copy"

@@ -3,5 +3,6 @@
     ./bat.nix
     ./git.nix
     ./sss.nix
+    ./zellij
   ];
 }

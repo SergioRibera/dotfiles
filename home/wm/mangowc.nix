@@ -220,8 +220,8 @@ in
           bind=SUPER,l,spawn,${dms-ipc "lock" "lock"}
 
           bind=SUPER,e,spawn,nautilus
-          bind=SUPER,Return,spawn,${join " " terminal.command} ${join " " shell.command}
-          bind=SUPER+SHIFT,Return,spawn,${join " " terminal.command} ${join " " shell.privSession}
+          bind=SUPER,Return,spawn,${join " " terminal.command} ${join " " terminal.shell}
+          bind=SUPER+SHIFT,Return,spawn,${join " " terminal.command} ${join " " terminal.privShell}
           bind=SUPER,period,spawn,simplemoji --show-recent --recent-type mixed -t medium-light -soc wl-copy
 
           bind=SUPER,w,killclient

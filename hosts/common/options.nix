@@ -275,6 +275,24 @@ in
           "-e"
         ];
       };
+      shell = mkOption {
+        type = types.listOf types.str;
+        default = config.shell.command;
+        defaultText = lib.literalExpression "config.shell.command";
+        description = ''
+          Command appended to `terminal.command` when a window manager spawns a
+          terminal. Defaults to the user's shell; the zellij module overrides
+          this so terminals open inside a multiplexer session.
+        '';
+      };
+      privShell = mkOption {
+        type = types.listOf types.str;
+        default = config.shell.privSession;
+        defaultText = lib.literalExpression "config.shell.privSession";
+        description = ''
+          Same as `terminal.shell` but for the private/ephemeral terminal bind.
+        '';
+      };
     };
     shell = {
       name = mkOption {

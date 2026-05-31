@@ -100,8 +100,8 @@ in
             # "Super_L-alt-l" = dms-ipc "lock" "lock" null;
 
             "Super_L-e" = mkCmd "nautilus";
-            "Super_L-return" = mkCmd (terminal.command ++ shell.command);
-            "Super_L-shift-return" = mkCmd (terminal.command ++ shell.privSession);
+            "Super_L-return" = mkCmd (terminal.command ++ terminal.shell);
+            "Super_L-shift-return" = mkCmd (terminal.command ++ terminal.privShell);
             "Super_L-period" = mkCmd [
               "simplemoji"
               "--show-recent"

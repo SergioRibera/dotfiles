@@ -1,4 +1,9 @@
-{ config, ... }:
+{ config, lib, ... }:
+let
+  inherit (config) terminal;
+  shellProgram = builtins.head terminal.shell;
+  shellArgs = builtins.tail terminal.shell;
+in
 {
   home-manager.users.${config.user.username}.programs.alacritty = {
     enable = (config.gui.enable && config.terminal.name == "alacritty");
@@ -20,6 +25,11 @@
           shape = "Block";
           blinking = "On";
         };
+      };
+      # Bare `alacritty` (no -e) launches the same thing the WM bind launches.
+      terminal.shell = {
+        program = shellProgram;
+        args = shellArgs;
       };
       general.import = [ "dank-theme.toml" ];
     };

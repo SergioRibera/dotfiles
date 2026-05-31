@@ -219,8 +219,8 @@ in
 
                 "Mod+Escape".action = toggle-overview;
                 "Mod+E".action.spawn = "nautilus";
-                "Mod+Return".action.spawn = terminal.command ++ shell.command;
-                "Mod+Shift+Return".action.spawn = terminal.command ++ shell.privSession;
+                "Mod+Return".action.spawn = terminal.command ++ terminal.shell;
+                "Mod+Shift+Return".action.spawn = terminal.command ++ terminal.privShell;
 
                 "Mod+Tab" = dms-ipc "spotlight" null;
                 "Mod+P" = dms-ipc "powermenu" null;

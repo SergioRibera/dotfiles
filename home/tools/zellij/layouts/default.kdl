@@ -1,0 +1,10 @@
+// Bare layout: no status-bar, no tab-bar. Tabs still work via Alt+T / Alt+1-9 /
+// Alt+Tab — they just stay invisible. Zellij stable cannot conditionally show
+// the tab-bar only when more than one tab exists, so the next-best fit for
+// the "only show when >1" intent is to hide everything until upstream lands
+// that feature.
+layout {
+    default_tab_template {
+        children
+    }
+}

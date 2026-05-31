@@ -104,9 +104,9 @@ in
           "${mod}+L" = "exec ${dms-ipc "lock" "lock"}";
 
           "${mod}+e" = "exec nautilus";
-          "${mod}+Return" = "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ shell.command));
+          "${mod}+Return" = "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ terminal.shell));
           "${mod}+Shift+Return" =
-            "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ shell.privSession));
+            "exec " + (lib.strings.concatStringsSep " " (terminal.command ++ terminal.privShell));
 
           "${mod}+w" = "kill";
           "${mod}+f" = "floating toggle";
