@@ -58,6 +58,16 @@
     ];
   };
 
+  fileSystems."/mnt/games" = {
+    device = "/dev/disk/by-uuid/972eb046-f3ed-4122-b033-7513ee85315f";
+    fsType = "xfs";
+    options = [
+      "noatime"
+      "logbsize=256k"
+      "nofail"
+    ];
+  };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
