@@ -40,7 +40,10 @@ in
             IdentityFile ~/.ssh/gitlab
       '';
     };
-    steam.enable = games;
+    steam = {
+      enable = games;
+      gamescopeSession.enable = games;
+    };
     gamemode.enable = games;
   };
 }
