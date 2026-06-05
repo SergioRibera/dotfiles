@@ -29,6 +29,9 @@ let
   privateLayout = pkgs.writeText "zellij-private.kdl" ''
     layout {
       default_tab_template {
+        pane size=1 borderless=true {
+          plugin location="zellij:tab-bar"
+        }
         children
       }
       pane {

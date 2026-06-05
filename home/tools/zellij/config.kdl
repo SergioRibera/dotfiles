@@ -75,7 +75,6 @@ keybinds clear-defaults=true {
         bind "Alt /" { SwitchToMode "Search"; }
 
         bind "Alt d" { Detach; }
-        bind "Alt q" { Quit; }
         bind "Alt g" { SwitchToMode "Locked"; }
     }
 
