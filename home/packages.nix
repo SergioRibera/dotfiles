@@ -58,6 +58,7 @@ with pkgs;
     ++ lib.optionals config.nvim.complete [
       just
       android-tools
+      mcp-nixos
 
       # Js
       pnpm
