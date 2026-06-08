@@ -374,6 +374,31 @@
         "type": "github"
       }
     },
+    "nix-bundle-app": {
+      "inputs": {
+        "flake-utils": [
+          "sss",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "sss",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779742283,
+        "narHash": "sha256-NsrQiGW3Z93LqK0o7MVblE1PNBDoqZIBsEKHapoYO2w=",
+        "owner": "SergioRibera",
+        "repo": "nix-bundle-app",
+        "rev": "3a6a2243b714fcc0ee6fe3e1abb6806609100dec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SergioRibera",
+        "repo": "nix-bundle-app",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1736643958,
@@ -594,16 +619,17 @@
         "flake-utils": [
           "fu"
         ],
+        "nix-bundle-app": "nix-bundle-app",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1755150424,
-        "narHash": "sha256-Pi1Uwi3hWgIT5+0hr2N2siavsgqdvseJ0Y7UrZOBbf8=",
+        "lastModified": 1780673038,
+        "narHash": "sha256-JG80PvgxJkWVhUWQPvKxPR259qr6jZM0ZJuQqR09+Eg=",
         "owner": "SergioRibera",
         "repo": "sss",
-        "rev": "4cd57f050a35279059a8b33849f61bda1d6887e9",
+        "rev": "bd7d1696be2dabef5e2bda9e0dfbd16ca3113f2f",
         "type": "github"
       },
       "original": {

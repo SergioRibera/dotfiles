@@ -215,7 +215,10 @@ in
 
                 "Mod+S" = dms-niri "screenshotWindow";
                 "Mod+Print" = dms-niri "screenshotWindow";
-                "Mod+Shift+S" = dms-niri "screenshot";
+                "Mod+Shift+S".action.spawn = [
+                  "${inputs.sss.packages.${pkgs.system}.default}/bin/sss"
+                  "--area"
+                ];
 
                 "Mod+Escape".action = toggle-overview;
                 "Mod+E".action.spawn = "nautilus";

@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
@@ -8,7 +9,6 @@ let
   inherit (config)
     user
     gui
-    shell
     terminal
     wm
     ;
@@ -209,8 +209,8 @@ in
           "SUPER_SHIFT,Return,exec,${lib.concatStringsSep " " (terminal.command ++ terminal.privShell)}"
 
           "SUPER,E,exec,nautilus"
-          "SUPER,S,exec,sss --area \"$(slurp -d)\" -o raw | wl-copy"
-          "SUPER_SHIFT,S,exec,sss --area \"$(slurp -d)\" -o \"$HOME/Pictures/Screenshot/$(date '+%Y-%m-%d-%H%M%S')_sss.png\""
+          "SUPER,S,exec,${inputs.sss.packages.${pkgs.system}.default}/bin/sss --area -o raw | wl-copy"
+          "SUPER_SHIFT,S,exec,${inputs.sss.packages.${pkgs.system}.default}/bin/sss --area -o \"$HOME/Pictures/Screenshot/$(date '+%Y-%m-%d-%H%M%S')_sss.png\""
           "SUPER,ALT_S,exec,hyprshot --clipboard-only -m region"
           "SUPER_SHIFT,ALT_S,exec,hyprshot -m region -o ~/Pictures/Screenshot"
 

@@ -8,7 +8,6 @@ let
   inherit (config)
     user
     terminal
-    shell
     gui
     wm
     ;
@@ -83,12 +82,12 @@ in
           # };
         };
         output = builtins.listToAttrs (
-          builtins.map (o: {
+          map (o: {
             name = o.name;
             value = {
-              scale = builtins.toString o.scale;
-              pos = "${builtins.toString o.position.x} ${builtins.toString o.position.y}";
-              resolution = "${builtins.toString o.resolution.x}x${builtins.toString o.resolution.y}@${builtins.toString o.frequency}Hz";
+              scale = toString o.scale;
+              pos = "${toString o.position.x} ${toString o.position.y}";
+              resolution = "${toString o.resolution.x}x${toString o.resolution.y}@${toString o.frequency}Hz";
               transform = mkRotation o.rotation;
             };
           }) wm.screens
@@ -127,7 +126,7 @@ in
           map (
             x:
             let
-              xs = builtins.toString x;
+              xs = toString x;
             in
             {
               "${mod}+${xs}" = "workspace number ${xs}";

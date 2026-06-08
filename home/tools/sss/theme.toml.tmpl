@@ -1,0 +1,18 @@
+# matugen template — rendered into ~/.config/sss/dms-colors.toml on every
+# theme regen. Imported by ~/.config/sss/config.toml so sss colours track
+# the active DMS scheme automatically.
+[general.colors]
+background = "{{colors.background.default.hex}}"
+author = "{{colors.on_surface.default.hex}}"
+title = "{{colors.on_primary.default.hex}}"
+window-background = "{{colors.surface_container.default.hex}}"
+shadow = "{{dank16.color0.default.hex}}"
+
+[capture-ui.chrome]
+toolbar-bg = "{{colors.surface_container.default.hex}}"
+toolbar-fg = "{{colors.on_surface.default.hex}}"
+toolbar-border = "{{colors.outline.default.hex}}"
+button-bg = "{{colors.surface_container_high.default.hex}}"
+button-active-bg = "{{colors.primary.default.hex}}"
+button-active-border = "{{colors.on_primary.default.hex}}"
+accent = "{{colors.primary.default.hex}}"
