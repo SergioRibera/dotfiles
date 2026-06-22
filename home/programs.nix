@@ -7,6 +7,7 @@
 }:
 let
   inherit (config)
+    games
     shell
     user
     gui
@@ -40,6 +41,12 @@ in
             obs-advanced-masks
             # distroav
           ];
+        };
+        lutris = {
+          enable = games;
+          defaultWinePackage = pkgs.wineWow64Packages.stagingFull;
+          winePackages = with pkgs; [ wineWow64Packages.stagingFull ];
+          runners = { };
         };
       };
     }

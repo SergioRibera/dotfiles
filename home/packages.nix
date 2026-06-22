@@ -133,7 +133,6 @@ with pkgs;
       prismlauncher # minecraft launcher
       mcpelauncher-ui-qt
       heroic
-      lutris
       gamescope
       mangohud
       inputs.hytale-launcher.packages.${pkgs.system}.hytale-launcher
