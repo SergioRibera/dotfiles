@@ -109,17 +109,17 @@
       "width": 50
     },
     {
-      "enabled": true,
-      "id": "builtin_vpn",
-      "width": 50
-    },
-    {
       "id": "nightMode",
       "enabled": true,
       "width": 50
     },
     {
       "id": "idleInhibitor",
+      "enabled": true,
+      "width": 50
+    },
+    {
+      "id": "plugin_dankFerricast",
       "enabled": true,
       "width": 50
     }
@@ -205,7 +205,13 @@
   "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
   "browserPickerViewMode": "grid",
-  "browserUsageHistory": {},
+  "browserUsageHistory": {
+    "firefox-devedition": {
+      "count": 13,
+      "lastUsed": 1782370827855,
+      "name": "Firefox Developer Edition"
+    }
+  },
   "appPickerViewMode": "grid",
   "filePickerUsageHistory": {},
   "sortAppsAlphabetically": false,
@@ -449,6 +455,10 @@
         {
           "enabled": true,
           "id": "systemTray"
+        },
+        {
+          "id": "ansync",
+          "enabled": true
         }
       ],
       "maximizeDetection": true,
@@ -460,20 +470,24 @@
       "position": 0,
       "rightWidgets": [
         {
-          "enabled": true,
-          "id": "privacyIndicator"
+          "id": "bluetoothBatteryBadges",
+          "enabled": true
         },
         {
-          "enabled": true,
-          "id": "dockerManager"
+          "id": "privacyIndicator",
+          "enabled": true
         },
         {
-          "enabled": true,
-          "id": "notificationButton"
+          "id": "dockerManager",
+          "enabled": true
         },
         {
-          "enabled": true,
-          "id": "controlCenterButton"
+          "id": "notificationButton",
+          "enabled": true
+        },
+        {
+          "id": "controlCenterButton",
+          "enabled": true
         }
       ],
       "screenPreferences": [

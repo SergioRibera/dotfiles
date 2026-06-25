@@ -8,6 +8,18 @@
 let
   inherit (config) gui user wm;
   niriEnabled = (builtins.elem "niri" wm.actives);
+
+  myPluginsSrc = pkgs.fetchFromGitHub {
+    owner = "SergioRibera";
+    repo = "my-dms-plugins";
+    rev = "0b5366244c85a1b7ca990e251c4fa86d83d1bc50";
+    sha256 = "sha256-JqAVBY+bcJcnSpwDpKjlKA/SVMh1Vw58xnbTjqpvj1E=";
+  };
+  pluginFromRepo =
+    name:
+    pkgs.runCommandLocal "dms-plugin-${name}" { } ''
+      cp -r ${myPluginsSrc}/${name} $out
+    '';
 in
 {
   systemd.user.services.niri-flake-polkit.enable = !(gui.enable && niriEnabled);
@@ -58,6 +70,9 @@ in
               sha256 = "sha256-VoJCaygWnKpv0s0pqTOmzZnPM922qPDMHk4EPcgVnaU=";
             };
           };
+          Ansync.src = pluginFromRepo "Ansync";
+          BluetoothBatteryBadges.src = pluginFromRepo "BluetoothBatteryBadges";
+          DankFerricast.src = pluginFromRepo "DankFerricast";
         };
       };
     }
