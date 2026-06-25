@@ -59,6 +59,7 @@ with pkgs;
       just
       android-tools
       mcp-nixos
+      inputs.codebase-mm-mcp.packages.${pkgs.system}.default
 
       # Js
       pnpm
