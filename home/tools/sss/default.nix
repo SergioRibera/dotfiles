@@ -23,7 +23,7 @@ in
       programs.sss = {
         enable = true;
 
-        imports = [ "~/.config/sss/dms-colors.toml" ];
+        imports = [ "${user.homepath}/.config/sss/dms-colors.toml" ];
 
         code = {
           enable = true;
