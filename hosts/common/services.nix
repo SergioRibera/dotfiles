@@ -88,5 +88,11 @@ with pkgs.stdenv.buildPlatform;
       xkb.layout = "us";
       xkb.variant = "altgr-intl";
     };
+
+    udev.extraRules = lib.mkIf config.games ''
+      SUBSYSTEM=="input", ATTRS{name}=="*Wireless Controller Touchpad*", ENV{ID_INPUT}="", ENV{ID_INPUT_TOUCHPAD}="", ENV{ID_INPUT_MOUSE}=""
+    '';
   };
+
+  hardware.steam-hardware.enable = lib.mkIf config.games true;
 }
