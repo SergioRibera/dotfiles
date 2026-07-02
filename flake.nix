@@ -104,7 +104,7 @@
             );
           }) myHosts
         ))
-        // (import ./pkgs) pkgs pkgs
+        // (pkgs.lib.filterAttrs (_: pkgs.lib.isDerivation) ((import ./pkgs) pkgs pkgs))
       );
       # packages = inputs.simplemoji.packages;
       # Contains my full system builds, including home-manager
@@ -150,7 +150,7 @@
         in
         {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [
+            buildInputs = [
               inputs.quickshell.packages."${system}".default
               # TODO: disko implementation
               # disko.packages.${system}.default
@@ -275,6 +275,8 @@
       "https://niri.cachix.org"
       "https://sss.cachix.org"
       "https://anyrun.cachix.org"
+      "https://cache.rustlang-es.org/main"
+      "https://cache.sergioribera.rs/main"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -285,6 +287,8 @@
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "sss.cachix.org-1:YI2JMG95LEu62PC7VMz75N7bypEdUz9Z/Il1hkGH4AA="
       "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+      "main:NnVmqBjdfyyL4tGgoTw17lUMDgulJ75+67pOsJupnS4="
+      "main:vFI3N1JP9edRFwBwdk9ebUKTIPWK9R1ECbkdA7Q593M="
     ];
   };
 }

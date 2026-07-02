@@ -62,6 +62,14 @@ in
         "@wheel"
       ];
       nix-path = nixPath;
+      extra-substituters = [
+        "https://cache.rustlang-es.org/main"
+        "https://cache.sergioribera.rs/main"
+      ];
+      extra-trusted-public-keys = [
+        "main:NnVmqBjdfyyL4tGgoTw17lUMDgulJ75+67pOsJupnS4="
+        "main:vFI3N1JP9edRFwBwdk9ebUKTIPWK9R1ECbkdA7Q593M="
+      ];
       # flake-registry = "/etc/nix/registry.json";
 
       # for direnv GC roots
