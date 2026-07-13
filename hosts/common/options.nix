@@ -372,7 +372,8 @@ in
             nixclear = "nix-store --gc";
             nixcleanup = "sudo nix-collect-garbage --delete-older-than 1d";
             nixlistgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
-            nixforceclean = "sudo nix-collect-garbage -d";
+            # after: sudo /run/current-system/bin/switch-to-configuration boot
+            nixcleanoldgen = "sudo nix-collect-garbage -d";
           }
           // ssh-aliases;
         };
