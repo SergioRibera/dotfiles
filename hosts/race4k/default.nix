@@ -1,8 +1,19 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   imports = [
     ./hardware-configuration.nix
   ];
+
+  services.ansync = {
+    enable = true;
+    user = config.user.username;
+    package = inputs.ansync.packages.${pkgs.system}.default;
+  };
   # Prioritize performance over efficiency
   powerManagement.cpuFreqGovernor = "performance";
 
@@ -13,10 +24,13 @@
   games = true;
   server-network = true;
   git.enable = true;
-  gui.enable = true;
   sshKeys = true;
   audio = true;
   bluetooth = true;
+  gui = {
+    enable = true;
+    touchpad = true;
+  };
 
   nvim = {
     enable = true;

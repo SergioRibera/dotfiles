@@ -58,6 +58,7 @@
             ./hosts/common
             inputs.agenix.nixosModules.default
             inputs.home-manager.nixosModules.home-manager
+            inputs.ansync.nixosModules.default
           ]
           ++ [ ./hosts/${name} ];
         };
@@ -259,6 +260,10 @@
     # Codebase MCP
     codebase-mm-mcp = {
       url = "github:DeusData/codebase-memory-mcp";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ansync = {
+      url = "github:sbbw-widgets/ansync";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
