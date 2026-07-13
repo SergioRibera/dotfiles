@@ -12,8 +12,8 @@ let
   myPluginsSrc = pkgs.fetchFromGitHub {
     owner = "SergioRibera";
     repo = "my-dms-plugins";
-    rev = "0b5366244c85a1b7ca990e251c4fa86d83d1bc50";
-    sha256 = "sha256-JqAVBY+bcJcnSpwDpKjlKA/SVMh1Vw58xnbTjqpvj1E=";
+    rev = "53be2300b2e8eba09b3800e057ce973ff0504d6d";
+    sha256 = "sha256-M+1m+5E+vsRMTFOWtJ+vNxJ4K28D/iCNYe5RSe9arQk=";
   };
   pluginFromRepo =
     name:

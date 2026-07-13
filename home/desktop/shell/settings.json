@@ -207,8 +207,8 @@
   "browserPickerViewMode": "grid",
   "browserUsageHistory": {
     "firefox-devedition": {
-      "count": 13,
-      "lastUsed": 1782370827855,
+      "count": 18,
+      "lastUsed": 1783403794565,
       "name": "Firefox Developer Edition"
     }
   },
@@ -496,17 +496,17 @@
           "name": "HDMI-A-2"
         },
         {
-          "name": "DP-2",
-          "model": "P27FBA-RAGL",
-          "modelIndex": 0
-        },
-        {
           "name": "DP-1",
           "model": "Unknown"
         },
         {
           "name": "HDMI-A-1",
           "model": "27 Monitor"
+        },
+        {
+          "name": "DP-2",
+          "model": "P27FBA-RAGL",
+          "modelIndex": 0
         }
       ],
       "showOnLastDisplay": true,
