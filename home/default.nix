@@ -71,6 +71,7 @@ in
           inherit username;
           homeDirectory = user.homepath;
           stateVersion = user.osVersion;
+          sessionPath = [ "$HOME/.cargo/bin" ];
 
           file = {
             ".local/bin/wallpaper" = lib.mkIf gui.enable {
