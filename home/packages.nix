@@ -95,6 +95,7 @@ with pkgs;
 
       # GUI
       easyeffects
+      lsp-plugins  # convolver/HRTF plugins for EasyEffects
       pwvucontrol
       anydesk
       simplemoji

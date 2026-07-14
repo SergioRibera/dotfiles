@@ -71,6 +71,35 @@ with pkgs.stdenv.buildPlatform;
       alsa.support32Bit = true;
       pulse.enable = true;
       wireplumber.enable = true;
+
+      extraConfig.pipewire."92-lowlatency" = {
+        "context.properties" = {
+          "default.clock.rate" = 48000;
+          "default.clock.quantum" = 512;
+          "default.clock.min-quantum" = 256;
+          "default.clock.max-quantum" = 2048;
+        };
+      };
+
+      wireplumber.extraConfig = {
+        "51-bluetooth" = {
+          "monitor.bluez.properties" = {
+            "bluez5.enable-sbc-xq" = true;
+            "bluez5.enable-msbc" = true;
+            # LC3 = BT LE Audio (lowest latency ~20ms), then aptX-LL, then rest
+            "bluez5.codecs" = [ "lc3" "aptx_ll" "aptx_hd" "aptx" "aac" "sbc_xq" "sbc" ];
+            # BAP roles enable BT LE Audio multi-channel (hardware permitting)
+            "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hfp_hf" "hfp_ag" ];
+          };
+        };
+        # ACP enables full profile enumeration: detects 2.0/5.1/7.1 on HDMI/USB
+        "52-alsa-acp" = {
+          "monitor.alsa.rules" = [ {
+            matches = [ { "device.name" = "~alsa_card.*"; } ];
+            actions.update-props."api.alsa.use-acp" = true;
+          } ];
+        };
+      };
     };
 
     displayManager = {
@@ -97,4 +126,12 @@ with pkgs.stdenv.buildPlatform;
   };
 
   hardware.steam-hardware.enable = lib.mkIf config.games true;
+
+  environment.etc."openal/alsoft.conf" = lib.mkIf config.audio {
+    text = ''
+      [general]
+      hrtf = true
+      default-hrtf = Default HRTF
+    '';
+  };
 }
