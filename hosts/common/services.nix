@@ -92,12 +92,22 @@ with pkgs.stdenv.buildPlatform;
             "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hfp_hf" "hfp_ag" ];
           };
         };
-        # ACP enables full profile enumeration: detects 2.0/5.1/7.1 on HDMI/USB
         "52-alsa-acp" = {
-          "monitor.alsa.rules" = [ {
-            matches = [ { "device.name" = "~alsa_card.*"; } ];
-            actions.update-props."api.alsa.use-acp" = true;
-          } ];
+          "monitor.alsa.rules" = [
+            {
+              # USB headsets: ACP on but lock to stereo — multicanal crudo rompe el audio
+              matches = [ { "device.name" = "~alsa_card.usb-*"; } ];
+              actions.update-props = {
+                "api.alsa.use-acp" = true;
+                "device.profile" = "output:stereo-fallback+input:mono-fallback";
+              };
+            }
+            {
+              # PCI (HDMI/DisplayPort): ACP full — detecta perfiles 5.1/7.1 desde EDID
+              matches = [ { "device.name" = "~alsa_card.pci-*"; } ];
+              actions.update-props."api.alsa.use-acp" = true;
+            }
+          ];
         };
       };
     };

@@ -20,6 +20,7 @@ in
     ./programs.nix
     ./security.nix
     ./services.nix
+    ./audio.nix
   ];
 
   environment.sessionVariables = {

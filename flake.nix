@@ -252,6 +252,11 @@
       url = "github:SergioRibera/wallpapers";
       flake = false;
     };
+    # HRTF impulse responses for virtual surround (5.1 → stereo headphone)
+    hrtf-files = {
+      url = "github:niccokunzmann/6channel-hrir";
+      flake = false;
+    };
     # Used to generate NixOS images for other platforms
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
