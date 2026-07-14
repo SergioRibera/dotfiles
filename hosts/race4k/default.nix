@@ -101,10 +101,11 @@
       "nvidia_drm.modeset=1"
       "nvidia_drm.fbdev=1"
       "module_blacklist=amdgpu,radeon"
+      "pcie_aspm=off"
     ];
   };
   hardware = {
-    nvidia-container-toolkit.enable = false;
+    nvidia-container-toolkit.enable = true;
     nvidia = {
       modesetting.enable = true;
       nvidiaPersistenced = false;
@@ -113,12 +114,10 @@
         finegrained = false;
       };
       forceFullCompositionPipeline = false;
-      # Open kernel modules. RTX 3060 = Ampere (GA106), fully
-      # supported by `nvidia-open` since 555.x. The open path has the
-      # saner DRM/KMS implementation and is what NVIDIA is going to
-      # maintain going forward — no reason to stay on the closed
-      # `nvidia.ko` for a consumer Ampere card.
-      open = true;
+      # Switched to closed driver: open 595.71.05 has GSP RPC failures
+      # (rpcSendMessage 0x0000000f / API_GPU_ATTACHED_SANITY_CHECK) that
+      # cascade into libnvidia-eglcore abort → compositor freeze.
+      open = false;
       package = config.boot.kernelPackages.nvidiaPackages.production;
     };
     graphics = {
