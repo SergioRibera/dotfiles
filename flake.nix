@@ -252,9 +252,9 @@
       url = "github:SergioRibera/wallpapers";
       flake = false;
     };
-    # HRTF impulse responses for virtual surround (5.1 → stereo headphone)
+    # HeSuVi HRIR collection — 14-channel WAV presets for virtual surround
     hrtf-files = {
-      url = "github:niccokunzmann/6channel-hrir";
+      url = "github:eadwu/HeSuVi-HRIRs";
       flake = false;
     };
     # Used to generate NixOS images for other platforms

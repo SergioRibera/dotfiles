@@ -320,6 +320,22 @@
         "type": "github"
       }
     },
+    "hrtf-files": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1605295470,
+        "narHash": "sha256-demn1qIoIayJF2/uQBNOIn0WBBMAKv0GW6UcQ7zAJlk=",
+        "owner": "eadwu",
+        "repo": "HeSuVi-HRIRs",
+        "rev": "1c05524866d0ca854eee7c0aafcc6850a045be33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eadwu",
+        "repo": "HeSuVi-HRIRs",
+        "type": "github"
+      }
+    },
     "hytale-launcher": {
       "inputs": {
         "nixpkgs": [
@@ -669,6 +685,7 @@
         "flake-parts": "flake-parts_2",
         "fu": "fu",
         "home-manager": "home-manager_2",
+        "hrtf-files": "hrtf-files",
         "hytale-launcher": "hytale-launcher",
         "mac-style-plymouth": "mac-style-plymouth",
         "mango": "mango",
