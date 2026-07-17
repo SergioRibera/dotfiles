@@ -32,16 +32,16 @@
 
 rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } (finalAttrs: {
   pname = "simplemoji";
-  version = "1.2.3";
+  version = "1.2.5";
 
   src = fetchFromGitHub {
     owner = "SergioRibera";
     repo = "simplemoji";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-+hiF+6A1n8r4zKBUs7T7SaYjPy7W+iUbIzUO6qIf4PI=";
+    hash = "sha256-3u2Xh6e/SJzlfrTme0TpIhJuWlEhmArXYSverJbA95A=";
   };
 
-  cargoHash = "sha256-T2RWwZGWdrC3Hlsrfujcdv8erBScn1zWCMyhkSOb2EA=";
+  cargoHash = "sha256-G5JYXmO95bQ9yEtQDRDhjnIFQTiatz6EYD5SZKXj0bk=";
 
   env = {
     SKIA_SOURCE_DIR =
@@ -50,8 +50,8 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } (finalAttrs: {
           owner = "rust-skia";
           repo = "skia";
           # see rust-skia:skia-bindings/Cargo.toml#package.metadata skia
-          tag = "m141-0.88.0";
-          hash = "sha256-CB7zRtAQ2KNak6YZB+5kAN/nkmou+mJM/pK/skN9Fqk=";
+          tag = "m150-0.98.1";
+          hash = "sha256-h/TFrGlqDur7bvIc9CBqDBwSJOQBk0N52/jwle3ay7c=";
         };
         # The externals for skia are taken from skia/DEPS
         externals = linkFarm "skia-externals" (
@@ -84,6 +84,7 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } (finalAttrs: {
 
   buildInputs = [
     libxcb
+    libxkbcommon
     fontconfig
     libx11
     rustPlatform.bindgenHook

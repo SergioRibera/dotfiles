@@ -253,8 +253,7 @@ in
                   "mixed"
                   "-t"
                   "medium-light"
-                  "-soc"
-                  "wl-copy"
+                  "-so"
                 ];
 
                 "Mod+Shift+T".action = toggle-debug-tint;
