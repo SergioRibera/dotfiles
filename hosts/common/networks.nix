@@ -24,10 +24,12 @@
       settings = {
         General.AddressRandomization = "once";
         General.AddressRandomizationRange = "full";
+        WiFiDisplayR2.WFDSubelements = "000600111c4400c8";
       };
     };
-    # mdns
-    firewall.allowedUDPPorts = [ 5353 ];
+    # mdns + miracast (rtsp signaling + wfd p2p)
+    firewall.allowedUDPPorts = [ 5353 7236 ];
+    firewall.allowedTCPPorts = [ 7236 7250 ];
   };
 
   services.cloudflared = {
