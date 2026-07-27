@@ -17,10 +17,6 @@ final: prev: {
 
   firefoxAddons = prev.callPackage ./firefox-addons { };
 
-  iwd = prev.iwd.overrideAttrs (old: {
-    configureFlags = old.configureFlags ++ [ "--enable-wfd" ];
-  });
-
   # Real overlay
   openldap = prev.openldap.overrideAttrs (old: {
     doCheck = !prev.stdenv.hostPlatform.isi686;
