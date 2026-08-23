@@ -1,33 +1,37 @@
-{ nixpkgs, ... }:
-[
-  "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-  ./boot.nix
-  {
-    # Prioritize performance over efficiency
-    powerManagement.cpuFreqGovernor = "performance";
+{ modulesPath, ... }:
+{
+  imports = [
+    "${modulesPath}/installer/sd-card/sd-image-raspberrypi.nix"
+    ./boot.nix
+  ];
 
-    nvim = {
-      neovide = false;
-      complete = false;
-    };
+  # Prioritize performance over efficiency
+  powerManagement.cpuFreqGovernor = "performance";
 
-    shell = {
-      name = "nushell";
-      command = [ "nu" ];
-      privSession = [
-        "nu"
-        "--no-history"
-      ];
-    };
+  nvim = {
+    neovide = false;
+    complete = false;
+  };
 
-    user = {
-      isNormalUser = true;
-      enableHM = true;
-      groups = [
-        "wheel"
-        "docker"
-        "networkmanager"
-      ];
-    };
-  }
-]
+  shell = {
+    name = "nushell";
+    command = [ "nu" ];
+    privSession = [
+      "nu"
+      "--no-history"
+    ];
+  };
+
+  user = {
+    isNormalUser = true;
+    enableHM = false;
+    groups = [
+      "wheel"
+      "docker"
+      "networkmanager"
+    ];
+  };
+
+  # No secrets on headless rpi build
+  age.secrets = { };
+}

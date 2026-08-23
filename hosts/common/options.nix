@@ -315,6 +315,7 @@ in
       };
       aliases =
         let
+          hasSecrets = secrets ? rustlanges && secrets ? github && secrets ? hosts;
           ssh-base = [
             {
               name = "rs";
@@ -326,7 +327,7 @@ in
               path = secrets.github.path;
             }
           ];
-          ssh-aliases = builtins.listToAttrs (
+          ssh-aliases = if hasSecrets then builtins.listToAttrs (
             map (
               {
                 name,
@@ -338,7 +339,7 @@ in
                 value = ''ssh -i ${path} $"root@(open ${secrets.hosts.path} | lines | get ${toString idx})"'';
               }
             ) ssh-base
-          );
+          ) else {};
         in
         mkOption {
           type = types.attrs;

@@ -16,15 +16,15 @@ in
     ];
 
     initrd = {
-      systemd.enable = true;
+      systemd.enable = lib.mkDefault true;
       supportedFilesystems = [ "ntfs" ];
     };
 
+    # Disable EFI bootloader — RPi uses extlinux via sd-image module
     loader = {
-      timeout = 0;
-      grub.devices = [ "nodev" ];
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = lib.mkForce false;
+      efi.canTouchEfiVariables = lib.mkForce false;
+      grub.enable = lib.mkForce false;
     };
   };
 }

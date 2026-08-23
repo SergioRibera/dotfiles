@@ -18,7 +18,19 @@ let
       format = "sd";
       system = "aarch64-linux";
       name = "rpi";
-      profile = ../profiles/desktop.nix;
+      profile = ../profiles/server.nix;
+    }
+    {
+      format = "iso";
+      system = "x86_64-linux";
+      name = "server-iso";
+      profile = ../profiles/server.nix;
+    }
+    {
+      format = "iso";
+      system = "x86_64-linux";
+      name = "live-gui";
+      profile = ../profiles/live-gui.nix;
     }
   ];
 in

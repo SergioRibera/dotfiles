@@ -15,7 +15,13 @@ let
     {
       system = "aarch64-linux";
       name = "rpi";
-      profile = ../profiles/desktop.nix;
+      profile = ../profiles/server.nix;
+    }
+    {
+      system = "x86_64-linux";
+      name = "wsl";
+      profile = ../profiles/wsl.nix;
+      extraModules = [ inputs.nixos-wsl.nixosModules.wsl ];
     }
   ];
 in
@@ -23,7 +29,10 @@ in
   flake.nixosConfigurations = builtins.listToAttrs (
     map (h: {
       name = h.name;
-      value = hostLib.mkHost { inherit (h) system name profile; };
+      value = hostLib.mkHost {
+        inherit (h) system name profile;
+        extraModules = h.extraModules or [ ];
+      };
     }) hosts
   );
 }

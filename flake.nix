@@ -17,6 +17,7 @@
         ./flake-modules/formatter.nix
         ./flake-modules/hosts.nix
         ./flake-modules/isos.nix
+        ./flake-modules/darwin.nix
       ];
     };
 
@@ -102,6 +103,14 @@
     };
     ansync = {
       url = "github:sbbw-widgets/ansync";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

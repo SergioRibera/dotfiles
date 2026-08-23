@@ -19,8 +19,8 @@ let
 in
 {
   boot = {
-    consoleLogLevel = 0;
-    tmp.cleanOnBoot = true;
+    consoleLogLevel = lib.mkDefault 0;
+    tmp.cleanOnBoot = lib.mkDefault true;
     kernelParams =
       lib.optionals gui.enable [
         "quiet"
@@ -36,14 +36,14 @@ in
       ) wm.screens);
 
     initrd = {
-      verbose = false;
-      supportedFilesystems = [ "ntfs" ];
+      verbose = lib.mkDefault false;
+      supportedFilesystems = lib.mkDefault [ "ntfs" ];
     };
 
     loader = {
       timeout = lib.mkDefault 3;
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = lib.mkDefault true;
+      systemd-boot.enable = lib.mkDefault true;
     };
 
     plymouth = lib.mkIf gui.enable {

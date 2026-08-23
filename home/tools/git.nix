@@ -5,7 +5,7 @@ let
   inherit (config.git) name email;
 in
 {
-  systemd.user.services.ssh-add-git-sign = {
+  systemd.user.services.ssh-add-git-sign = lib.mkIf (secrets ? git_sign) {
     enable = true;
     description = "Add git signing SSH key to agent";
     after = [ "default.target" ];
@@ -72,6 +72,7 @@ in
           settings = {
             user = {
               inherit name email;
+            } // lib.optionalAttrs (secrets ? git_sign_pub) {
               signingkey = secrets.git_sign_pub.path;
             };
             alias = {
@@ -83,7 +84,7 @@ in
             gpg.format = "ssh";
             init.defaultBranch = "main";
             credential.helper = "store";
-            commit.gpgsign = true;
+            commit.gpgsign = lib.mkIf (secrets ? git_sign_pub) true;
             push = {
               autoSetupRemote = true;
               default = "current";

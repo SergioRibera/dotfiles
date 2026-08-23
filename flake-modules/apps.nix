@@ -13,8 +13,17 @@
             if builtins.pathExists path then
               let
                 result = builtins.tryEval (import path { inherit inputs pkgs system; });
+                app = result.value;
               in
-              if result.success then { name = tool; value = result.value; } else null
+              if result.success then
+                {
+                  name = tool;
+                  value = {
+                    inherit (app) type program;
+                  };
+                }
+              else
+                null
             else
               null
           ) (builtins.attrNames (builtins.readDir ../tools))

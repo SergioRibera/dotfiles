@@ -31,7 +31,7 @@ in
       nix-direnv.enable = true;
       loadInNixShell = true;
     };
-    ssh = {
+    ssh = lib.mkIf (secrets ? github) {
       extraConfig = ''
         AddKeysToAgent yes
         Host github.com
