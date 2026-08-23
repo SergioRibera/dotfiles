@@ -1,7 +1,8 @@
 {
   inputs,
   pkgs,
-  complete,
+  system ? pkgs.system,
+  complete ? true,
   ...
 }:
 let

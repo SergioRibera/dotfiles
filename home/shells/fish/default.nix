@@ -1,24 +1,5 @@
 { config, ... }:
 {
-  home-manager.users."${config.user.username}".programs.fish = {
-    enable = (config.shell.name == "fish");
-    interactiveShellInit = builtins.readFile ./config.fish;
-    # shellAliases = {
-    #     neovide = "neovide --multigrid";
-    # };
-    functions = {
-      __fish_cmd_error = {
-        body = ''
-          # TODO: make more interactive
-          # crkbd_gui --no-gui -t 500ms color "00FFFF" "BFFFFF" full &>/dev/null
-        '';
-      };
-      __fish_cmd_success = {
-        body = ''
-          # TODO: make more interactive
-          # crkbd_gui --no-gui -t 500ms color "00FFFF" full &>/dev/null
-        '';
-      };
-    };
-  };
+  home-manager.users."${config.user.username}".programs.fish =
+    import ../../../tools/fish/module.nix { inherit (config) shell; };
 }
