@@ -1,127 +1,23 @@
 {
   description = "SergioRibera NixOS System Configuration";
+
   outputs =
-    { nixpkgs, nixos-generators, ... }@inputs:
-    let
-      # System types to support.
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
-        # "x86_64-darwin"
         "aarch64-linux"
-        # "aarch64-darwin"
       ];
-
-      overlays = [
-        (import ./pkgs)
-        inputs.rust-overlay.overlays.default
-        inputs.mac-style-plymouth.overlays.default
+      imports = [
+        ./flake-modules/overlays.nix
+        ./flake-modules/packages.nix
+        ./flake-modules/containers.nix
+        ./flake-modules/apps.nix
+        ./flake-modules/devshells.nix
+        ./flake-modules/formatter.nix
+        ./flake-modules/hosts.nix
+        ./flake-modules/isos.nix
       ];
-      forEachSystem = nixpkgs.lib.genAttrs systems;
-      pkgs = forEachSystem (
-        system:
-        import nixpkgs {
-          inherit system overlays;
-          config.allowUnfree = true;
-        }
-      );
-
-      hostLib = import ./lib/mk-host.nix { inherit inputs; };
-      mkNixosCfg = hostLib.mkHost;
-      baseSystem = hostLib.mkHostArgs;
-
-      myHosts = [
-        {
-          format = "iso";
-          system = "x86_64-linux";
-          name = "race4k";
-        }
-        {
-          format = "iso";
-          system = "x86_64-linux";
-          name = "laptop";
-        }
-        {
-          format = "sd";
-          system = "aarch64-linux";
-          name = "rpi";
-        }
-      ];
-    in
-    {
-      overlays.default = import ./pkgs;
-      packages = forEachSystem (
-        system:
-        let
-          sysPkgs = pkgs.${system};
-        in
-        (builtins.listToAttrs (
-          map (h: {
-            name = h.name;
-            value = nixos-generators.nixosGenerate (
-              {
-                format = h.format;
-              }
-              // (baseSystem h.system h.name)
-            );
-          }) myHosts
-        ))
-        // (sysPkgs.lib.filterAttrs (_: sysPkgs.lib.isDerivation) ((import ./pkgs) sysPkgs sysPkgs))
-        // (import ./flake-modules/containers.nix { pkgs = sysPkgs; })
-      );
-      # packages = inputs.simplemoji.packages;
-      # Contains my full system builds, including home-manager
-      # nixos-rebuild switch --flake .#laptop
-      nixosConfigurations = builtins.listToAttrs (
-        map (h: {
-          name = h.name;
-          value = mkNixosCfg h.system h.name;
-        }) myHosts
-      );
-
-      # Programs that can be run by calling this flake
-      apps = forEachSystem (
-        system:
-        (import ./apps {
-          inherit system inputs;
-          pkgs = pkgs.${system};
-        })
-      );
-
-      formatter = forEachSystem (
-        system:
-        pkgs.${system}.treefmt.withConfig {
-          runtimeInputs = [ pkgs.${system}.nixfmt-rfc-style ];
-
-          settings = {
-            # Log level for files treefmt won't format
-            on-unmatched = "info";
-
-            # Configure nixfmt for .nix files
-            formatter.nixfmt = {
-              command = "nixfmt";
-              includes = [ "*.nix" ];
-            };
-          };
-        }
-      );
-
-      devShells = forEachSystem (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
-        {
-          default = pkgs.mkShell {
-            buildInputs = [
-              inputs.quickshell.packages."${system}".default
-              # TODO: disko implementation
-              # disko.packages.${system}.default
-              # git
-              # nixos-generators
-            ];
-          };
-        }
-      );
     };
 
   inputs = {
@@ -160,36 +56,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
-    # wlrs-pkg.url = "git+file:///home/s4rch/Contributions/wlrs";
-    # niri-pkg.url = "git+file:///home/s4rch/Public/contributions/niri";
     niri-pkg = {
       url = "github:SergioRibera/niri/own-niri-features";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nixos-cosmic = {
-    #   url = "github:lilyinstarlight/nixos-cosmic";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hyprland ={
-    #   url = "github:hyprwm/Hyprland";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hyprspace = {
-    #   url = "github:KZDKM/Hyprspace";
-    #   # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
-    #   # inputs.hyprland.follows = "hyprland";
-    # };
     hytale-launcher = {
       url = "github:swagtop/hytale-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # My plymouth theme
     mac-style-plymouth = {
       url = "github:SergioRibera/s4rchiso-plymouth-theme";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "fu";
     };
-    # My tool to take screen/code screenshots
     sss = {
       url = "github:SergioRibera/sss";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -201,39 +80,22 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # oxidshell = {
-    #   url = "path:/home/s4rch/Public/rust/GamerOS/oxidshell";
-    #   inputs.nixpkgs.follows   = "nixpkgs";
-    #   inputs.rust-overlay.follows = "rust-overlay";
-    # };
-    # gamer-shell = {
-    #   url = "path:/home/s4rch/Public/rust/GamerOS/gamer-shell";
-    #   inputs.nixpkgs.follows    = "nixpkgs";
-    #   inputs.rust-overlay.follows = "rust-overlay";
-    #   inputs.oxidshell.follows  = "oxidshell";
-    # };
-    # Dev Mode
-    # nixificate my neovim configs
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Wallpapers
     wallpapers = {
       url = "github:SergioRibera/wallpapers";
       flake = false;
     };
-    # HeSuVi HRIR collection — 14-channel WAV presets for virtual surround
     hrtf-files = {
       url = "github:eadwu/HeSuVi-HRIRs";
       flake = false;
     };
-    # Used to generate NixOS images for other platforms
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Codebase MCP
     codebase-mm-mcp = {
       url = "github:DeusData/codebase-memory-mcp";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -251,8 +113,6 @@
       "https://fufexan.cachix.org"
       "https://hyprland.cachix.org"
       "https://cosmic.cachix.org/"
-      # I have problems with that
-      # "https://cache.privatevoid.net"
       "https://niri.cachix.org"
       "https://sss.cachix.org"
       "https://anyrun.cachix.org"
@@ -264,7 +124,6 @@
       "fufexan.cachix.org-1:LwCDjCJNJQf5XD2BV+yamQIMZfcKWR9ISIFy5curUsY="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-      # "cache.privatevoid.net:SErQ8bvNWANeAvtsOESUwVYr2VJynfuc9JRwlzTTkVg="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "sss.cachix.org-1:YI2JMG95LEu62PC7VMz75N7bypEdUz9Z/Il1hkGH4AA="
       "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
