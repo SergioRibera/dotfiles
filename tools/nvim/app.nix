@@ -7,7 +7,7 @@
 let
   src = (
     inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvim (
-      import ../home/editors/nvim {
+      import ./module.nix {
         inherit inputs pkgs;
         user = {
           username = "sergioribera";
@@ -21,7 +21,7 @@ let
           enable = complete;
           theme = {
             name = "gruvbox-dark";
-            colors = (import ../colorscheme/gruvbox-dark).dark;
+            colors = (import ../../colorscheme/gruvbox-dark).dark;
           };
         };
         shell = {

@@ -51,5 +51,5 @@
     enable = config.games;
     extraDaemonFlags = [ "--no-logs-no-support" ];
   };
-  networking.firewall.checkReversePath = lib.optionalString config.games "loose";
+  networking.firewall.checkReversePath = if config.games then "loose" else true;
 }

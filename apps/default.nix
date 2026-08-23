@@ -17,13 +17,13 @@ rec {
   update-pkgs = import ./update-pkgs { inherit pkgs; };
 
   # Run neovim as an app
-  nvim = import ./neovim.nix {
+  nvim = import ../tools/nvim/app.nix {
     inherit inputs pkgs;
     complete = true;
   };
 
   # Run neovim as an app
-  nvim-basic = import ./neovim.nix {
+  nvim-basic = import ../tools/nvim/app.nix {
     inherit inputs pkgs;
     complete = false;
   };

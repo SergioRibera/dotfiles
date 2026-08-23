@@ -11,7 +11,6 @@
         # "aarch64-darwin"
       ];
 
-      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       overlays = [
         (import ./pkgs)
         inputs.rust-overlay.overlays.default
@@ -25,45 +24,10 @@
           config.allowUnfree = true;
         }
       );
-      mkLib =
-        system:
-        import ./lib {
-          pkgs = pkgs.${system};
-          inherit (nixpkgs) lib;
-        };
 
-      baseSystem =
-        let
-          username = "s4rch";
-        in
-        system: name: {
-          inherit system;
-          specialArgs = {
-            inherit inputs;
-            libx = mkLib system;
-            hostName = name;
-          }
-          // (mkLib system);
-          modules = [
-            {
-              # Hardware
-              networking.hostName = name;
-              nixpkgs.overlays = overlays;
-              user.username = username;
-              boot.binfmt.emulatedSystems = pkgs.${system}.lib.optionals (system != "aarch64-linux") [
-                "aarch64-linux"
-              ];
-            }
-            ./home
-            ./hosts/common
-            inputs.agenix.nixosModules.default
-            inputs.home-manager.nixosModules.home-manager
-            inputs.ansync.nixosModules.default
-          ]
-          ++ [ ./hosts/${name} ];
-        };
-
-      mkNixosCfg = system: name: inputs.nixpkgs.lib.nixosSystem (baseSystem system name);
+      hostLib = import ./lib/mk-host.nix { inherit inputs; };
+      mkNixosCfg = hostLib.mkHost;
+      baseSystem = hostLib.mkHostArgs;
 
       myHosts = [
         {
@@ -240,6 +204,17 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # oxidshell = {
+    #   url = "path:/home/s4rch/Public/rust/GamerOS/oxidshell";
+    #   inputs.nixpkgs.follows   = "nixpkgs";
+    #   inputs.rust-overlay.follows = "rust-overlay";
+    # };
+    # gamer-shell = {
+    #   url = "path:/home/s4rch/Public/rust/GamerOS/gamer-shell";
+    #   inputs.nixpkgs.follows    = "nixpkgs";
+    #   inputs.rust-overlay.follows = "rust-overlay";
+    #   inputs.oxidshell.follows  = "oxidshell";
+    # };
     # Dev Mode
     # nixificate my neovim configs
     nixvim = {

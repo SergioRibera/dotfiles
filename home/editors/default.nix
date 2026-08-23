@@ -23,7 +23,7 @@ in
         nixvim = {
           enable = config.nvim.enable;
         }
-        // (import ./nvim {
+        // (import ../../tools/nvim/module.nix {
           cfg = config.nvim;
           inherit
             inputs
