@@ -34,11 +34,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1783390903,
-        "narHash": "sha256-r/Etw/s4on1OfIqwZ/4/6KimCvv2NGwu9JyGX+VFxJM=",
+        "lastModified": 1785817212,
+        "narHash": "sha256-L18vyaiC7N6ls7RaizpG0/TXFjwbvDPmPVGqRitAqsQ=",
         "owner": "sbbw-widgets",
         "repo": "ansync",
-        "rev": "4ccd1dbf9959c259cc2ea06138ce91fa81f82356",
+        "rev": "77119a660c8cef207da60e5df68da6920059da6a",
         "type": "github"
       },
       "original": {
@@ -797,11 +797,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782548183,
-        "narHash": "sha256-bQOu2ueo4mnbr9jA8PADgB6YVLSjzXtLfO6qEuUvg7U=",
+        "lastModified": 1785482020,
+        "narHash": "sha256-ePcavcJ8/JN0R9CW+zNRJ1xiumtPK/7o3abtFi5WrBw=",
         "owner": "SergioRibera",
         "repo": "sss",
-        "rev": "f08b68b8ab65d2f22a0eec095113ac8db069dc22",
+        "rev": "5464d361616f5acae933bc67fc2e252871765b41",
         "type": "github"
       },
       "original": {

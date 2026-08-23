@@ -204,7 +204,6 @@
     niri-pkg = {
       url = "github:SergioRibera/niri/own-niri-features";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
     };
     # nixos-cosmic = {
     #   url = "github:lilyinstarlight/nixos-cosmic";

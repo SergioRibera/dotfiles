@@ -37,7 +37,7 @@ in
         Host github.com
             IdentityFile ${secrets.github.path}
         Host gitlab.com
-            IdentityFile ~/.ssh/gitlab
+            IdentityFile ${secrets.github.path}
       '';
     };
     steam = {
