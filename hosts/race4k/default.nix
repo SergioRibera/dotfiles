@@ -67,6 +67,7 @@
       "adbusers"
       "input"
       "dialout"
+      "wpa_supplicant"
     ];
   };
 

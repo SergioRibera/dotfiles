@@ -15,18 +15,18 @@
         "virbr0"
       ];
       wifi = {
-        backend = "iwd";
+        backend = "wpa_supplicant";
         powersave = false;
       };
     };
-    wireless.iwd = {
-      enable = true;
-      settings = {
-        General.AddressRandomization = "once";
-        General.AddressRandomizationRange = "full";
-        WiFiDisplayR2.WFDSubelements = "000600111c4400c8";
-      };
-    };
+    # wireless.iwd = {
+    #   enable = true;
+    #   settings = {
+    #     General.AddressRandomization = "once";
+    #     General.AddressRandomizationRange = "full";
+    #     WiFiDisplayR2.WFDSubelements = "000600111c4400c8";
+    #   };
+    # };
     # mdns + miracast (rtsp signaling + wfd p2p)
     firewall.allowedUDPPorts = [ 5353 7236 ];
     firewall.allowedTCPPorts = [ 7236 7250 ];
