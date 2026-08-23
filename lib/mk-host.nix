@@ -15,7 +15,12 @@ let
     };
 
   mkHostArgs =
-    system: name:
+    {
+      system,
+      name,
+      profile ? ../profiles/desktop.nix,
+      extraModules ? [ ],
+    }:
     {
       inherit system;
       specialArgs = {
@@ -34,16 +39,16 @@ let
               "aarch64-linux"
             ];
         }
-        ../home
-        ../hosts/common
+        profile
         inputs.agenix.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.ansync.nixosModules.default
       ]
+      ++ extraModules
       ++ [ ../hosts/${name} ];
     };
 
-  mkHost = system: name: inputs.nixpkgs.lib.nixosSystem (mkHostArgs system name);
+  mkHost = args: inputs.nixpkgs.lib.nixosSystem (mkHostArgs args);
 in
 {
   inherit mkHostArgs mkHost;
