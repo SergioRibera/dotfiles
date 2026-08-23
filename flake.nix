@@ -49,14 +49,10 @@
     in
     {
       overlays.default = import ./pkgs;
-      # Just for Test
       packages = forEachSystem (
         system:
         let
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
+          sysPkgs = pkgs.${system};
         in
         (builtins.listToAttrs (
           map (h: {
@@ -69,7 +65,8 @@
             );
           }) myHosts
         ))
-        // (pkgs.lib.filterAttrs (_: pkgs.lib.isDerivation) ((import ./pkgs) pkgs pkgs))
+        // (sysPkgs.lib.filterAttrs (_: sysPkgs.lib.isDerivation) ((import ./pkgs) sysPkgs sysPkgs))
+        // (import ./flake-modules/containers.nix { pkgs = sysPkgs; })
       );
       # packages = inputs.simplemoji.packages;
       # Contains my full system builds, including home-manager
