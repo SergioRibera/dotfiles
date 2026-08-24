@@ -1,4 +1,4 @@
-{ ... }:
+{ config, lib, ... }:
 {
   zramSwap = {
     algorithm = "zstd";
@@ -18,8 +18,8 @@
     };
   };
 
-  # BPF-based auto-tuning of Linux system parameters
-  services.bpftune.enable = true;
+  # BPF-based auto-tuning of Linux system parameters (desktop only)
+  services.bpftune.enable = lib.mkIf config.gui.enable true;
 
   ## A few other kernel tweaks
   boot.kernel.sysctl = {

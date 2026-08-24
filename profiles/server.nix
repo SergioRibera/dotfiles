@@ -22,4 +22,6 @@
   ];
 
   services.openssh.enable = lib.mkDefault true;
+
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 }

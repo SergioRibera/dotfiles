@@ -27,7 +27,7 @@ with pkgs.stdenv.buildPlatform;
 
   services = {
     acpid.enable = lib.mkIf config.gui.enable true;
-    avahi = {
+    avahi = lib.mkIf config.gui.enable {
       enable = true;
       nssmdns4 = true;
       publish = {
