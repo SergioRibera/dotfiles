@@ -18,10 +18,13 @@ in
       echo -e "\tRun with ${BGLIGHTBLUT}${BOLDBLACK}nix run github:SergioRibera/dotfiles#${BGPURPLE}someoption${BGLIGHTBLUT}${NOC}."
       echo ""
       echo ""
+      echo -e "\t  • ${BGPURPLE} install ${NOC} ${ITALIC}Install NixOS from the live installer.${NOC}"
       echo -e "\t  • ${BGPURPLE} rebuild ${NOC} ${ITALIC}Switch to this configuration.${NOC}"
-      echo -e "\t  • ${BGPURPLE} neovim ${NOC} ${ITALIC}Run out the complete Neovim package.${NOC}"
-      echo -e "\t  • ${BGPURPLE} neovim-basic ${NOC} ${ITALIC}Run out the basic Neovim package.${NOC}"
       echo -e "\t  • ${BGPURPLE} update-pkgs ${NOC} ${ITALIC}Upgrades all custom package sources.${NOC}"
+      echo -e "\t  • ${BGPURPLE} nvim ${NOC} ${ITALIC}Run full Neovim + Neovide.${NOC}"
+      echo -e "\t  • ${BGPURPLE} nvim-basic ${NOC} ${ITALIC}Run headless Neovim (no GUI).${NOC}"
+      echo -e "\t  • ${BGPURPLE} fish ${NOC} ${ITALIC}Fish shell with dotfiles config.${NOC}"
+      echo -e "\t  • ${BGPURPLE} zellij ${NOC} ${ITALIC}Zellij with dotfiles config.${NOC}"
     ''
   );
 }

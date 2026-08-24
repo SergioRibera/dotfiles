@@ -13,6 +13,7 @@ rec {
   };
 
   # Build
+  install = import ./install.nix { inherit pkgs; };
   rebuild = import ./rebuild.nix { inherit pkgs; };
   update-pkgs = import ./update-pkgs { inherit pkgs; };
 
