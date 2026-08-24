@@ -12,7 +12,7 @@ with pkgs.stdenv.buildPlatform;
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  environment.systemPackages = with pkgs; [ catppuccin-sddm ];
+  environment.systemPackages = lib.mkIf config.gui.enable (with pkgs; [ catppuccin-sddm ]);
 
   systemd.network.wait-online.enable = !config.gui.enable;
   systemd.user.services.mpris-proxy = lib.mkIf (isLinux && config.bluetooth) {
@@ -26,7 +26,7 @@ with pkgs.stdenv.buildPlatform;
   };
 
   services = {
-    acpid.enable = true;
+    acpid.enable = lib.mkIf config.gui.enable true;
     avahi = {
       enable = true;
       nssmdns4 = true;
@@ -35,13 +35,13 @@ with pkgs.stdenv.buildPlatform;
         addresses = true;
       };
     };
-    udisks2.enable = true;
-    upower = {
+    udisks2.enable = lib.mkIf config.gui.enable true;
+    upower = lib.mkIf config.gui.enable {
       enable = true;
       percentageLow = 30;
       percentageCritical = 15;
     };
-    ratbagd.enable = true;
+    ratbagd.enable = lib.mkIf config.gui.enable true;
     fstrim.enable = true;
     journald.extraConfig = ''
       SystemMaxUse=500M
