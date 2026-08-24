@@ -2,6 +2,7 @@ name: "Build — ISOs & Containers"
 
 on:
   push:
+    branches: [main]
     paths:
       # ISOs
       - "profiles/**"
@@ -29,22 +30,8 @@ jobs:
         include:
           - name: server-iso
             attr: "packages.x86_64-linux.server-iso"
-            paths: >
-              profiles/base.nix
-              profiles/server.nix
-              hosts/common
-              hosts/server-iso
-              flake-modules/isos.nix
           - name: live-gui
             attr: "packages.x86_64-linux.live-gui"
-            paths: >
-              profiles/base.nix
-              profiles/desktop.nix
-              profiles/live-gui.nix
-              hosts/common
-              hosts/live-gui
-              home
-              flake-modules/isos.nix
 
     steps:
       - uses: actions/checkout@v4
@@ -76,6 +63,8 @@ jobs:
   build-containers:
     name: "Container — ${{ matrix.name }}"
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.tag }}
     strategy:
       fail-fast: false
       matrix:
@@ -83,12 +72,13 @@ jobs:
           - name: nvim-container
             attr: "packages.x86_64-linux.nvim-container"
             image: nvim
-            paths: >
-              tools/nvim
-              flake-modules/containers.nix
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set version tag
+        id: version
+        run: echo "tag=$(date -u +%Y-%m-%d)-$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
       - uses: cachix/install-nix-action@v27
         with:
@@ -107,11 +97,53 @@ jobs:
         run: nix build '.#${{ matrix.attr }}' --print-build-logs
 
       - name: Load and push to GHCR
-        if: github.ref == 'refs/heads/main'
+        env:
+          OWNER: ${{ github.repository_owner }}
+          IMAGE: ${{ matrix.image }}
+          VERSION: ${{ steps.version.outputs.tag }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACTOR: ${{ github.actor }}
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          IMAGE=$(docker load < result | grep "Loaded image:" | awk '{print $NF}')
-          docker tag "$IMAGE" ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}:latest
-          docker tag "$IMAGE" ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}:${{ github.sha }}
-          docker push ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}:latest
-          docker push ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}:${{ github.sha }}
+          OWNER_LC="${OWNER,,}"
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$ACTOR" --password-stdin
+          LOADED=$(docker load < result | grep "Loaded image:" | awk '{print $NF}')
+          docker tag "$LOADED" "ghcr.io/${OWNER_LC}/${IMAGE}:latest"
+          docker tag "$LOADED" "ghcr.io/${OWNER_LC}/${IMAGE}:${VERSION}"
+          docker push "ghcr.io/${OWNER_LC}/${IMAGE}:latest"
+          docker push "ghcr.io/${OWNER_LC}/${IMAGE}:${VERSION}"
+
+  release:
+    name: "Release"
+    needs: [build-isos, build-containers]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set version tag
+        id: version
+        run: echo "tag=$(date -u +%Y-%m-%d)-$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Download ISO artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.tag }}
+          body: |
+            **Commit**: ${{ github.sha }}
+
+            ### ISOs
+            - `server-iso` — headless appliance (boot directly, no install needed)
+            - `live-gui` — live GUI ISO (boot directly, no install needed)
+
+            ### Containers
+            - `ghcr.io/${{ github.repository_owner }}/nvim:${{ steps.version.outputs.tag }}`
+          files: artifacts/**/*.iso
+          fail_on_unmatched_files: false
