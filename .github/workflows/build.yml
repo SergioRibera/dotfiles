@@ -30,8 +30,8 @@ jobs:
         include:
           - name: server-iso
             attr: "packages.x86_64-linux.server-iso"
-          - name: live-gui
-            attr: "packages.x86_64-linux.live-gui"
+          # - name: live-gui
+          #   attr: "packages.x86_64-linux.live-gui"
 
     steps:
       - uses: actions/checkout@v4
