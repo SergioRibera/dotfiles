@@ -1,17 +1,7 @@
 { inputs, ... }:
 {
-  perSystem = { pkgs, lib, system, ... }:
+  perSystem = { pkgs, system, ... }:
     let
-      pureContainers = lib.genAttrs [ "simple-commits" "wakatime-ls" "discord-presence" ] (
-        name:
-        pkgs.dockerTools.buildLayeredImage {
-          inherit name;
-          tag = "latest";
-          contents = [ pkgs.${name} ];
-          config.Entrypoint = [ "/bin/${name}" ];
-        }
-      );
-
       toolContainers = builtins.listToAttrs (
         builtins.filter (x: x != null) (
           map (
@@ -33,8 +23,6 @@
       );
     in
     {
-      packages =
-        (lib.mapAttrs' (name: value: { name = "${name}-container"; inherit value; }) pureContainers)
-        // toolContainers;
+      packages = toolContainers;
     };
 }

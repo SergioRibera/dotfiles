@@ -1,0 +1,117 @@
+name: "Build — ISOs & Containers"
+
+on:
+  push:
+    paths:
+      # ISOs
+      - "profiles/**"
+      - "hosts/common/**"
+      - "hosts/server-iso/**"
+      - "hosts/live-gui/**"
+      - "flake-modules/isos.nix"
+      # Containers
+      - "tools/*/container.nix"
+      - "tools/nvim/**"
+      - "flake-modules/containers.nix"
+      # Shared
+      - "flake.nix"
+      - "flake.lock"
+      - "lib/**"
+      - "pkgs/**"
+
+jobs:
+  build-isos:
+    name: "ISO — ${{ matrix.name }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: server-iso
+            attr: "packages.x86_64-linux.server-iso"
+            paths: >
+              profiles/base.nix
+              profiles/server.nix
+              hosts/common
+              hosts/server-iso
+              flake-modules/isos.nix
+          - name: live-gui
+            attr: "packages.x86_64-linux.live-gui"
+            paths: >
+              profiles/base.nix
+              profiles/desktop.nix
+              profiles/live-gui.nix
+              hosts/common
+              hosts/live-gui
+              home
+              flake-modules/isos.nix
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v27
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            extra-substituters = https://cache.sergioribera.rs/main
+            extra-trusted-public-keys = main:NnVmqBjdfyyL4tGgoTw17lUMDgulJ75+67pOsJupnS4=
+
+      - uses: cachix/cachix-action@v15
+        with:
+          name: sss
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        continue-on-error: true
+
+      - name: Build ${{ matrix.name }}
+        run: nix build '.#${{ matrix.attr }}' --print-build-logs
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: result/iso/*.iso
+          if-no-files-found: ignore
+          retention-days: 7
+
+  build-containers:
+    name: "Container — ${{ matrix.name }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: nvim-container
+            attr: "packages.x86_64-linux.nvim-container"
+            image: nvim
+            paths: >
+              tools/nvim
+              flake-modules/containers.nix
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v27
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            extra-substituters = https://cache.sergioribera.rs/main
+            extra-trusted-public-keys = main:NnVmqBjdfyyL4tGgoTw17lUMDgulJ75+67pOsJupnS4=
+
+      - uses: cachix/cachix-action@v15
+        with:
+          name: sss
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        continue-on-error: true
+
+      - name: Build ${{ matrix.name }}
+        run: nix build '.#${{ matrix.attr }}' --print-build-logs
+
+      - name: Load and push to GHCR
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          IMAGE=$(docker load < result | grep "Loaded image:" | awk '{print $NF}')
+          docker tag "$IMAGE" ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}:latest
+          docker tag "$IMAGE" ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}:${{ github.sha }}
+          docker push ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}:latest
+          docker push ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}:${{ github.sha }}

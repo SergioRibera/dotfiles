@@ -58,13 +58,17 @@ Personal NixOS flake covering multiple machines and deployment variants from a s
 ## `nix run` Apps
 
 ```sh
-nix run github:SergioRibera/dotfiles              # show help
-nix run github:SergioRibera/dotfiles#rebuild      # nixos-rebuild / darwin-rebuild switch
-nix run github:SergioRibera/dotfiles#update-pkgs  # upgrade custom package sources
-nix run github:SergioRibera/dotfiles#nvim         # full Neovim + Neovide
-nix run github:SergioRibera/dotfiles#nvim-basic   # headless Neovim (no GUI)
-nix run github:SergioRibera/dotfiles#fish         # fish shell with dotfiles config
-nix run github:SergioRibera/dotfiles#zellij       # zellij with dotfiles config
+nix run github:SergioRibera/dotfiles                        # show help + available options
+nix run github:SergioRibera/dotfiles#install -- <host>      # install NixOS from live installer
+nix run github:SergioRibera/dotfiles#install -- laptop      # → clones repo, generates hw config, nixos-install
+nix run github:SergioRibera/dotfiles#install -- wsl         # → prints WSL import instructions
+nix run github:SergioRibera/dotfiles#install -- rpi         # → prints sd-image dd command
+nix run github:SergioRibera/dotfiles#rebuild                # nixos-rebuild / darwin-rebuild switch
+nix run github:SergioRibera/dotfiles#update-pkgs            # upgrade custom package sources
+nix run github:SergioRibera/dotfiles#nvim                   # full Neovim + Neovide
+nix run github:SergioRibera/dotfiles#nvim-basic             # headless Neovim (no GUI)
+nix run github:SergioRibera/dotfiles#fish                   # fish shell with dotfiles config
+nix run github:SergioRibera/dotfiles#zellij                 # zellij with dotfiles config
 ```
 
 > Tools in `tools/<name>/app.nix` are auto-discovered — no index to update.
@@ -76,13 +80,9 @@ nix run github:SergioRibera/dotfiles#zellij       # zellij with dotfiles config
 ```sh
 nix build github:SergioRibera/dotfiles#nvim-container
 docker load < result
-
-nix build github:SergioRibera/dotfiles#simple-commits-container
-nix build github:SergioRibera/dotfiles#wakatime-ls-container
-nix build github:SergioRibera/dotfiles#discord-presence-container
 ```
 
-> Tools in `tools/<name>/container.nix` are also auto-discovered.
+> Tools in `tools/<name>/container.nix` are auto-discovered.
 
 ---
 
