@@ -54,7 +54,7 @@ with pkgs.stdenv.buildPlatform;
       packages = [ pkgs.gcr ];
     };
 
-    qemuGuest.enable = (isLinux && config.gui.enable);
+    qemuGuest.enable = lib.mkDefault (isLinux && config.gui.enable);
     spice-vdagentd.enable = (isLinux && config.gui.enable);
 
     openssh = {

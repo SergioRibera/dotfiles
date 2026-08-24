@@ -20,6 +20,8 @@ let
       name = "rpi";
       profile = ../profiles/server.nix;
     }
+    # Bootable live ISO — dd to USB, or upload to Proxmox / boot in QEMU.
+    # For persistent VPS installs use nixos-anywhere + nixosConfigurations.server-iso.
     {
       format = "iso";
       system = "x86_64-linux";
@@ -40,7 +42,11 @@ in
       map (h: {
         name = h.name;
         value = inputs.nixos-generators.nixosGenerate (
-          { format = h.format; } // (hostLib.mkHostArgs { inherit (h) system name profile; })
+          { format = h.format; }
+          // (hostLib.mkHostArgs {
+            inherit (h) system profile;
+            name = h.hostDir or h.name;
+          })
         );
       }) (builtins.filter (h: h.system == system) isoHosts)
     );

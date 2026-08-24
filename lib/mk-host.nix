@@ -43,6 +43,7 @@ let
         inputs.agenix.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.ansync.nixosModules.default
+        inputs.disko.nixosModules.disko
       ]
       ++ extraModules
       ++ [ ../hosts/${name} ];

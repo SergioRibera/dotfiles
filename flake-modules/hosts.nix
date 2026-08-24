@@ -23,6 +23,13 @@ let
       profile = ../profiles/wsl.nix;
       extraModules = [ inputs.nixos-wsl.nixosModules.wsl ];
     }
+    # nixos-anywhere target: boot VPS into rescue mode, then:
+    # nix run github:nix-community/nixos-anywhere -- --flake .#server-iso root@<ip>
+    {
+      system = "x86_64-linux";
+      name = "server-iso";
+      profile = ../profiles/server.nix;
+    }
   ];
 in
 {
