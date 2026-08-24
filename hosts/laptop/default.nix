@@ -9,6 +9,9 @@
     ./hardware-configuration.nix
   ];
 
+  # Early KMS: amdgpu in initrd so Plymouth starts at native res from frame 1
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
   # Prioritize performance over efficiency
   powerManagement.cpuFreqGovernor = "ondemand";
 

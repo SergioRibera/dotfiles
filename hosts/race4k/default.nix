@@ -95,12 +95,13 @@
     };
   };
   boot = {
-    initrd.kernelModules = [ "nvidia" ];
+    initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
     kernelParams = [
       "rcutree.gp_init_delay=1"
       "mt7925e.disable_aspm=1"
       "nvidia_drm.modeset=1"
       "nvidia_drm.fbdev=1"
+      "video=efifb:off"
       "module_blacklist=amdgpu,radeon"
       "pcie_aspm=off"
     ];
