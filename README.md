@@ -112,6 +112,43 @@ nix run nix-darwin -- switch --flake github:SergioRibera/dotfiles#mac
 nix run github:SergioRibera/dotfiles#rebuild
 ```
 
+### Proxmox
+
+Upload `server-iso` to Proxmox storage, create a VM, attach it as boot disk, start:
+
+```sh
+nix build github:SergioRibera/dotfiles#server-iso
+# upload result/iso/*.iso via Proxmox web UI → Storage → Upload
+# Create VM → use uploaded ISO as boot media → Start
+```
+
+The ISO boots directly as the configured server — no install step needed.
+For a persistent disk, boot any NixOS installer and use nixos-anywhere (see below).
+
+### Generic VPS / cloud (nixos-anywhere)
+
+Rescue-mode install on any KVM VPS (Hetzner, DigitalOcean, Vultr, AWS, …):
+
+```sh
+# Put VPS into rescue mode (SSH access as root), then from your local machine:
+nix run github:nix-community/nixos-anywhere -- \
+  --flake github:SergioRibera/dotfiles#server-iso \
+  root@<ip>
+```
+
+Partitions and installs automatically using the disko layout (`/dev/vda`, GPT+EFI, ext4).
+Override the disk device if needed:
+
+```sh
+nix run github:nix-community/nixos-anywhere -- \
+  --flake github:SergioRibera/dotfiles#server-iso \
+  --disk-encryption-keys ... \
+  root@<ip>
+# or pass --extra-files / --disko-script flags — see nixos-anywhere docs
+```
+
+After install: VPS reboots into the configured NixOS server.
+
 ## Thanks
 
 - [Lemin-n](https://github.com/Lemin-n/dotfiles)
