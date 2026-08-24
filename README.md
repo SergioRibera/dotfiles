@@ -18,19 +18,6 @@ Personal NixOS flake covering multiple machines and deployment variants from a s
 | `packages.<system>.live-gui` | ISO | live-gui | Bootable live GUI, no install needed |
 | `darwinConfigurations.mac` | nix-darwin | mac | macOS minimal (tools only) |
 
-### Profiles
-
-| Profile | GUI | HM | WM | Boot |
-|---|---|---|---|---|
-| `base` | — | — | — | UEFI / extlinux |
-| `desktop` | ✓ | ✓ | niri · hyprland · sway · jay · mango | systemd-boot |
-| `server` | — | — | — | systemd-boot |
-| `live-gui` | ✓ | ✓ | niri | systemd-boot · autologin |
-| `wsl` | — | ✓ | — | WSL2 (no bootloader) |
-| `mac` | — | ✓ | — | macOS |
-
----
-
 ## Hosts
 
 ### `laptop`
@@ -88,93 +75,42 @@ docker load < result
 
 ## Installation
 
-### NixOS (laptop / race4k)
+### Fresh install
 
-Boot into the NixOS installer, mount your disks at `/mnt`, then:
+Boot into the NixOS installer, mount your disks at `/mnt`, then run the one-liner:
 
 ```sh
 sudo -i
-nix-shell -p git
-mkdir -p /mnt/etc/nixos
-
-git clone --depth 1 https://github.com/SergioRibera/dotfiles /mnt/etc/nixos
-cd /mnt/etc/nixos
-
-# generate hardware config
-nixos-generate-config --root /mnt
-rm /mnt/etc/nixos/configuration.nix
-mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/hosts/<host>/
-
-# replace <host> with: laptop or race4k
-nixos-install --flake '.#<host>'
+nix run github:SergioRibera/dotfiles#install -- <host>
 ```
 
-After reboot, set your password and take ownership:
+The script clones the repo, generates `hardware-configuration.nix`, and runs `nixos-install` for you.
+After reboot:
 
 ```sh
-passwd
+passwd                        # set password for s4rch
 sudo chown -R $USER /etc/nixos
 ```
 
-### Live GUI ISO
+For other variants (`wsl`, `rpi`, ISOs) the script prints the specific instructions for each one.
+
+### Update / switch (already installed)
 
 ```sh
-nix build github:SergioRibera/dotfiles#live-gui
-dd if=result/iso/*.iso of=/dev/sdX bs=4M status=progress
-# or test in QEMU:
-qemu-system-x86_64 -cdrom result/iso/*.iso -m 4G -enable-kvm
-```
-
-### Server / Appliance ISO
-
-```sh
-nix build github:SergioRibera/dotfiles#server-iso
-dd if=result/iso/*.iso of=/dev/sdX bs=4M status=progress
-```
-
-### Raspberry Pi SD image
-
-```sh
-# requires aarch64 builder or binfmt cross-compilation
-nix build github:SergioRibera/dotfiles#rpi
-dd if=result/sd-image/*.img.zst of=/dev/mmcblkX bs=4M status=progress
-```
-
-### NixOS-WSL
-
-```sh
-nix build github:SergioRibera/dotfiles#nixosConfigurations.wsl.config.system.build.tarball
-wsl --import NixOS %LOCALAPPDATA%\NixOS result/tarball/nixos-system-*.tar.gz
+nix run github:SergioRibera/dotfiles#rebuild
+# or directly:
+doas nixos-rebuild switch --flake /etc/nixos#<host>
 ```
 
 ### macOS (nix-darwin)
 
 ```sh
+# first time
 nix run nix-darwin -- switch --flake github:SergioRibera/dotfiles#mac
+
+# subsequent updates
+nix run github:SergioRibera/dotfiles#rebuild
 ```
-
----
-
-## Repo structure
-
-```
-flake.nix            # inputs + flake-parts.lib.mkFlake
-flake-modules/       # overlays · packages · containers · apps · hosts · isos · darwin
-profiles/            # composition layer: base · desktop · server · live-gui · wsl · mac
-hosts/               # per-machine hardware deltas
-  common/            # shared NixOS options and modules
-  laptop/  race4k/  rpi/  wsl/  mac/  server-iso/  live-gui/
-tools/               # SSOT building blocks (module.nix · hm.nix · app.nix · container.nix)
-  nvim/  fish/  zellij/
-home/                # NixOS+HM wiring: delegates to tools/*/hm.nix
-  wm/  desktop/  shells/  tools/  editors/  common/
-apps/                # nix run entrypoints: help · rebuild · update-pkgs
-pkgs/                # custom packages overlay
-lib/                 # mk-host.nix · mk-darwin.nix
-colorscheme/         # gruvbox-dark and others
-```
-
----
 
 ## Thanks
 
