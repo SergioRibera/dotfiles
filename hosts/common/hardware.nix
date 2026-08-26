@@ -10,7 +10,7 @@
     "v4l2loopback"
     "tcp_bbr"
   ];
-  boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   hardware = {
     graphics = lib.mkIf config.gui.enable {
       enable = true;
