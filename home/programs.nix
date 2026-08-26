@@ -34,6 +34,9 @@ in
         };
         obs-studio = {
           enable = gui.enable;
+          package = if config.hardware.nvidia.enabled
+            then pkgs.obs-studio.override { cudaSupport = true; }
+            else pkgs.obs-studio;
           plugins = with pkgs.obs-studio-plugins; [
             wlrobs
             advanced-scene-switcher
