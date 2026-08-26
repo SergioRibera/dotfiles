@@ -95,15 +95,20 @@
     };
   };
   boot = {
-    initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    initrd.kernelModules = [ "nvidia" ];
     kernelParams = [
       "rcutree.gp_init_delay=1"
       "mt7925e.disable_aspm=1"
       "nvidia_drm.modeset=1"
       "nvidia_drm.fbdev=1"
-      "video=efifb:off"
       "module_blacklist=amdgpu,radeon"
       "pcie_aspm=off"
+    ];
+    kernelPatches = [
+      {
+        name = "mt7925-bt-slpprot-fix";
+        patch = ./mt7925-bt-slpprot.patch;
+      }
     ];
   };
   hardware = {

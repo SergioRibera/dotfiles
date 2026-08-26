@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: fix <fix@fix.fix>
+Date: Mon, 25 Aug 2026 00:00:00 +0000
+Subject: [PATCH] Bluetooth: btmtk: Reset MT7925 before firmware download
+
+After a warm reboot the MT7925 BT core can retain its pre-reboot
+firmware state. The WMT bulk-transfer path becomes unresponsive while
+UHW register access (vendor control requests) still works. This causes
+the initial PATCH_DWNLD WMT command in btmtk_setup_firmware_79xx() to
+time out (-ETIMEDOUT).
+
+Call btmtk_usb_subsys_reset() for MT7925 before firmware download to
+return the chip to ROM state, making it ready to receive firmware
+regardless of reboot type.
+---
+ drivers/bluetooth/btmtk.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/drivers/bluetooth/btmtk.c b/drivers/bluetooth/btmtk.c
+--- a/drivers/bluetooth/btmtk.c
++++ b/drivers/bluetooth/btmtk.c
+@@ -1326,6 +1326,14 @@ int btmtk_usb_setup(struct hci_dev *hdev)
+ 	case 0x7922:
+ 	case 0x7925:
+ 	case 0x7961:
++		if (dev_id == 0x7925) {
++			err = btmtk_usb_subsys_reset(hdev, dev_id);
++			if (err < 0) {
++				bt_dev_err(hdev, "Subsystem reset failed (%d)", err);
++				return err;
++			}
++		}
++
+ 		btmtk_fw_get_filename(fw_bin_name, sizeof(fw_bin_name), dev_id,
+ 				      fw_version, fw_flavor);
+
