@@ -4,11 +4,7 @@
     useDHCP = lib.mkForce false;
     networkmanager = {
       enable = true;
-      dns = "none";
-      insertNameservers = [
-        "1.1.1.1"
-        "8.8.8.8"
-      ];
+      dns = "systemd-resolved";
       unmanaged = [
         "lo"
         "docker0"
@@ -30,6 +26,15 @@
     # mdns + miracast (rtsp signaling + wfd p2p)
     firewall.allowedUDPPorts = [ 5353 7236 ];
     firewall.allowedTCPPorts = [ 7236 7250 ];
+  };
+
+  services.resolved = {
+    enable = true;
+    dnssec = "false";
+    fallbackDns = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
   };
 
   services.cloudflared = {
