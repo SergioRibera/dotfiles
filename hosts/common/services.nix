@@ -85,7 +85,8 @@ with pkgs.stdenv.buildPlatform;
         "51-bluetooth" = {
           "monitor.bluez.properties" = {
             "bluez5.enable-sbc-xq" = true;
-            "bluez5.enable-msbc" = true;
+            "bluez5.enable-msbc" = false;
+            "bluez5.hfphsp-backend" = "native";
             # LC3 = BT LE Audio (lowest latency ~20ms), then aptX-LL, then rest
             "bluez5.codecs" = [ "lc3" "ldac" "aptx_ll" "aptx_hd" "aptx" "aac" "sbc_xq" "sbc" ];
             # BAP roles enable BT LE Audio multi-channel (hardware permitting)
