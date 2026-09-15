@@ -5,6 +5,11 @@
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
+      insertNameservers = [
+        "8.8.8.8"
+        "8.8.4.4"
+        "1.1.1.1"
+      ];
       unmanaged = [
         "lo"
         "docker0"
@@ -31,10 +36,15 @@
   services.resolved = {
     enable = true;
     dnssec = "false";
+    dnsovertls = "true";
     fallbackDns = [
-      "1.1.1.1"
-      "8.8.8.8"
+      "8.8.8.8#dns.google"
+      "8.8.4.4#dns.google"
+      "1.1.1.1#cloudflare-dns.com"
     ];
+    extraConfig = ''
+      DNS=8.8.8.8#dns.google 8.8.4.4#dns.google
+    '';
   };
 
   services.cloudflared = {
