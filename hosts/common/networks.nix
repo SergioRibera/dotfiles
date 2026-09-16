@@ -5,11 +5,10 @@
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
-      insertNameservers = [
-        "8.8.8.8"
-        "8.8.4.4"
-        "1.1.1.1"
-      ];
+      connectionConfig = {
+        "ipv4.ignore-auto-dns" = true;
+        "ipv6.ignore-auto-dns" = true;
+      };
       unmanaged = [
         "lo"
         "docker0"
@@ -42,9 +41,6 @@
       "8.8.4.4#dns.google"
       "1.1.1.1#cloudflare-dns.com"
     ];
-    extraConfig = ''
-      DNS=8.8.8.8#dns.google 8.8.4.4#dns.google
-    '';
   };
 
   services.cloudflared = {
@@ -65,6 +61,7 @@
   services.tailscale = {
     enable = config.games;
     extraDaemonFlags = [ "--no-logs-no-support" ];
+    extraSetFlags = [ "--accept-dns=false" ];
   };
   networking.firewall.checkReversePath = if config.games then "loose" else true;
 }
