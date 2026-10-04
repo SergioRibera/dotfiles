@@ -32,16 +32,7 @@
     firewall.allowedTCPPorts = [ 7236 7250 ];
   };
 
-  services.resolved = {
-    enable = true;
-    dnssec = "false";
-    dnsovertls = "true";
-    fallbackDns = [
-      "8.8.8.8#dns.google"
-      "8.8.4.4#dns.google"
-      "1.1.1.1#cloudflare-dns.com"
-    ];
-  };
+  services.resolved.enable = true;
 
   services.cloudflared = {
     enable = config.server-network;
@@ -60,8 +51,8 @@
   ];
   services.tailscale = {
     enable = config.games;
-    extraDaemonFlags = [ "--no-logs-no-support" ];
-    extraSetFlags = [ "--accept-dns=false" ];
+    # extraDaemonFlags = [ "--no-logs-no-support" ];
+    # extraSetFlags = [ "--accept-dns=false" ];
   };
   networking.firewall.checkReversePath = if config.games then "loose" else true;
 }
