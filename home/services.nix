@@ -25,7 +25,7 @@ in
     ollama = {
       enable = config.ia.enable;
       package = pkgs.ollama-vulkan;
-      loadModels = lib.optionals config.ia.service [ "deepseek-r1:70b" ];
+      # loadModels = lib.optionals config.ia.service [ "deepseek-r1:70b" ];
     };
   };
 }
